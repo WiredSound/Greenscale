@@ -10,9 +10,9 @@ void ComponentGrid::turnPassed() {
 	for (unsigned int x = 0; x < gridSize.x; x++) {
 		for (unsigned int y = 0; y < gridSize.y; y++) {
 			sf::Vector2u position(x, y);
-			std::shared_ptr<Component> &component = getComponentAt(position);
+			auto &component = getComponentAt(position);
 
-			if (component != nullptr) {
+			if (component) {
 				std::vector<int> adjacentIndexes = getAdjacentComponentIndexes(position);
 
 				// TODO: This does not work correctly if there are no adjacent components!
@@ -28,12 +28,8 @@ void ComponentGrid::turnPassed() {
 	}
 }
 
-std::shared_ptr<Component> ComponentGrid::getComponentAt(sf::Vector2u pos) {
+Optional<Component> &ComponentGrid::getComponentAt(sf::Vector2u pos) {
 	return components[getIndex(pos)];
-}
-
-void ComponentGrid::setComponentAt(sf::Vector2u pos, std::shared_ptr<Component> component) {
-	components[getIndex(pos)] = component;
 }
 
 const sf::Vector2u &ComponentGrid::getGridSize() const {

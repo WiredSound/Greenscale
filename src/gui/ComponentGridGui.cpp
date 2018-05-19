@@ -14,8 +14,6 @@ void ComponentGridGui::update(Input &input) {
 	GuiWindow::update(input);
 
 	if (turnManager.getCurrentEntity()->getComponentGrid().getGridSize() != currentComponentGrid.getGridSize()) {
-		currentComponentGrid = turnManager.getCurrentEntity()->getComponentGrid();
-		
 		resize();
 	}
 
@@ -55,9 +53,9 @@ void ComponentGridGui::resize() {
 }
 
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos) {
-	auto component = currentComponentGrid.getComponentAt(pos);
+	auto &component = currentComponentGrid.getComponentAt(pos);
 
-	if(component != nullptr) {
+	if(component) {
 		const ComponentInfo info = component->fetchInfo();
 
 		int index = pos.y * currentComponentGrid.getGridSize().x + pos.x;

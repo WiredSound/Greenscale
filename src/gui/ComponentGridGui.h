@@ -11,8 +11,6 @@ public:
 	virtual void update(Input &input) override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-	void resize();
-
 private:
 	std::shared_ptr<sf::Texture> componentsTexture; // TODO: Set this up and finish building the vertex array.
 	TurnManager &turnManager;
@@ -27,5 +25,6 @@ private:
 	sf::Color componentBoxHoverColour;
 	sf::Color componentBoxBorderColour;
 
+	void resize();
 	void setupComponentQuad(sf::Vector2u pos);
 };
