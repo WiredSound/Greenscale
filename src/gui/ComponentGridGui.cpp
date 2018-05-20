@@ -55,11 +55,12 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid) {
 	auto &component = grid.getComponentAt(pos);
 
+	int index = pos.y * grid.getGridSize().x + pos.x;
+	sf::Vertex *quad = &vertices[index * 4];
+
 	if (component) {
 		const ComponentInfo info = component->fetchInfo();
 
-		int index = pos.y * grid.getGridSize().x + pos.x;
-		sf::Vertex *quad = &vertices[index * 4];
 		auto &child = getChild(index);
 
 		quad[0].position = child->getAbsolutePosition();
@@ -73,5 +74,9 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid)
 		quad[3].texCoords = sf::Vector2f(info.textureX * componentTextureSize.x, (info.textureY + 1) * componentTextureSize.y);
 
 		quad[0].color = quad[1].color = quad[2].color = quad[3].color = component->getColour();
+	}
+	else {
+		// Remove any textures applied from previous component grid draws.
+		quad[0].texCoords = quad[1].texCoords = quad[2].texCoords = quad[3].texCoords = sf::Vector2f(0, 0);
 	}
 }
