@@ -24,7 +24,7 @@ public:
 
 	bool updateMovement();
 	virtual bool updateAttacking();
-	
+
 	sf::Vector2u getPosition() const;
 	unsigned int getX() const;
 	unsigned int getY() const;
@@ -32,7 +32,7 @@ public:
 	bool setMovementPath(MovementPath path);
 	bool reachedPathTarget();
 	bool withinRange(int distance);
-	
+
 	bool isBlocking();
 	virtual sf::Color getColour();
 	virtual char getPriority();
@@ -40,7 +40,7 @@ public:
 	virtual Animation::Frame fetchFrame() = 0;
 	ComponentGrid &getComponentGrid();
 	int getMovementRange();
-	
+
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
 
@@ -54,7 +54,7 @@ protected:
 	sf::Clock movementClock;
 
 	Faction faction;
-	
+
 	MovementPath currentPath;
 	int movementRange = 10;
 	sf::Time visualMovementSpeed; // Time between each tile movement when moving along a path.
@@ -63,7 +63,7 @@ private:
 	GameMap *map;
 
 	ComponentGrid componentGrid;
-	
+
 	sf::Vector2u position;
 	sf::Vector2u size;
 

@@ -13,7 +13,7 @@ public:
 		unsigned int textureY;
 		sf::Color colour;
 	};
-	
+
 	const sf::Time timeBetweenFrames;
 
 	Animation(sf::Time frameTime, std::vector<Frame> animationFrames);

@@ -15,13 +15,13 @@ class Robot;
 class GameMap {
 public:
 	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer);
-	
+
 	void update();
 	void turnPassed();
 	void draw(sf::RenderWindow &window);
 	void colourTilePath(MovementPath path, sf::Color colour);
 	void resetColourTilePath(MovementPath path);
-	
+
 	void construct(); // Goes through each room and rebuilds it.
 	void addRoom(std::unique_ptr<MapRoom> room);
 	bool addEntity(std::shared_ptr<Entity> entity);

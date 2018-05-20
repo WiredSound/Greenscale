@@ -45,7 +45,7 @@ const std::vector<std::shared_ptr<Entity>> &TurnManager::getCurrentEntities() {
 std::shared_ptr<Entity> TurnManager::getCurrentEntity() {
 	if (index >= currentEntities.size()) // All turns now complete.
 		fetchOrderedEntities();
-	
+
 	return currentEntities.at(index);
 }
 

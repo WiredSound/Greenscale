@@ -7,7 +7,7 @@ class Input {
 public:
 	Input(sf::RenderWindow &renderWindow);
 	bool update();
-	
+
 	bool isKeyJustPressed(sf::Keyboard::Key key);
 	bool isKeyHeld(sf::Keyboard::Key key);
 	bool isMouseButtonJustPressed(sf::Mouse::Button button);

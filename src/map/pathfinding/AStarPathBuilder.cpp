@@ -23,7 +23,7 @@ struct AStarPathBuilder::AStarTile {
 struct AStarPathBuilder::CompareVectors {
 public:
 	CompareVectors(sf::Vector2u sizeMap) : mapSize(sizeMap) {}
-	
+
 	bool operator()(const sf::Vector2u &left, const sf::Vector2u &right) const {
 		return (left.y * mapSize.x + left.x) < (right.y * mapSize.x + right.x);
 	}

@@ -14,13 +14,13 @@ public:
 
 private:
 	std::shared_ptr<PlayerController> playerController;
-	
+
 	TileManager tileManager;
 	ComponentManager componentManager;
 	EntityBuilder entityBuilder;
-	
+
 	std::shared_ptr<sf::Texture> tilesTexture;
 	std::shared_ptr<sf::Texture> entitiesTexture;
-	
+
 	std::default_random_engine rand;
 };

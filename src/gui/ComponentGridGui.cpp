@@ -35,14 +35,13 @@ void ComponentGridGui::draw(sf::RenderTarget& target, sf::RenderStates states) c
 // Creates component boxes and resizes window.
 void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 	vertices.resize(gridSize.x * gridSize.y * 4);
-	
+
 	destroyAllChildren();
 
 	boxSize = sf::Vector2f((1.0 - padding.x) / gridSize.x - padding.x, (1.0 - padding.y) / gridSize.y - padding.y);
 
 	for (unsigned int x = 0; x < gridSize.x; x++) {
 		for (unsigned int y = 0; y < gridSize.y; y++) {
-
 			addChild(std::make_unique<GuiWindow>("Component Box", *this,
 				sf::Vector2f(padding.x + (padding.x + boxSize.x) * x,
 					padding.y + (padding.y + boxSize.y) * y), boxSize, sf::Vector2f(0, 0),
@@ -56,7 +55,7 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid) {
 	auto &component = grid.getComponentAt(pos);
 
-	if(component) {
+	if (component) {
 		const ComponentInfo info = component->fetchInfo();
 
 		int index = pos.y * grid.getGridSize().x + pos.x;

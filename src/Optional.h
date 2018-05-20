@@ -7,7 +7,7 @@ class Optional {
 public:
 	Optional() : present(false) {}
 	Optional(std::unique_ptr<T> obj) : object(obj), present(true) {}
-	
+
 	std::unique_ptr<T> &get() {
 		return object;
 	}
@@ -21,7 +21,7 @@ public:
 		present = false;
 		return std::move(object);
 	}
-	
+
 	void remove() {
 		object.release();
 		present = false;

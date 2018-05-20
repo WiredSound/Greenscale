@@ -10,15 +10,15 @@ bool PlayerController::handleMovement(Entity *entity, Input &input) {
 
 	if (targetSelected) {
 		bool finishedMoving = entity->updateMovement();
-		
+
 		if (finishedMoving) {
 			targetSelected = false;
 			path = MovementPath(path.getStartPosition()); // This will make the attack path be immediately rebuilt.
 		}
-		
+
 		return finishedMoving;
 	}
-	else if(entity->reachedPathTarget()) {
+	else if (entity->reachedPathTarget()) {
 		if (gui.isMouseOverChildren()) {
 			map->resetColourTilePath(path);
 		}

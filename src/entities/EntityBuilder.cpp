@@ -40,13 +40,13 @@ Animation EntityBuilder::loadAnimation(nlohmann::json &animationsJson, const std
 
 	for (nlohmann::json frameJson : json["frames"]) {
 		nlohmann::json frameCoords = frameJson[0];
-		
+
 		sf::Color colour = sf::Color(0, 0, 0, 0);
 		try {
 			colour = JsonHelp::parseColour(frameJson.at(1)); // Load the frame colour only if one is specified (otherwise uses the default entity colour).
 		}
 		catch (nlohmann::detail::out_of_range) {}
-		
+
 		frames.push_back({
 			frameCoords[0].get<unsigned int>(), // Texture X.
 			frameCoords[1].get<unsigned int>(), // Texture Y.

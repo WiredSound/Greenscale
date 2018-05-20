@@ -7,7 +7,7 @@ MovementPath::MovementPath(sf::Vector2u pos) : startPos(pos), targetPos(pos), le
 }
 
 MovementPath::MovementPath(std::vector<sf::Vector2u> tiles)
-	: path(tiles), startPos(tiles[0]), targetPos(tiles[tiles.size() - 1]), length((int) tiles.size()), pathIndex(0), complete(true) {}
+	: path(tiles), startPos(tiles[0]), targetPos(tiles[tiles.size() - 1]), length((int)tiles.size()), pathIndex(0), complete(true) {}
 
 bool MovementPath::isComplete() {
 	return complete;
@@ -18,7 +18,7 @@ sf::Vector2u MovementPath::currentPosition() {
 }
 
 void MovementPath::nextPosition() {
-	if(pathIndex < length)
+	if (pathIndex < length)
 		pathIndex++;
 }
 
@@ -58,7 +58,7 @@ MovementPath MovementPath::buildLinePath(const sf::Vector2u &start, const sf::Ve
 
 std::vector<sf::Vector2u> MovementPath::buildLinePathPositions(const sf::Vector2u &start, const sf::Vector2u &target) {
 	std::vector<sf::Vector2u> path;
-	
+
 	if (std::abs((int)target.y - (int)start.y) < std::abs((int)target.x - (int)start.x)) {
 		if (start.x > target.x) {
 			path = buildLinePathLow(target, start, false);
@@ -113,7 +113,7 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathLow(const sf::Vector2u &sta
 std::vector<sf::Vector2u> MovementPath::buildLinePathHigh(const sf::Vector2u &start, const sf::Vector2u &target, bool append) {
 	DEBUG_LOG_SPAM("Building line path high. Appending: " << append)
 
-	std::vector<sf::Vector2u> tiles;
+		std::vector<sf::Vector2u> tiles;
 
 	addPosition(start, tiles, append);
 

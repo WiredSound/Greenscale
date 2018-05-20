@@ -10,7 +10,7 @@ namespace IDs {
 		GRASS = 5,
 		DIRT = 6
 	};
-	
+
 	enum Components : char {
 		BASIC_HEAT_SINK = 0,
 		IMPROVED_HEAT_SINK = 1,

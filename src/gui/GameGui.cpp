@@ -23,7 +23,7 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, sf::Vector2f child
 
 	addChild(std::make_unique<ComponentGui>(*this, font, sf::Vector2f(0.01f, 0.99f), sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness));
-	
+
 	addChild(std::make_unique<ComponentGridGui>(*this, turnManager, componentsTexture, sf::Vector2f(16, 16), sf::Vector2f(0.01f, 0.73f), sf::Vector2f(0.08f, 0.08f * getAspectRatio()), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness));
 }

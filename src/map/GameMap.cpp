@@ -44,7 +44,7 @@ bool GameMap::addEntity(std::shared_ptr<Entity> entity) {
 		entities->addEntity(entity);
 		return true;
 	}
-	
+
 	return false;
 }
 
@@ -70,7 +70,7 @@ std::vector<std::shared_ptr<Entity>> GameMap::getEntitiesInFaction(Faction facti
 }
 
 sf::Vector2u GameMap::worldPosToTilePos(sf::Vector2f worldPos) {
-	return sf::Vector2u((unsigned int) std::floor(worldPos.x / tileSize.x), (unsigned int) std::floor(worldPos.y / tileSize.y));
+	return sf::Vector2u((unsigned int)std::floor(worldPos.x / tileSize.x), (unsigned int)std::floor(worldPos.y / tileSize.y));
 }
 
 bool GameMap::withinBounds(sf::Vector2u pos) {

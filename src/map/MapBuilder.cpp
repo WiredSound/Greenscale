@@ -8,18 +8,16 @@
 
 #include "../IDs.h"
 
-
 MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui)
 	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), playerController(std::make_shared<PlayerController>(window, gui)) {
 	tileManager.loadFromJsonFile(TILES_PATH);
-	
+
 	entityBuilder.loadAllAnimations(ENTITIES_PATH);
 
 	componentManager.loadFromJsonFile(COMPONENTS_PATH);
-	
+
 	tilesTexture->loadFromFile(TILES_TEXTURE_PATH);
 	entitiesTexture->loadFromFile(ENTITIES_TEXTURE_PATH);
-
 }
 
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {

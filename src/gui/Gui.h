@@ -9,13 +9,13 @@
 class Gui : public sf::Drawable {
 public:
 	Gui(std::string guiName);
-	
+
 	virtual void update(Input &input);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	
+
 	void updateChildren(Input &input);
 	void drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
-	
+
 	virtual sf::Vector2f getAbsolutePosition() = 0;
 	virtual sf::Vector2f getAbsoluteSize() = 0;
 
@@ -31,7 +31,7 @@ protected:
 	std::unique_ptr<Gui> &getChild(int index);
 	void addChild(std::unique_ptr<Gui> child);
 	void removeChild(std::unique_ptr<Gui> child);
-	
+
 	void destroyAllChildren();
 
 	virtual void mouseOverChild(std::unique_ptr<Gui> &child, Input &input);

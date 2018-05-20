@@ -9,7 +9,7 @@ void TileLayer::resetColouring() {
 	for (unsigned int y = 0; y < size.x; y++) {
 		for (unsigned int x = 0; x < size.y; x++) {
 			sf::Vector2u pos(x, y);
-			
+
 			setupTileQuad(pos);
 		}
 	}
@@ -79,14 +79,14 @@ sf::Color TileLayer::getColourAt(sf::Vector2u pos) {
 	if (withinBounds(pos.x, pos.y)) {
 		return tiles[pos.y + size.x + pos.x].second;
 	}
-	
+
 	return getTileAt(pos).defaultColour;
 }
 
 void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id) {
 	if (withinBounds(pos.x, pos.y)) {
 		DEBUG_LOG_SPAM("Set tile " << id << " at " << pos.x << ", " << pos.y);
-		
+
 		tiles[pos.y * size.x + pos.x].first = id;
 		setupTileQuad(pos);
 	}
@@ -119,7 +119,7 @@ void TileLayer::fillRect(IDs::Tiles id, unsigned int posX, unsigned int posY, un
 
 void TileLayer::colourPath(MovementPath path, sf::Color colour) {
 	for (sf::Vector2u pos : path.getPathTiles()) {
-		if(withinBounds(pos.x, pos.y))
+		if (withinBounds(pos.x, pos.y))
 			setQuadColour(getQuadPtr(pos), colour);
 	}
 }

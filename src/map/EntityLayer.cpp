@@ -55,7 +55,7 @@ void EntityLayer::addEntity(std::shared_ptr<Entity> entity) {
 	vertices.resize(entities.size() * 4);
 }
 
-void EntityLayer::updateVertices() {	
+void EntityLayer::updateVertices() {
 	for (int i = 0; i < entities.size(); i++) {
 		std::shared_ptr<Entity> &entity = entities[i];
 		const Animation::Frame &frame = entity->fetchFrame();

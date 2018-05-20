@@ -32,13 +32,13 @@ int main() {
 	fpsText.setFont(font);
 	fpsText.setFillColor(sf::Color::Yellow);
 	fpsText.setCharacterSize(18);
-	
+
 	auto state = std::make_unique<GameState>(window, font); // Create the game state.
 	Input input(window);
 
-	while(window.isOpen()) {
+	while (window.isOpen()) {
 		bool closeWindow = input.update();
-		
+
 		if (closeWindow) // Handle close window event.
 			window.close();
 		else

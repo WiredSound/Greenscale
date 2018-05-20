@@ -16,7 +16,7 @@ private:
 	TurnManager &turnManager;
 	sf::Vector2u currentGridSize;
 	sf::VertexArray vertices;
-	
+
 	sf::Vector2f padding; // Space between the borders and component boxes.
 	sf::Vector2f componentTextureSize;
 	sf::Vector2f boxSize;

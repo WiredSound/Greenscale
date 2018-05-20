@@ -35,7 +35,7 @@ void Component::applyDisruption(float disruption) {
 
 void Component::increaseIntegrity(int amount) {
 	integrity += amount;
-	
+
 	if (integrity > fetchInfo().maxIntegrity)
 		integrity = fetchInfo().maxIntegrity;
 }
