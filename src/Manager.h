@@ -9,12 +9,14 @@ template<typename Key, typename Managed>
 class Manager {
 protected:
 	const std::string managedName;
+	const std::string managedKey;
 	std::map<Key, const Managed> map;
 
-	virtual std::pair<Key, const Managed> parseJson(nlohmann::json json) = 0;
+	virtual void parseJson(nlohmann::json json) = 0;
+	virtual std::pair<Key, const Managed> parseJsonManaged(nlohmann::json json) = 0;
 
 public:
-	Manager(std::string name) : managedName(name) {}
+	Manager(std::string name, std::string keyManaged) : managedName(name), managedKey(keyManaged) {}
 
 	bool loadFromJsonFile(std::string filename) {
 		nlohmann::json json;
@@ -24,8 +26,10 @@ public:
 			try {
 				file >> json;
 
-				for (nlohmann::json managedJson : json) {
-					auto managed = parseJson(managedJson);
+				parseJson(json); // Parse any root values in the json file (such as tile width and height).
+
+				for (nlohmann::json managedJson : json[managedKey]) {
+					auto managed = parseJsonManaged(managedJson); // Parse the list of managed items.
 
 					map.insert(managed);
 				}

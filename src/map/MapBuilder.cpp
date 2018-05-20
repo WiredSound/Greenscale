@@ -23,7 +23,7 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 }
 
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {
-	auto tiles = std::make_unique<TileLayer>(size, tileSize, tileTextureSize, tilesTexture, tileManager);
+	auto tiles = std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
 	tiles->fill(IDs::Tiles::GROUND);
 
 	auto entities = std::make_unique<EntityLayer>(size, tileSize, tileTextureSize, entitiesTexture);

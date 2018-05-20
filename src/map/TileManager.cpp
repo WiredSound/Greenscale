@@ -2,9 +2,13 @@
 
 #include "../JsonHelp.h"
 
-TileManager::TileManager() : Manager("tile") {}
+TileManager::TileManager() : Manager("tile", "tiles") {}
 
-std::pair<IDs::Tiles, const Tile> TileManager::parseJson(nlohmann::json json) {
+void TileManager::parseJson(nlohmann::json json) {
+	tileSize = sf::Vector2f(json["tile width"].get<float>(), json["tile height"].get<float>());
+}
+
+std::pair<IDs::Tiles, const Tile> TileManager::parseJsonManaged(nlohmann::json json) {
 	std::pair<IDs::Tiles, const Tile> tilePair(
 		json["id"].get<IDs::Tiles>(),
 		{
@@ -22,4 +26,8 @@ std::pair<IDs::Tiles, const Tile> TileManager::parseJson(nlohmann::json json) {
 	DEBUG_LOG("Loaded " << managedName << " '" << tilePair.second.name << "' with ID: " << tilePair.first);
 
 	return tilePair;
+}
+
+const sf::Vector2f &TileManager::getSingleTileTextureSize() {
+	return tileSize;
 }

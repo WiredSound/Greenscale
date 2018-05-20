@@ -7,5 +7,6 @@
 class ComponentManager : public Manager<IDs::Components, ComponentInfo> {
 public:
 	ComponentManager();
-	virtual std::pair<IDs::Components, const ComponentInfo> parseJson(nlohmann::json json);
+	virtual void parseJson(nlohmann::json json) {}
+	virtual std::pair<IDs::Components, const ComponentInfo> parseJsonManaged(nlohmann::json json);
 };

@@ -2,9 +2,9 @@
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
-ComponentManager::ComponentManager() : Manager("component") {}
+ComponentManager::ComponentManager() : Manager("component", "components") {}
 
-std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJson(nlohmann::json json) {
+std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManaged(nlohmann::json json) {
 	std::pair<IDs::Components, const ComponentInfo> componentPair(
 		json["id"].get<IDs::Components>(),
 		{
