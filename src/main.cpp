@@ -7,24 +7,25 @@
 #include "Input.h"
 #include "debugging.h"
 
-// TODO: Load settings file instead of using these constants.
+struct GameSettings {
+	unsigned int windowWidth = 1728;
+	unsigned int windowHeight = 972;
+	bool vsyncEnabled = false;
+	bool fullscreenEnabled = false;
+	bool displayFps = true;
+};
 
-#define WINDOW_WIDTH 1728
-#define WINDOW_HEIGHT 972
-
-#define VSYNC_ENABLED false
-#define FULLSCREEN_ENABLED false
-#define DISPLAY_FPS true
-
-#define CLEAR_COLOUR sf::Color(143, 143, 143, 255)
+GameSettings loadSettings(std::string filename);
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-		"Greenscale",
-		FULLSCREEN_ENABLED ? (sf::Style::Fullscreen) : (sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize));
+	GameSettings settings = loadSettings("options.json");
 
-	window.setVerticalSyncEnabled(VSYNC_ENABLED);
-	window.setView(sf::View(sf::FloatRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)));
+	sf::RenderWindow window(sf::VideoMode(settings.windowWidth, settings.windowHeight),
+		"Greenscale",
+		settings.fullscreenEnabled ? (sf::Style::Fullscreen) : (sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize));
+
+	window.setVerticalSyncEnabled(settings.vsyncEnabled);
+	window.setView(sf::View(sf::FloatRect(0, 0, settings.windowWidth, settings.windowHeight)));
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/joystix monospace.ttf")) {
@@ -32,7 +33,6 @@ int main() {
 		return -1;
 	}
 
-#if DISPLAY_FPS
 	int fpsCounter = 0;
 	sf::Clock clock;
 
@@ -40,7 +40,6 @@ int main() {
 	fpsText.setFont(font);
 	fpsText.setFillColor(sf::Color::Yellow);
 	fpsText.setCharacterSize(18);
-#endif
 	
 	auto state = std::make_unique<GameState>(window, font); // Create the game state.
 	Input input(window);
@@ -53,28 +52,56 @@ int main() {
 		else
 			state->update(input); // Send input to the current state.
 
-		window.clear(CLEAR_COLOUR);
+		window.clear(sf::Color::Black);
 
 		state->draw(); // Allow the current state to draw to the window.
 
-#if DISPLAY_FPS
 		fpsCounter++;
 		if (clock.getElapsedTime() > sf::milliseconds(500)) {
 			int fps = fpsCounter * 2;
 			DEBUG_LOG_SPAM("FPS: " << fps);
 
-			fpsText.setString("FPS: " + std::to_string(fps));
-			fpsText.setPosition(WINDOW_WIDTH - fpsText.getLocalBounds().width, 0);
+			if (settings.displayFps) {
+				fpsText.setString("FPS: " + std::to_string(fps));
+				fpsText.setPosition(settings.windowWidth - fpsText.getLocalBounds().width, 0);
+			}
 
 			clock.restart();
 			fpsCounter = 0;
 		}
 
 		window.draw(fpsText);
-#endif
 
 		window.display();
 	}
 
 	return 0;
+}
+
+GameSettings loadSettings(std::string filename) {
+	GameSettings settings;
+	nlohmann::json json;
+	std::ifstream file(filename);
+
+	if (file.is_open()) {
+		try {
+			file >> json;
+
+			settings.windowWidth = json["window width"].get<unsigned int>();
+			settings.windowHeight = json["window height"].get<unsigned int>();
+			settings.vsyncEnabled = json["vsync enabled"].get<bool>();
+			settings.fullscreenEnabled = json["fullscreen enabled"].get<bool>();
+			settings.fullscreenEnabled = json["display fps"].get<bool>();
+
+			file.close();
+		}
+		catch (nlohmann::json::type_error &e) {
+			DEBUG_LOG_ERROR("Failed to load settings file due to type error: " << e.what() << "\nException ID: " << e.id);
+		}
+		catch (nlohmann::json::parse_error &e) {
+			DEBUG_LOG_ERROR("Failed to load settings file due to parse error: " << e.what() << "\nException ID: " << e.id << "\nAt byte: " << e.byte);
+		}
+	}
+
+	return settings;
 }
