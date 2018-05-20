@@ -14,7 +14,7 @@ public:
 private:
 	std::shared_ptr<sf::Texture> componentsTexture; // TODO: Set this up and finish building the vertex array.
 	TurnManager &turnManager;
-	ComponentGrid &currentComponentGrid;
+	sf::Vector2u currentGridSize;
 	sf::VertexArray vertices;
 	
 	sf::Vector2f padding; // Space between the borders and component boxes.
@@ -25,6 +25,6 @@ private:
 	sf::Color componentBoxHoverColour;
 	sf::Color componentBoxBorderColour;
 
-	void resize();
-	void setupComponentQuad(sf::Vector2u pos);
+	void resize(const sf::Vector2u &gridSize);
+	void setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid);
 };
