@@ -5,20 +5,12 @@
 #include "State.h"
 #include "GameState.h"
 #include "Input.h"
+#include "GameSettings.h"
 #include "debugging.h"
 
-struct GameSettings {
-	unsigned int windowWidth = 1728;
-	unsigned int windowHeight = 972;
-	bool vsyncEnabled = false;
-	bool fullscreenEnabled = false;
-	bool displayFps = true;
-};
-
-GameSettings loadSettings(std::string filename);
-
 int main() {
-	GameSettings settings = loadSettings("options.json");
+	GameSettings settings;
+	settings.loadSettings("options.json");
 
 	sf::RenderWindow window(sf::VideoMode(settings.windowWidth, settings.windowHeight),
 		"Greenscale",

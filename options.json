@@ -1,7 +1,7 @@
 {
     "window width" : 1920,
     "window height" : 1080,
-    "fullscreen enabled" : true,
+    "fullscreen enabled" : false,
     "vsync enabled" : false,
     "display fps" : true
 }
