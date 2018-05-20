@@ -9,8 +9,12 @@
 
 class MapBuilder {
 public:
-	MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui);
-	std::unique_ptr<GameMap> buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize);
+	MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui); // The game gui is required by the player controller.
+	virtual std::unique_ptr<GameMap> buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize);
+
+protected:
+	std::unique_ptr<TileLayer> makeTileLayer(sf::Vector2u size, sf::Vector2f tileSize);
+	std::unique_ptr<EntityLayer> makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize);
 
 private:
 	std::shared_ptr<PlayerController> playerController;

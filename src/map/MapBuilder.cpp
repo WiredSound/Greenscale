@@ -21,10 +21,10 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 }
 
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {
-	auto tiles = std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
-	tiles->fill(IDs::Tiles::DIRT);
+	auto tiles = makeTileLayer(size, tileSize);
+	auto entities = makeEntityLayer(size, tileSize, tileTextureSize);
 
-	auto entities = std::make_unique<EntityLayer>(size, tileSize, tileTextureSize, entitiesTexture);
+	tiles->fill(IDs::Tiles::DIRT);
 
 	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities));
 
@@ -37,4 +37,11 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	map->addEntity(std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(4, 1), playerController, Faction::CORPORATION)));
 
 	return map;
+}
+
+std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u size, sf::Vector2f tileSize) {
+	return std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
+}
+std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {
+	return std::make_unique<EntityLayer>(size, tileSize, tileTextureSize, entitiesTexture);
 }
