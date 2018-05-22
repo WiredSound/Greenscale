@@ -7,8 +7,11 @@
 #include "Input.h"
 #include "GameSettings.h"
 #include "debugging.h"
+#include <FastNoise.h>
 
 int main() {
+	FastNoise noise;
+
 	GameSettings settings;
 	settings.loadSettings("options.json");
 

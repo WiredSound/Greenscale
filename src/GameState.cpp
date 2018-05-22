@@ -1,7 +1,9 @@
 #include "GameState.h"
 
+#include <ctime>
+
 GameState::GameState(sf::RenderWindow &renderWindow, sf::Font &textFont)
-	: State(renderWindow), turnManager(map), gui((sf::Vector2f) renderWindow.getSize()), mapBuilder(10, renderWindow, gui), font(textFont) {
+	: State(renderWindow), turnManager(map), gui((sf::Vector2f) renderWindow.getSize()), mapBuilder(time(0), renderWindow, gui), font(textFont) {
 	map = mapBuilder.buildMap(sf::Vector2u(50, 50), sf::Vector2f(64, 64), sf::Vector2f(16, 16));
 	map->construct();
 

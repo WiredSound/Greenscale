@@ -33,10 +33,7 @@ void TileLayer::setupTileQuad(sf::Vector2u pos) {
 
 	setQuadPosition(quad, pos);
 	setQuadTexture(quad, sf::Vector2u(tile.textureX, tile.textureY));
-	if (colour != NO_COLOUR)
-		setQuadColour(quad, colour);
-	else
-		setQuadColour(quad, tile.defaultColour);
+	setQuadColour(quad, colour);
 }
 
 sf::Vertex *TileLayer::getQuadPtr(sf::Vector2u pos) {
@@ -77,7 +74,7 @@ const Tile &TileLayer::getTileAt(sf::Vector2u pos) {
 
 sf::Color TileLayer::getColourAt(sf::Vector2u pos) {
 	if (withinBounds(pos.x, pos.y)) {
-		return tiles[pos.y + size.x + pos.x].second;
+		return tiles[pos.y * size.x + pos.x].second;
 	}
 
 	return getTileAt(pos).defaultColour;
@@ -88,6 +85,17 @@ void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id) {
 		DEBUG_LOG_SPAM("Set tile " << id << " at " << pos.x << ", " << pos.y);
 
 		tiles[pos.y * size.x + pos.x].first = id;
+		tiles[pos.y * size.x + pos.x].second = getTileAt(pos).defaultColour;
+		setupTileQuad(pos);
+	}
+}
+
+void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour) {
+	if (withinBounds(pos.x, pos.y)) {
+		DEBUG_LOG_SPAM("Set tile colour " << id << " at " << pos.x << ", " << pos.y << " to: " << colour);
+
+		tiles[pos.y * size.x + pos.x].first = id;
+		tiles[pos.y * size.x + pos.x].second = colour;
 		setupTileQuad(pos);
 	}
 }

@@ -9,7 +9,7 @@ void MapLayer::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 bool MapLayer::withinBounds(int x, int y) {
-	return x < (int)size.x && y < (int)size.y && x >= 0 && y >= 0;
+	return x < static_cast<int>(size.x) && y < static_cast<int>(size.y) && x >= 0 && y >= 0;
 }
 
 void MapLayer::updateVertices() {

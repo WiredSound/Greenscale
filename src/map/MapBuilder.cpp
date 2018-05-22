@@ -6,6 +6,7 @@
 #define TILES_TEXTURE_PATH "assets/tiles/tiles.png"
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
 
+#include "GradientTerrainGenerator.h"
 #include "../IDs.h"
 
 MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui)
@@ -24,7 +25,8 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	auto tiles = makeTileLayer(size, tileSize);
 	auto entities = makeEntityLayer(size, tileSize, tileTextureSize);
 
-	tiles->fill(IDs::Tiles::DIRT);
+	GradientTerrainGenerator terrainGen(FastNoise::NoiseType::SimplexFractal, 0.1f, IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80));
+	terrainGen.fillGradientTerrain(tiles, sf::Vector2u(0, 0), size);
 
 	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities));
 

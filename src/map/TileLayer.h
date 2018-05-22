@@ -13,6 +13,7 @@ public:
 	const Tile &getTileAt(sf::Vector2u pos);
 	sf::Color getColourAt(sf::Vector2u pos);
 	void setTileAt(sf::Vector2u pos, IDs::Tiles id);
+	void setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour);
 	void setColourAt(sf::Vector2u, sf::Color colour);
 	void fill(IDs::Tiles id);
 	void fillRect(IDs::Tiles id, sf::Vector2u pos, sf::Vector2u rectSize);
