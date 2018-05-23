@@ -16,6 +16,5 @@ private:
 	sf::RenderWindow &window;
 	bool targetSelected = false;
 
-	sf::Vector2u mouseCoordinatesInTiles(GameMap *map);
 	void drawCurrentPath(Entity *entity, GameMap *map);
 };

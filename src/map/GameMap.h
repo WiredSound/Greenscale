@@ -28,7 +28,10 @@ public:
 	bool isPositionFree(sf::Vector2u position);
 	std::vector<std::shared_ptr<Entity>> getEntitesPriorityOrdered();
 	std::vector<std::shared_ptr<Entity>> getEntitiesInFaction(Faction faction);
+
 	sf::Vector2u worldPosToTilePos(sf::Vector2f worldPos);
+	sf::Vector2u mousePosToTilePos(sf::Vector2i mousePos, sf::RenderWindow &window);
+	sf::Vector2u mousePosToTilePos(sf::RenderWindow &window);
 
 	const AStarPathBuilder pathfinder;
 

@@ -70,7 +70,16 @@ std::vector<std::shared_ptr<Entity>> GameMap::getEntitiesInFaction(Faction facti
 }
 
 sf::Vector2u GameMap::worldPosToTilePos(sf::Vector2f worldPos) {
-	return sf::Vector2u((unsigned int)std::floor(worldPos.x / tileSize.x), (unsigned int)std::floor(worldPos.y / tileSize.y));
+	return sf::Vector2u(static_cast<unsigned int>(std::floor(worldPos.x / tileSize.x)), static_cast<unsigned int>(std::floor(worldPos.y / tileSize.y)));
+}
+
+sf::Vector2u GameMap::mousePosToTilePos(sf::Vector2i mousePos, sf::RenderWindow &window) {
+	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
+	return worldPosToTilePos(worldPos);
+}
+
+sf::Vector2u GameMap::mousePosToTilePos(sf::RenderWindow &window) {
+	return mousePosToTilePos(sf::Mouse::getPosition(window), window);
 }
 
 bool GameMap::withinBounds(sf::Vector2u pos) {

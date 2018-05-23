@@ -25,7 +25,7 @@ bool PlayerController::handleMovement(Entity *entity, Input &input) {
 		else { // If the mouse is not currently over the gui...
 			drawCurrentPath(entity, map);
 
-			sf::Vector2u tilePos = mouseCoordinatesInTiles(map);
+			sf::Vector2u tilePos = map->mousePosToTilePos(window);
 
 			// Build a path if the player has moved their mouse over a new tile but only if that position is within bounds and free.
 			if (path.getTargetPosition() != tilePos && map->withinBounds(tilePos) && map->isPositionFree(tilePos)) {
@@ -64,7 +64,7 @@ bool PlayerController::handleAttacking(Entity *entity, Input &input) {
 		else { // If the mouse is not currently over the gui...
 			map->colourTilePath(path, sf::Color::Magenta);
 
-			sf::Vector2u tilePos = mouseCoordinatesInTiles(map);
+			sf::Vector2u tilePos = map->mousePosToTilePos(window);
 
 			if (path.getTargetPosition() != tilePos && map->withinBounds(tilePos)) {
 				map->resetColourTilePath(path);
@@ -83,11 +83,4 @@ bool PlayerController::handleAttacking(Entity *entity, Input &input) {
 
 void PlayerController::drawCurrentPath(Entity *entity, GameMap *map) {
 	map->colourTilePath(path, (path.isComplete() && entity->withinRange(path.getLength()) ? PATH_IN_RANGE_COLOUR : PATH_NOT_IN_RANGE_COLOUR));
-}
-
-// Covert the mouse coordinates to the correct tile coordinates.
-sf::Vector2u PlayerController::mouseCoordinatesInTiles(GameMap *map) {
-	sf::Vector2i mousePos = sf::Mouse::getPosition(window);
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-	return map->worldPosToTilePos(worldPos);
 }
