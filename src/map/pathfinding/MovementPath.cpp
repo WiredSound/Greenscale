@@ -96,7 +96,7 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathLow(const sf::Vector2u &sta
 	int d = 2 * dy - dx;
 	int y = start.y;
 
-	for (int x = start.x; x < target.x; x++) {
+	for (unsigned int x = start.x; x < target.x; x++) {
 		addPosition(sf::Vector2u(x, y), tiles, append);
 
 		if (d > 0) {
@@ -129,7 +129,7 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathHigh(const sf::Vector2u &st
 	int d = 2 * dx - dy;
 	int x = start.x;
 
-	for (int y = start.y; y < target.y; y++) {
+	for (unsigned int y = start.y; y < target.y; y++) {
 		addPosition(sf::Vector2u(x, y), tiles, append);
 
 		if (d > 0) {
@@ -145,7 +145,7 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathHigh(const sf::Vector2u &st
 }
 
 unsigned int MovementPath::distanceFromTo(const sf::Vector2u &from, const sf::Vector2u &to) {
-	return buildLinePathPositions(from, to).size();
+	return static_cast<unsigned int>(buildLinePathPositions(from, to).size());
 }
 
 void MovementPath::addPosition(const sf::Vector2u pos, std::vector<sf::Vector2u> &list, bool append) {

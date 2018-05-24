@@ -22,7 +22,7 @@ void EntityListGui::update(Input &input) {
 
 		lines[i].setString((entity->isMyTurn() ? "> " : "  ") + entity->name);
 		lines[i].setFillColor(entity->getFaction().colour);
-		lines[i].setPosition(getAbsolutePosition().x + 8, getAbsolutePosition().y + (i * (textSize * 1.2)) + 8);
+		lines[i].setPosition(getAbsolutePosition().x + 8, getAbsolutePosition().y + (i * (textSize * 1.2f)) + 8);
 	}
 }
 

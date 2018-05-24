@@ -5,8 +5,6 @@
 #include "../debugging.h"
 #include "pathfinding/MovementPath.h"
 
-#define NO_COLOUR sf::Color(0, 0, 0, 255)
-
 class TileLayer : public MapLayer {
 public:
 	TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager);

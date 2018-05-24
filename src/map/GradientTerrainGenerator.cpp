@@ -24,11 +24,14 @@ void GradientTerrainGenerator::fillGradientTerrain(std::unique_ptr<TileLayer> &t
 sf::Color GradientTerrainGenerator::getColourAt(sf::Vector2u position) {
 	float percentage = getPercentageAt(position);
 
-	return sf::Color(minColour.r + (colourDifference.r * percentage), minColour.g + (colourDifference.g * percentage), minColour.b + (colourDifference.b * percentage), 255);
+	return sf::Color(
+		minColour.r + static_cast<sf::Uint8>(colourDifference.r * percentage),
+		minColour.g + static_cast<sf::Uint8>(colourDifference.g * percentage),
+		minColour.b + static_cast<sf::Uint8>(colourDifference.b * percentage), 255);
 }
 
 float GradientTerrainGenerator::getPercentageAt(sf::Vector2u position) {
-	float noise = noiseGenerator.GetNoise(position.x, position.y);
+	float noise = noiseGenerator.GetNoise(static_cast<FN_DECIMAL>(position.x), static_cast<FN_DECIMAL>(position.y));
 
 	// By default noise values range from -1 to 1 so this lowers that range to 0 to 1.
 	return (noise + 1.0f) / 2.0f;

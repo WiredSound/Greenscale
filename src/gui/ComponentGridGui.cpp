@@ -4,7 +4,7 @@ ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::share
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Component Grid", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	turnManager(manager), componentsTexture(texture),
-	padding(0.05, 0.05), componentBoxColour(40, 40, 40, 255), componentBoxHoverColour(25, 25, 25, 255), componentBoxBorderColour(borderColour), componentTextureSize(textureSizeComponent)
+	padding(0.05f, 0.05f), componentBoxColour(40, 40, 40, 255), componentBoxHoverColour(25, 25, 25, 255), componentBoxBorderColour(borderColour), componentTextureSize(textureSizeComponent)
 {
 	vertices.setPrimitiveType(sf::Quads);
 }
@@ -38,7 +38,7 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 
 	destroyAllChildren();
 
-	boxSize = sf::Vector2f((1.0 - padding.x) / gridSize.x - padding.x, (1.0 - padding.y) / gridSize.y - padding.y);
+	boxSize = sf::Vector2f((1.0f - padding.x) / gridSize.x - padding.x, (1.0f - padding.y) / gridSize.y - padding.y);
 
 	for (unsigned int x = 0; x < gridSize.x; x++) {
 		for (unsigned int y = 0; y < gridSize.y; y++) {
