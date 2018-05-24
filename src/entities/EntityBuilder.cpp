@@ -8,8 +8,12 @@ void EntityBuilder::loadAllAnimations(const std::string filename) {
 		try {
 			file >> json;
 
-			robotIdleAnimation = std::make_shared<Animation>(loadAnimation(json, "robot idle"));
-			robotMovingAnimation = std::make_shared<Animation>(loadAnimation(json, "robot moving"));
+			frameSize = sf::Vector2f(json["frame width"].get<float>(), json["frame height"].get<float>());
+
+			auto animationsJson = json["animations"];
+
+			robotIdleAnimation = std::make_shared<Animation>(loadAnimation(animationsJson, "robot idle"));
+			robotMovingAnimation = std::make_shared<Animation>(loadAnimation(animationsJson, "robot moving"));
 		}
 		catch (nlohmann::json::type_error &e) {
 			DEBUG_LOG_ERROR("Failed to load load entity animations due to type error: " << e.what() << "\nException ID: " << e.id);
@@ -20,6 +24,10 @@ void EntityBuilder::loadAllAnimations(const std::string filename) {
 
 		file.close();
 	}
+}
+
+sf::Vector2f EntityBuilder::getFrameSize() {
+	return frameSize;
 }
 
 Robot EntityBuilder::buildSimpleRobot(sf::Vector2u position, std::shared_ptr<EntityController> controller, Faction faction) {

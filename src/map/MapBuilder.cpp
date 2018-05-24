@@ -21,9 +21,9 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 	entitiesTexture->loadFromFile(ENTITIES_TEXTURE_PATH);
 }
 
-std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {
+std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize) {
 	auto tiles = makeTileLayer(size, tileSize);
-	auto entities = makeEntityLayer(size, tileSize, tileTextureSize);
+	auto entities = makeEntityLayer(size, tileSize);
 
 	GradientTerrainGenerator terrainGen(FastNoise::NoiseType::SimplexFractal, 0.1f, IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80));
 	terrainGen.fillGradientTerrain(tiles, sf::Vector2u(0, 0), size);
@@ -44,6 +44,6 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u size, sf::Vector2f tileSize) {
 	return std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
 }
-std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize, sf::Vector2f tileTextureSize) {
-	return std::make_unique<EntityLayer>(size, tileSize, tileTextureSize, entitiesTexture);
+std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize) {
+	return std::make_unique<EntityLayer>(size, tileSize, entityBuilder.getFrameSize(), entitiesTexture);
 }

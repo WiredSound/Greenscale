@@ -10,11 +10,15 @@
 class EntityBuilder {
 public:
 	void loadAllAnimations(const std::string filename);
+	sf::Vector2f getFrameSize();
+
 	Robot buildSimpleRobot(sf::Vector2u position, std::shared_ptr<EntityController> controller, Faction faction);
 
 private:
 	std::shared_ptr<Animation> robotIdleAnimation;
 	std::shared_ptr<Animation> robotMovingAnimation;
+
+	sf::Vector2f frameSize;
 
 	Animation loadAnimation(nlohmann::json &animationsJson, const std::string animationName);
 };

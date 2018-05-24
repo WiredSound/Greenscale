@@ -9,7 +9,7 @@ const Animation::Frame &Animation::getFrameFromIndex(int index) {
 }
 
 const Animation::Frame &Animation::getFrame(sf::Time atTime) {
-	int frameNum = (int)std::floor(atTime / timeBetweenFrames);
+	int frameNum = static_cast<int>(std::floor(atTime / timeBetweenFrames));
 
 	return getFrameFromIndex(frameNum % frames.size());
 }
