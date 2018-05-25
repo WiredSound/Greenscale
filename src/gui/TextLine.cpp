@@ -24,6 +24,10 @@ void TextLine::add(ColourText colourText) {
 	currentPosition.x += text.getLocalBounds().width;
 }
 
+void TextLine::clear() {
+	texts.clear();
+}
+
 void TextLine::draw(sf::RenderTarget &target, sf::RenderStates states) const {
 	for (const sf::Text &text : texts) {
 		target.draw(text, states);

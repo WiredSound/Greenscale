@@ -12,7 +12,7 @@ ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::share
 void ComponentGridGui::update(Input &input) {
 	GuiWindow::update(input);
 
-	ComponentGrid &currentGrid = turnManager.getCurrentEntity()->getComponentGrid();
+	ComponentGrid &currentGrid = fetchCurrentGrid();
 
 	if (currentGrid.getGridSize() != currentGridSize) {
 		resize(currentGrid.getGridSize());
@@ -32,6 +32,10 @@ void ComponentGridGui::draw(sf::RenderTarget& target, sf::RenderStates states) c
 	target.draw(vertices, states);
 }
 
+Optional<Component> &ComponentGridGui::getComponentHoveredOver() {
+	return fetchCurrentGrid().getComponentAt(hoverGridPosition);
+}
+
 // Creates component boxes and resizes window.
 void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 	vertices.resize(gridSize.x * gridSize.y * 4);
@@ -42,10 +46,10 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 
 	for (unsigned int x = 0; x < gridSize.x; x++) {
 		for (unsigned int y = 0; y < gridSize.y; y++) {
-			addChild(std::make_unique<GuiWindow>("Component Box", *this,
+			addChild(std::make_unique<ComponentGridGuiBox>(*this, sf::Vector2u(x, y),
 				sf::Vector2f(padding.x + (padding.x + boxSize.x) * x,
-					padding.y + (padding.y + boxSize.y) * y), boxSize, sf::Vector2f(0, 0),
-				sf::Color(40, 40, 40, 255), componentBoxHoverColour, componentBoxBorderColour, 1));
+					padding.y + (padding.y + boxSize.y) * y), boxSize,
+				sf::Color(40, 40, 40, 255), componentBoxHoverColour, componentBoxBorderColour));
 		}
 	}
 
@@ -79,4 +83,8 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid)
 		// Remove any textures applied from previous component grid draws.
 		quad[0].texCoords = quad[1].texCoords = quad[2].texCoords = quad[3].texCoords = sf::Vector2f(0, 0);
 	}
+}
+
+ComponentGrid &ComponentGridGui::fetchCurrentGrid() {
+	return turnManager.getCurrentEntity()->getComponentGrid();
 }

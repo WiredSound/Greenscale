@@ -16,6 +16,7 @@ public:
 	TextLine(sf::Font &textFont, unsigned int size);
 	void setPosition(sf::Vector2f basePosition);
 	void add(ColourText colourText);
+	void clear();
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
