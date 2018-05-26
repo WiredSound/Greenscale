@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include "ComponentGridGui.h"
-#include "TextLine.h"
+#include "TextLines.h"
 
 class ComponentGui : public GuiWindow {
 public:
@@ -15,5 +15,4 @@ public:
 private:
 	ComponentGridGui &gridGui;
 	sf::Font &font;
-	TextLine line;
 };

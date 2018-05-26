@@ -28,6 +28,11 @@ public:
 	const std::string name;
 
 protected:
+	template <typename T>
+	T *getChild(int index) {
+		return dynamic_cast<T*>(getChild(index).get());
+	}
+
 	std::unique_ptr<Gui> &getChild(int index);
 	void addChild(std::unique_ptr<Gui> child);
 	void removeChild(std::unique_ptr<Gui> child);
