@@ -35,8 +35,7 @@ int Component::getFatalHeatLevel() {
 }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
-	return std::vector<IDs::ComponentUpgrades>(); // TODO: Fix this!
-	//return fetchInfo().possibleUpgrades;
+	return fetchInfo().possibleUpgrades;
 }
 
 sf::Vector2f Component::getIconTextureSize() {

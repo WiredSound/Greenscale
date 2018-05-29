@@ -21,13 +21,13 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<int>("heat level dangerous", 0),
 			json.value<int>("heat level fatal", 0),
 			json.value<int>("passive power drain", 0),
-			json.value<int>("heat dissipation", 0)
-			//std::vector<IDs::ComponentUpgrades>()
-			/*json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>()*/
+			json.value<int>("heat dissipation", 0),
+			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>()
 		}
 	);
 
 	DEBUG_LOG("Loaded " << managedName << " '" << componentPair.second.name << "' with ID: " << componentPair.first);
+	DEBUG_LOG("Possible upgrades: " << json["possible upgrades"]);
 
 	return componentPair;
 }

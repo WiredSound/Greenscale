@@ -22,7 +22,7 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, sf::Vector2f child
 	auto componentGridGui = std::make_unique<ComponentGridGui>(*this, turnManager, componentsTexture, sf::Vector2f(0.01f, 0.73f), sf::Vector2f(0.08f, 0.08f * getAspectRatio()), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto componentGui = std::make_unique<ComponentGui>(*this, *componentGridGui, font, sf::Vector2f(0.01f, 0.99f), sf::Vector2f(0.5f, 0.25f), sf::Vector2f(0, 1),
+	auto componentGui = std::make_unique<ComponentGui>(*this, *componentGridGui, font, sf::Vector2f(0.01f, 0.99f), sf::Vector2f(0.7f, 0.225f), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
 	addChild(std::move(entityListGui));
