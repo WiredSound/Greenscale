@@ -12,10 +12,18 @@ public:
 		float disruption; // Liklihood that the component will become disabled temporarily or malfunction.
 	};
 
-	Component(IDs::Components componentId, ComponentManager &componentManager);
+	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn();
 
 	const ComponentInfo &fetchInfo();
+	std::string getName();
+	std::string getDescription();
+	int getMaxIntegrity();
+	int getDangerousHeatLevel();
+	int getFatalHeatLevel();
+	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
+
+	sf::Vector2f getIconTextureSize();
 
 	void applyDamage(Damage damage);
 	void applyKineticDamage(int damage);
@@ -36,11 +44,12 @@ protected:
 
 private:
 	IDs::Components id;
+	std::shared_ptr<ComponentManager> manager;
+	std::vector<ComponentUpgrade> upgrades;
+
 	int integrity;
 	int heat = 0;
 	int disabledForTurns = 0; // TODO: Take this into account.
 
 	std::default_random_engine rand;
-
-	ComponentManager &manager;
 };

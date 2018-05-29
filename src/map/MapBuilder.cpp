@@ -15,7 +15,7 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 
 	entityBuilder.loadAllAnimations(ENTITIES_PATH);
 
-	componentManager.loadFromJsonFile(COMPONENTS_PATH);
+	componentBuilder.loadComponentInfo(COMPONENTS_PATH);
 
 	tilesTexture->loadFromFile(TILES_TEXTURE_PATH);
 	entitiesTexture->loadFromFile(ENTITIES_TEXTURE_PATH);
@@ -34,8 +34,8 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	map->addRoom(std::make_unique<SquareRoom>("Second Room", sf::Vector2u(8, 4), sf::Vector2u(5, 5), IDs::Tiles::GROUND, IDs::Tiles::WALL));
 
 	auto player = std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(1, 1), playerController, Faction::PLAYER));
-	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(std::make_unique<Component>(IDs::Components::BASIC_HEAT_SINK, componentManager));
-	player->getComponentGrid().getComponentAt(sf::Vector2u(2, 2)).set(std::make_unique<Component>(IDs::Components::ADVANCED_HEAT_SINK, componentManager));
+	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::HEAT_SINK));
+	player->getComponentGrid().getComponentAt(sf::Vector2u(2, 2)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
 	map->addEntity(player);
 	map->addEntity(std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(4, 1), playerController, Faction::CORPORATION)));
 

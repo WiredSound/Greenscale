@@ -6,6 +6,7 @@
 #include "SquareRoom.h"
 #include "../entities/EntityBuilder.h"
 #include "../entities/PlayerController.h"
+#include "../components/ComponentBuilder.h"
 
 class MapBuilder {
 public:
@@ -20,8 +21,8 @@ private:
 	std::shared_ptr<PlayerController> playerController;
 
 	TileManager tileManager;
-	ComponentManager componentManager;
 	EntityBuilder entityBuilder;
+	ComponentBuilder componentBuilder;
 
 	std::shared_ptr<sf::Texture> tilesTexture;
 	std::shared_ptr<sf::Texture> entitiesTexture;

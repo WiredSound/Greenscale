@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <fstream>
 #include <nlohmann/json.hpp>
 #include "debugging.h"
 
@@ -50,6 +51,7 @@ public:
 	}
 
 	const Managed &get(Key key) {
+		assert(key < map.size());
 		return map[key];
 	}
 };

@@ -13,5 +13,14 @@ struct ComponentInfo {
 	int maxIntegrity;
 	int dangerousHeatLevel;
 	int fatalHeatLevel;
-	//std::unique_ptr<const IDs::ComponentUpgrades[]> possibleUpgrades;
+	int passivePowerDrain;
+	int heatDissipation;
+	//std::vector<IDs::ComponentUpgrades> possibleUpgrades;
+};
+
+struct ComponentUpgrade {
+	IDs::Components id;
+	std::string name;
+	std::string prefix;
+	std::string description;
 };

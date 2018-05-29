@@ -16,6 +16,8 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	nameLines->addLine(TextLine(font, 16, { "Description: ", sf::Color::White }));
 	valueLines->addLine(TextLine(font, 16));
 
+	nameLines->addLine(TextLine(font, 16, { "Heat: ", sf::Color::White }));
+
 	addChild(std::move(nameLines));
 	addChild(std::move(valueLines));
 }

@@ -17,7 +17,6 @@ public:
 private:
 	sf::Font &font;
 	std::unique_ptr<GameMap> map;
-	MapBuilder mapBuilder;
 	TurnManager turnManager;
 	GameGui gui;
 };

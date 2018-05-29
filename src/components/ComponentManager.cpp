@@ -4,6 +4,10 @@
 
 ComponentManager::ComponentManager() : Manager("component", "components") {}
 
+void ComponentManager::parseJson(nlohmann::json json) {
+	iconSize = sf::Vector2f(json["icon width"].get<float>(), json["icon height"].get<float>());
+}
+
 std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManaged(nlohmann::json json) {
 	std::pair<IDs::Components, const ComponentInfo> componentPair(
 		json["id"].get<IDs::Components>(),
@@ -13,13 +17,21 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json["description"].get<std::string>(),
 			json["textureX"].get<unsigned int>(),
 			json["textureY"].get<unsigned int>(),
-			json["max integrity"].get<int>(),
-			json["heat level dangerous"].get<int>(),
-			json["heat level fatal"].get<int>()
+			json.value<int>("max integrity", 1),
+			json.value<int>("heat level dangerous", 0),
+			json.value<int>("heat level fatal", 0),
+			json.value<int>("passive power drain", 0),
+			json.value<int>("heat dissipation", 0)
+			//std::vector<IDs::ComponentUpgrades>()
+			/*json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>()*/
 		}
 	);
 
 	DEBUG_LOG("Loaded " << managedName << " '" << componentPair.second.name << "' with ID: " << componentPair.first);
 
 	return componentPair;
+}
+
+const sf::Vector2f &ComponentManager::getSingleIconTextureSize() const {
+	return iconSize;
 }

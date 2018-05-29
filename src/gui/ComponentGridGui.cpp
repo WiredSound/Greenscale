@@ -1,10 +1,10 @@
 #include "ComponentGridGui.h"
 
-ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::shared_ptr<sf::Texture> texture, sf::Vector2f textureSizeComponent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
+ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::shared_ptr<sf::Texture> texture, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Component Grid", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	turnManager(manager), componentsTexture(texture),
-	padding(0.05f, 0.05f), componentBoxColour(40, 40, 40, 255), componentBoxHoverColour(25, 25, 25, 255), componentBoxBorderColour(borderColour), componentTextureSize(textureSizeComponent)
+	padding(0.05f, 0.05f), componentBoxColour(75, 75, 75, 255), componentBoxHoverColour(60, 60, 60, 255), componentBoxBorderColour(borderColour)
 {
 	vertices.setPrimitiveType(sf::Quads);
 }
@@ -49,7 +49,7 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 			addChild(std::make_unique<ComponentGridGuiBox>(*this, sf::Vector2u(x, y),
 				sf::Vector2f(padding.x + (padding.x + boxSize.x) * x,
 					padding.y + (padding.y + boxSize.y) * y), boxSize,
-				sf::Color(40, 40, 40, 255), componentBoxHoverColour, componentBoxBorderColour));
+				componentBoxColour, componentBoxHoverColour, componentBoxBorderColour));
 		}
 	}
 
@@ -63,7 +63,8 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid)
 	sf::Vertex *quad = &vertices[index * 4];
 
 	if (component) {
-		const ComponentInfo info = component->fetchInfo();
+		const ComponentInfo &info = component->fetchInfo();
+		sf::Vector2f componentTextureSize = component->getIconTextureSize();
 
 		auto &child = getChild(index);
 

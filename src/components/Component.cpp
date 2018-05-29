@@ -1,15 +1,46 @@
 #include "Component.h"
 
-Component::Component(IDs::Components componentId, ComponentManager &componentManager)
-	: id(componentId), manager(componentManager), rand(std::random_device()()) {}
+Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
+	: id(componentId), rand(std::random_device()()), manager(componentManager) {}
 
 const ComponentInfo &Component::fetchInfo() {
-	return manager.get(id);
+	return manager->get(id);
 }
 
 void Component::yourTurn() {
 	if (disabledForTurns > 0)
 		disabledForTurns--;
+}
+
+std::string Component::getName() {
+	return fetchInfo().name;
+}
+std::string Component::getDescription() {
+	return fetchInfo().description;
+}
+int Component::getMaxIntegrity() {
+	int baseMaxIntegrity = fetchInfo().maxIntegrity;
+	// TODO: Apply upgrade modifiers...
+	return baseMaxIntegrity;
+}
+int Component::getDangerousHeatLevel() {
+	int baseDangerousHeatLevel = fetchInfo().dangerousHeatLevel;
+	// TODO: Apply upgrade modifiers...
+	return baseDangerousHeatLevel;
+}
+int Component::getFatalHeatLevel() {
+	int baseFatalHeatLevel = fetchInfo().fatalHeatLevel;
+	// TODO: Apply upgrade modifiers...
+	return baseFatalHeatLevel;
+}
+
+std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
+	return std::vector<IDs::ComponentUpgrades>(); // TODO: Fix this!
+	//return fetchInfo().possibleUpgrades;
+}
+
+sf::Vector2f Component::getIconTextureSize() {
+	return manager->getSingleIconTextureSize();
 }
 
 void Component::applyDamage(Damage damage) {
@@ -36,8 +67,8 @@ void Component::applyDisruption(float disruption) {
 void Component::increaseIntegrity(int amount) {
 	integrity += amount;
 
-	if (integrity > fetchInfo().maxIntegrity)
-		integrity = fetchInfo().maxIntegrity;
+	if (integrity > getMaxIntegrity())
+		integrity = getMaxIntegrity();
 }
 
 void Component::reduceIntegrity(int amount) {
@@ -47,8 +78,8 @@ void Component::reduceIntegrity(int amount) {
 void Component::increaseHeat(int amount) {
 	heat += amount;
 
-	if (heat >= fetchInfo().fatalHeatLevel); // TODO: ...
-	else if (heat >= fetchInfo().dangerousHeatLevel);
+	if (heat >= getFatalHeatLevel()); // TODO: ...
+	else if (heat >= getDangerousHeatLevel()); // ...
 }
 
 void Component::reduceHeat(int amount) {
