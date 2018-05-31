@@ -1,8 +1,5 @@
 #include "ComponentGui.h"
 
-#define NAME_LINES 0
-#define VALUE_LINES 1
-
 ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::Font &textFont, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Components", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
@@ -22,8 +19,8 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	nameLines->addLine(TextLine(font, 16, { "Heat level: ", sf::Color::White }));
 	heatLevelLine = valueLines->addLine(TextLine(font, 16));
 
-	addChild(std::move(nameLines));
-	addChild(std::move(valueLines));
+	propertyNameLines = addChild(std::move(nameLines));
+	propertyValueLines = addChild(std::move(valueLines));
 }
 
 void ComponentGui::update(Input &input) {
@@ -31,10 +28,11 @@ void ComponentGui::update(Input &input) {
 
 	if (component) {
 		// TODO: This use of dynamic_cast is probably not best practise...
-		getChild<TextLines>(VALUE_LINES)->getLine(nameLine).set(0, { component->getName(), okTextColour });
-		getChild<TextLines>(VALUE_LINES)->getLine(descriptionLine).set(0, { component->getDescription(), okTextColour });
-		getChild<TextLines>(VALUE_LINES)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
-		getChild<TextLines>(VALUE_LINES)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColour(*component) });
+		getChild<TextLines>(propertyValueLines)->getLine(nameLine).set(0, { component->getName(), okTextColour });
+		getChild<TextLines>(propertyValueLines)->getLine(descriptionLine).set(0, { component->getDescription(), okTextColour });
+		getChild<TextLines>(propertyValueLines)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
+		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
+		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
 	}
 
 	GuiWindow::update(input);
@@ -44,10 +42,10 @@ void ComponentGui::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	GuiWindow::draw(target, states);
 }
 
-sf::Color ComponentGui::getHeatLevelColour(Component &component) {
+std::pair<std::string, sf::Color> ComponentGui::getHeatLevelColourText(Component &component) {
 	if (component.getHeatLevel() >= component.getFatalHeatLevel())
-		return badTextColour;
+		return std::make_pair("fatal", badTextColour);
 	if (component.getHeatLevel() >= component.getDangerousHeatLevel())
-		return warningTextColour;
-	return okTextColour;
+		return std::make_pair("dangerous", warningTextColour);
+	return std::make_pair("ok", okTextColour);
 }

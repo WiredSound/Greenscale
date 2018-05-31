@@ -50,8 +50,9 @@ std::unique_ptr<Gui> &Gui::getChild(int index) {
 	return children[index];
 }
 
-void Gui::addChild(std::unique_ptr<Gui> child) {
+int Gui::addChild(std::unique_ptr<Gui> child) {
 	children.push_back(std::move(child));
+	return children.size() - 1;
 }
 
 void Gui::removeChild(std::unique_ptr<Gui> child) {

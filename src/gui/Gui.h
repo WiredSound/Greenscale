@@ -34,7 +34,7 @@ protected:
 	}
 
 	std::unique_ptr<Gui> &getChild(int index);
-	void addChild(std::unique_ptr<Gui> child);
+	int addChild(std::unique_ptr<Gui> child);
 	void removeChild(std::unique_ptr<Gui> child);
 
 	void destroyAllChildren();
