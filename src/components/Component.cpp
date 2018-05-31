@@ -38,7 +38,7 @@ int Component::getMaxIntegrity() {
 	int maxIntegrity = baseMaxIntegrity;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		maxIntegrity += baseMaxIntegrity * upgrade.maxIntegrityModifier;
+		maxIntegrity += static_cast<int>(baseMaxIntegrity * upgrade.maxIntegrityModifier);
 	}
 
 	return maxIntegrity;
@@ -53,7 +53,7 @@ int Component::getDangerousHeatLevel() {
 	int dangerousHeatLevel = baseDangerousHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		dangerousHeatLevel += baseDangerousHeatLevel * upgrade.dangerousHeatLevelModifier;
+		dangerousHeatLevel += static_cast<int>(baseDangerousHeatLevel * upgrade.dangerousHeatLevelModifier);
 	}
 
 	return dangerousHeatLevel;
@@ -64,10 +64,21 @@ int Component::getFatalHeatLevel() {
 	int fatalHeatLevel = baseFatalHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		fatalHeatLevel += baseFatalHeatLevel * upgrade.fatalHeatLevelModifier;
+		fatalHeatLevel += static_cast<int>(baseFatalHeatLevel * upgrade.fatalHeatLevelModifier);
 	}
 
 	return fatalHeatLevel;
+}
+
+int Component::getPassivePowerDrain() {
+	int basePassivePowerDrain = fetchInfo().passivePowerDrain;
+	int passivePowerDrain = basePassivePowerDrain;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		passivePowerDrain += static_cast<int>(basePassivePowerDrain * upgrade.passivePowerDrainModifer);
+	}
+
+	return passivePowerDrain;
 }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
@@ -125,7 +136,7 @@ void Component::reduceHeat(int amount) {
 }
 
 int Component::reduceHeatByPercentage(float percentage) {
-	int amount = heat * percentage;
+	int amount = static_cast<int>(heat * percentage);
 	reduceHeat(amount);
 	return amount;
 }

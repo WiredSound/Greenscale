@@ -17,7 +17,7 @@ private:
 	sf::Font &font;
 
 	unsigned int propertyNameLines, propertyValueLines;
-	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine;
+	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine, passivePowerDrainLine;
 
 	sf::Color okTextColour;
 	sf::Color warningTextColour;

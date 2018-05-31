@@ -20,7 +20,7 @@ int main() {
 		settings.fullscreenEnabled ? (sf::Style::Fullscreen) : (sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize));
 
 	window.setVerticalSyncEnabled(settings.vsyncEnabled);
-	window.setView(sf::View(sf::FloatRect(0, 0, settings.windowWidth, settings.windowHeight)));
+	//window.setView(sf::View(sf::FloatRect(0, 0, settings.windowWidth, settings.windowHeight)));
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/joystix monospace.ttf")) {

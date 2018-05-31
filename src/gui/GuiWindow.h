@@ -7,9 +7,9 @@
 class GuiWindow : public ChildGui {
 public:
 	GuiWindow(std::string guiName, Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
-		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
+		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness);
 
-	void setupBackground(sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
+	void setupBackground(sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness);
 
 	virtual void update(Input &input);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

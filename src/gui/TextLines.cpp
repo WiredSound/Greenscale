@@ -4,7 +4,7 @@ TextLines::TextLines(Gui &parent, sf::Vector2f position, float padding) : ChildG
 
 unsigned int TextLines::addLine(TextLine line) {
 	lines.push_back(line);
-	return lines.size() - 1;
+	return static_cast<unsigned int>(lines.size()) - 1;
 }
 
 TextLine &TextLines::getLine(unsigned int index) {

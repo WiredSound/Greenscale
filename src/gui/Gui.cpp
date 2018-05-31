@@ -52,7 +52,7 @@ std::unique_ptr<Gui> &Gui::getChild(int index) {
 
 int Gui::addChild(std::unique_ptr<Gui> child) {
 	children.push_back(std::move(child));
-	return children.size() - 1;
+	return static_cast<int>(children.size()) - 1;
 }
 
 void Gui::removeChild(std::unique_ptr<Gui> child) {

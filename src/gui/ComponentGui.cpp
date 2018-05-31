@@ -19,6 +19,9 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	nameLines->addLine(TextLine(font, 16, { "Heat level: ", sf::Color::White }));
 	heatLevelLine = valueLines->addLine(TextLine(font, 16));
 
+	nameLines->addLine(TextLine(font, 16, { "Passive power drain: ", sf::Color::White }));
+	passivePowerDrainLine = valueLines->addLine(TextLine(font, 16));
+
 	propertyNameLines = addChild(std::move(nameLines));
 	propertyValueLines = addChild(std::move(valueLines));
 }
@@ -33,6 +36,7 @@ void ComponentGui::update(Input &input) {
 		getChild<TextLines>(propertyValueLines)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
 		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
 		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
+		getChild<TextLines>(propertyValueLines)->getLine(passivePowerDrainLine).set(0, { std::to_string(component->getPassivePowerDrain()) + " per turn", warningTextColour });
 	}
 
 	GuiWindow::update(input);
