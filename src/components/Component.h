@@ -14,11 +14,15 @@ public:
 
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn();
+	virtual void yourTurnEnabled();
+	virtual bool use();
 
 	const ComponentInfo &fetchInfo();
 	std::string getName();
 	std::string getDescription();
+	int getIntegrity();
 	int getMaxIntegrity();
+	int getHeatLevel();
 	int getDangerousHeatLevel();
 	int getFatalHeatLevel();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
@@ -35,6 +39,7 @@ public:
 	int reduceHeatByPercentage(float percentage);
 
 	bool isDestroyed();
+	bool isEnabled();
 
 	sf::Color getColour();
 
@@ -47,9 +52,11 @@ private:
 	std::shared_ptr<ComponentManager> manager;
 	std::vector<ComponentUpgrade> upgrades;
 
+	bool enabled;
+
 	int integrity;
 	int heat = 0;
-	int disabledForTurns = 0; // TODO: Take this into account.
+	int disabledForTurns = 0;
 
 	std::default_random_engine rand;
 };

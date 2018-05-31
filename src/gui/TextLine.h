@@ -16,7 +16,9 @@ public:
 	TextLine(sf::Font &textFont, unsigned int size);
 	TextLine(sf::Font &textFont, unsigned int size, ColourText text);
 	void setPosition(sf::Vector2f basePosition);
+	void add();
 	void add(ColourText colourText);
+	void set(unsigned int index, ColourText colourText);
 	void clear();
 
 	float getLineHeight();

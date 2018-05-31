@@ -15,4 +15,12 @@ public:
 private:
 	ComponentGridGui &gridGui;
 	sf::Font &font;
+
+	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine;
+
+	sf::Color okTextColour;
+	sf::Color warningTextColour;
+	sf::Color badTextColour;
+
+	sf::Color getHeatLevelColour(Component &component);
 };

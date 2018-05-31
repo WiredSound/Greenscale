@@ -19,10 +19,8 @@ float TextLine::getLineHeight() {
 	return texts[0].getLocalBounds().height;
 }
 
-void TextLine::add(ColourText colourText) {
+void TextLine::add() {
 	sf::Text text;
-	text.setString(colourText.text);
-	text.setFillColor(colourText.colour);
 	text.setFont(font);
 	text.setCharacterSize(fontSize);
 	text.setPosition(currentPosition);
@@ -30,6 +28,22 @@ void TextLine::add(ColourText colourText) {
 	texts.push_back(text);
 
 	currentPosition.x += text.getLocalBounds().width;
+}
+
+void TextLine::add(ColourText colourText) {
+	add();
+	texts[texts.size() - 1].setString(colourText.text);
+	texts[texts.size() - 1].setFillColor(colourText.colour);
+}
+
+void TextLine::set(unsigned int index, ColourText colourText) {
+	// Add new text lines if there is not already one at the given index:
+	while (texts.size() <= index)
+		add();
+
+	sf::Text &text = texts[index];
+	text.setString(colourText.text);
+	text.setFillColor(colourText.colour);
 }
 
 void TextLine::clear() {

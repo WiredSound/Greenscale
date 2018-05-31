@@ -14,6 +14,7 @@ struct ComponentInfo {
 	int dangerousHeatLevel;
 	int fatalHeatLevel;
 	int passivePowerDrain;
+	int usePowerDrain;
 	int heatDissipation;
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades;
 };
@@ -23,4 +24,11 @@ struct ComponentUpgrade {
 	std::string name;
 	std::string prefix;
 	std::string description;
+
+	float maxIntegrityModifier;
+	float dangerousHeatLevelModifier;
+	float fatalHeatLevelModifier;
+	float passivePowerDrainModifer;
+	float usePowerDrainModifier;
+	float heatDissipationModifier;
 };

@@ -12,8 +12,9 @@ namespace IDs {
 	};
 
 	enum Components : char {
-		HEAT_SINK = 0,
-		DEFENSIVE_PLATING = 1
+		CORE = 0,
+		HEAT_SINK = 1,
+		DEFENSIVE_PLATING = 2
 	};
 
 	enum ComponentUpgrades : char {};

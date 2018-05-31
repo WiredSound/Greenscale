@@ -1,37 +1,73 @@
 #include "Component.h"
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
-	: id(componentId), rand(std::random_device()()), manager(componentManager) {}
+	: id(componentId), rand(std::random_device()()), manager(componentManager), integrity(getMaxIntegrity()) {}
 
 const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
 }
 
 void Component::yourTurn() {
+	if (isEnabled())
+		yourTurnEnabled();
+
 	if (disabledForTurns > 0)
 		disabledForTurns--;
+}
+
+void Component::yourTurnEnabled() {}
+
+bool Component::use() {
+	return true;
 }
 
 std::string Component::getName() {
 	return fetchInfo().name;
 }
+
 std::string Component::getDescription() {
 	return fetchInfo().description;
 }
+
+int Component::getIntegrity() {
+	return integrity;
+}
+
 int Component::getMaxIntegrity() {
 	int baseMaxIntegrity = fetchInfo().maxIntegrity;
-	// TODO: Apply upgrade modifiers...
-	return baseMaxIntegrity;
+	int maxIntegrity = baseMaxIntegrity;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		maxIntegrity += baseMaxIntegrity * upgrade.maxIntegrityModifier;
+	}
+
+	return maxIntegrity;
 }
+
+int Component::getHeatLevel() {
+	return heat;
+}
+
 int Component::getDangerousHeatLevel() {
 	int baseDangerousHeatLevel = fetchInfo().dangerousHeatLevel;
-	// TODO: Apply upgrade modifiers...
-	return baseDangerousHeatLevel;
+	int dangerousHeatLevel = baseDangerousHeatLevel;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		dangerousHeatLevel += baseDangerousHeatLevel * upgrade.dangerousHeatLevelModifier;
+	}
+
+	return dangerousHeatLevel;
 }
+
 int Component::getFatalHeatLevel() {
 	int baseFatalHeatLevel = fetchInfo().fatalHeatLevel;
-	// TODO: Apply upgrade modifiers...
-	return baseFatalHeatLevel;
+	int fatalHeatLevel = baseFatalHeatLevel;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		fatalHeatLevel += baseFatalHeatLevel * upgrade.fatalHeatLevelModifier;
+	}
+
+	return fatalHeatLevel;
 }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
@@ -96,6 +132,10 @@ int Component::reduceHeatByPercentage(float percentage) {
 
 bool Component::isDestroyed() {
 	return integrity <= 0;
+}
+
+bool Component::isEnabled() {
+	return disabledForTurns <= 0 && enabled;
 }
 
 sf::Color Component::getColour() {

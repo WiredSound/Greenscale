@@ -2,8 +2,9 @@
 
 TextLines::TextLines(Gui &parent, sf::Vector2f position, float padding) : ChildGui("Text Lines", parent, position, sf::Vector2f(0, 0), sf::Vector2f(0, 0)), paddingBetweenLines(padding) {}
 
-void TextLines::addLine(TextLine line) {
+unsigned int TextLines::addLine(TextLine line) {
 	lines.push_back(line);
+	return lines.size() - 1;
 }
 
 TextLine &TextLines::getLine(unsigned int index) {

@@ -7,7 +7,7 @@ class TextLines : public ChildGui {
 public:
 	TextLines(Gui &parent, sf::Vector2f position, float padding);
 
-	void addLine(TextLine line);
+	unsigned int addLine(TextLine line);
 	TextLine &getLine(unsigned int index);
 
 	virtual void update(Input &input) override;

@@ -39,6 +39,10 @@ public:
 		return isPresent();
 	}
 
+	T &operator*() {
+		return *object.get();
+	}
+
 private:
 	std::unique_ptr<T> object;
 	bool present;
