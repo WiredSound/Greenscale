@@ -13,7 +13,7 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	nameLines->addLine(TextLine(font, 16, { "Description:", sf::Color::White }));
 	descriptionLine = valueLines->addLine(TextLine(font, 16));
 
-	nameLines->addLine(TextLine(font, 16, { "Integirty:", sf::Color::White }));
+	nameLines->addLine(TextLine(font, 16, { "Integrity:", sf::Color::White }));
 	integrityLine = valueLines->addLine(TextLine(font, 16));
 
 	nameLines->addLine(TextLine(font, 16, { "Heat level:", sf::Color::White }));
