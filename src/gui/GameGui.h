@@ -7,7 +7,8 @@
 class GameGui : public RootGui {
 public:
 	GameGui(sf::Vector2f windowSize);
-	void setup(TurnManager &turnManager, sf::Font &font, sf::Vector2f childrenScale, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
+	void setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Vector2f childrenScale,
+		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
 	virtual void update(Input &input) override;
 
 private:

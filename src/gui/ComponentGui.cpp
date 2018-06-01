@@ -3,29 +3,29 @@
 #include <cmath>
 
 ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::Font &textFont, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
-	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
+	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness, unsigned int fontSize)
 	: GuiWindow("Components", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	font(textFont), gridGui(componentGridGui), okTextColour(sf::Color::Green), warningTextColour(sf::Color::Yellow), badTextColour(sf::Color::Red) {
 	auto nameLines = std::make_unique<TextLines>(*this, sf::Vector2f(0.025f, 0.05f), 5);
 	auto valueLines = std::make_unique<TextLines>(*this, sf::Vector2f(0.23f, 0.05f), 5);
 
-	nameLines->addLine(TextLine(font, 16, { "Name:", sf::Color::White }));
-	nameLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Name:", sf::Color::White }));
+	nameLine = valueLines->addLine(TextLine(font, fontSize));
 
-	nameLines->addLine(TextLine(font, 16, { "Description:", sf::Color::White }));
-	descriptionLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Description:", sf::Color::White }));
+	descriptionLine = valueLines->addLine(TextLine(font, fontSize));
 
-	nameLines->addLine(TextLine(font, 16, { "Integrity:", sf::Color::White }));
-	integrityLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Integrity:", sf::Color::White }));
+	integrityLine = valueLines->addLine(TextLine(font, fontSize));
 
-	nameLines->addLine(TextLine(font, 16, { "Heat level:", sf::Color::White }));
-	heatLevelLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Heat level:", sf::Color::White }));
+	heatLevelLine = valueLines->addLine(TextLine(font, fontSize));
 
-	nameLines->addLine(TextLine(font, 16, { "Passive power:", sf::Color::White }));
-	passivePowerLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Passive power:", sf::Color::White }));
+	passivePowerLine = valueLines->addLine(TextLine(font, fontSize));
 
-	nameLines->addLine(TextLine(font, 16, { "Use power:", sf::Color::White }));
-	usePowerLine = valueLines->addLine(TextLine(font, 16));
+	nameLines->addLine(TextLine(font, fontSize, { "Use power:", sf::Color::White }));
+	usePowerLine = valueLines->addLine(TextLine(font, fontSize));
 
 	propertyNameLines = addChild(std::move(nameLines));
 	propertyValueLines = addChild(std::move(valueLines));

@@ -23,7 +23,7 @@ int main() {
 	//window.setView(sf::View(sf::FloatRect(0, 0, settings.windowWidth, settings.windowHeight)));
 
 	sf::Font font;
-	if (!font.loadFromFile("assets/fonts/joystix monospace.ttf")) {
+	if (!font.loadFromFile("assets/fonts/aurulent-sans-mono/AurulentSansMono-Regular.otf")) {
 		DEBUG_LOG_ERROR("Failed to load font!");
 		return -1;
 	}
