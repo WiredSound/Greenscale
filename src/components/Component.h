@@ -25,7 +25,8 @@ public:
 	int getHeatLevel();
 	int getDangerousHeatLevel();
 	int getFatalHeatLevel();
-	int getPassivePowerDrain();
+	int getPassivePower();
+	int getUsePower();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
 
 	sf::Vector2f getIconTextureSize();

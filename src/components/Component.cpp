@@ -70,15 +70,26 @@ int Component::getFatalHeatLevel() {
 	return fatalHeatLevel;
 }
 
-int Component::getPassivePowerDrain() {
-	int basePassivePowerDrain = fetchInfo().passivePowerDrain;
-	int passivePowerDrain = basePassivePowerDrain;
+int Component::getPassivePower() {
+	int basePassivePower = fetchInfo().passivePower;
+	int passivePower = basePassivePower;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		passivePowerDrain += static_cast<int>(basePassivePowerDrain * upgrade.passivePowerDrainModifer);
+		passivePower += static_cast<int>(basePassivePower * upgrade.passivePowerDrainModifer);
 	}
 
-	return passivePowerDrain;
+	return passivePower;
+}
+
+int Component::getUsePower() {
+	int baseUsePower = fetchInfo().usePower;
+	int usePower = baseUsePower;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		usePower += static_cast<int>(baseUsePower * upgrade.usePowerDrainModifier);
+	}
+
+	return usePower;
 }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {

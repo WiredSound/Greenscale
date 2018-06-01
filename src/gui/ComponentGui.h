@@ -17,11 +17,12 @@ private:
 	sf::Font &font;
 
 	unsigned int propertyNameLines, propertyValueLines;
-	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine, passivePowerDrainLine;
+	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine, passivePowerLine, usePowerLine;
 
 	sf::Color okTextColour;
 	sf::Color warningTextColour;
 	sf::Color badTextColour;
 
 	std::pair<std::string, sf::Color> getHeatLevelColourText(Component &component);
+	sf::Color colourBasedOnSign(int value, sf::Color positiveColour, sf::Color zeroColour, sf::Color negativeColour);
 };
