@@ -13,6 +13,11 @@ public:
 	const sf::Vector2u &getGridSize() const;
 	void resize(sf::Vector2u size);
 
+	unsigned int getCurrentIntegrity(); // The total integrity of every component in this grid.
+	unsigned int getMaxIntegrity();
+
+	unsigned int getMaxPowerStorage();
+
 protected:
 	std::vector<int> getAdjacentComponentIndexes(sf::Vector2u pos);
 	int getIndex(const sf::Vector2u &pos);

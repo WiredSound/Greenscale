@@ -2,8 +2,8 @@
 
 #include "EntityController.h"
 
-Entity::Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, int integrityMax, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController)
-	: name(entityName), position(pos), faction(entityFaction), maxIntegrity(integrityMax), integrity(integrityMax), componentGrid(componentGridSize), controller(entityController),
+Entity::Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController)
+	: name(entityName), position(pos), faction(entityFaction), componentGrid(componentGridSize), controller(entityController),
 	currentPath(pos), visualMovementSpeed(sf::milliseconds(80)) {}
 
 bool Entity::yourMovementTurn(Input &input) {
@@ -16,6 +16,10 @@ bool Entity::yourAttackTurn(Input &input) {
 	bool complete = controller->handleAttacking(this, input);
 	myTurn = !complete;
 	return complete;
+}
+
+void Entity::yourTurnEnded() {
+	componentGrid.turnPassed();
 }
 
 bool Entity::isMyTurn() {
@@ -80,6 +84,22 @@ bool Entity::setMovementPath(MovementPath path) {
 
 int Entity::getMovementRange() {
 	return movementRange;
+}
+
+unsigned int Entity::getIntegrity() {
+	return componentGrid.getCurrentIntegrity();
+}
+
+unsigned int Entity::getMaxIntegrity() {
+	return componentGrid.getMaxIntegrity();
+}
+
+int Entity::getPowerLevel() {
+	return powerLevel;
+}
+
+int Entity::getMaxPowerStorage() {
+	return componentGrid.getMaxPowerStorage();
 }
 
 bool Entity::isBlocking() {

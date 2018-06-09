@@ -24,6 +24,7 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<int>("use power", 0),
 			json.value<int>("passive heat", 0),
 			json.value<int>("use heat", 0),
+			json.value<int>("power storage", 0),
 			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>()
 		}
 	);

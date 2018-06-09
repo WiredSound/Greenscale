@@ -36,7 +36,6 @@ Robot EntityBuilder::buildSimpleRobot(sf::Vector2u position, std::shared_ptr<Ent
 		sf::Vector2u(3, 3),	// Size of the robot's component grid.
 		controller,
 		faction,
-		10,					// Robot's integrity.
 		robotIdleAnimation,
 		robotMovingAnimation);
 }

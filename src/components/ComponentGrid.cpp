@@ -13,16 +13,10 @@ void ComponentGrid::turnPassed() {
 			auto &component = getComponentAt(position);
 
 			if (component) {
-				std::vector<int> adjacentIndexes = getAdjacentComponentIndexes(position);
+				component->yourTurn();
 
-				// TODO: This does not work correctly if there are no adjacent components!
-
-				int heat = component->reduceHeatByPercentage(heatSpreadFraction);
-				int heatPerComponent = heat / adjacentIndexes.size();
-
-				for (int index : adjacentIndexes) {
-					components[index]->increaseHeat(heatPerComponent);
-				}
+				if (component->isDestroyed())
+					component.remove();
 			}
 		}
 	}
@@ -55,6 +49,36 @@ std::vector<int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2u pos) {
 void ComponentGrid::resize(sf::Vector2u size) {
 	components.resize(size.x * size.y);
 	gridSize = size;
+}
+
+unsigned int ComponentGrid::getCurrentIntegrity() {
+	unsigned int integrity = 0;
+
+	for (auto &component : components) {
+		if (component) integrity += component->getIntegrity();
+	}
+
+	return integrity;
+}
+
+unsigned int ComponentGrid::getMaxIntegrity() {
+	unsigned int maxIntegrity = 0;
+
+	for (auto &component : components) {
+		if (component) maxIntegrity += component->getMaxIntegrity();
+	}
+
+	return maxIntegrity;
+}
+
+unsigned int ComponentGrid::getMaxPowerStorage() {
+	unsigned int powerStorage = 0;
+
+	for (auto &component : components) {
+		if (component) powerStorage += component->getPowerStorage();
+	}
+
+	return powerStorage;
 }
 
 int ComponentGrid::getIndex(const sf::Vector2u &pos) {

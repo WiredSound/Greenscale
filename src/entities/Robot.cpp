@@ -1,8 +1,8 @@
 #include "Robot.h"
 
-Robot::Robot(std::string entityName, sf::Vector2u pos, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController, Faction entityFaction, int integrityMax,
+Robot::Robot(std::string entityName, sf::Vector2u pos, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController, Faction entityFaction,
 	std::shared_ptr<Animation> animationIdle, std::shared_ptr<Animation> animationMoving)
-	: Entity(entityName, pos, entityFaction, integrityMax, componentGridSize, entityController), idleAnimation(animationIdle), movingAnimation(animationMoving) {}
+	: Entity(entityName, pos, entityFaction, componentGridSize, entityController), idleAnimation(animationIdle), movingAnimation(animationMoving) {}
 
 Animation::Frame Robot::fetchFrame() {
 	if (reachedPathTarget())

@@ -14,8 +14,7 @@ public:
 
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn();
-	virtual void yourTurnEnabled();
-	virtual bool use();
+	bool use();
 
 	const ComponentInfo &fetchInfo();
 	std::string getName();
@@ -27,6 +26,9 @@ public:
 	int getFatalHeatLevel();
 	int getPassivePower();
 	int getUsePower();
+	int getPassiveHeat();
+	int getUseHeat();
+	int getPowerStorage();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
 
 	sf::Vector2f getIconTextureSize();
@@ -37,8 +39,7 @@ public:
 	void applyDisruption(float disruption);
 
 	void increaseHeat(int amount);
-	void reduceHeat(int amount);
-	int reduceHeatByPercentage(float percentage);
+	//void increasePower(int amount);
 
 	bool isDestroyed();
 	bool isEnabled();
@@ -46,6 +47,9 @@ public:
 	sf::Color getColour();
 
 protected:
+	virtual void yourTurnEnabled();
+	virtual bool useEnabled();
+
 	void increaseIntegrity(int amount);
 	void reduceIntegrity(int amount);
 

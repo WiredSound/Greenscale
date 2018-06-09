@@ -16,10 +16,11 @@ class EntityController;
 
 class Entity {
 public:
-	Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, int integrityMax, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController);
+	Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController);
 
 	bool yourMovementTurn(Input &input);
 	bool yourAttackTurn(Input &input);
+	void yourTurnEnded();
 	bool isMyTurn();
 
 	bool updateMovement();
@@ -40,6 +41,12 @@ public:
 	virtual Animation::Frame fetchFrame() = 0;
 	ComponentGrid &getComponentGrid();
 	int getMovementRange();
+
+	unsigned int getIntegrity();
+	unsigned int getMaxIntegrity();
+
+	int getPowerLevel();
+	int getMaxPowerStorage();
 
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
@@ -67,8 +74,11 @@ private:
 	sf::Vector2u position;
 	sf::Vector2u size;
 
-	int integrity;
-	int maxIntegrity;
+	unsigned int powerLevel = 0;
+
+	// Removed as integrity is now based entirely upon the components equipped.
+	//int integrity;
+	//int maxIntegrity;
 
 	std::shared_ptr<EntityController> controller;
 	bool myTurn = false;

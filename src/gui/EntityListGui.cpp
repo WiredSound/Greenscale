@@ -13,7 +13,7 @@ void EntityListGui::update(Input &input) {
 	for (int i = 0; i < entities.size(); i++) {
 		const std::shared_ptr<Entity> &entity = entities[i];
 
-		while (i >= lines.size()) {
+		while (i >= lines.size()) { // TODO: Set up to use TextLines class instead.
 			sf::Text text;
 			text.setFont(font);
 			text.setCharacterSize(textSize);

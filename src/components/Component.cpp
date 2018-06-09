@@ -8,6 +8,8 @@ const ComponentInfo &Component::fetchInfo() {
 }
 
 void Component::yourTurn() {
+	increaseHeat(getPassiveHeat());
+
 	if (isEnabled())
 		yourTurnEnabled();
 
@@ -18,6 +20,16 @@ void Component::yourTurn() {
 void Component::yourTurnEnabled() {}
 
 bool Component::use() {
+	if (isEnabled()) {
+		increaseHeat(getUseHeat());
+
+		return useEnabled();
+	}
+
+	return true;
+}
+
+bool Component::useEnabled() {
 	return true;
 }
 
@@ -53,7 +65,7 @@ int Component::getDangerousHeatLevel() {
 	int dangerousHeatLevel = baseDangerousHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		dangerousHeatLevel += static_cast<int>(baseDangerousHeatLevel * upgrade.dangerousHeatLevelModifier);
+		dangerousHeatLevel += static_cast<int>(baseDangerousHeatLevel * upgrade.unsafeHeatLevelModifier);
 	}
 
 	return dangerousHeatLevel;
@@ -64,7 +76,7 @@ int Component::getFatalHeatLevel() {
 	int fatalHeatLevel = baseFatalHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		fatalHeatLevel += static_cast<int>(baseFatalHeatLevel * upgrade.fatalHeatLevelModifier);
+		fatalHeatLevel += static_cast<int>(baseFatalHeatLevel * upgrade.unsafeHeatLevelModifier);
 	}
 
 	return fatalHeatLevel;
@@ -75,7 +87,7 @@ int Component::getPassivePower() {
 	int passivePower = basePassivePower;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		passivePower += static_cast<int>(basePassivePower * upgrade.passivePowerDrainModifer);
+		passivePower += static_cast<int>(basePassivePower * upgrade.powerModifier);
 	}
 
 	return passivePower;
@@ -86,10 +98,43 @@ int Component::getUsePower() {
 	int usePower = baseUsePower;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		usePower += static_cast<int>(baseUsePower * upgrade.usePowerDrainModifier);
+		usePower += static_cast<int>(baseUsePower * upgrade.powerModifier);
 	}
 
 	return usePower;
+}
+
+int Component::getPassiveHeat() {
+	int basePassiveHeat = fetchInfo().passiveHeat;
+	int passiveHeat = basePassiveHeat;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		passiveHeat += static_cast<int>(basePassiveHeat * upgrade.heatModifier);
+	}
+
+	return passiveHeat;
+}
+
+int Component::getUseHeat() {
+	int baseUseHeat = fetchInfo().useHeat;
+	int useHeat = baseUseHeat;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		useHeat += static_cast<int>(baseUseHeat * upgrade.heatModifier);
+	}
+
+	return useHeat;
+}
+
+int Component::getPowerStorage() {
+	int basePowerStorage = fetchInfo().powerStorage;
+	int powerStorage = basePowerStorage;
+
+	for (const ComponentUpgrade &upgrade : upgrades) {
+		powerStorage += static_cast<int>(powerStorage * upgrade.powerModifier);
+	}
+
+	return powerStorage;
 }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
@@ -135,10 +180,13 @@ void Component::reduceIntegrity(int amount) {
 void Component::increaseHeat(int amount) {
 	heat += amount;
 
+	if (heat < 0) heat = 0;
+
 	if (heat >= getFatalHeatLevel()); // TODO: ...
 	else if (heat >= getDangerousHeatLevel()); // ...
 }
 
+/*
 void Component::reduceHeat(int amount) {
 	heat -= amount;
 
@@ -151,6 +199,7 @@ int Component::reduceHeatByPercentage(float percentage) {
 	reduceHeat(amount);
 	return amount;
 }
+*/
 
 bool Component::isDestroyed() {
 	return integrity <= 0;

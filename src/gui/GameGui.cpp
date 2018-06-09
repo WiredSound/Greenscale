@@ -3,6 +3,7 @@
 #include "ComponentGridGui.h"
 #include "ComponentGui.h"
 #include "EntityListGui.h"
+#include "EntityGui.h"
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
@@ -25,9 +26,13 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto componentGui = std::make_unique<ComponentGui>(*this, *componentGridGui, font, sf::Vector2f(0.01f, 0.99f), sf::Vector2f(0.7f, 0.225f), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness, fontSize);
 
+	auto entityGui = std::make_unique<EntityGui>(*this, font, turnManager, sf::Vector2f(0.99, 0.99), sf::Vector2f(0.18, 0.1), sf::Vector2f(1, 1),
+		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
+
 	addChild(std::move(entityListGui));
 	addChild(std::move(componentGridGui));
 	addChild(std::move(componentGui));
+	addChild(std::move(entityGui));
 }
 
 void GameGui::update(Input &input) {
