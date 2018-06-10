@@ -65,4 +65,6 @@ private:
 	int disabledForTurns = 0;
 
 	std::default_random_engine rand;
+	std::uniform_int_distribution<int> randomTurnsMissed;
+	std::uniform_int_distribution<int> randomPercentage;
 };

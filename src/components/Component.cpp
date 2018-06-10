@@ -1,7 +1,7 @@
 #include "Component.h"
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
-	: id(componentId), rand(std::random_device()()), manager(componentManager), integrity(getMaxIntegrity()) {}
+	: id(componentId), rand(std::random_device()()), manager(componentManager), integrity(getMaxIntegrity()), randomTurnsMissed(1, 3), randomPercentage(0, 100) {}
 
 const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
@@ -15,6 +15,11 @@ void Component::yourTurn() {
 
 	if (disabledForTurns > 0)
 		disabledForTurns--;
+
+	if (heat >= getFatalHeatLevel() && randomPercentage(rand) >= 80) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
+		disabledForTurns += randomTurnsMissed(rand);
+	else if (heat >= getDangerousHeatLevel() && randomPercentage(rand) >= 50) // If at a dangerous heat level then the chance is 50% of becoming disabled.
+		disabledForTurns += randomTurnsMissed(rand);
 }
 
 void Component::yourTurnEnabled() {}
@@ -181,9 +186,6 @@ void Component::increaseHeat(int amount) {
 	heat += amount;
 
 	if (heat < 0) heat = 0;
-
-	if (heat >= getFatalHeatLevel()); // TODO: ...
-	else if (heat >= getDangerousHeatLevel()); // ...
 }
 
 /*

@@ -18,7 +18,7 @@ public:
 private:
 	sf::Vector2u hoverGridPosition;
 
-	std::shared_ptr<sf::Texture> componentsTexture; // TODO: Set this up and finish building the vertex array.
+	std::shared_ptr<sf::Texture> componentsTexture;
 	TurnManager &turnManager;
 	sf::Vector2u currentGridSize;
 	sf::VertexArray vertices;
