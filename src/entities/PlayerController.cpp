@@ -2,6 +2,7 @@
 
 #define PATH_IN_RANGE_COLOUR sf::Color(0, 255, 0, 255)
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)
+#define ATTACK_PATH_COLOUR sf::Color::Magenta
 
 PlayerController::PlayerController(sf::RenderWindow &renderWindow, GameGui &gameGui) : window(renderWindow), path(sf::Vector2u(0, 0)), gui(gameGui) {}
 
@@ -34,7 +35,7 @@ bool PlayerController::handle(Entity * entity, Input &input) {
 			}
 		}
 		else { // Attack mode:
-			map->colourTilePath(path, sf::Color::Magenta);
+			map->colourTilePath(path, ATTACK_PATH_COLOUR);
 
 			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos)) {
 				map->resetColourTilePath(path);
