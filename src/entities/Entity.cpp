@@ -6,20 +6,21 @@ Entity::Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, 
 	: name(entityName), position(pos), faction(entityFaction), componentGrid(componentGridSize), controller(entityController),
 	currentPath(pos), visualMovementSpeed(sf::milliseconds(80)) {}
 
-bool Entity::yourMovementTurn(Input &input) {
-	bool complete = controller->handleMovement(this, input); // I don't think they can handle this! Update: This joke doesn't work as well now...   :(
-	myTurn = !complete;
-	return complete;
+void Entity::yourTurnBegin() {
+	myTurn = true;
 }
 
-bool Entity::yourAttackTurn(Input &input) {
-	bool complete = controller->handleAttacking(this, input);
-	myTurn = !complete;
-	return complete;
+bool Entity::yourTurnDecision(Input &input) {
+	return controller->handle(this, input); // Controller, can you handle this? I don't think they can handle this!
 }
 
-void Entity::yourTurnEnded() {
+bool Entity::yourTurnCurrently() {
+	return updateMovement() && updateAttacking();
+}
+
+void Entity::yourTurnEnd() {
 	componentGrid.turnPassed();
+	myTurn = false;
 }
 
 bool Entity::isMyTurn() {
@@ -107,7 +108,7 @@ bool Entity::isBlocking() {
 }
 
 sf::Color Entity::getColour() {
-	return (isMyTurn() ? MY_TURN_COLOUR : sf::Color(255, 255, 255, 255));
+	return (myTurn ? MY_TURN_COLOUR : sf::Color(255, 255, 255, 255));
 }
 
 bool Entity::moveDirectlyBy(sf::Vector2u movement) {

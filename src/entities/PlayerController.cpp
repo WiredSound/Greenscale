@@ -5,75 +5,49 @@
 
 PlayerController::PlayerController(sf::RenderWindow &renderWindow, GameGui &gameGui) : window(renderWindow), path(sf::Vector2u(0, 0)), gui(gameGui) {}
 
-bool PlayerController::handleMovement(Entity *entity, Input &input) {
+bool PlayerController::handle(Entity * entity, Input &input) {
 	GameMap *map = entity->getMapReference();
 
-	if (targetSelected) {
-		bool finishedMoving = entity->updateMovement();
-
-		if (finishedMoving) {
-			targetSelected = false;
-			path = MovementPath(path.getStartPosition()); // This will make the attack path be immediately rebuilt.
-		}
-
-		return finishedMoving;
+	if (gui.isMouseOverChildren()) { // Remove any path colouring if the mouse moves over the GUI.
+		map->resetColourTilePath(path);
 	}
-	else if (entity->reachedPathTarget()) {
-		if (gui.isMouseOverChildren()) {
-			map->resetColourTilePath(path);
-		}
-		else { // If the mouse is not currently over the gui...
-			drawCurrentPath(entity, map);
+	else { // If the mouse is not over any GUI elements...
+		sf::Vector2u mouseTilePos = map->mousePosToTilePos(window); // Get the map tile that the mouse is currently over.
 
-			sf::Vector2u tilePos = map->mousePosToTilePos(window);
+		if (moveMode) {
+			drawCurrentMovementPath(entity, map);
 
 			// Build a path if the player has moved their mouse over a new tile but only if that position is within bounds and free.
-			if (path.getTargetPosition() != tilePos && map->withinBounds(tilePos) && map->isPositionFree(tilePos)) {
+			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos) && map->isPositionFree(mouseTilePos)) {
 				map->resetColourTilePath(path); // Reset the colouring on the previous path.
 
-				if (MovementPath::distanceFromTo(entity->getPosition(), tilePos) <= entity->getMovementRange() * 1.5)
-					path = map->pathfinder.buildAStarPath(entity->getPosition(), tilePos);
+				if (MovementPath::distanceFromTo(entity->getPosition(), mouseTilePos) <= entity->getMovementRange() * 1.5)
+					path = map->pathfinder.buildAStarPath(entity->getPosition(), mouseTilePos);
 				else
-					path = MovementPath(tilePos);
+					path = MovementPath(mouseTilePos); // Build an incomplete path if the target is not in range.
 			}
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
-				targetSelected = entity->setMovementPath(path);
+				bool success = entity->setMovementPath(path);
+
+				if (success) return true; // Path now set so player's turn ends.
 			}
 		}
-	}
-
-	return false;
-}
-
-bool PlayerController::handleAttacking(Entity *entity, Input &input) {
-	GameMap *map = entity->getMapReference();
-
-	if (targetSelected) {
-		DEBUG_LOG(entity->name << " is firing!");
-
-		path = MovementPath(path.getStartPosition()); // Reset the movement path.
-		targetSelected = false;
-
-		return true;
-	}
-	else {
-		if (gui.isMouseOverChildren()) {
-			map->resetColourTilePath(path);
-		}
-		else { // If the mouse is not currently over the gui...
+		else { // Attack mode:
 			map->colourTilePath(path, sf::Color::Magenta);
 
-			sf::Vector2u tilePos = map->mousePosToTilePos(window);
-
-			if (path.getTargetPosition() != tilePos && map->withinBounds(tilePos)) {
+			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos)) {
 				map->resetColourTilePath(path);
 
-				path = MovementPath::buildLinePath(entity->getPosition(), tilePos);
+				path = MovementPath::buildLinePath(entity->getPosition(), mouseTilePos);
 			}
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
-				targetSelected = true;
+				DEBUG_LOG(entity->name << " is firing!");
+
+				// TODO: Properly set up weapon firing.
+
+				return true;
 			}
 		}
 	}
@@ -81,6 +55,6 @@ bool PlayerController::handleAttacking(Entity *entity, Input &input) {
 	return false;
 }
 
-void PlayerController::drawCurrentPath(Entity *entity, GameMap *map) {
+void PlayerController::drawCurrentMovementPath(Entity *entity, GameMap *map) {
 	map->colourTilePath(path, (path.isComplete() && entity->withinRange(path.getLength()) ? PATH_IN_RANGE_COLOUR : PATH_NOT_IN_RANGE_COLOUR));
 }

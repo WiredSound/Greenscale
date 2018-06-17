@@ -18,9 +18,10 @@ class Entity {
 public:
 	Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController);
 
-	bool yourMovementTurn(Input &input);
-	bool yourAttackTurn(Input &input);
-	void yourTurnEnded();
+	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
+	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
+	virtual bool yourTurnCurrently(); // Where the entity can performs things that take multiple frames to complete such as movement before the turn manager can move onto the next entity.
+	virtual void yourTurnEnd(); // When the entity has finished moving, animating, etc.
 	bool isMyTurn();
 
 	bool updateMovement();
