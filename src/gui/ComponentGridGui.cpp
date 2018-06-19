@@ -32,8 +32,21 @@ void ComponentGridGui::draw(sf::RenderTarget& target, sf::RenderStates states) c
 	target.draw(vertices, states);
 }
 
+unsigned int ComponentGridGui::getGridIndex(sf::Vector2u pos, const ComponentGrid &grid) {
+	return pos.y * grid.getGridSize().x + pos.x;
+}
+
 Optional<Component> &ComponentGridGui::getComponentHoveredOver() {
 	return fetchCurrentGrid().getComponentAt(hoverGridPosition);
+}
+
+void ComponentGridGui::hoveringOverGridPosition(sf::Vector2u gridPosition) {
+	// Put in checks to ensure this is pointing to a valid grid position?
+	hoverGridPosition = gridPosition;
+}
+
+void ComponentGridGui::equipGridPosition(sf::Vector2u gridPosition) {
+	equippedGridPosition = gridPosition;
 }
 
 // Creates component boxes and resizes window.
@@ -59,7 +72,7 @@ void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid) {
 	auto &component = grid.getComponentAt(pos);
 
-	int index = pos.y * grid.getGridSize().x + pos.x;
+	int index = getGridIndex(pos, grid);
 	sf::Vertex *quad = &vertices[index * 4];
 
 	if (component) {

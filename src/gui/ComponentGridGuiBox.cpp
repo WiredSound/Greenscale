@@ -8,5 +8,10 @@ ComponentGridGuiBox::ComponentGridGuiBox(ComponentGridGui &parent, sf::Vector2u 
 void ComponentGridGuiBox::mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) {
 	GuiWindow::mouseHover(position, mouseButtonsJustClicked);
 
-	gridGui.hoverGridPosition = gridPosition;
+	gridGui.hoveringOverGridPosition(gridPosition);
+
+	for (sf::Mouse::Button button : mouseButtonsJustClicked) {
+		if (button == sf::Mouse::Button::Left)
+			gridGui.equipGridPosition(gridPosition);
+	}
 }
