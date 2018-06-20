@@ -4,7 +4,7 @@ ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::share
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Component Grid", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	turnManager(manager), componentsTexture(texture),
-	padding(0.05f, 0.05f), componentBoxColour(75, 75, 75, 255), componentBoxHoverColour(60, 60, 60, 255), componentBoxBorderColour(borderColour)
+	padding(0.05f, 0.05f), componentBoxColour(75, 75, 75, 255), componentBoxHoverColour(60, 60, 60, 255), componentBoxUnequippedBorderColour(borderColour), componentBoxEquippedBorderColour(sf::Color::Blue)
 {
 	vertices.setPrimitiveType(sf::Quads);
 }
@@ -14,13 +14,16 @@ void ComponentGridGui::update(Input &input) {
 
 	ComponentGrid &currentGrid = fetchCurrentGrid();
 
-	if (currentGrid.getGridSize() != currentGridSize) {
-		resize(currentGrid.getGridSize());
+	if (previousComponentGrid != &currentGrid) { // Check if the grid being displayed has changed.
+		setup(currentGrid);
+		previousComponentGrid = &currentGrid;
 	}
 
 	for (unsigned int x = 0; x < currentGrid.getGridSize().x; x++) {
 		for (unsigned int y = 0; y < currentGrid.getGridSize().y; y++) {
-			setupComponentQuad(sf::Vector2u(x, y), currentGrid);
+			sf::Vector2u position(x, y);
+
+			setupComponentQuad(position, currentGrid);
 		}
 	}
 }
@@ -46,27 +49,39 @@ void ComponentGridGui::hoveringOverGridPosition(sf::Vector2u gridPosition) {
 }
 
 void ComponentGridGui::equipGridPosition(sf::Vector2u gridPosition) {
-	equippedGridPosition = gridPosition;
+	auto &grid = fetchCurrentGrid();
+
+	// Handle the changes to the GUI:
+	if (grid.isComponentEquipped())
+		getGridBox(grid.getEquippedComponentGridPosition(), grid)->unequip();
+	getGridBox(gridPosition, grid)->equip();
+
+	grid.equipComponent(gridPosition);
 }
 
 // Creates component boxes and resizes window.
-void ComponentGridGui::resize(const sf::Vector2u &gridSize) {
+void ComponentGridGui::setup(ComponentGrid &grid) {
+	const sf::Vector2u &gridSize = grid.getGridSize();
+
 	vertices.resize(gridSize.x * gridSize.y * 4);
 
 	destroyAllChildren();
 
 	boxSize = sf::Vector2f((1.0f - padding.x) / gridSize.x - padding.x, (1.0f - padding.y) / gridSize.y - padding.y);
 
-	for (unsigned int x = 0; x < gridSize.x; x++) {
-		for (unsigned int y = 0; y < gridSize.y; y++) {
-			addChild(std::make_unique<ComponentGridGuiBox>(*this, sf::Vector2u(x, y),
+	for (unsigned int y = 0; y < gridSize.y; y++) {
+		for (unsigned int x = 0; x < gridSize.x; x++) {
+			sf::Vector2u gridPos(x, y);
+
+			addChild(std::make_unique<ComponentGridGuiBox>(*this, gridPos,
 				sf::Vector2f(padding.x + (padding.x + boxSize.x) * x,
 					padding.y + (padding.y + boxSize.y) * y), boxSize,
-				componentBoxColour, componentBoxHoverColour, componentBoxBorderColour));
+				componentBoxColour, componentBoxHoverColour, componentBoxEquippedBorderColour, componentBoxUnequippedBorderColour, 1.0f));
+
+			if (grid.getEquippedComponentGridPosition() == gridPos && grid.isComponentEquipped())
+				getGridBox(gridPos, grid)->equip();
 		}
 	}
-
-	currentGridSize = gridSize;
 }
 
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid) {
@@ -101,4 +116,10 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid)
 
 ComponentGrid &ComponentGridGui::fetchCurrentGrid() {
 	return turnManager.getCurrentEntity()->getComponentGrid();
+}
+
+ComponentGridGuiBox *ComponentGridGui::getGridBox(sf::Vector2u pos, ComponentGrid &grid) {
+	auto *ptr = dynamic_cast<ComponentGridGuiBox*>(getChild(getGridIndex(pos, grid)).get()); // Ew...
+	assert(ptr != nullptr);
+	return ptr;
 }

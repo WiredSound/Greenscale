@@ -2,14 +2,17 @@
 
 GuiWindow::GuiWindow(std::string guiName, Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) : ChildGui(guiName, parent, position, size, origin) {
-	setupBackground(backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
+	setupBackground(backgroundColour, hoverBackgroundColour);
+	setBorder(borderColour, borderThickness);
 }
 
-void GuiWindow::setupBackground(sf::Color colourBackground, sf::Color colourBackgroundHover, sf::Color borderColour, float borderThickness) {
+void GuiWindow::setupBackground(sf::Color colourBackground, sf::Color colourBackgroundHover) {
 	backgroundColour = colourBackground;
 	hoverBackgroundColour = colourBackgroundHover;
-
 	background.setFillColor(backgroundColour);
+}
+
+void GuiWindow::setBorder(sf::Color borderColour, float borderThickness) {
 	background.setOutlineThickness(borderThickness);
 	background.setOutlineColor(borderColour);
 }

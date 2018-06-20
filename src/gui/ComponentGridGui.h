@@ -22,11 +22,9 @@ public:
 
 private:
 	sf::Vector2u hoverGridPosition;
-	sf::Vector2u equippedGridPosition;
 
 	std::shared_ptr<sf::Texture> componentsTexture;
 	TurnManager &turnManager;
-	sf::Vector2u currentGridSize;
 	sf::VertexArray vertices;
 
 	sf::Vector2f padding; // Space between the borders and component boxes.
@@ -34,10 +32,14 @@ private:
 
 	sf::Color componentBoxColour;
 	sf::Color componentBoxHoverColour;
-	sf::Color componentBoxBorderColour;
+	sf::Color componentBoxEquippedBorderColour;
+	sf::Color componentBoxUnequippedBorderColour;
 
+	ComponentGrid *previousComponentGrid;
 	ComponentGrid &fetchCurrentGrid();
 
-	void resize(const sf::Vector2u &gridSize);
+	ComponentGridGuiBox *getGridBox(sf::Vector2u pos, ComponentGrid &grid);
+
+	void setup(ComponentGrid &grid);
 	void setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid);
 };

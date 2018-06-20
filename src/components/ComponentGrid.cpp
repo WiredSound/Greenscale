@@ -22,8 +22,15 @@ void ComponentGrid::turnPassed() {
 	}
 }
 
+Optional<Component> &ComponentGrid::getComponentByIndex(unsigned int index) {
+	if (index < components.size())
+		return components[index];
+
+	return Optional<Component>();
+}
+
 Optional<Component> &ComponentGrid::getComponentAt(sf::Vector2u pos) {
-	return components[getIndex(pos)];
+	return getComponentByIndex(getIndex(pos));
 }
 
 const sf::Vector2u &ComponentGrid::getGridSize() const {
@@ -81,6 +88,30 @@ unsigned int ComponentGrid::getMaxPowerStorage() {
 	return powerStorage;
 }
 
-int ComponentGrid::getIndex(const sf::Vector2u &pos) {
+Optional<Component> &ComponentGrid::getEquippedComponent() {
+	if (componentEquipped)
+		return getComponentAt(equippedPosition);
+
+	return Optional<Component>();
+}
+
+sf::Vector2u ComponentGrid::getEquippedComponentGridPosition() {
+	return equippedPosition;
+}
+
+void ComponentGrid::equipComponent(sf::Vector2u pos) {
+	componentEquipped = true;
+	equippedPosition = pos;
+}
+
+void ComponentGrid::unequipComponent() {
+	componentEquipped = false;
+}
+
+bool ComponentGrid::isComponentEquipped() {
+	return componentEquipped;
+}
+
+unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {
 	return pos.y * gridSize.x + pos.x;
 }
