@@ -203,15 +203,19 @@ int Component::reduceHeatByPercentage(float percentage) {
 }
 */
 
+void Component::toggleManualEnable() {
+	manualEnable = !manualEnable;
+}
+
 bool Component::isDestroyed() {
 	return integrity <= 0;
 }
 
 bool Component::isEnabled() {
-	return disabledForTurns <= 0 && enabled;
+	return disabledForTurns <= 0 && manualEnable;
 }
 
 sf::Color Component::getColour() {
 	// TODO: Implement component colours!
-	return sf::Color(80, 255, 80, 255);
+	return sf::Color(80, 255, 80, isEnabled() ? 255 : 130);
 }

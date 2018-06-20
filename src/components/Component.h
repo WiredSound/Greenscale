@@ -44,6 +44,8 @@ public:
 	bool isDestroyed();
 	bool isEnabled();
 
+	void toggleManualEnable();
+
 	sf::Color getColour();
 
 protected:
@@ -58,7 +60,7 @@ private:
 	std::shared_ptr<ComponentManager> manager;
 	std::vector<ComponentUpgrade> upgrades;
 
-	bool enabled;
+	bool manualEnable;
 
 	int integrity;
 	int heat = 0;

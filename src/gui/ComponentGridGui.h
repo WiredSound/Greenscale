@@ -19,6 +19,7 @@ public:
 	// This use of the 'friend' keyword is probably bad practise so instead made the below public:
 	void hoveringOverGridPosition(sf::Vector2u gridPosition);
 	void equipGridPosition(sf::Vector2u gridPosition);
+	void toggleEnableGridPosition(sf::Vector2u gridPosition);
 
 private:
 	sf::Vector2u hoverGridPosition;

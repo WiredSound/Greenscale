@@ -59,6 +59,10 @@ void ComponentGridGui::equipGridPosition(sf::Vector2u gridPosition) {
 	grid.equipComponent(gridPosition);
 }
 
+void ComponentGridGui::toggleEnableGridPosition(sf::Vector2u gridPosition) {
+	fetchCurrentGrid().getComponentAt(gridPosition)->toggleManualEnable();
+}
+
 // Creates component boxes and resizes window.
 void ComponentGridGui::setup(ComponentGrid &grid) {
 	const sf::Vector2u &gridSize = grid.getGridSize();
