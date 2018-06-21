@@ -216,6 +216,14 @@ bool Component::isEnabled() {
 }
 
 sf::Color Component::getColour() {
-	// TODO: Implement component colours!
-	return sf::Color(80, 255, 80, isEnabled() ? 255 : 130);
+	sf::Uint8 opacity = isEnabled() ? 255 : 130; // Opacity is based on whether the component is enabled or not.
+
+	switch (upgrades.size()) {
+	case 0: return sf::Color(255, 255, 255, opacity);	// WHITE
+	case 1: return sf::Color(0, 255, 0, opacity);		// GREEN
+	case 2: return sf::Color(0, 0, 255, opacity);		// BLUE
+	case 3: return sf::Color(128, 0, 128, opacity);		// PURPLE
+	case 4: return sf::Color(255, 165, 0, opacity);		// ORANGE
+	default: return sf::Color(255, 0, 0, opacity);		// RED
+	}
 }
