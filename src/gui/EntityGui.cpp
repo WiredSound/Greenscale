@@ -1,13 +1,13 @@
 #include "EntityGui.h"
 
-EntityGui::EntityGui(Gui &parent, sf::Font &textFont, TurnManager &manager, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
+EntityGui::EntityGui(Gui &parent, sf::Font &textFont, unsigned int fontSize, TurnManager &manager, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)
 	: GuiWindow("Entity Info", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness), font(textFont), turnManager(manager) {
 	auto lines = std::make_unique<TextLines>(*this, sf::Vector2f(0.02f, 0.02f), 5);
 
-	nameLine = lines->addLine(TextLine(font, 16, { "Name: ", sf::Color::White }));
-	integrityLine = lines->addLine(TextLine(font, 16, { "Integrity: ", sf::Color::White }));
-	powerLine = lines->addLine(TextLine(font, 16, { "Power: ", sf::Color::White }));
+	nameLine = lines->addLine(TextLine(font, fontSize, { "Name: ", sf::Color::White }));
+	integrityLine = lines->addLine(TextLine(font, fontSize, { "Integrity: ", sf::Color::White }));
+	powerLine = lines->addLine(TextLine(font, fontSize, { "Power: ", sf::Color::White }));
 
 	entityInfoLines = addChild(std::move(lines));
 }

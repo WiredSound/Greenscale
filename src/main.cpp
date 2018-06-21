@@ -17,10 +17,9 @@ int main() {
 
 	sf::RenderWindow window(sf::VideoMode(settings.windowWidth, settings.windowHeight),
 		"Greenscale",
-		settings.fullscreenEnabled ? (sf::Style::Fullscreen) : (sf::Style::Titlebar | sf::Style::Close | sf::Style::Resize));
+		settings.fullscreenEnabled ? (sf::Style::Fullscreen) : (sf::Style::Titlebar | sf::Style::Close/* | sf::Style::Resize*/));
 
 	window.setVerticalSyncEnabled(settings.vsyncEnabled);
-	//window.setView(sf::View(sf::FloatRect(0, 0, settings.windowWidth, settings.windowHeight)));
 
 	sf::Font font;
 	if (!font.loadFromFile("assets/fonts/aurulent-sans-mono/AurulentSansMono-Regular.otf")) {
@@ -34,9 +33,9 @@ int main() {
 	sf::Text fpsText;
 	fpsText.setFont(font);
 	fpsText.setFillColor(sf::Color::Yellow);
-	fpsText.setCharacterSize(18);
+	fpsText.setCharacterSize(settings.fontSize);
 
-	auto state = std::make_unique<GameState>(window, font); // Create the game state.
+	auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
 	Input input(window);
 
 	while (window.isOpen()) {

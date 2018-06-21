@@ -1,6 +1,7 @@
 {
     "window width" : 1280,
     "window height" : 720,
+    "font size" : 14,
     "fullscreen enabled" : false,
     "vsync enabled" : false,
     "display fps" : true

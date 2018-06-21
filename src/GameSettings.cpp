@@ -7,6 +7,7 @@
 // JSON keys:
 #define WINDOW_WIDTH "window width"
 #define WINDOW_HEIGHT "window height"
+#define FONT_SIZE "font size"
 #define VSYNC_ENABLED "vsync enabled"
 #define FULLSCREEN_ENABLED "fullscreen enabled"
 #define DISPLAY_FPS "display fps"
@@ -21,6 +22,7 @@ bool GameSettings::loadSettings(std::string filename) {
 
 			windowWidth = json[WINDOW_WIDTH].get<unsigned int>();
 			windowHeight = json[WINDOW_HEIGHT].get<unsigned int>();
+			fontSize = json[FONT_SIZE].get<unsigned int>();
 			vsyncEnabled = json[VSYNC_ENABLED].get<bool>();
 			fullscreenEnabled = json[FULLSCREEN_ENABLED].get<bool>();
 			displayFps = json[DISPLAY_FPS].get<bool>();
@@ -47,6 +49,7 @@ bool GameSettings::writeSettings(std::string filename) {
 	if (file.is_open()) {
 		json[WINDOW_WIDTH] = windowWidth;
 		json[WINDOW_HEIGHT] = windowHeight;
+		json[FONT_SIZE] = fontSize;
 		json[VSYNC_ENABLED] = vsyncEnabled;
 		json[FULLSCREEN_ENABLED] = fullscreenEnabled;
 		json[DISPLAY_FPS] = displayFps;
