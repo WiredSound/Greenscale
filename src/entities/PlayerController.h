@@ -18,4 +18,6 @@ private:
 	bool moveMode = true; // Whether currently in moving or attacking mode.
 
 	void drawCurrentMovementPath(Entity *entity, GameMap *map);
+	void buildMoveModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos);
+	void buildAttackModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos);
 };
