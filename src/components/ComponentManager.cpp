@@ -1,5 +1,7 @@
 #include "ComponentManager.h"
 
+#include "../JsonHelp.h"
+
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
 ComponentManager::ComponentManager() : Manager("component", "components") {}
@@ -15,6 +17,7 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json["id"].get<IDs::Components>(),
 			json["name"].get<std::string>(),
 			json["description"].get<std::string>(),
+			json.value<std::string>("type", ""),
 			json["textureX"].get<unsigned int>(),
 			json["textureY"].get<unsigned int>(),
 			json.value<int>("max integrity", 1),
@@ -25,7 +28,11 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<int>("passive heat", 0),
 			json.value<int>("use heat", 0),
 			json.value<int>("power storage", 0),
-			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>()
+			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>(),
+			json.value<IDs::Projectiles>("projectile id", IDs::Projectiles::BULLET),
+			json.find("projectile damage") != json.end() ? JsonHelp::parseDamage(json["projectile damage"]) : Damage(),
+			json.value<unsigned int>("projectile range", 1),
+			json.value<unsigned int>("projectile penetration", 0)
 		}
 	);
 

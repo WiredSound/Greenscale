@@ -48,10 +48,6 @@ bool GameMap::addEntity(std::shared_ptr<Entity> entity) {
 	return false;
 }
 
-bool GameMap::isPositionFree(sf::Vector2u position) {
-	return (!tiles->getTileAt(position).blocking) && (entities->isPositionFree(position));
-}
-
 std::vector<std::shared_ptr<Entity>> GameMap::getEntitesPriorityOrdered() {
 	std::vector<std::shared_ptr<Entity>> entityList = entities->getEntities();
 	std::sort(entityList.begin(), entityList.end(), entitySortMethod);
@@ -69,6 +65,13 @@ std::vector<std::shared_ptr<Entity>> GameMap::getEntitiesInFaction(Faction facti
 	return factionEntities;
 }
 
+std::vector<std::shared_ptr<Entity>> GameMap::getEntitiesAt(sf::Vector2u position) {
+	if (withinBounds(position))
+		return entities->getEntitiesAt(position);
+
+	return std::vector<std::shared_ptr<Entity>>();
+}
+
 sf::Vector2u GameMap::worldPosToTilePos(sf::Vector2f worldPos) {
 	return sf::Vector2u(static_cast<unsigned int>(std::floor(worldPos.x / tileSize.x)), static_cast<unsigned int>(std::floor(worldPos.y / tileSize.y)));
 }
@@ -78,12 +81,35 @@ sf::Vector2u GameMap::mousePosToTilePos(sf::Vector2i mousePos, sf::RenderWindow 
 	return worldPosToTilePos(worldPos);
 }
 
+bool GameMap::isTilePositionFree(sf::Vector2u position) {
+	return !tiles->getTileAt(position).blocking;
+}
+
+bool GameMap::isEntityPositionFree(sf::Vector2u position) {
+	return entities->isPositionFree(position);
+}
+
+bool GameMap::isPositionFree(sf::Vector2u position) {
+	return isTilePositionFree(position) && isEntityPositionFree(position);
+}
+
 sf::Vector2u GameMap::mousePosToTilePos(sf::RenderWindow &window) {
 	return mousePosToTilePos(sf::Mouse::getPosition(window), window);
 }
 
 bool GameMap::withinBounds(sf::Vector2u pos) {
 	return tiles->withinBounds(pos.x, pos.y) && entities->withinBounds(pos.x, pos.y);
+}
+
+unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration) {
+	auto strength = tiles->getTileAt(pos).strength;
+
+	if (penetration >= strength) {
+		tiles->setTileAt(pos, IDs::Tiles::DIRT); // TODO: Replace the tile to something more appropriate.
+		penetration -= strength;
+	}
+
+	return penetration;
 }
 
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right) {

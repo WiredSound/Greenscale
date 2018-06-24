@@ -10,6 +10,7 @@
 #include "../Input.h"
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
+#include "../projectiles/ProjectileArc.h"
 class EntityController;
 
 #define MY_TURN_COLOUR sf::Color(0, 255, 0, 255)
@@ -49,6 +50,9 @@ public:
 	int getPowerLevel();
 	int getMaxPowerStorage();
 
+	bool useEquippedComponent(sf::Vector2u target);
+	void applyDamage(Damage damage);
+
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
 
@@ -66,6 +70,8 @@ protected:
 	MovementPath currentPath;
 	int movementRange = 10;
 	sf::Time visualMovementSpeed; // Time between each tile movement when moving along a path.
+
+	Optional<ProjectileArc> currentArc;
 
 private:
 	GameMap *map;

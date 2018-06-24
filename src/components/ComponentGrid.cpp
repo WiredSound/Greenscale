@@ -38,8 +38,9 @@ const sf::Vector2u &ComponentGrid::getGridSize() const {
 }
 
 // Gets the index of the components vector of components adjacent to pos (assuming they are within bounds).
-std::vector<int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2u pos) {
-	std::vector<int> indexes;
+// TODO: Handle when a position on the edge of the grid is given.
+std::vector<unsigned int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2u pos) {
+	std::vector<unsigned int> indexes;
 
 	if (pos.x < gridSize.x)
 		indexes.push_back(getIndex(sf::Vector2u(pos.x + 1, pos.y)));
@@ -49,6 +50,17 @@ std::vector<int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2u pos) {
 		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y + 1)));
 	if (pos.y > 0)
 		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y - 1)));
+
+	return indexes;
+}
+
+std::vector<unsigned int> ComponentGrid::getFunctionalComponentIndexes() {
+	std::vector<unsigned int> indexes;
+
+	for (unsigned int i = 0; i < components.size(); i++) {
+		if (getComponentByIndex(i))
+			indexes.push_back(i);
+	}
 
 	return indexes;
 }
@@ -110,6 +122,15 @@ void ComponentGrid::unequipComponent() {
 
 bool ComponentGrid::isComponentEquipped() {
 	return componentEquipped;
+}
+
+void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
+	std::vector<unsigned int> indexes = getFunctionalComponentIndexes();
+
+	unsigned int randomIndex = rand() % indexes.size();
+	auto &randomComponent = getComponentByIndex(randomIndex);
+
+	randomComponent->applyDamage(damage);
 }
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {

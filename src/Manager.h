@@ -32,6 +32,8 @@ public:
 				for (nlohmann::json managedJson : json[managedKey]) {
 					auto managed = parseJsonManaged(managedJson); // Parse the list of managed items.
 
+					DEBUG_LOG("Loaded " << managedName << " with ID: " << managed.first);
+
 					map.insert(managed);
 				}
 

@@ -19,6 +19,4 @@ private:
 	std::shared_ptr<Animation> robotMovingAnimation;
 
 	sf::Vector2f frameSize;
-
-	Animation loadAnimation(nlohmann::json &animationsJson, const std::string animationName);
 };

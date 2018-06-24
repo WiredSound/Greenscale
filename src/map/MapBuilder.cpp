@@ -2,6 +2,7 @@
 
 #define TILES_PATH "assets/tiles/tiles.json"
 #define COMPONENTS_PATH "assets/components/components.json"
+#define PROJECTILES_PATH "assets/projectiles/projectiles.json"
 #define ENTITIES_PATH "assets/entities/animations.json"
 #define TILES_TEXTURE_PATH "assets/tiles/tiles.png"
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
@@ -16,6 +17,7 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 	entityBuilder.loadAllAnimations(ENTITIES_PATH);
 
 	componentBuilder.loadComponentInfo(COMPONENTS_PATH);
+	componentBuilder.loadProjectileInfo(PROJECTILES_PATH);
 
 	tilesTexture->loadFromFile(TILES_TEXTURE_PATH);
 	entitiesTexture->loadFromFile(ENTITIES_TEXTURE_PATH);

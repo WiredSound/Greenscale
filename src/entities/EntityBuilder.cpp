@@ -12,8 +12,8 @@ void EntityBuilder::loadAllAnimations(const std::string filename) {
 
 			auto animationsJson = json["animations"];
 
-			robotIdleAnimation = std::make_shared<Animation>(loadAnimation(animationsJson, "robot idle"));
-			robotMovingAnimation = std::make_shared<Animation>(loadAnimation(animationsJson, "robot moving"));
+			robotIdleAnimation = std::make_shared<Animation>(JsonHelp::loadAnimation(animationsJson["robot idle"]));
+			robotMovingAnimation = std::make_shared<Animation>(JsonHelp::loadAnimation(animationsJson["robot moving"]));
 		}
 		catch (nlohmann::json::type_error &e) {
 			DEBUG_LOG_ERROR("Failed to load load entity animations due to type error: " << e.what() << "\nException ID: " << e.id);
@@ -38,30 +38,4 @@ Robot EntityBuilder::buildSimpleRobot(sf::Vector2u position, std::shared_ptr<Ent
 		faction,
 		robotIdleAnimation,
 		robotMovingAnimation);
-}
-
-Animation EntityBuilder::loadAnimation(nlohmann::json &animationsJson, const std::string animationName) {
-	nlohmann::json json = animationsJson[animationName];
-
-	std::vector<Animation::Frame> frames;
-
-	for (nlohmann::json frameJson : json["frames"]) {
-		nlohmann::json frameCoords = frameJson[0];
-
-		sf::Color colour = sf::Color(0, 0, 0, 0);
-		try {
-			colour = JsonHelp::parseColour(frameJson.at(1)); // Load the frame colour only if one is specified (otherwise uses the default entity colour).
-		}
-		catch (nlohmann::detail::out_of_range) {}
-
-		frames.push_back({
-			frameCoords[0].get<unsigned int>(), // Texture X.
-			frameCoords[1].get<unsigned int>(), // Texture Y.
-			colour
-		});
-	}
-
-	DEBUG_LOG("Loaded animation '" << animationName << "' with " << frames.size() << " frame(s).");
-
-	return Animation(sf::milliseconds(json["time"].get<int>()), frames);
 }

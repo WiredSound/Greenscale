@@ -9,10 +9,12 @@ void TileManager::parseJson(nlohmann::json json) {
 }
 
 std::pair<IDs::Tiles, const Tile> TileManager::parseJsonManaged(nlohmann::json json) {
+	auto id = json["id"].get<IDs::Tiles>();
+
 	std::pair<IDs::Tiles, const Tile> tilePair(
-		json["id"].get<IDs::Tiles>(),
+		id,
 		{
-			json["id"].get<IDs::Tiles>(),
+			id,
 			json["name"],
 			json["textureX"].get<unsigned int>(),
 			json["textureY"].get<unsigned int>(),
@@ -22,8 +24,6 @@ std::pair<IDs::Tiles, const Tile> TileManager::parseJsonManaged(nlohmann::json j
 			json["strength"].get<int>()
 		}
 	);
-
-	DEBUG_LOG("Loaded " << managedName << " '" << tilePair.second.name << "' with ID: " << tilePair.first);
 
 	return tilePair;
 }

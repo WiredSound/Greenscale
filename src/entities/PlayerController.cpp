@@ -11,7 +11,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 
 	sf::Vector2u mouseTilePos = map->mousePosToTilePos(window); // Get the map tile that the mouse is currently over.
 
-	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) {
+	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
 		moveMode = !moveMode;
 		if (moveMode) buildMoveModePath(entity, map, mouseTilePos); else buildAttackModePath(entity, map, mouseTilePos);
 	}
@@ -42,10 +42,11 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				DEBUG_LOG(entity->name << " is firing!");
 
-				// TODO: Properly set up weapon firing.
-
-				return true;
+				return entity->useEquippedComponent(mouseTilePos);
 			}
+
+			//if (input.isKeyJustPressed(sf::Keyboard::Key::S)) // TODO: Key bindings...
+				//return entity->useEquippedComponent(); // On self...
 		}
 	}
 
@@ -68,5 +69,6 @@ void PlayerController::buildMoveModePath(Entity *entity, GameMap *map, const sf:
 void PlayerController::buildAttackModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos) {
 	map->resetColourTilePath(path);
 
-	path = MovementPath::buildLinePath(entity->getPosition(), mouseTilePos);
+	//return entity->buildEquippedComponentPath(mouseTilePos);
+	// path = MovementPath::buildLinePath(entity->getPosition(), mouseTilePos);
 }

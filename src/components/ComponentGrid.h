@@ -25,8 +25,11 @@ public:
 	void unequipComponent();
 	bool isComponentEquipped();
 
+	void applyDamageToRandomComponent(Damage damage);
+
 protected:
-	std::vector<int> getAdjacentComponentIndexes(sf::Vector2u pos);
+	std::vector<unsigned int> getAdjacentComponentIndexes(sf::Vector2u pos);
+	std::vector<unsigned int> getFunctionalComponentIndexes(); // 'Functional' means having an integrity greater than 0 in this case.
 	unsigned int getIndex(const sf::Vector2u &pos);
 
 private:

@@ -18,4 +18,8 @@ namespace IDs {
 	};
 
 	enum ComponentUpgrades : char {};
+
+	enum Projectiles : char {
+		BULLET = 0
+	};
 }

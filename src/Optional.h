@@ -6,10 +6,14 @@ template <typename T>
 class Optional {
 public:
 	Optional() : present(false) {}
-	Optional(std::unique_ptr<T> obj) : object(obj), present(true) {}
+	Optional(std::unique_ptr<T> obj) : object(std::move(obj)), present(true) {}
 
 	std::unique_ptr<T> &get() {
 		return object;
+	}
+
+	T *getRaw() {
+		object.get();
 	}
 
 	void set(std::unique_ptr<T> obj) {

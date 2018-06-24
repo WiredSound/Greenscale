@@ -39,7 +39,12 @@ bool Entity::updateMovement() {
 }
 
 bool Entity::updateAttacking() {
-	// This is overloaded by robots which can actually have weapons.
+	if (currentArc) {
+		return currentArc->update(map);
+
+		if (currentArc->isComplete()) currentArc.remove();
+	}
+
 	return true;
 }
 
@@ -101,6 +106,24 @@ int Entity::getPowerLevel() {
 
 int Entity::getMaxPowerStorage() {
 	return componentGrid.getMaxPowerStorage();
+}
+
+bool Entity::useEquippedComponent(sf::Vector2u target) {
+	auto &component = componentGrid.getEquippedComponent();
+
+	if (component) {
+		MovementPath path = component->buildProjectilePath(getPosition(), target, map);
+		Optional<ProjectileArc> possibleArc = component->use(path);
+
+		if (possibleArc)
+			currentArc.set(possibleArc.claim());
+	}
+
+	return false;
+}
+
+void Entity::applyDamage(Damage damage) {
+	componentGrid.applyDamageToRandomComponent(damage); // TODO: Apply damage to component based on where the entity is shot from instead.
 }
 
 bool Entity::isBlocking() {

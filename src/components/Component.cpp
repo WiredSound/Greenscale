@@ -1,5 +1,8 @@
 #include "Component.h"
 
+#include "../entities/Entity.h"
+#include "../map/GameMap.h"
+
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
 	: id(componentId), rand(std::random_device()()), manager(componentManager), integrity(getMaxIntegrity()), randomTurnsMissed(1, 3), randomPercentage(0, 100) {}
 
@@ -55,7 +58,7 @@ int Component::getMaxIntegrity() {
 	int maxIntegrity = baseMaxIntegrity;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		maxIntegrity += static_cast<int>(baseMaxIntegrity * upgrade.maxIntegrityModifier);
+		maxIntegrity += static_cast<int>(ceil(baseMaxIntegrity * upgrade.maxIntegrityModifier));
 	}
 
 	return maxIntegrity;
@@ -70,7 +73,7 @@ int Component::getDangerousHeatLevel() {
 	int dangerousHeatLevel = baseDangerousHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		dangerousHeatLevel += static_cast<int>(baseDangerousHeatLevel * upgrade.unsafeHeatLevelModifier);
+		dangerousHeatLevel += static_cast<int>(ceil(baseDangerousHeatLevel * upgrade.unsafeHeatLevelModifier));
 	}
 
 	return dangerousHeatLevel;
@@ -81,7 +84,7 @@ int Component::getFatalHeatLevel() {
 	int fatalHeatLevel = baseFatalHeatLevel;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		fatalHeatLevel += static_cast<int>(baseFatalHeatLevel * upgrade.unsafeHeatLevelModifier);
+		fatalHeatLevel += static_cast<int>(ceil(baseFatalHeatLevel * upgrade.unsafeHeatLevelModifier));
 	}
 
 	return fatalHeatLevel;
@@ -92,7 +95,7 @@ int Component::getPassivePower() {
 	int passivePower = basePassivePower;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		passivePower += static_cast<int>(basePassivePower * upgrade.powerModifier);
+		passivePower += static_cast<int>(ceil(basePassivePower * upgrade.powerModifier));
 	}
 
 	return passivePower;
@@ -103,7 +106,7 @@ int Component::getUsePower() {
 	int usePower = baseUsePower;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		usePower += static_cast<int>(baseUsePower * upgrade.powerModifier);
+		usePower += static_cast<int>(ceil(baseUsePower * upgrade.powerModifier));
 	}
 
 	return usePower;
@@ -114,7 +117,7 @@ int Component::getPassiveHeat() {
 	int passiveHeat = basePassiveHeat;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		passiveHeat += static_cast<int>(basePassiveHeat * upgrade.heatModifier);
+		passiveHeat += static_cast<int>(ceil(basePassiveHeat * upgrade.heatModifier));
 	}
 
 	return passiveHeat;
@@ -125,7 +128,7 @@ int Component::getUseHeat() {
 	int useHeat = baseUseHeat;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		useHeat += static_cast<int>(baseUseHeat * upgrade.heatModifier);
+		useHeat += static_cast<int>(ceil(baseUseHeat * upgrade.heatModifier));
 	}
 
 	return useHeat;
@@ -136,7 +139,7 @@ int Component::getPowerStorage() {
 	int powerStorage = basePowerStorage;
 
 	for (const ComponentUpgrade &upgrade : upgrades) {
-		powerStorage += static_cast<int>(powerStorage * upgrade.powerModifier);
+		powerStorage += static_cast<int>(ceil(powerStorage * upgrade.powerModifier));
 	}
 
 	return powerStorage;
@@ -188,20 +191,13 @@ void Component::increaseHeat(int amount) {
 	if (heat < 0) heat = 0;
 }
 
-/*
-void Component::reduceHeat(int amount) {
-	heat -= amount;
-
-	if (heat < 0)
-		heat = 0;
+Optional<ProjectileArc> Component::use(MovementPath path) {
+	return Optional<ProjectileArc>();
 }
 
-int Component::reduceHeatByPercentage(float percentage) {
-	int amount = static_cast<int>(heat * percentage);
-	reduceHeat(amount);
-	return amount;
+MovementPath Component::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {
+	return MovementPath(source); // A regular component can only be used on itself.
 }
-*/
 
 void Component::toggleManualEnable() {
 	manualEnable = !manualEnable;

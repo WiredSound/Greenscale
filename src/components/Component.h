@@ -3,15 +3,15 @@
 #include <random>
 #include <SFML/Graphics/Texture.hpp>
 #include "ComponentManager.h"
+#include "../map/pathfinding/MovementPath.h"
+#include "../Optional.h"
+#include "../projectiles/ProjectileArc.h"
+#include "Damage.h"
+class Entity;
+class GameMap;
 
 class Component {
 public:
-	struct Damage {
-		int kinetic; // Applies a direct reduction of the component's integrity.
-		int thermal; // Adds heat to the component. Some heat can disable the component temporarily while larger amounts can disable it permanently or cause it to explode.
-		float disruption; // Liklihood that the component will become disabled temporarily or malfunction.
-	};
-
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn();
 	bool use();
@@ -44,6 +44,9 @@ public:
 	bool isDestroyed();
 	bool isEnabled();
 
+	virtual Optional<ProjectileArc> use(MovementPath path); // Can optionally fire a projectile (or alternatively just apply changes to self).
+	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);
+
 	void toggleManualEnable();
 
 	sf::Color getColour();
@@ -55,10 +58,11 @@ protected:
 	void increaseIntegrity(int amount);
 	void reduceIntegrity(int amount);
 
+	std::vector<ComponentUpgrade> upgrades;
+
 private:
 	IDs::Components id;
 	std::shared_ptr<ComponentManager> manager;
-	std::vector<ComponentUpgrade> upgrades;
 
 	bool manualEnable;
 
