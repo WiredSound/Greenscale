@@ -11,8 +11,6 @@ const ComponentInfo &Component::fetchInfo() {
 }
 
 void Component::yourTurn() {
-	increaseHeat(getPassiveHeat());
-
 	if (isEnabled())
 		yourTurnEnabled();
 
@@ -25,19 +23,21 @@ void Component::yourTurn() {
 		disabledForTurns += randomTurnsMissed(rand);
 }
 
-void Component::yourTurnEnabled() {}
+void Component::yourTurnEnabled() {
+	increaseHeat(getPassiveHeat());
+	//increasePower(getPassivePower());
+}
 
 bool Component::use() {
-	if (isEnabled()) {
-		increaseHeat(getUseHeat());
-
+	if (isEnabled())
 		return useEnabled();
-	}
 
 	return true;
 }
 
 bool Component::useEnabled() {
+	increaseHeat(getUseHeat());
+	//increasePower(getUsePower());
 	return true;
 }
 

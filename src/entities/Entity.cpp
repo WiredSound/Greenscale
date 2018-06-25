@@ -112,7 +112,6 @@ MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 	auto &component = componentGrid.getEquippedComponent();
 
 	if (component) {
-		DEBUG_LOG("BUILT PATH!");
 		return component->buildProjectilePath(getPosition(), target, map);
 	}
 
@@ -127,6 +126,8 @@ bool Entity::useEquippedComponent(MovementPath path) {
 
 		if (possibleArc)
 			currentArc.set(possibleArc.claim());
+
+		return true;
 	}
 
 	return false;

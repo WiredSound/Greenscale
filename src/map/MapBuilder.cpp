@@ -37,6 +37,7 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 
 	auto player = std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(1, 1), playerController, Faction::PLAYER));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::HEAT_SINK));
+	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(2, 2)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
 	map->addEntity(player);
 	map->addEntity(std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(4, 1), playerController, Faction::CORPORATION)));

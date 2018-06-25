@@ -12,7 +12,7 @@ namespace IDs {
 	};
 
 	enum Components : char {
-		CORE = 0,
+		FISSION_REACTOR = 0,
 		HEAT_SINK = 1,
 		DEFENSIVE_PLATING = 2
 	};
