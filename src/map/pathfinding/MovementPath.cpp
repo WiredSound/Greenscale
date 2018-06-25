@@ -6,6 +6,12 @@ MovementPath::MovementPath(sf::Vector2u pos) : startPos(pos), targetPos(pos), le
 	path.push_back(pos);
 }
 
+/*
+MovementPath::MovementPath(sf::Vector2u pos, bool pathComplete) : startPos(pos), targetPos(pos), length(1), pathIndex(pathComplete ? 0 : 1), complete(pathComplete) {
+	path.push_back(pos);
+}
+*/
+
 MovementPath::MovementPath(std::vector<sf::Vector2u> tiles)
 	: path(tiles), startPos(tiles[0]), targetPos(tiles[tiles.size() - 1]), length((int)tiles.size()), pathIndex(0), complete(true) {}
 

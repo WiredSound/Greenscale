@@ -50,7 +50,8 @@ public:
 	int getPowerLevel();
 	int getMaxPowerStorage();
 
-	bool useEquippedComponent(sf::Vector2u target);
+	MovementPath buildEquippedComponentPath(sf::Vector2u target);
+	bool useEquippedComponent(MovementPath path);
 	void applyDamage(Damage damage);
 
 	void setMap(GameMap *gameMap);

@@ -108,11 +108,21 @@ int Entity::getMaxPowerStorage() {
 	return componentGrid.getMaxPowerStorage();
 }
 
-bool Entity::useEquippedComponent(sf::Vector2u target) {
+MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 	auto &component = componentGrid.getEquippedComponent();
 
 	if (component) {
-		MovementPath path = component->buildProjectilePath(getPosition(), target, map);
+		DEBUG_LOG("BUILT PATH!");
+		return component->buildProjectilePath(getPosition(), target, map);
+	}
+
+	return MovementPath(getPosition());
+}
+
+bool Entity::useEquippedComponent(MovementPath path) {
+	auto &component = componentGrid.getEquippedComponent();
+
+	if (component) {
 		Optional<ProjectileArc> possibleArc = component->use(path);
 
 		if (possibleArc)

@@ -36,6 +36,8 @@ private:
 	sf::Vector2u gridSize;
 	std::vector<Optional<Component>> components;
 
+	Optional<Component> noComponent;
+
 	bool componentEquipped = false;
 	sf::Vector2u equippedPosition;
 

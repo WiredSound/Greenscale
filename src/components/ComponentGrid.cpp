@@ -26,7 +26,7 @@ Optional<Component> &ComponentGrid::getComponentByIndex(unsigned int index) {
 	if (index < components.size())
 		return components[index];
 
-	return Optional<Component>();
+	return noComponent;
 }
 
 Optional<Component> &ComponentGrid::getComponentAt(sf::Vector2u pos) {
@@ -104,7 +104,7 @@ Optional<Component> &ComponentGrid::getEquippedComponent() {
 	if (componentEquipped)
 		return getComponentAt(equippedPosition);
 
-	return Optional<Component>();
+	return noComponent;
 }
 
 sf::Vector2u ComponentGrid::getEquippedComponentGridPosition() {

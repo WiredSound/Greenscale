@@ -10,6 +10,7 @@ class GameMap;
 class MovementPath {
 public:
 	MovementPath(sf::Vector2u pos); // Incomplete movement path.
+	//MovementPath(sf::Vector2u pos, bool pathComplete);
 	MovementPath(std::vector<sf::Vector2u> tiles); // Complete movement path.
 
 	sf::Vector2u currentPosition();

@@ -31,7 +31,8 @@ Animation JsonHelp::loadAnimation(nlohmann::json &json) {
 		});
 	}
 
-	DEBUG_LOG("Loaded animation '" << animationName << "' with " << frames.size() << " frame(s).");
+	//DEBUG_LOG("Loaded animation '" << animationName << "' with " << frames.size() << " frame(s).");
+	DEBUG_LOG("Loaded animation with " << frames.size() << " frame(s).");
 
 	return Animation(sf::milliseconds(json["time"].get<int>()), frames);
 }
