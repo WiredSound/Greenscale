@@ -9,6 +9,7 @@ public:
 
 	unsigned int addLine(TextLine line);
 	TextLine &getLine(unsigned int index);
+	void numberOfLines(unsigned int amount, TextLine line);
 
 	virtual void update(Input &input) override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

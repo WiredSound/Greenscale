@@ -11,6 +11,14 @@ TextLine &TextLines::getLine(unsigned int index) {
 	return lines[index];
 }
 
+void TextLines::numberOfLines(unsigned int amount, TextLine line) {
+	lines.resize(amount, line);
+	/*
+	while (lines.size() <= amount)
+		addLine(line);
+	*/
+}
+
 void TextLines::update(Input &input) {
 	ChildGui::update(input);
 

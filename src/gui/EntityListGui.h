@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics/Text.hpp>
+#include "TextLines.h"
 #include "GuiWindow.h"
 #include "../TurnManager.h"
 
@@ -10,11 +10,10 @@ public:
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
 
 	virtual void update(Input &input) override;
-	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 private:
 	TurnManager &turnManager; // Turn manager belonging to the game state.
-	std::vector<sf::Text> lines;
 	sf::Font &font;
+	unsigned int textLines;
 	unsigned int textSize;
 };

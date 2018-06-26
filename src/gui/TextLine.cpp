@@ -1,5 +1,7 @@
 #include "TextLine.h"
 
+#include "../debugging.h"
+
 TextLine::TextLine(sf::Font &textFont, unsigned int size) : font(textFont), fontSize(size) {}
 
 TextLine::TextLine(sf::Font &textFont, unsigned int size, ColourText text) : TextLine(textFont, size) {
@@ -10,13 +12,16 @@ void TextLine::setPosition(sf::Vector2f basePosition) {
 	currentPosition = basePosition;
 
 	for (sf::Text &text : texts) {
-		text.setPosition(currentPosition);
+		text.setPosition(sf::Vector2f(round(currentPosition.x), round(currentPosition.y))); // The position is rounded so that the text does not appear blurry.
 		currentPosition.x += text.getLocalBounds().width;
 	}
 }
 
 float TextLine::getLineHeight() {
-	return texts[0].getLocalBounds().height;
+	if (texts.size() > 0) {
+		return texts[0].getCharacterSize();
+	}
+	return 0;
 }
 
 void TextLine::add() {
