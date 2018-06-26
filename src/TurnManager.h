@@ -10,7 +10,7 @@ class TurnManager {
 public:
 	TurnManager(std::unique_ptr<GameMap> &gameMap);
 	void update(Input &input);
-	std::shared_ptr<Entity> getCurrentEntity();
+	std::shared_ptr<Entity> &getCurrentEntity();
 	const std::vector<std::shared_ptr<Entity>> &getCurrentEntities();
 
 private:

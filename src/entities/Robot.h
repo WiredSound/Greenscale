@@ -9,7 +9,6 @@ public:
 		std::shared_ptr<Animation> animationIdle, std::shared_ptr<Animation> animationMoving);
 	virtual Animation::Frame fetchFrame() override;
 	virtual sf::Color getColour() override;
-	virtual bool updateAttacking() override;
 
 private:
 	std::shared_ptr<Animation> idleAnimation;

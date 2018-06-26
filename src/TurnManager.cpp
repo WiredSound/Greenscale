@@ -1,10 +1,14 @@
 #include "TurnManager.h"
 
-TurnManager::TurnManager(std::unique_ptr<GameMap> &gameMap) : map(gameMap) {}
+TurnManager::TurnManager(std::unique_ptr<GameMap> &gameMap) : map(gameMap) {
+}
 
 void TurnManager::update(Input &input) {
 	if (currentEntities.size() > 0) {
-		std::shared_ptr<Entity> entity = getCurrentEntity();
+		std::shared_ptr<Entity> &entity = getCurrentEntity();
+
+		if(!entity->isMyTurn())
+			getCurrentEntity()->yourTurnBegin();
 
 		if (decisionMade) {
 			bool complete = entity->yourTurnCurrently();
@@ -20,7 +24,7 @@ void TurnManager::update(Input &input) {
 	}
 }
 
-std::shared_ptr<Entity> TurnManager::getCurrentEntity() {
+std::shared_ptr<Entity> &TurnManager::getCurrentEntity() {
 	return currentEntities.at(index);
 }
 
@@ -33,8 +37,6 @@ void TurnManager::nextEntity() {
 
 	if (index >= currentEntities.size())  // All turns now complete.
 		fetchOrderedEntities();
-
-	getCurrentEntity()->yourTurnBegin(); // Beginning of the next entity's turn.
 }
 
 void TurnManager::fetchOrderedEntities() {

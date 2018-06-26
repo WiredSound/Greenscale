@@ -11,9 +11,8 @@
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
 #include "../projectiles/ProjectileArc.h"
+#include "../PulsingColour.h"
 class EntityController;
-
-#define MY_TURN_COLOUR sf::Color(0, 255, 0, 255)
 
 class Entity {
 public:
@@ -71,6 +70,8 @@ protected:
 	MovementPath currentPath;
 	int movementRange = 10;
 	sf::Time visualMovementSpeed; // Time between each tile movement when moving along a path.
+
+	PulsingColour myTurnColourPulse;
 
 	Optional<ProjectileArc> currentArc;
 

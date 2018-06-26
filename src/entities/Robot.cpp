@@ -12,10 +12,5 @@ Animation::Frame Robot::fetchFrame() {
 }
 
 sf::Color Robot::getColour() {
-	return (isMyTurn() ? MY_TURN_COLOUR : faction.colour);
-}
-
-bool Robot::updateAttacking() {
-	// TODO...
-	return true;
+	return (isMyTurn() ? myTurnColourPulse.getColour(faction.colour) : faction.colour);
 }

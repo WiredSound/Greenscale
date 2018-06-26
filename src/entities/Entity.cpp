@@ -4,9 +4,10 @@
 
 Entity::Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController)
 	: name(entityName), position(pos), faction(entityFaction), componentGrid(componentGridSize), controller(entityController),
-	currentPath(pos), visualMovementSpeed(sf::milliseconds(80)) {}
+	currentPath(pos), visualMovementSpeed(sf::milliseconds(80)), myTurnColourPulse(0.8f, 1.0f, 0.005f) {}
 
 void Entity::yourTurnBegin() {
+	DEBUG_LOG("Turn begins for entity: " << name);
 	myTurn = true;
 }
 
@@ -19,6 +20,7 @@ bool Entity::yourTurnCurrently() {
 }
 
 void Entity::yourTurnEnd() {
+	DEBUG_LOG("Turn ends for entity: " << name);
 	componentGrid.turnPassed();
 	myTurn = false;
 }
@@ -142,7 +144,7 @@ bool Entity::isBlocking() {
 }
 
 sf::Color Entity::getColour() {
-	return (myTurn ? MY_TURN_COLOUR : sf::Color(255, 255, 255, 255));
+	return (myTurn ? myTurnColourPulse.getColour(sf::Color::White) : sf::Color::White);
 }
 
 bool Entity::moveDirectlyBy(sf::Vector2u movement) {
