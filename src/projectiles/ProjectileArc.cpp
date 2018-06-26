@@ -9,12 +9,12 @@ ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManage
 	path.resetPosition();
 }
 
-bool ProjectileArc::isComplete() {
-	return path.isComplete();
+bool ProjectileArc::reachedTarget() {
+	return path.reachedTarget();
 }
 
 bool ProjectileArc::update(GameMap *map) {
-	if (!isComplete() && movementClock.getElapsedTime() >= getTimeBetweenMoves()) {
+	if (!reachedTarget() && movementClock.getElapsedTime() >= getTimeBetweenMoves()) {
 		movementClock.restart();
 
 		hit(map, path.currentPosition());
@@ -22,7 +22,7 @@ bool ProjectileArc::update(GameMap *map) {
 		path.nextPosition();
 	}
 
-	return isComplete();
+	return reachedTarget();
 }
 
 void ProjectileArc::hit(GameMap *map, sf::Vector2u pos) {

@@ -11,7 +11,7 @@ class ProjectileArc {
 public:
 	ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId, Damage projectileDamage, unsigned int projectilePenetration);
 
-	bool isComplete();
+	bool reachedTarget();
 	bool update(GameMap *map);
 
 	const ProjectileVisual &getProjectileVisualInfo();
