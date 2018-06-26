@@ -44,7 +44,7 @@ bool Entity::updateAttacking() {
 	if (currentArc) {
 		return currentArc->update(map);
 
-		if (currentArc->isComplete()) currentArc.remove();
+		if (currentArc->reachedTarget()) currentArc.remove();
 	}
 
 	return true;
