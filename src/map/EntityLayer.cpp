@@ -19,14 +19,14 @@ void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
 	for (sf::Vector2u pos : path.getPathTiles()) {
 		auto entities = getEntitiesAt(pos);
 
-		for (std::shared_ptr<Entity> entity : entities) {
+		for (std::shared_ptr<Entity> &entity : entities) {
 			// ...
 		}
 	}
 }
 
 bool EntityLayer::isPositionFree(sf::Vector2u pos) {
-	for (std::shared_ptr<Entity> entity : getEntitiesAt(pos)) {
+	for (std::shared_ptr<Entity> &entity : getEntitiesAt(pos)) {
 		if (entity->isBlocking())
 			return false;
 	}
@@ -37,7 +37,7 @@ bool EntityLayer::isPositionFree(sf::Vector2u pos) {
 std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesAt(sf::Vector2u pos) {
 	std::vector<std::shared_ptr<Entity>> entitiesHere;
 
-	for (std::shared_ptr<Entity> entity : entities) {
+	for (std::shared_ptr<Entity> &entity : entities) {
 		if (entity->getPosition() == pos)
 			entitiesHere.push_back(entity);
 	}
