@@ -14,9 +14,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
 		moveMode = !moveMode;
 
-		// Reset path:
-		map->resetColourTilePath(path);
-		path = MovementPath(entity->getPosition());
+		reset(path, entity->getPosition(), map);
 	}
 
 	if (gui.isMouseOverChildren()) { // Remove any path colouring if the mouse moves over the GUI.
@@ -33,7 +31,10 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				bool success = entity->setMovementPath(path);
 
-				if (success) return true; // Path now set so player's turn ends.
+				if (success) {
+					reset(path, mouseTilePos, map);
+					return true; // Path now set so player's turn ends.
+				}
 			}
 		}
 		else { // Attack mode:
@@ -73,4 +74,9 @@ MovementPath PlayerController::buildAttackModePath(Entity *entity, GameMap *map,
 	map->resetColourTilePath(path);
 
 	return entity->buildEquippedComponentPath(mouseTilePos);
+}
+
+void PlayerController::reset(MovementPath &path, sf::Vector2u pos, GameMap *map) {
+	map->resetColourTilePath(path);
+	path = MovementPath(pos);
 }

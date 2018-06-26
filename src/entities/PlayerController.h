@@ -20,4 +20,5 @@ private:
 	void drawMovementPath(MovementPath &path, Entity *entity, GameMap *map);
 	MovementPath buildMoveModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos);
 	MovementPath buildAttackModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos);
+	void reset(MovementPath &path, sf::Vector2u pos, GameMap *map);
 };
