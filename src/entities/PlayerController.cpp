@@ -13,7 +13,10 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 
 	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
 		moveMode = !moveMode;
-		if (moveMode) path = buildMoveModePath(entity, map, mouseTilePos); else buildAttackModePath(entity, map, mouseTilePos);
+
+		// Reset path:
+		map->resetColourTilePath(path);
+		path = MovementPath(entity->getPosition());
 	}
 
 	if (gui.isMouseOverChildren()) { // Remove any path colouring if the mouse moves over the GUI.
@@ -21,11 +24,11 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 	}
 	else { // If the mouse is not over any GUI elements...
 		if (moveMode) {
-			drawMovementPath(path, entity, map);
-
 			// Build a path if the player has moved their mouse over a new tile but only if that position is within bounds and free.
 			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos) && map->isPositionFree(mouseTilePos))
 				path = buildMoveModePath(entity, map, mouseTilePos);
+
+			drawMovementPath(path, entity, map);
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				bool success = entity->setMovementPath(path);
@@ -34,10 +37,10 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			}
 		}
 		else { // Attack mode:
-			map->colourTilePath(path, ATTACK_PATH_COLOUR);
-
-			if (path.isComplete() && path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos))
+			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos))
 				path = buildAttackModePath(entity, map, mouseTilePos);
+
+			map->colourTilePath(path, ATTACK_PATH_COLOUR);
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				DEBUG_LOG(entity->name << " is firing!");
