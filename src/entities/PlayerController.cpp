@@ -23,7 +23,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 		map->resetColourTilePath(path);
 	}
 	else { // If the mouse is not over any GUI elements...
-		if (moveMode) {
+		if (moveMode) { // Move mode:
 			// Build a path if the player has moved their mouse over a new tile but only if that position is within bounds and free.
 			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos) && map->isPositionFree(mouseTilePos))
 				path = buildMoveModePath(entity, map, mouseTilePos);
