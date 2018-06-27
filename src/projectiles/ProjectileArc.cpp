@@ -35,7 +35,7 @@ void ProjectileArc::hit(GameMap *map, sf::Vector2u pos) {
 		for (auto &entity : map->getEntitiesAt(pos)) {
 			entity->applyDamage(getProjectileDamage());
 
-			DEBUG_LOG("Projectile arc hit entity: " << entity);
+			DEBUG_LOG("Projectile arc hit entity: " << entity->name);
 		}
 	}
 }
@@ -54,4 +54,12 @@ Damage ProjectileArc::getProjectileDamage() {
 
 unsigned int ProjectileArc::getProjectilePenetration() {
 	return penetration;
+}
+
+sf::Vector2u ProjectileArc::getCurrentProjectilePosition() {
+	return path.currentPosition();
+}
+
+sf::Time ProjectileArc::getAnimationTime() {
+	return animationClock.getElapsedTime();
 }

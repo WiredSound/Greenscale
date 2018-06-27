@@ -18,12 +18,17 @@ public:
 	Damage getProjectileDamage();
 	unsigned int getProjectilePenetration();
 
+	sf::Vector2u getCurrentProjectilePosition();
+	sf::Time getAnimationTime();
+
 private:
 	MovementPath path;
 	IDs::Projectiles id;
 
 	sf::Clock movementClock;
 	sf::Time timeBetweenMoves;
+
+	sf::Clock animationClock;
 
 	Damage damage;
 	unsigned int penetration;

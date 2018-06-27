@@ -11,8 +11,6 @@ EntityLayer::EntityLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vect
 
 void EntityLayer::update() {
 	updateVertices(); // Entity vertices are updated every frame so colour and texture changes are easily handled.
-
-	// TODO: Update entity logic and whatnot.
 }
 
 void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
@@ -60,7 +58,7 @@ void EntityLayer::updateVertices() {
 		std::shared_ptr<Entity> &entity = entities[i];
 		const Animation::Frame &frame = entity->fetchFrame();
 
-		DEBUG_LOG_SPAM("Adding to vertex array entity " << entity->name << " at " << entity->getX() << ", " << entity->getY() << ".");
+		DEBUG_LOG_SPAM("Adding to vertex array entity " << entity->name << " at: " << entity->getX() << ", " << entity->getY());
 
 		sf::Vertex *quad = &vertices[i * 4];
 

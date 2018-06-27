@@ -4,23 +4,28 @@
 #include <cmath>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 #include "MapRoom.h"
 #include "pathfinding/AStarPathBuilder.h"
 #include "TileLayer.h"
 #include "EntityLayer.h"
 #include "../entities/Faction.h"
+#include "../projectiles/ProjectileArc.h"
 class Entity;
 class Robot;
 
 class GameMap {
 public:
-	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer);
+	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> texture);
 
 	void update();
 	void turnPassed();
 	void draw(sf::RenderWindow &window);
 	void colourTilePath(MovementPath path, sf::Color colour);
 	void resetColourTilePath(MovementPath path);
+
+	void fireArcs(std::vector<ProjectileArc> arcs);
+	bool areAllProjectileArcsComplete();
 
 	void construct(); // Goes through each room and rebuilds it.
 	void addRoom(std::unique_ptr<MapRoom> room);
@@ -51,6 +56,12 @@ public:
 
 private:
 	std::vector<std::unique_ptr<MapRoom>> rooms;
+
+	std::vector<ProjectileArc> projectileArcs;
+	std::shared_ptr<sf::Texture> projectilesTexture;
+	sf::Sprite projectileSprite;
+
+	void updateProjectiles();
 };
 
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right);

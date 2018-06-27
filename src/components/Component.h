@@ -34,7 +34,7 @@ public:
 	sf::Vector2f getIconTextureSize();
 
 	void applyDamage(Damage damage);
-	void applyKineticDamage(int damage);
+	void applyKineticDamage(int kinetic);
 	void applyThermalDamage(int heat);
 	void applyDisruption(float disruption);
 
@@ -44,7 +44,7 @@ public:
 	bool isDestroyed();
 	bool isEnabled();
 
-	virtual Optional<ProjectileArc> use(MovementPath path); // Can optionally fire a projectile (or alternatively just apply changes to self).
+	virtual std::vector<ProjectileArc> use(MovementPath path); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);
 
 	void toggleManualEnable();

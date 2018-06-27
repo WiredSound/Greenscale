@@ -159,8 +159,8 @@ void Component::applyDamage(Damage damage) {
 	applyDisruption(damage.disruption);
 }
 
-void Component::applyKineticDamage(int damage) {
-	reduceIntegrity(damage);
+void Component::applyKineticDamage(int kinetic) {
+	reduceIntegrity(kinetic);
 }
 void Component::applyThermalDamage(int heat) {
 	increaseHeat(heat);
@@ -182,7 +182,10 @@ void Component::increaseIntegrity(int amount) {
 }
 
 void Component::reduceIntegrity(int amount) {
-	integrity -= amount;
+	if (integrity >= amount)
+		integrity -= amount;
+	else
+		integrity = 0;
 }
 
 void Component::increaseHeat(int amount) {
@@ -191,8 +194,8 @@ void Component::increaseHeat(int amount) {
 	if (heat < 0) heat = 0;
 }
 
-Optional<ProjectileArc> Component::use(MovementPath path) {
-	return Optional<ProjectileArc>();
+std::vector<ProjectileArc> Component::use(MovementPath path) {
+	return std::vector<ProjectileArc>();
 }
 
 MovementPath Component::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {

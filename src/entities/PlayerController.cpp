@@ -46,7 +46,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				DEBUG_LOG(entity->name << " is firing!");
 
-				return entity->useEquippedComponent(mouseTilePos);
+				return entity->useEquippedComponent(path);
 			}
 
 			//if (input.isKeyJustPressed(sf::Keyboard::Key::S)) // TODO: Key bindings...

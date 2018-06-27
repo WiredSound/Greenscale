@@ -2,11 +2,12 @@
 
 #include "../entities/Robot.h"
 
-GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this) {}
+GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> texture)
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(texture) {}
 
 void GameMap::update() {
 	entities->update();
+	updateProjectiles();
 }
 
 void GameMap::turnPassed() {
@@ -17,6 +18,9 @@ void GameMap::draw(sf::RenderWindow &window) {
 	window.draw(*tiles);
 	window.draw(*entities);
 
+	if (!areAllProjectileArcsComplete())
+		window.draw(projectileSprite);
+
 	//tiles->resetColouring();
 }
 
@@ -26,6 +30,35 @@ void GameMap::colourTilePath(MovementPath path, sf::Color colour) {
 
 void GameMap::resetColourTilePath(MovementPath path) {
 	tiles->resetColourPath(path);
+}
+
+void GameMap::fireArcs(std::vector<ProjectileArc> arcs) {
+	projectileArcs.insert(projectileArcs.end(), arcs.begin(), arcs.end());
+}
+
+bool GameMap::areAllProjectileArcsComplete() {
+	return projectileArcs.size() == 0;
+}
+
+void GameMap::updateProjectiles() {
+	if (!areAllProjectileArcsComplete()) {
+		ProjectileArc &arc = projectileArcs[0];
+		sf::Vector2u &position = arc.getCurrentProjectilePosition();
+		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
+		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());
+
+		arc.update(this);
+
+		if (arc.reachedTarget()) {
+			projectileArcs.erase(projectileArcs.begin());
+		}
+		else {
+			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
+			projectileSprite.setTexture(*projectilesTexture.get());
+			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * 32, frame.textureY * 32, 32, 32)); // TODO: Get texture size of projectiles.
+			projectileSprite.setColor(sf::Color::White); // TODO: Set up colours properly.
+		}
+	}
 }
 
 void GameMap::construct() {

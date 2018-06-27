@@ -20,7 +20,9 @@ bool MovementPath::isComplete() {
 }
 
 sf::Vector2u MovementPath::currentPosition() {
-	return path[pathIndex];
+	if (pathIndex < path.size())
+		return path[pathIndex];
+	return targetPos;
 }
 
 void MovementPath::nextPosition() {

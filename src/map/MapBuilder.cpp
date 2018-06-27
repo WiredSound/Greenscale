@@ -6,12 +6,14 @@
 #define ENTITIES_PATH "assets/entities/animations.json"
 #define TILES_TEXTURE_PATH "assets/tiles/tiles.png"
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
+#define PROJECTILES_TEXTURE_PATH "assets/projectiles/projectiles.png"
 
 #include "GradientTerrainGenerator.h"
 #include "../IDs.h"
 
 MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui)
-	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), playerController(std::make_shared<PlayerController>(window, gui)) {
+	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), projectilesTexture(std::make_shared<sf::Texture>()),
+	playerController(std::make_shared<PlayerController>(window, gui)) {
 	tileManager.loadFromJsonFile(TILES_PATH);
 
 	entityBuilder.loadAllAnimations(ENTITIES_PATH);
@@ -21,6 +23,7 @@ MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui
 
 	tilesTexture->loadFromFile(TILES_TEXTURE_PATH);
 	entitiesTexture->loadFromFile(ENTITIES_TEXTURE_PATH);
+	projectilesTexture->loadFromFile(PROJECTILES_TEXTURE_PATH);
 }
 
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f tileSize) {
@@ -30,7 +33,7 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	GradientTerrainGenerator terrainGen(FastNoise::NoiseType::SimplexFractal, 0.1f, IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80));
 	terrainGen.fillGradientTerrain(tiles, sf::Vector2u(0, 0), size);
 
-	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities));
+	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), projectilesTexture);
 
 	map->addRoom(std::make_unique<SquareRoom>("First Room", sf::Vector2u(2, 2), sf::Vector2u(5, 5), IDs::Tiles::GROUND, IDs::Tiles::WALL));
 	map->addRoom(std::make_unique<SquareRoom>("Second Room", sf::Vector2u(8, 4), sf::Vector2u(5, 5), IDs::Tiles::GROUND, IDs::Tiles::WALL));

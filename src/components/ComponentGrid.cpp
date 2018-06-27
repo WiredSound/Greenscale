@@ -125,12 +125,15 @@ bool ComponentGrid::isComponentEquipped() {
 }
 
 void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
+	// TODO: Make this work!
+	/*
 	std::vector<unsigned int> indexes = getFunctionalComponentIndexes();
 
 	unsigned int randomIndex = rand() % indexes.size();
 	auto &randomComponent = getComponentByIndex(randomIndex);
 
 	randomComponent->applyDamage(damage);
+	*/
 }
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {

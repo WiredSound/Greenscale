@@ -26,6 +26,7 @@ private:
 
 	std::shared_ptr<sf::Texture> tilesTexture;
 	std::shared_ptr<sf::Texture> entitiesTexture;
+	std::shared_ptr<sf::Texture> projectilesTexture;
 
 	std::default_random_engine rand;
 };

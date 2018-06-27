@@ -30,6 +30,7 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<int>("power storage", 0),
 			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>(),
 			json.value<IDs::Projectiles>("projectile id", IDs::Projectiles::BULLET),
+			json.value<unsigned int>("projectile count", 1),
 			json.find("projectile damage") != json.end() ? JsonHelp::parseDamage(json["projectile damage"]) : Damage(),
 			json.value<unsigned int>("projectile range", 1),
 			json.value<unsigned int>("projectile penetration", 0)

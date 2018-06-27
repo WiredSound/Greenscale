@@ -41,13 +41,7 @@ bool Entity::updateMovement() {
 }
 
 bool Entity::updateAttacking() {
-	if (currentArc) {
-		return currentArc->update(map);
-
-		if (currentArc->reachedTarget()) currentArc.remove();
-	}
-
-	return true;
+	return map->areAllProjectileArcsComplete();
 }
 
 sf::Vector2u Entity::getPosition() const {
@@ -124,10 +118,9 @@ bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
 	if (component) {
-		Optional<ProjectileArc> possibleArc = component->use(path);
+		std::vector<ProjectileArc> arcs = component->use(path);
 
-		if (possibleArc)
-			currentArc.set(possibleArc.claim());
+		map->fireArcs(arcs);
 
 		return true;
 	}

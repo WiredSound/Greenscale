@@ -73,8 +73,6 @@ protected:
 
 	PulsingColour myTurnColourPulse;
 
-	Optional<ProjectileArc> currentArc;
-
 private:
 	GameMap *map;
 
