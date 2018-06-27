@@ -67,17 +67,15 @@ MovementPath MovementPath::buildLinePath(const sf::Vector2u &start, const sf::Ve
 std::vector<sf::Vector2u> MovementPath::buildLinePathPositions(const sf::Vector2u &start, const sf::Vector2u &target) {
 	std::vector<sf::Vector2u> path;
 
-	if (std::abs((int)target.y - (int)start.y) < std::abs((int)target.x - (int)start.x)) {
-		if (start.x > target.x) {
+	if (std::abs(static_cast<int>(target.y) - static_cast<int>(start.y)) < std::abs(static_cast<int>(target.x) - static_cast<int>(start.x))) {
+		if (start.x > target.x)
 			path = buildLinePathLow(target, start, false);
-		}
 		else
 			path = buildLinePathLow(start, target, true);
 	}
 	else {
-		if (start.y > target.y) {
+		if (start.y > target.y)
 			path = buildLinePathHigh(target, start, false);
-		}
 		else
 			path = buildLinePathHigh(start, target, true);
 	}
@@ -89,8 +87,6 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathLow(const sf::Vector2u &sta
 	DEBUG_LOG_SPAM("Building line path low. Appending: " << append);
 
 	std::vector<sf::Vector2u> tiles;
-
-	addPosition(start, tiles, append);
 
 	int dx = target.x - start.x;
 	int dy = target.y - start.y;
@@ -114,16 +110,15 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathLow(const sf::Vector2u &sta
 		d = d + 2 * dy;
 	}
 
-	addPosition(target, tiles, append);
+	removeStartAddTargetIfAppend(tiles, target, append);
 
 	return tiles;
 }
+
 std::vector<sf::Vector2u> MovementPath::buildLinePathHigh(const sf::Vector2u &start, const sf::Vector2u &target, bool append) {
-	DEBUG_LOG_SPAM("Building line path high. Appending: " << append)
+	DEBUG_LOG_SPAM("Building line path high. Appending: " << append);
 
-		std::vector<sf::Vector2u> tiles;
-
-	addPosition(start, tiles, append);
+	std::vector<sf::Vector2u> tiles;
 
 	int dx = target.x - start.x;
 	int dy = target.y - start.y;
@@ -147,13 +142,21 @@ std::vector<sf::Vector2u> MovementPath::buildLinePathHigh(const sf::Vector2u &st
 		d = d + 2 * dx;
 	}
 
-	addPosition(target, tiles, append);
+	removeStartAddTargetIfAppend(tiles, target, append);
 
 	return tiles;
 }
 
 unsigned int MovementPath::distanceFromTo(const sf::Vector2u &from, const sf::Vector2u &to) {
 	return static_cast<unsigned int>(buildLinePathPositions(from, to).size());
+}
+
+void MovementPath::removeStartAddTargetIfAppend(std::vector<sf::Vector2u> &tiles, const sf::Vector2u target, bool append) { // That rhyhmes!
+	// This function sorts out an issue where the start position is included and the target is not when append is true (which is not desired).
+	if (append) {
+		tiles.push_back(target);
+		tiles.erase(tiles.begin());
+	}
 }
 
 void MovementPath::addPosition(const sf::Vector2u pos, std::vector<sf::Vector2u> &list, bool append) {

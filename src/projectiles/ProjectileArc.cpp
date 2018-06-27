@@ -14,29 +14,36 @@ bool ProjectileArc::reachedTarget() {
 }
 
 bool ProjectileArc::update(GameMap *map) {
+	bool destroyProjectile = false;
+
 	if (!reachedTarget() && movementClock.getElapsedTime() >= getTimeBetweenMoves()) {
 		movementClock.restart();
 
-		hit(map, path.currentPosition());
+		hitBlockingEntity(map, path.currentPosition());
+		destroyProjectile = hitBlockingTile(map, path.currentPosition());
 
 		path.nextPosition();
 	}
 
-	return reachedTarget();
+	return destroyProjectile;
 }
 
-void ProjectileArc::hit(GameMap *map, sf::Vector2u pos) {
-	if (!map->isTilePositionFree(pos)) {
-		penetration = map->applyPenetrationToTileAt(pos, penetration);
-
+bool ProjectileArc::hitBlockingTile(GameMap *map, sf::Vector2u pos) {
+	if (map->enoughPenetrationToDestroyTileAt(pos, penetration)) {
 		DEBUG_LOG("Projectile arc hit blocking tile and now has penetration value remaining: " << penetration);
-	}
-	else if (!map->isEntityPositionFree(pos)) {
-		for (auto &entity : map->getEntitiesAt(pos)) {
-			entity->applyDamage(getProjectileDamage());
 
-			DEBUG_LOG("Projectile arc hit entity: " << entity->name);
-		}
+		penetration = map->applyPenetrationToTileAt(pos, penetration);
+		return false;
+	}
+	DEBUG_LOG("Projectile destroyed by tile at: " << pos.x << ", " << pos.y);
+	return true; // Indicate the projectile needs to be destroyed as it does not have enough penetration value left to break the given tile.
+}
+
+void ProjectileArc::hitBlockingEntity(GameMap *map, sf::Vector2u pos) {
+	for (auto &entity : map->getEntitiesAt(pos)) {
+		DEBUG_LOG("Projectile arc hit entity: " << entity->name);
+
+		entity->applyDamage(getProjectileDamage());
 	}
 }
 

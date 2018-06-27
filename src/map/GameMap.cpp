@@ -47,10 +47,10 @@ void GameMap::updateProjectiles() {
 		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
 		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());
 
-		arc.update(this);
+		bool destroyArc = arc.update(this);
 
-		if (arc.reachedTarget()) {
-			projectileArcs.erase(projectileArcs.begin());
+		if (arc.reachedTarget() || destroyArc) {
+			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.
 		}
 		else {
 			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
@@ -134,10 +134,14 @@ bool GameMap::withinBounds(sf::Vector2u pos) {
 	return tiles->withinBounds(pos.x, pos.y) && entities->withinBounds(pos.x, pos.y);
 }
 
+bool GameMap::enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration) {
+	return penetration >= tiles->getTileAt(pos).strength;
+}
+
 unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration) {
 	auto strength = tiles->getTileAt(pos).strength;
 
-	if (penetration >= strength) {
+	if (enoughPenetrationToDestroyTileAt(pos, penetration)) {
 		tiles->setTileAt(pos, IDs::Tiles::DIRT); // TODO: Replace the tile to something more appropriate.
 		penetration -= strength;
 	}

@@ -12,7 +12,7 @@ public:
 	ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId, Damage projectileDamage, unsigned int projectilePenetration);
 
 	bool reachedTarget();
-	bool update(GameMap *map);
+	bool update(GameMap *map); // Returns true if the arc should be destroyed.
 
 	const ProjectileVisual &getProjectileVisualInfo();
 	Damage getProjectileDamage();
@@ -36,5 +36,7 @@ private:
 	std::shared_ptr<ProjectileManager> manager;
 
 	sf::Time getTimeBetweenMoves();
-	void hit(GameMap *map, sf::Vector2u pos);
+
+	bool hitBlockingTile(GameMap *map, sf::Vector2u pos); // Returns true if the arc cannot penetrate the tile.
+	void hitBlockingEntity(GameMap *map, sf::Vector2u pos);
 };

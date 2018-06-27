@@ -42,6 +42,7 @@ public:
 	bool isEntityPositionFree(sf::Vector2u position);
 	bool isPositionFree(sf::Vector2u position);
 
+	bool enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration);
 	unsigned int applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration);
 
 	bool withinBounds(sf::Vector2u pos);
@@ -51,10 +52,10 @@ public:
 	const sf::Vector2u size;
 	const sf::Vector2f tileSize;
 
+private:
 	std::unique_ptr<TileLayer> tiles;
 	std::unique_ptr<EntityLayer> entities;
 
-private:
 	std::vector<std::unique_ptr<MapRoom>> rooms;
 
 	std::vector<ProjectileArc> projectileArcs;

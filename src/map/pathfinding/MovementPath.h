@@ -44,5 +44,6 @@ private:
 	static std::vector<sf::Vector2u> buildLinePathPositions(const sf::Vector2u &start, const sf::Vector2u &target);
 	static std::vector<sf::Vector2u> buildLinePathLow(const sf::Vector2u &start, const sf::Vector2u &target, bool append);
 	static std::vector<sf::Vector2u> buildLinePathHigh(const sf::Vector2u &start, const sf::Vector2u &target, bool append);
+	static void removeStartAddTargetIfAppend(std::vector<sf::Vector2u> &tiles, const sf::Vector2u target, bool append);
 	static void addPosition(const sf::Vector2u pos, std::vector<sf::Vector2u> &list, bool append);
 };
