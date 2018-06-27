@@ -37,6 +37,6 @@ private:
 
 	sf::Time getTimeBetweenMoves();
 
-	bool hitBlockingTile(GameMap *map, sf::Vector2u pos); // Returns true if the arc cannot penetrate the tile.
-	void hitBlockingEntity(GameMap *map, sf::Vector2u pos);
+	bool hitTile(GameMap *map, sf::Vector2u pos); // Returns true if the arc cannot penetrate the tile.
+	void hitEntity(GameMap *map, sf::Vector2u pos);
 };

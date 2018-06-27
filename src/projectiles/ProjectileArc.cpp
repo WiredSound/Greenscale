@@ -19,8 +19,10 @@ bool ProjectileArc::update(GameMap *map) {
 	if (!reachedTarget() && movementClock.getElapsedTime() >= getTimeBetweenMoves()) {
 		movementClock.restart();
 
-		hitBlockingEntity(map, path.currentPosition());
-		destroyProjectile = hitBlockingTile(map, path.currentPosition());
+		auto pos = path.currentPosition();
+
+		hitEntity(map, pos);
+		destroyProjectile = hitTile(map, pos);
 
 		path.nextPosition();
 	}
@@ -28,22 +30,28 @@ bool ProjectileArc::update(GameMap *map) {
 	return destroyProjectile;
 }
 
-bool ProjectileArc::hitBlockingTile(GameMap *map, sf::Vector2u pos) {
-	if (map->enoughPenetrationToDestroyTileAt(pos, penetration)) {
-		DEBUG_LOG("Projectile arc hit blocking tile and now has penetration value remaining: " << penetration);
+bool ProjectileArc::hitTile(GameMap *map, sf::Vector2u pos) {
+	if (!map->isTilePositionFree(pos)) {
+		if (map->enoughPenetrationToDestroyTileAt(pos, penetration)) {
+			DEBUG_LOG("Projectile arc hit blocking tile and now has penetration value remaining: " << penetration);
 
-		penetration = map->applyPenetrationToTileAt(pos, penetration);
-		return false;
+			penetration = map->applyPenetrationToTileAt(pos, penetration);
+			return false;
+		}
+		DEBUG_LOG("Projectile destroyed by tile at: " << pos.x << ", " << pos.y);
+		return true; // Indicate the projectile needs to be destroyed as it does not have enough penetration value left to break the given tile.
 	}
-	DEBUG_LOG("Projectile destroyed by tile at: " << pos.x << ", " << pos.y);
-	return true; // Indicate the projectile needs to be destroyed as it does not have enough penetration value left to break the given tile.
+
+	return false;
 }
 
-void ProjectileArc::hitBlockingEntity(GameMap *map, sf::Vector2u pos) {
+void ProjectileArc::hitEntity(GameMap *map, sf::Vector2u pos) {
 	for (auto &entity : map->getEntitiesAt(pos)) {
-		DEBUG_LOG("Projectile arc hit entity: " << entity->name);
+		if (entity->isBlocking()) {
+			DEBUG_LOG("Projectile arc hit entity: " << entity->name);
 
-		entity->applyDamage(getProjectileDamage());
+			entity->applyDamage(getProjectileDamage());
+		}
 	}
 }
 
