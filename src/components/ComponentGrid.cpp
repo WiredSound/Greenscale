@@ -58,7 +58,7 @@ std::vector<unsigned int> ComponentGrid::getFunctionalComponentIndexes() {
 	std::vector<unsigned int> indexes;
 
 	for (unsigned int i = 0; i < components.size(); i++) {
-		if (getComponentByIndex(i))
+		if (getComponentByIndex(i) && getComponentByIndex(i)->getIntegrity() > 0)
 			indexes.push_back(i);
 	}
 
@@ -130,14 +130,22 @@ void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos)
 
 void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
 	// TODO: Make this work!
-	/*
-	std::vector<unsigned int> indexes = getFunctionalComponentIndexes();
 
-	unsigned int randomIndex = rand() % indexes.size();
-	auto &randomComponent = getComponentByIndex(randomIndex);
+	std::vector<unsigned int> functionalIndexes = getFunctionalComponentIndexes();
 
-	randomComponent->applyDamage(damage);
-	*/
+	if (functionalIndexes.size() > 0) {
+		unsigned int randomFunctionalComponentIndex = functionalIndexes[rand() % functionalIndexes.size()];
+
+		auto &randomComponent = getComponentByIndex(randomFunctionalComponentIndex);
+		assert(randomComponent);
+
+		DEBUG_LOG("Applying damage to random component: " << randomComponent->getName());
+
+		randomComponent->applyDamage(damage);
+	}
+	else {
+		DEBUG_LOG("The entity hit has no functional components to apply damage to!");
+	}
 }
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {
