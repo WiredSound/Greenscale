@@ -37,13 +37,13 @@ private:
 	unsigned int pathIndex;
 
 public:
-	static MovementPath buildLinePath(const sf::Vector2u &start, const sf::Vector2u &target);
-	static unsigned int distanceFromTo(const sf::Vector2u &from, const sf::Vector2u &to);
+	static MovementPath buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length = 10);
+	static unsigned int distanceFromTo(sf::Vector2u start, sf::Vector2u target);
 
 private:
-	static std::vector<sf::Vector2u> buildLinePathPositions(const sf::Vector2u &start, const sf::Vector2u &target);
-	static std::vector<sf::Vector2u> buildLinePathLow(const sf::Vector2u &start, const sf::Vector2u &target, bool append);
-	static std::vector<sf::Vector2u> buildLinePathHigh(const sf::Vector2u &start, const sf::Vector2u &target, bool append);
-	static void removeStartAddTargetIfAppend(std::vector<sf::Vector2u> &tiles, const sf::Vector2u target, bool append);
-	static void addPosition(const sf::Vector2u pos, std::vector<sf::Vector2u> &list, bool append);
+	static float lerp(float start, float end, float t);
+	static sf::Vector2f lerpPoint(const sf::Vector2f &point0, const sf::Vector2f &point1, float t);
+	static float diagonalDistance(const sf::Vector2f &point0, const sf::Vector2f &point1);
+	static sf::Vector2u roundPoint(sf::Vector2f point);
+	static std::vector<sf::Vector2u> buildLinePathPositions(sf::Vector2f start, sf::Vector2f target, float length = 0);
 };

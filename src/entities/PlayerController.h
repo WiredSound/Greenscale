@@ -16,6 +16,7 @@ private:
 	MovementPath path;
 	sf::RenderWindow &window;
 	bool moveMode = true; // Whether currently in moving or attacking mode.
+	sf::Vector2u lastMouseTilePos;
 
 	void drawMovementPath(MovementPath &path, Entity *entity, GameMap *map);
 	MovementPath buildMoveModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos);

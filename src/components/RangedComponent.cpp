@@ -12,7 +12,7 @@ std::vector<ProjectileArc> RangedComponent::use(MovementPath path) {
 }
 
 MovementPath RangedComponent::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {
-	return MovementPath::buildLinePath(source, target/*, getProjectileRange()*/); // TODO: Take range into account.
+	return MovementPath::buildLinePath(source, target, getProjectileRange());
 }
 
 IDs::Projectiles RangedComponent::getProjectileId() {

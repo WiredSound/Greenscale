@@ -38,8 +38,10 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			}
 		}
 		else { // Attack mode:
-			if (path.getTargetPosition() != mouseTilePos && map->withinBounds(mouseTilePos))
+			if (lastMouseTilePos != mouseTilePos && map->withinBounds(mouseTilePos)) {
 				path = buildAttackModePath(entity, map, mouseTilePos);
+				lastMouseTilePos = mouseTilePos;
+			}
 
 			map->colourTilePath(path, ATTACK_PATH_COLOUR);
 
