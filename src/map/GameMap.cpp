@@ -142,7 +142,7 @@ unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int pe
 	auto strength = tiles->getTileAt(pos).strength;
 
 	if (enoughPenetrationToDestroyTileAt(pos, penetration)) {
-		tiles->setTileAt(pos, IDs::Tiles::DIRT); // TODO: Replace the tile to something more appropriate.
+		tiles->setTileAt(pos, IDs::Tiles::GRASS); // TODO: Replace the tile to something more appropriate.
 		penetration -= strength;
 	}
 

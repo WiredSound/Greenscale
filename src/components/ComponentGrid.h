@@ -25,6 +25,8 @@ public:
 	void unequipComponent();
 	bool isComponentEquipped();
 
+	void swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos);
+
 	void applyDamageToRandomComponent(Damage damage);
 
 protected:

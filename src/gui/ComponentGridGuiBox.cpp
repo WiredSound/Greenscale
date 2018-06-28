@@ -15,6 +15,8 @@ void ComponentGridGuiBox::mouseHover(sf::Vector2i position, const std::vector<sf
 	gridGui.hoveringOverGridPosition(gridPosition);
 
 	for (sf::Mouse::Button button : mouseButtonsJustClicked) {
+		if (button == sf::Mouse::Left)
+			gridGui.mouseToggleHolding(gridPosition);
 		if (button == sf::Mouse::Button::Right)
 			gridGui.equipGridPosition(gridPosition);
 		if (button == sf::Mouse::Button::Middle)

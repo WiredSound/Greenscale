@@ -23,7 +23,7 @@ void ComponentGridGui::update(Input &input) {
 		for (unsigned int y = 0; y < currentGrid.getGridSize().y; y++) {
 			sf::Vector2u position(x, y);
 
-			setupComponentQuad(position, currentGrid);
+			setupComponentQuad(position, currentGrid, input);
 		}
 	}
 }
@@ -41,6 +41,13 @@ unsigned int ComponentGridGui::getGridIndex(sf::Vector2u pos, const ComponentGri
 
 Optional<Component> &ComponentGridGui::getComponentHoveredOver() {
 	return fetchCurrentGrid().getComponentAt(hoverGridPosition);
+}
+
+Optional<Component> &ComponentGridGui::getHeldComponent() {
+	if (mouseHoldingComponent)
+		return fetchCurrentGrid().getComponentAt(mouseHeldGridPosition);
+
+	return Optional<Component>();
 }
 
 void ComponentGridGui::hoveringOverGridPosition(sf::Vector2u gridPosition) {
@@ -61,6 +68,31 @@ void ComponentGridGui::equipGridPosition(sf::Vector2u gridPosition) {
 
 void ComponentGridGui::toggleEnableGridPosition(sf::Vector2u gridPosition) {
 	fetchCurrentGrid().getComponentAt(gridPosition)->toggleManualEnable();
+}
+
+void ComponentGridGui::mouseToggleHolding(sf::Vector2u gridPosition) {
+	if (mouseHoldingComponent)
+		mousePutDownHeldPosition(gridPosition);
+	else
+		mousePickupPosition(gridPosition);
+}
+
+void ComponentGridGui::mousePickupPosition(sf::Vector2u gridPosition) {
+	if (fetchCurrentGrid().getComponentAt(gridPosition)) { // Only hold the grid position if there actually is a component there.
+		mouseHeldGridPosition = gridPosition;
+		mouseHoldingComponent = true;
+	}
+}
+
+void ComponentGridGui::mousePutDownHeldPosition() {
+	mouseHoldingComponent = false;
+}
+
+void ComponentGridGui::mousePutDownHeldPosition(sf::Vector2u newPosition) {
+	if (mouseHoldingComponent) {
+		fetchCurrentGrid().swapPositions(mouseHeldGridPosition, newPosition);
+		mouseHoldingComponent = false;
+	}
 }
 
 // Creates component boxes and resizes window.
@@ -88,7 +120,7 @@ void ComponentGridGui::setup(ComponentGrid &grid) {
 	}
 }
 
-void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid) {
+void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid, Input &input) {
 	auto &component = grid.getComponentAt(pos);
 
 	int index = getGridIndex(pos, grid);
@@ -100,10 +132,15 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid)
 
 		auto &child = getChild(index);
 
-		quad[0].position = child->getAbsolutePosition();
-		quad[1].position = sf::Vector2f(child->getAbsolutePosition().x + child->getAbsoluteSize().x, child->getAbsolutePosition().y);
-		quad[2].position = sf::Vector2f(child->getAbsolutePosition().x + child->getAbsoluteSize().x, child->getAbsolutePosition().y + child->getAbsoluteSize().y);
-		quad[3].position = sf::Vector2f(child->getAbsolutePosition().x, child->getAbsolutePosition().y + child->getAbsoluteSize().y);
+		sf::Vector2f quadSize = child->getAbsoluteSize();
+		// If the component is the one held by the mouse then draw it at the mouse coordinates instead of in the grid.
+		sf::Vector2f quadPosition =
+			(mouseHoldingComponent && pos == mouseHeldGridPosition) ? sf::Vector2f(input.getMousePosition().x - (quadSize.x / 2), input.getMousePosition().y - (quadSize.y / 2)) : child->getAbsolutePosition();
+
+		quad[0].position = quadPosition;
+		quad[1].position = sf::Vector2f(quadPosition.x + quadSize.x, quadPosition.y);
+		quad[2].position = sf::Vector2f(quadPosition.x + quadSize.x, quadPosition.y + quadSize.y);
+		quad[3].position = sf::Vector2f(quadPosition.x, quadPosition.y + quadSize.y);
 
 		quad[0].texCoords = sf::Vector2f(info.textureX * componentTextureSize.x, info.textureY * componentTextureSize.y);
 		quad[1].texCoords = sf::Vector2f((info.textureX + 1) * componentTextureSize.x, info.textureY * componentTextureSize.y);

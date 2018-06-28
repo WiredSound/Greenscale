@@ -12,6 +12,7 @@ public:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	Optional<Component> &getComponentHoveredOver();
+	Optional<Component> &getHeldComponent();
 
 	unsigned int getGridIndex(sf::Vector2u pos, const ComponentGrid &grid);
 
@@ -20,6 +21,11 @@ public:
 	void hoveringOverGridPosition(sf::Vector2u gridPosition);
 	void equipGridPosition(sf::Vector2u gridPosition);
 	void toggleEnableGridPosition(sf::Vector2u gridPosition);
+
+	void mouseToggleHolding(sf::Vector2u gridPosition);
+	void mousePickupPosition(sf::Vector2u gridPosition);
+	void mousePutDownHeldPosition();
+	void mousePutDownHeldPosition(sf::Vector2u newPosition);
 
 private:
 	sf::Vector2u hoverGridPosition;
@@ -39,8 +45,11 @@ private:
 	ComponentGrid *previousComponentGrid;
 	ComponentGrid &fetchCurrentGrid();
 
+	sf::Vector2u mouseHeldGridPosition;
+	bool mouseHoldingComponent;
+
 	ComponentGridGuiBox *getGridBox(sf::Vector2u pos, ComponentGrid &grid);
 
 	void setup(ComponentGrid &grid);
-	void setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid);
+	void setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid, Input &input);
 };

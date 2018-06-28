@@ -124,6 +124,10 @@ bool ComponentGrid::isComponentEquipped() {
 	return componentEquipped;
 }
 
+void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos) {
+	std::iter_swap(components.begin() + getIndex(firstPos), components.begin() + getIndex(secondPos)); // TODO: Add checks to ensure that both positions are within bounds.
+}
+
 void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
 	// TODO: Make this work!
 	/*
