@@ -129,8 +129,6 @@ void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos)
 }
 
 void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
-	// TODO: Make this work!
-
 	std::vector<unsigned int> functionalIndexes = getFunctionalComponentIndexes();
 
 	if (functionalIndexes.size() > 0) {
