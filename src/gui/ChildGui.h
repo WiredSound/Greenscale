@@ -7,8 +7,8 @@ class ChildGui : public Gui {
 public:
 	ChildGui(std::string name, Gui &guiParent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f guiOrigin);
 
-	sf::Vector2f getAbsolutePosition() override;
-	sf::Vector2f getAbsoluteSize() override;
+	virtual sf::Vector2f getAbsolutePosition() override;
+	virtual sf::Vector2f getAbsoluteSize() override;
 
 protected:
 	// The position and size of the element is determined as the size of the parent multiplied by the below.
@@ -20,6 +20,5 @@ protected:
 	// The origin of the gui relative it its size.
 	sf::Vector2f origin;
 
-private:
 	Gui &parent;
 };

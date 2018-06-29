@@ -21,6 +21,7 @@ public:
 	void set(unsigned int index, ColourText colourText);
 	void clear();
 
+	float getLineWidth();
 	float getLineHeight();
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;

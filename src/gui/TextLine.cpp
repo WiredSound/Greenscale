@@ -24,6 +24,16 @@ float TextLine::getLineHeight() {
 	return 0;
 }
 
+float TextLine::getLineWidth() {
+	float width = 0.0f;
+
+	for (sf::Text &text : texts) {
+		width += text.getLocalBounds().width;
+	}
+
+	return width;
+}
+
 void TextLine::add() {
 	sf::Text text;
 	text.setFont(font);

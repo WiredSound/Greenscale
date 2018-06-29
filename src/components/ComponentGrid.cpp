@@ -5,7 +5,7 @@ ComponentGrid::ComponentGrid(sf::Vector2u size) {
 }
 
 void ComponentGrid::turnPassed() {
-	// TODO: Handle the transfer of heat and destroy components with 0 integrity.
+	// TODO: Handle the transfer of heat and disruption and destroy components with 0 integrity.
 
 	for (unsigned int x = 0; x < gridSize.x; x++) {
 		for (unsigned int y = 0; y < gridSize.y; y++) {

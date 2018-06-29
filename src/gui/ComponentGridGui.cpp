@@ -17,6 +17,7 @@ void ComponentGridGui::update(Input &input) {
 	if (previousComponentGrid != &currentGrid) { // Check if the grid being displayed has changed.
 		setup(currentGrid);
 		previousComponentGrid = &currentGrid;
+		mouseHoldingComponent = false;
 	}
 
 	for (unsigned int x = 0; x < currentGrid.getGridSize().x; x++) {
