@@ -21,7 +21,7 @@ float TextLine::getLineHeight() {
 	if (texts.size() > 0) {
 		return texts[0].getCharacterSize();
 	}
-	return 0;
+	return fontSize;
 }
 
 float TextLine::getLineWidth() {

@@ -19,6 +19,19 @@ void TextLines::numberOfLines(unsigned int amount, TextLine line) {
 	*/
 }
 
+sf::Vector2f TextLines::getDimensions() {
+	sf::Vector2f dimensions;
+
+	for (TextLine &line : lines) {
+		dimensions.y += line.getLineHeight() + paddingBetweenLines;
+
+		if (line.getLineWidth() > dimensions.x)
+			dimensions.x = line.getLineWidth();
+	}
+
+	return dimensions;
+}
+
 void TextLines::update(Input &input) {
 	ChildGui::update(input);
 

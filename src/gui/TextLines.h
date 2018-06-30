@@ -11,10 +11,13 @@ public:
 	TextLine &getLine(unsigned int index);
 	void numberOfLines(unsigned int amount, TextLine line);
 
+	sf::Vector2f getDimensions();
+
 	virtual void update(Input &input) override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-private:
 	std::vector<TextLine> lines;
+
+private:
 	float paddingBetweenLines;
 };

@@ -52,6 +52,8 @@ void ComponentGui::update(Input &input) {
 			colourBasedOnSign(component->getUsePower(), okTextColour, warningTextColour, badTextColour) });
 	}
 
+	//sizeFromParent.y = absoluteSizeToRelative(getChild<TextLines>(propertyValueLines)->getDimensions()).y * 1.1f;
+
 	GuiWindow::update(input);
 }
 

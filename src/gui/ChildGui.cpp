@@ -13,3 +13,7 @@ sf::Vector2f ChildGui::getAbsolutePosition() {
 sf::Vector2f ChildGui::getAbsoluteSize() {
 	return sf::Vector2f(parent.getAbsoluteSize().x * sizeFromParent.x, parent.getAbsoluteSize().y * sizeFromParent.y);
 }
+
+sf::Vector2f ChildGui::absoluteSizeToRelative(sf::Vector2f absoluteSize) {
+	return sf::Vector2f(absoluteSize.x / parent.getAbsoluteSize().x, absoluteSize.y / parent.getAbsoluteSize().y);
+}

@@ -10,6 +10,8 @@ public:
 	virtual sf::Vector2f getAbsolutePosition() override;
 	virtual sf::Vector2f getAbsoluteSize() override;
 
+	sf::Vector2f absoluteSizeToRelative(sf::Vector2f absoluteSize);
+
 protected:
 	// The position and size of the element is determined as the size of the parent multiplied by the below.
 	// For example, with a parent 1000x1000, an element at positionFromParent (0.25, 0.5) would be positioned
