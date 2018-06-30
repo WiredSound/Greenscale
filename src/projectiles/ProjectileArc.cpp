@@ -21,8 +21,8 @@ bool ProjectileArc::update(GameMap *map) {
 
 		auto pos = path.currentPosition();
 
-		hitEntity(map, pos);
-		destroyProjectile = hitTile(map, pos);
+		if (!destroyProjectile && (hitEntity(map, pos) || hitTile(map, pos)))
+			destroyProjectile = true;
 
 		path.nextPosition();
 	}
@@ -45,14 +45,19 @@ bool ProjectileArc::hitTile(GameMap *map, sf::Vector2u pos) {
 	return false;
 }
 
-void ProjectileArc::hitEntity(GameMap *map, sf::Vector2u pos) {
+bool ProjectileArc::hitEntity(GameMap *map, sf::Vector2u pos) {
+	bool entitiesHit = false;
+
 	for (auto &entity : map->getEntitiesAt(pos)) {
 		if (entity->isBlocking()) {
 			DEBUG_LOG("Projectile arc hit entity: " << entity->name);
 
 			entity->applyDamage(getProjectileDamage());
+			entitiesHit = true;
 		}
 	}
+
+	return entitiesHit;
 }
 
 const ProjectileVisual &ProjectileArc::getProjectileVisualInfo() {
