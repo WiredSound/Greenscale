@@ -46,6 +46,7 @@ void GameMap::updateProjectiles() {
 		sf::Vector2u &position = arc.getCurrentProjectilePosition();
 		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
 		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());
+		sf::Vector2f singleProjectileTextureSize = arc.getSingleProjectileTextureSize();
 
 		bool destroyArc = arc.update(this);
 
@@ -55,7 +56,7 @@ void GameMap::updateProjectiles() {
 		else {
 			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
 			projectileSprite.setTexture(*projectilesTexture.get());
-			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * 32, frame.textureY * 32, 32, 32)); // TODO: Get texture size of projectiles.
+			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * singleProjectileTextureSize.x, frame.textureY * singleProjectileTextureSize.y, singleProjectileTextureSize.x, singleProjectileTextureSize.y));
 			projectileSprite.setColor(sf::Color::White); // TODO: Set up colours properly.
 		}
 	}

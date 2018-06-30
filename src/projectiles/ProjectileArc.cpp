@@ -64,6 +64,10 @@ const ProjectileVisual &ProjectileArc::getProjectileVisualInfo() {
 	return manager->get(id);
 }
 
+sf::Vector2f ProjectileArc::getSingleProjectileTextureSize() {
+	return manager->getSingleProjectileTextureSize();
+}
+
 sf::Time ProjectileArc::getTimeBetweenMoves() {
 	return getProjectileVisualInfo().timeBetweenMoves;
 }

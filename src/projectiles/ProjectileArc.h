@@ -15,6 +15,7 @@ public:
 	bool update(GameMap *map); // Returns true if the arc should be destroyed.
 
 	const ProjectileVisual &getProjectileVisualInfo();
+	sf::Vector2f getSingleProjectileTextureSize();
 	Damage getProjectileDamage();
 	unsigned int getProjectilePenetration();
 

@@ -4,7 +4,12 @@
 
 ProjectileManager::ProjectileManager() : Manager("projectile", "projectiles") {}
 
+sf::Vector2f ProjectileManager::getSingleProjectileTextureSize() {
+	return tileSize;
+}
+
 void ProjectileManager::parseJson(nlohmann::json json) {
+	tileSize = sf::Vector2f(json["projectile width"], json["projectile height"]);
 }
 
 std::pair<IDs::Projectiles, const ProjectileVisual> ProjectileManager::parseJsonManaged(nlohmann::json json) {
