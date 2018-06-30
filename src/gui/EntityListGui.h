@@ -1,6 +1,6 @@
 #pragma once
 
-#include "TextLines.h"
+#include "TextLinesGui.h"
 #include "GuiWindow.h"
 #include "../TurnManager.h"
 

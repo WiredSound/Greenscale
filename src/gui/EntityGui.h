@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include "GuiWindow.h"
-#include "TextLines.h"
+#include "TextLinesGui.h"
 #include "../TurnManager.h"
 
 class EntityGui : public GuiWindow {

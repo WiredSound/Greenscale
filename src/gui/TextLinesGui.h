@@ -3,21 +3,20 @@
 #include "ChildGui.h"
 #include "TextLine.h"
 
-class TextLines : public ChildGui {
+class TextLinesGui : public ChildGui {
 public:
-	TextLines(Gui &parent, sf::Vector2f position, float padding);
+	TextLinesGui(Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin);
 
 	unsigned int addLine(TextLine line);
 	TextLine &getLine(unsigned int index);
-	void numberOfLines(unsigned int amount, TextLine line);
 
-	sf::Vector2f getDimensions();
+	unsigned int getNumberOfLines();
+	void setNumberOfLines(unsigned int amount, TextLine line);
+
+	float getLinesHeightWithoutPadding();
 
 	virtual void update(Input &input) override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	std::vector<TextLine> lines;
-
-private:
-	float paddingBetweenLines;
 };

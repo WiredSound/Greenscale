@@ -6,8 +6,8 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Components", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	font(textFont), gridGui(componentGridGui), okTextColour(sf::Color::Green), warningTextColour(sf::Color::Yellow), badTextColour(sf::Color::Red) {
-	auto nameLines = std::make_unique<TextLines>(*this, sf::Vector2f(0.025f, 0.05f), 5);
-	auto valueLines = std::make_unique<TextLines>(*this, sf::Vector2f(0.23f, 0.05f), 5);
+	auto nameLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95, 0.9), sf::Vector2f(0, 0));
+	auto valueLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.23f, 0.05f), sf::Vector2f(0.95, 0.9), sf::Vector2f(0, 0));
 
 	nameLines->addLine(TextLine(font, fontSize, { "Name:", sf::Color::White }));
 	nameLine = valueLines->addLine(TextLine(font, fontSize));
@@ -36,23 +36,23 @@ void ComponentGui::update(Input &input) {
 
 	if (component) {
 		// TODO: This use of dynamic_cast is probably not best practise...
-		getChild<TextLines>(propertyValueLines)->getLine(nameLine).set(0, { component->getName(), okTextColour });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(nameLine).set(0, { component->getName(), okTextColour });
 
-		getChild<TextLines>(propertyValueLines)->getLine(descriptionLine).set(0, { component->getDescription(), okTextColour });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(descriptionLine).set(0, { component->getDescription(), okTextColour });
 
-		getChild<TextLines>(propertyValueLines)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
 
-		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
-		getChild<TextLines>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
 
-		getChild<TextLines>(propertyValueLines)->getLine(passivePowerLine).set(0, { std::to_string(component->getPassivePower()) + " per turn",
+		getChild<TextLinesGui>(propertyValueLines)->getLine(passivePowerLine).set(0, { std::to_string(component->getPassivePower()) + " per turn",
 			colourBasedOnSign(component->getPassivePower(), okTextColour, warningTextColour, badTextColour) });
 
-		getChild<TextLines>(propertyValueLines)->getLine(usePowerLine).set(0, { std::to_string(component->getUsePower()) + " on use",
+		getChild<TextLinesGui>(propertyValueLines)->getLine(usePowerLine).set(0, { std::to_string(component->getUsePower()) + " on use",
 			colourBasedOnSign(component->getUsePower(), okTextColour, warningTextColour, badTextColour) });
 	}
 
-	//sizeFromParent.y = absoluteSizeToRelative(getChild<TextLines>(propertyValueLines)->getDimensions()).y * 1.1f;
+	//sizeFromParent.y = absoluteSizeToRelative(getChild<TextLinesGui>(propertyValueLines)->getDimensions()).y * 1.1f;
 
 	GuiWindow::update(input);
 }

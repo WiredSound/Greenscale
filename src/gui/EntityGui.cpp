@@ -3,7 +3,7 @@
 EntityGui::EntityGui(Gui &parent, sf::Font &textFont, unsigned int fontSize, TurnManager &manager, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)
 	: GuiWindow("Entity Info", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness), font(textFont), turnManager(manager) {
-	auto lines = std::make_unique<TextLines>(*this, sf::Vector2f(0.02f, 0.02f), 5);
+	auto lines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0, 0));
 
 	nameLine = lines->addLine(TextLine(font, fontSize, { "Name: ", sf::Color::White }));
 	integrityLine = lines->addLine(TextLine(font, fontSize, { "Integrity: ", sf::Color::White }));
@@ -17,15 +17,15 @@ void EntityGui::update(Input &input) {
 
 	auto &entity = turnManager.getCurrentEntity();
 
-	getChild<TextLines>(entityInfoLines)->getLine(nameLine).set(1, { entity->name, sf::Color::White });
+	getChild<TextLinesGui>(entityInfoLines)->getLine(nameLine).set(1, { entity->name, sf::Color::White });
 
 	unsigned int integrity = entity->getIntegrity();
 	unsigned int maxIntegrity = entity->getMaxIntegrity();
-	getChild<TextLines>(entityInfoLines)->getLine(integrityLine).set(1, { std::to_string(integrity) + "/" + std::to_string(maxIntegrity), colourBasedOnPercentage(integrity, maxIntegrity) });
+	getChild<TextLinesGui>(entityInfoLines)->getLine(integrityLine).set(1, { std::to_string(integrity) + "/" + std::to_string(maxIntegrity), colourBasedOnPercentage(integrity, maxIntegrity) });
 
 	unsigned int power = entity->getPowerLevel();
 	unsigned int maxPower = entity->getMaxPowerStorage();
-	getChild<TextLines>(entityInfoLines)->getLine(powerLine).set(1, { std::to_string(power) + "/" + std::to_string(maxPower), colourBasedOnPercentage(power, maxPower) });
+	getChild<TextLinesGui>(entityInfoLines)->getLine(powerLine).set(1, { std::to_string(power) + "/" + std::to_string(maxPower), colourBasedOnPercentage(power, maxPower) });
 }
 
 sf::Color EntityGui::colourBasedOnPercentage(unsigned int integrity, unsigned int maxIntegrity) {

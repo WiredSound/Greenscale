@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include "ComponentGridGui.h"
-#include "TextLines.h"
+#include "TextLinesGui.h"
 
 class ComponentGui : public GuiWindow {
 public:
