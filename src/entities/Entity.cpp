@@ -117,7 +117,7 @@ MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
-	if (component) {
+	if (component && component->isEnabled()) {
 		std::vector<ProjectileArc> arcs = component->use(path);
 
 		map->fireArcs(arcs);
