@@ -3,8 +3,9 @@
 #include "../map/GameMap.h"
 #include "../entities/Entity.h"
 
-ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId, Damage projectileDamage, unsigned int projectilePenetration)
-	: manager(projectileManager), path(projectilePath), id(projectileId), damage(projectileDamage), penetration(projectilePenetration)
+ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId,
+	Damage projectileDamage, unsigned int projectilePenetration, sf::Color projectileColour)
+	: manager(projectileManager), path(projectilePath), id(projectileId), damage(projectileDamage), penetration(projectilePenetration), colour(projectileColour)
 {
 	path.resetPosition();
 }
@@ -78,6 +79,10 @@ Damage ProjectileArc::getProjectileDamage() {
 
 unsigned int ProjectileArc::getProjectilePenetration() {
 	return penetration;
+}
+
+sf::Color ProjectileArc::getProjectileColour() {
+	return colour;
 }
 
 sf::Vector2u ProjectileArc::getCurrentProjectilePosition() {

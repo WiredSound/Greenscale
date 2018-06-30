@@ -9,7 +9,8 @@
 
 class ProjectileArc {
 public:
-	ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId, Damage projectileDamage, unsigned int projectilePenetration);
+	ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId,
+		Damage projectileDamage, unsigned int projectilePenetration, sf::Color projectileColour);
 
 	bool reachedTarget();
 	bool update(GameMap *map); // Returns true if the arc should be destroyed.
@@ -18,6 +19,7 @@ public:
 	sf::Vector2f getSingleProjectileTextureSize();
 	Damage getProjectileDamage();
 	unsigned int getProjectilePenetration();
+	sf::Color getProjectileColour();
 
 	sf::Vector2u getCurrentProjectilePosition();
 	sf::Time getAnimationTime();
@@ -25,6 +27,8 @@ public:
 private:
 	MovementPath path;
 	IDs::Projectiles id;
+
+	sf::Color colour;
 
 	sf::Clock movementClock;
 	sf::Time timeBetweenMoves;

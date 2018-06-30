@@ -194,7 +194,7 @@ void Component::increaseHeat(int amount) {
 	if (heat < 0) heat = 0;
 }
 
-std::vector<ProjectileArc> Component::use(MovementPath path) {
+std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path) {
 	return std::vector<ProjectileArc>();
 }
 

@@ -118,7 +118,7 @@ bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
 	if (component && component->isEnabled()) {
-		std::vector<ProjectileArc> arcs = component->use(path);
+		std::vector<ProjectileArc> arcs = component->use(*this, path);
 
 		map->fireArcs(arcs);
 

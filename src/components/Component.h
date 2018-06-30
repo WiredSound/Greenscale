@@ -44,7 +44,7 @@ public:
 	bool isDestroyed();
 	bool isEnabled();
 
-	virtual std::vector<ProjectileArc> use(MovementPath path); // Can optionally fire some projectiles (or alternatively just apply changes to self).
+	virtual std::vector<ProjectileArc> use(Entity &user, MovementPath path); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);
 
 	void toggleManualEnable();

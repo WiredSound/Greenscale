@@ -57,7 +57,7 @@ void GameMap::updateProjectiles() {
 			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
 			projectileSprite.setTexture(*projectilesTexture.get());
 			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * singleProjectileTextureSize.x, frame.textureY * singleProjectileTextureSize.y, singleProjectileTextureSize.x, singleProjectileTextureSize.y));
-			projectileSprite.setColor(sf::Color::White); // TODO: Set up colours properly.
+			projectileSprite.setColor(arc.getProjectileColour());
 		}
 	}
 }

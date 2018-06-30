@@ -5,7 +5,7 @@
 class RangedComponent : public Component {
 public:
 	RangedComponent(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager, std::shared_ptr<ProjectileManager> manager);
-	virtual std::vector<ProjectileArc> use(MovementPath path);
+	virtual std::vector<ProjectileArc> use(Entity &user, MovementPath path) override;
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) override;
 
 	IDs::Projectiles getProjectileId();

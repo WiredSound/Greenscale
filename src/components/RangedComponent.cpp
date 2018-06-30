@@ -1,12 +1,14 @@
 #include "RangedComponent.h"
 
+#include "../entities/Entity.h"
+
 RangedComponent::RangedComponent(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager, std::shared_ptr<ProjectileManager> manager)
 	: Component(componentId, componentManager), projectileManager(manager) {}
 
-std::vector<ProjectileArc> RangedComponent::use(MovementPath path) {
+std::vector<ProjectileArc> RangedComponent::use(Entity &user, MovementPath path) {
 	std::vector<ProjectileArc> arcs;
 
-	arcs.resize(getProjectileCount(), ProjectileArc(projectileManager, path, getProjectileId(), getProjectileDamage(), getProjectilePenetration()));
+	arcs.resize(getProjectileCount(), ProjectileArc(projectileManager, path, getProjectileId(), getProjectileDamage(), getProjectilePenetration(), user.getFaction().colour));
 
 	return arcs;
 }
