@@ -8,7 +8,8 @@ namespace IDs {
 		DOOR = 3,
 		ROCK = 4,
 		GRASS = 5,
-		DIRT = 6
+		DIRT = 6,
+		TREE = 7
 	};
 
 	enum Components : char {
