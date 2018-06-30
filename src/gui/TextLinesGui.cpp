@@ -30,19 +30,22 @@ float TextLinesGui::getLinesHeightWithoutPadding() {
 	return heightOfLinesWithoutPadding;
 }
 
+float TextLinesGui::getPaddingBetweenLines() {
+	float heightNoPadding = getLinesHeightWithoutPadding();
+	float paddingHeightTotal = getAbsoluteSize().y - heightNoPadding;
+	return paddingHeightTotal / getNumberOfLines();
+}
+
 void TextLinesGui::update(Input &input) {
 	ChildGui::update(input);
 
-	float heightNoPadding = getLinesHeightWithoutPadding();
-	float paddingHeightTotal = getAbsoluteSize().y - heightNoPadding;
-	float paddingBetweenLines = paddingHeightTotal / getNumberOfLines();
-
 	sf::Vector2f position = getAbsolutePosition();
+	float padding = getPaddingBetweenLines();
 
 	for (TextLine &line : lines) {
 		line.setPosition(position);
 
-		position.y += line.getLineHeight() + paddingBetweenLines;
+		position.y += line.getLineHeight() + padding;
 	}
 }
 

@@ -14,6 +14,7 @@ public:
 	void setNumberOfLines(unsigned int amount, TextLine line);
 
 	float getLinesHeightWithoutPadding();
+	float getPaddingBetweenLines();
 
 	virtual void update(Input &input) override;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
