@@ -3,7 +3,7 @@
 #include <fstream>
 
 TileLayer::TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager)
-	: MapLayer(layerSize, sizeTile, tileManager.getSingleTileTextureSize(), layerTexture), manager(tileManager), tiles(new std::pair<IDs::Tiles, sf::Color>[layerSize.x * layerSize.y]) {
+	: MapLayer(layerSize, sizeTile, tileManager.getSingleTileTextureSize(), layerTexture), manager(tileManager), tiles(new std::pair<IDs::Tiles, sf::Color>[getTileCount()]) {
 	updateVertices();
 }
 
@@ -34,7 +34,7 @@ bool TileLayer::save(std::string path) {
 	if (file.is_open()) {
 		DEBUG_LOG("Writing tile layer to file: " << path);
 
-		file.write(reinterpret_cast<char*>(tiles.get()), sizeof(TileColourPair) * (size.x * size.y));
+		file.write(reinterpret_cast<char*>(tiles.get()), sizeof(TileColourPair) * getTileCount());
 
 		file.close();
 		return true;
@@ -46,12 +46,18 @@ bool TileLayer::save(std::string path) {
 
 bool TileLayer::load(std::string path) {
 	std::ifstream file;
-	file.open(path, std::ios::in | std::ios::binary);
+	file.open(path, std::ios::in | std::ios::binary | std::ios::ate);
 
 	if (file.is_open()) {
 		DEBUG_LOG("Loading tile layer from file: " << path);
 
-		file.read(reinterpret_cast<char*>(tiles.get()), sizeof(TileColourPair) * (size.x * size.y));
+		unsigned long bufferSize = sizeof(TileColourPair) * getTileCount();
+		unsigned long fileSize = static_cast<unsigned long>(file.tellg());
+
+		assert(fileSize == bufferSize); // TODO: Check the actual size of the layer being loaded rather than just assuming its size.
+
+		file.seekg(0, std::ios::beg);
+		file.read(reinterpret_cast<char*>(tiles.get()), bufferSize);
 
 		file.close();
 
@@ -117,6 +123,10 @@ sf::Color TileLayer::getColourAt(sf::Vector2u pos) {
 	}
 
 	return getTileAt(pos).defaultColour;
+}
+
+unsigned int TileLayer::getTileCount() {
+	return size.x * size.y;
 }
 
 void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id) {

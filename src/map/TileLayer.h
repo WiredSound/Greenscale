@@ -12,6 +12,7 @@ public:
 	TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager);
 	const Tile &getTileAt(sf::Vector2u pos);
 	sf::Color getColourAt(sf::Vector2u pos);
+	unsigned int getTileCount();
 	void setTileAt(sf::Vector2u pos, IDs::Tiles id);
 	void setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour);
 	void setColourAt(sf::Vector2u, sf::Color colour);
