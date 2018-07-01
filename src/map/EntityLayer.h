@@ -16,6 +16,8 @@ public:
 	std::vector<std::shared_ptr<Entity>> getEntitiesAt(sf::Vector2u pos);
 	std::vector<std::shared_ptr<Entity>> getEntities();
 
+	bool save(std::string path);
+
 private:
 	std::vector<std::shared_ptr<Entity>> entities;
 

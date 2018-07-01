@@ -16,7 +16,7 @@ class Robot;
 
 class GameMap {
 public:
-	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> texture);
+	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles);
 
 	void update();
 	void turnPassed();
@@ -46,6 +46,9 @@ public:
 	unsigned int applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration);
 
 	bool withinBounds(sf::Vector2u pos);
+
+	bool save(std::string path);
+	bool load(std::string path);
 
 	const AStarPathBuilder pathfinder;
 

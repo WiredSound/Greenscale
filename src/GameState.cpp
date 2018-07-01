@@ -17,6 +17,11 @@ void GameState::update(Input &input) {
 	turnManager.update(input);
 	gui.update(input);
 
+	if (input.isKeyJustPressed(sf::Keyboard::Key::S))
+		map->save("M:/Visual Studio Projects/Greenscale/test");
+	if (input.isKeyJustPressed(sf::Keyboard::Key::L))
+		map->load("M:/Visual Studio Projects/Greenscale/test");
+
 	for (sf::Event event : input.getMiscellaneousEvents()) {
 		//if (event.type == sf::Event::Resized) gui.resize((sf::Vector2f) window.getSize());
 	}

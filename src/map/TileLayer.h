@@ -5,6 +5,8 @@
 #include "../debugging.h"
 #include "pathfinding/MovementPath.h"
 
+using TileColourPair = std::pair<IDs::Tiles, sf::Color>;
+
 class TileLayer : public MapLayer {
 public:
 	TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager);
@@ -21,8 +23,11 @@ public:
 	void resetColouring();
 	void updateVertices() override;
 
+	bool save(std::string path);
+	bool load(std::string path);
+
 private:
-	std::unique_ptr<std::pair<IDs::Tiles, sf::Color>[]> tiles;
+	std::unique_ptr<TileColourPair[]> tiles;
 
 	TileManager manager;
 

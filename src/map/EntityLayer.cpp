@@ -47,6 +47,23 @@ std::vector<std::shared_ptr<Entity>> EntityLayer::getEntities() {
 	return entities;
 }
 
+bool EntityLayer::save(std::string path) {
+	std::ofstream file;
+	file.open(path, std::ios::out | std::ios::trunc | std::ios::binary);
+
+	if (file.is_open()) {
+		DEBUG_LOG("Writing entity layer to file: " << path);
+
+		// TODO: ...
+
+		file.close();
+		return true;
+	}
+
+	DEBUG_LOG_ERROR("Failed to write entity layer to file: " << path);
+	return false;
+}
+
 void EntityLayer::addEntity(std::shared_ptr<Entity> entity) {
 	entities.push_back(entity);
 

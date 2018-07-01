@@ -1,5 +1,7 @@
 #include "TileLayer.h"
 
+#include <fstream>
+
 TileLayer::TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager)
 	: MapLayer(layerSize, sizeTile, tileManager.getSingleTileTextureSize(), layerTexture), manager(tileManager), tiles(new std::pair<IDs::Tiles, sf::Color>[layerSize.x * layerSize.y]) {
 	updateVertices();
@@ -23,6 +25,43 @@ void TileLayer::updateVertices() {
 			setupTileQuad(sf::Vector2u(x, y));
 		}
 	}
+}
+
+bool TileLayer::save(std::string path) {
+	std::ofstream file;
+	file.open(path, std::ios::out | std::ios::trunc | std::ios::binary);
+
+	if (file.is_open()) {
+		DEBUG_LOG("Writing tile layer to file: " << path);
+
+		file.write(reinterpret_cast<char*>(tiles.get()), sizeof(TileColourPair) * (size.x * size.y));
+
+		file.close();
+		return true;
+	}
+
+	DEBUG_LOG_ERROR("Failed to write tile layer to file: " << path);
+	return false;
+}
+
+bool TileLayer::load(std::string path) {
+	std::ifstream file;
+	file.open(path, std::ios::in | std::ios::binary);
+
+	if (file.is_open()) {
+		DEBUG_LOG("Loading tile layer from file: " << path);
+
+		file.read(reinterpret_cast<char*>(tiles.get()), sizeof(TileColourPair) * (size.x * size.y));
+
+		file.close();
+
+		updateVertices();
+
+		return true;
+	}
+
+	DEBUG_LOG_ERROR("Failed to load tile layer from file: " << path);
+	return false;
 }
 
 void TileLayer::setupTileQuad(sf::Vector2u pos) {

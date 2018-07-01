@@ -1,9 +1,10 @@
 #include "GameMap.h"
 
+#include <experimental/filesystem>
 #include "../entities/Robot.h"
 
-GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> texture)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(texture) {}
+GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles)
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles) {}
 
 void GameMap::update() {
 	entities->update();
@@ -133,6 +134,20 @@ sf::Vector2u GameMap::mousePosToTilePos(sf::RenderWindow &window) {
 
 bool GameMap::withinBounds(sf::Vector2u pos) {
 	return tiles->withinBounds(pos.x, pos.y) && entities->withinBounds(pos.x, pos.y);
+}
+
+bool GameMap::save(std::string path) {
+	if (path[path.size() - 1] != '/') path.push_back('/');
+
+	std::experimental::filesystem::create_directories(path);
+
+	return tiles->save(path + "tiles.sav");// && entities->save(path + "entities.sav");
+}
+
+bool GameMap::load(std::string path) {
+	if (path[path.size() - 1] != '/') path.push_back('/');
+
+	return tiles->load(path + "tiles.sav");// && entities->load(path + "entities.sav");
 }
 
 bool GameMap::enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration) {
