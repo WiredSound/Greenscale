@@ -11,6 +11,8 @@ void ComponentManager::parseJson(nlohmann::json json) {
 }
 
 std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManaged(nlohmann::json json) {
+	DEBUG_LOG("Loading " << managedName << " " << json["name"] << "...");
+
 	std::pair<IDs::Components, const ComponentInfo> componentPair(
 		json["id"].get<IDs::Components>(),
 		{
@@ -37,7 +39,6 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 		}
 	);
 
-	DEBUG_LOG("Loaded " << managedName << " '" << componentPair.second.name << "' with ID: " << componentPair.first);
 	DEBUG_LOG("Possible upgrades: " << json["possible upgrades"]);
 
 	return componentPair;

@@ -1,22 +1,22 @@
 #include "MapBuilder.h"
 
+#include "GradientTerrainGenerator.h"
+#include "../IDs.h"
+
 #define TILES_PATH "assets/tiles/tiles.json"
 #define COMPONENTS_PATH "assets/components/components.json"
 #define PROJECTILES_PATH "assets/projectiles/projectiles.json"
-#define ENTITIES_PATH "assets/entities/animations.json"
+#define ENTITIES_PATH "assets/entities/entities.json"
 #define TILES_TEXTURE_PATH "assets/tiles/tiles.png"
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
 #define PROJECTILES_TEXTURE_PATH "assets/projectiles/projectiles.png"
-
-#include "GradientTerrainGenerator.h"
-#include "../IDs.h"
 
 MapBuilder::MapBuilder(unsigned int seed, sf::RenderWindow &window, GameGui &gui)
 	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), projectilesTexture(std::make_shared<sf::Texture>()),
 	playerController(std::make_shared<PlayerController>(window, gui)) {
 	tileManager.loadFromJsonFile(TILES_PATH);
 
-	entityBuilder.loadAllAnimations(ENTITIES_PATH);
+	entityBuilder.loadEntityInfo(ENTITIES_PATH);
 
 	componentBuilder.loadComponentInfo(COMPONENTS_PATH);
 	componentBuilder.loadProjectileInfo(PROJECTILES_PATH);
@@ -38,16 +38,16 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	map->addRoom(std::make_unique<SquareRoom>("First Room", sf::Vector2u(2, 2), sf::Vector2u(5, 5), IDs::Tiles::GROUND, IDs::Tiles::WALL));
 	map->addRoom(std::make_unique<SquareRoom>("Second Room", sf::Vector2u(8, 4), sf::Vector2u(5, 5), IDs::Tiles::GROUND, IDs::Tiles::WALL));
 
-	auto player = std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(1, 1), playerController, Faction::PLAYER));
+	auto player = entityBuilder.buildEntity(IDs::Entities::TROOP_01, "Player", sf::Vector2u(1, 1), Faction::PLAYER, playerController);
 	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::HEAT_SINK));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(2, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE));
 	map->addEntity(player);
 
-	auto other = std::make_shared<Robot>(entityBuilder.buildSimpleRobot(sf::Vector2u(4, 1), playerController, Faction::CORPORATION));
-	other->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
-	map->addEntity(other);
+	//auto other = entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Other Robot", sf::Vector2u(4, 1), Faction::CORPORATION, playerController);
+	//other->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
+	//map->addEntity(other);
 
 	return map;
 }

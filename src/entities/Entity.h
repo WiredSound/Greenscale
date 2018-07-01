@@ -6,17 +6,17 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Faction.h"
-#include "../Animation.h"
 #include "../Input.h"
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
 #include "../projectiles/ProjectileArc.h"
 #include "../PulsingColour.h"
+#include "../entities/EntityManager.h"
 class EntityController;
 
 class Entity {
 public:
-	Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController);
+	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController);
 
 	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
 	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
@@ -35,6 +35,12 @@ public:
 	bool reachedPathTarget();
 	bool withinRange(int distance);
 
+	const EntityInfo &fetchInfo();
+	std::string getEntityName();
+	std::string getDescription();
+	std::string getEntityType();
+	std::shared_ptr<Animation> getAnimation(std::string key);
+
 	bool isBlocking();
 	virtual sf::Color getColour();
 	virtual char getPriority();
@@ -42,6 +48,8 @@ public:
 	virtual Animation::Frame fetchFrame() = 0;
 	ComponentGrid &getComponentGrid();
 	int getMovementRange();
+	std::string getPersonalName();
+	std::string getFullName();
 
 	unsigned int getIntegrity();
 	unsigned int getMaxIntegrity();
@@ -56,8 +64,6 @@ public:
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
 
-	const std::string name;
-
 protected:
 	bool moveDirectlyBy(sf::Vector2u movement);
 	bool moveDirectlyToPosition(sf::Vector2u newPos);
@@ -65,15 +71,18 @@ protected:
 	sf::Clock animationClock;
 	sf::Clock movementClock;
 
+	std::string personalName;
 	Faction faction;
 
 	MovementPath currentPath;
-	int movementRange = 10;
 	sf::Time visualMovementSpeed; // Time between each tile movement when moving along a path.
 
-	PulsingColour myTurnColourPulse;
+	static PulsingColour myTurnColourPulse;
 
 private:
+	IDs::Entities id;
+	std::shared_ptr<EntityManager> manager;
+
 	GameMap *map;
 
 	ComponentGrid componentGrid;

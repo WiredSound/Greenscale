@@ -51,7 +51,7 @@ bool ProjectileArc::hitEntity(GameMap *map, sf::Vector2u pos) {
 
 	for (auto &entity : map->getEntitiesAt(pos)) {
 		if (entity->isBlocking()) {
-			DEBUG_LOG("Projectile arc hit entity: " << entity->name);
+			DEBUG_LOG("Projectile arc hit entity: " << entity->getFullName());
 
 			entity->applyDamage(getProjectileDamage());
 			entitiesHit = true;

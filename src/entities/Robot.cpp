@@ -1,16 +1,19 @@
 #include "Robot.h"
 
-Robot::Robot(std::string entityName, sf::Vector2u pos, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController, Faction entityFaction,
-	std::shared_ptr<Animation> animationIdle, std::shared_ptr<Animation> animationMoving)
-	: Entity(entityName, pos, entityFaction, componentGridSize, entityController), idleAnimation(animationIdle), movingAnimation(animationMoving) {}
-
 Animation::Frame Robot::fetchFrame() {
 	if (reachedPathTarget())
-		return idleAnimation->getFrame(animationClock.getElapsedTime());
+		return getIdleAnimation()->getFrame(animationClock.getElapsedTime());
 	else
-		return movingAnimation->getFrame(animationClock.getElapsedTime());
+		return getMovingAnimation()->getFrame(animationClock.getElapsedTime());
 }
 
 sf::Color Robot::getColour() {
 	return (isMyTurn() ? myTurnColourPulse.getColour(faction.colour) : faction.colour);
+}
+
+std::shared_ptr<Animation> Robot::getIdleAnimation() {
+	return getAnimation("idle");
+}
+std::shared_ptr<Animation> Robot::getMovingAnimation() {
+	return getAnimation("moving");
 }

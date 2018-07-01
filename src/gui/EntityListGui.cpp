@@ -19,6 +19,6 @@ void EntityListGui::update(Input &input) {
 		const std::shared_ptr<Entity> &entity = entities[i];
 
 		getChild<TextLinesGui>(textLines)->getLine(i).set(0, { entity->isMyTurn() ? "> " : "  ", sf::Color::White });
-		getChild<TextLinesGui>(textLines)->getLine(i).set(1, { entity->name, entity->getFaction().colour });
+		getChild<TextLinesGui>(textLines)->getLine(i).set(1, { entity->getFullName(), entity->getFaction().colour });
 	}
 }

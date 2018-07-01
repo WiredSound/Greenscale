@@ -2,12 +2,14 @@
 
 #include "EntityController.h"
 
-Entity::Entity(std::string entityName, sf::Vector2u pos, Faction entityFaction, sf::Vector2u componentGridSize, std::shared_ptr<EntityController> entityController)
-	: name(entityName), position(pos), faction(entityFaction), componentGrid(componentGridSize), controller(entityController),
-	currentPath(pos), visualMovementSpeed(sf::milliseconds(80)), myTurnColourPulse(0.8f, 1.0f, 0.005f) {}
+PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
+
+Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController)
+	: id(entityId), manager(entityManager), personalName(entityName), position(pos), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
+	controller(entityController), currentPath(pos), visualMovementSpeed(sf::milliseconds(80)) {}
 
 void Entity::yourTurnBegin() {
-	DEBUG_LOG("Turn begins for entity: " << name);
+	DEBUG_LOG("Turn begins for entity: " << personalName);
 	myTurn = true;
 }
 
@@ -20,8 +22,8 @@ bool Entity::yourTurnCurrently() {
 }
 
 void Entity::yourTurnEnd() {
-	DEBUG_LOG("Turn ends for entity: " << name);
 	componentGrid.turnPassed();
+	DEBUG_LOG("Turn ends for entity: " << personalName);
 	myTurn = false;
 }
 
@@ -64,7 +66,25 @@ bool Entity::reachedPathTarget() {
 }
 
 bool Entity::withinRange(int distance) {
-	return distance <= movementRange;
+	return distance <= getMovementRange();
+}
+
+const EntityInfo &Entity::fetchInfo() {
+	return manager->get(id);
+}
+
+std::string Entity::getEntityName() {
+	return fetchInfo().name;
+}
+
+std::string Entity::getDescription() {
+	return fetchInfo().description;
+}
+std::string Entity::getEntityType() {
+	return fetchInfo().type;
+}
+std::shared_ptr<Animation> Entity::getAnimation(std::string key) {
+	return fetchInfo().animations.at(key);
 }
 
 bool Entity::moveTo(sf::Vector2u movePos) {
@@ -85,7 +105,16 @@ bool Entity::setMovementPath(MovementPath path) {
 }
 
 int Entity::getMovementRange() {
-	return movementRange;
+	// TODO: Calculate movement range.
+	return 12;
+}
+
+std::string Entity::getPersonalName() {
+	return personalName;
+}
+
+std::string Entity::getFullName() {
+	return getPersonalName() + " (" + getEntityName() + ")";
 }
 
 unsigned int Entity::getIntegrity() {

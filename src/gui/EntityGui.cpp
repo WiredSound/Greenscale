@@ -17,7 +17,7 @@ void EntityGui::update(Input &input) {
 
 	auto &entity = turnManager.getCurrentEntity();
 
-	getChild<TextLinesGui>(entityInfoLines)->getLine(nameLine).set(1, { entity->name, sf::Color::White });
+	getChild<TextLinesGui>(entityInfoLines)->getLine(nameLine).set(1, { entity->getFullName(), sf::Color::White });
 
 	unsigned int integrity = entity->getIntegrity();
 	unsigned int maxIntegrity = entity->getMaxIntegrity();

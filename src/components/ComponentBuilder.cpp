@@ -2,12 +2,12 @@
 
 ComponentBuilder::ComponentBuilder() : componentManager(std::make_shared<ComponentManager>()), projectileManager(std::make_shared<ProjectileManager>()) {}
 
-void ComponentBuilder::loadComponentInfo(std::string filename) {
-	componentManager->loadFromJsonFile(filename);
+bool ComponentBuilder::loadComponentInfo(std::string filename) {
+	return componentManager->loadFromJsonFile(filename);
 }
 
-void ComponentBuilder::loadProjectileInfo(std::string filename) {
-	projectileManager->loadFromJsonFile(filename);
+bool ComponentBuilder::loadProjectileInfo(std::string filename) {
+	return projectileManager->loadFromJsonFile(filename);
 }
 
 std::unique_ptr<Component> ComponentBuilder::buildComponentNoUpgrades(IDs::Components id) {

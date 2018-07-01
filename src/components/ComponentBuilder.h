@@ -7,8 +7,8 @@
 class ComponentBuilder {
 public:
 	ComponentBuilder();
-	void loadComponentInfo(std::string filename);
-	void loadProjectileInfo(std::string filename);
+	bool loadComponentInfo(std::string filename);
+	bool loadProjectileInfo(std::string filename);
 
 	std::unique_ptr<Component> buildComponentNoUpgrades(IDs::Components);
 	std::unique_ptr<Component> buildComponentRandomised(IDs::Components, unsigned int upgradePoints);

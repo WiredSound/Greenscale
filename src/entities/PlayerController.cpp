@@ -46,7 +46,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			map->colourTilePath(path, ATTACK_PATH_COLOUR);
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
-				DEBUG_LOG(entity->name << " is firing!");
+				DEBUG_LOG(entity->getFullName() << " is firing!");
 
 				return entity->useEquippedComponent(path);
 			}

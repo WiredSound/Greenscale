@@ -24,4 +24,10 @@ namespace IDs {
 	enum Projectiles : char {
 		BULLET = 0
 	};
+
+	enum Entities : char {
+		TROOP_01 = 0,
+		RESTRUCTOR_01 = 1,
+		SCANNER_01 = 2
+	};
 }

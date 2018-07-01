@@ -6,9 +6,10 @@
 #include "components/Damage.h"
 
 namespace JsonHelp {
-	sf::Color parseColour(nlohmann::json colourJson);
-	Damage parseDamage(nlohmann::json json);
-	Animation loadAnimation(nlohmann::json &json);
+	sf::Color parseColour(const nlohmann::json &colourJson);
+	Damage parseDamage(const nlohmann::json &json);
+	Animation loadAnimation(const nlohmann::json &json);
+	std::map<const std::string, std::shared_ptr<Animation>> loadAnimationsAsMap(const nlohmann::json &json);
 
 	/*
 	template <typename Vector, typename Types>

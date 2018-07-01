@@ -1,22 +1,16 @@
 #pragma once
 
-#include <fstream>
-#include <iostream>
-#include <nlohmann/json.hpp>
+#include "EntityManager.h"
+#include "Entity.h"
 #include "Robot.h"
-#include "../JsonHelp.h"
-#include "../debugging.h"
 
 class EntityBuilder {
 public:
-	void loadAllAnimations(const std::string filename);
+	EntityBuilder();
+	bool loadEntityInfo(std::string filename);
+	std::shared_ptr<Entity> buildEntity(IDs::Entities id, std::string personalName, sf::Vector2u position, Faction faction, std::shared_ptr<EntityController> controller);
 	sf::Vector2f getFrameSize();
 
-	Robot buildSimpleRobot(sf::Vector2u position, std::shared_ptr<EntityController> controller, Faction faction);
-
 private:
-	std::shared_ptr<Animation> robotIdleAnimation;
-	std::shared_ptr<Animation> robotMovingAnimation;
-
-	sf::Vector2f frameSize;
+	std::shared_ptr<EntityManager> manager;
 };
