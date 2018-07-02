@@ -1,9 +1,8 @@
 #include "EntityListGui.h"
 
-EntityListGui::EntityListGui(Gui &parent, TurnManager &managerTurns, sf::Font &textFont, unsigned int sizeText, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
+EntityListGui::EntityListGui(Gui &parent, TurnManager &managerTurns, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
-	: GuiWindow("Entity List", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
-	turnManager(managerTurns), font(textFont), textSize(sizeText)
+	: GuiWindow("Entity List", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness), turnManager(managerTurns)
 {
 	auto lines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0, 0));
 	lines->setNumberOfLines(8, TextLine(textFont, textSize));

@@ -19,6 +19,9 @@ public:
 	void add();
 	void add(ColourText colourText);
 	void set(unsigned int index, ColourText colourText);
+	void setText(unsigned int index, std::string text);
+	void setColour(unsigned int index, sf::Color colour);
+	ColourText get(unsigned int index);
 	void clear();
 
 	float getLineWidth();
@@ -31,4 +34,6 @@ private:
 	sf::Font &font;
 	sf::Vector2f currentPosition;
 	unsigned int fontSize;
+
+	void ensureMinimumTexts(unsigned int amount);
 };
