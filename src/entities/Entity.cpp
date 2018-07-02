@@ -6,7 +6,7 @@ PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
 
 Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController)
 	: id(entityId), manager(entityManager), personalName(entityName), position(pos), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
-	controller(entityController), currentPath(pos), visualMovementSpeed(sf::milliseconds(80)) {}
+	controller(entityController), currentPath(pos), visualMovementSpeed(sf::milliseconds(150)) {}
 
 void Entity::yourTurnBegin() {
 	DEBUG_LOG("Turn begins for entity: " << personalName);

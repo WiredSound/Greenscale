@@ -33,7 +33,7 @@ neutral or as an ally of player aligned robots.
 const Faction Faction::ROGUE(
 	"Rogue",
 	"ROGUE",
-	sf::Color(0, 0, 255, FACTIONS_OPACITY),
+	sf::Color(100, 100, 255, FACTIONS_OPACITY),
 	2 // Rogue entities act after player entities.
 );
 
@@ -44,6 +44,6 @@ designed to engage in battle which will attack player aligned robots.
 const Faction Faction::CORPORATION(
 	"Corporation",
 	"CORP",
-	sf::Color(255, 0, 0, FACTIONS_OPACITY),
+	sf::Color(255, 50, 50, FACTIONS_OPACITY),
 	3 // Corporation entities are given their turn last.
 );

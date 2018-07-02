@@ -44,10 +44,8 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, sf::Vector2f ti
 	player->getComponentGrid().getComponentAt(sf::Vector2u(2, 0)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
 	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE));
 	map->addEntity(player);
-
-	//auto other = entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Other Robot", sf::Vector2u(4, 1), Faction::CORPORATION, playerController);
-	//other->getComponentGrid().getComponentAt(sf::Vector2u(1, 1)).set(componentBuilder.buildComponentNoUpgrades(IDs::Components::DEFENSIVE_PLATING));
-	//map->addEntity(other);
+	map->addEntity(entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Scanner", sf::Vector2u(3, 1), Faction::CORPORATION, playerController));
+	map->addEntity(entityBuilder.buildEntity(IDs::Entities::RESTRUCTOR_01, "Scanner", sf::Vector2u(5, 1), Faction::ROGUE, playerController));
 
 	return map;
 }

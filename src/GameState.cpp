@@ -6,7 +6,7 @@ GameState::GameState(sf::RenderWindow &renderWindow, sf::Font &textFont, GameSet
 	: State(renderWindow), turnManager(map), gui((sf::Vector2f) renderWindow.getSize()), font(textFont), settings(gameSettings) {
 	MapBuilder mapBuilder(static_cast<unsigned int>(time(0)), renderWindow, gui);
 
-	map = mapBuilder.buildMap(sf::Vector2u(50, 50), sf::Vector2f(32, 32));
+	map = mapBuilder.buildMap(sf::Vector2u(50, 50), sf::Vector2f(64, 64));
 	map->construct();
 
 	gui.setup(turnManager, font, settings.fontSize, sf::Vector2f(1, 1), sf::Color(5, 5, 5, 200), sf::Color(5, 5, 5, 230), sf::Color(35, 140, 35, 255), 2);
