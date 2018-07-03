@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics/Font.hpp>
 #include "RootGui.h"
+#include "ConsoleGui.h"
 #include "../TurnManager.h"
 
 class GameGui : public RootGui {
@@ -11,6 +12,9 @@ public:
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
 	virtual void update(Input &input) override;
 
+	void displayConsoleMessage(ConsoleGui::Message message, bool prependMessageType = false);
+
 private:
 	std::shared_ptr<sf::Texture> componentsTexture;
+	unsigned int consoleGuiIndex;
 };

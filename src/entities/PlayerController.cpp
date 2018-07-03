@@ -46,9 +46,14 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			map->colourTilePath(path, ATTACK_PATH_COLOUR);
 
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
-				DEBUG_LOG(entity->getFullName() << " is firing!");
+				DEBUG_LOG(entity->getFullName() << " is attempting to use component...");
 
-				return entity->useEquippedComponent(path);
+				bool success = entity->useEquippedComponent(path);
+
+				// TODO: Display more detail about component use...
+				if (success) gui.displayConsoleMessage({ entity->getFullName() + " used component!", ConsoleGui::MessageType::INFO });
+
+				return success;
 			}
 
 			//if (input.isKeyJustPressed(sf::Keyboard::Key::S)) // TODO: Key bindings...

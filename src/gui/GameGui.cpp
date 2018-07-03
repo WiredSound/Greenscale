@@ -4,7 +4,6 @@
 #include "ComponentGui.h"
 #include "EntityListGui.h"
 #include "EntityGui.h"
-#include "ConsoleGui.h"
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
@@ -33,22 +32,17 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.4f, 0.3f), sf::Vector2f(0, 0), 8,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	for (int i = 0; i < 20; i++) {
-		consoleGui->display({
-			"Line number: " + std::to_string(i + 1),
-			ConsoleGui::MessageType::INFO
-		});
-	}
-
-	consoleGui->flush();
-
 	addChild(std::move(entityListGui));
 	addChild(std::move(componentGridGui));
 	addChild(std::move(componentGui));
 	addChild(std::move(entityGui));
-	addChild(std::move(consoleGui));
+	consoleGuiIndex = addChild(std::move(consoleGui));
 }
 
 void GameGui::update(Input &input) {
 	Gui::update(input);
+}
+
+void GameGui::displayConsoleMessage(ConsoleGui::Message message, bool prependMessageType) {
+	getChild<ConsoleGui>(consoleGuiIndex)->display(message, prependMessageType);
 }

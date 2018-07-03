@@ -31,7 +31,7 @@ public:
 	void scrollBy(int amount);
 	int getMaximumScroll();
 
-	void display(Message msg, bool prependMessageType = true);
+	void display(Message msg, bool prependMessageType);
 	void flush();
 	TextLine getLine(unsigned int index);
 
