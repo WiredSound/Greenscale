@@ -12,25 +12,26 @@ ConsoleGui::ConsoleGui(Gui &parent, sf::Font &textFont, unsigned int textSize, s
 	textLinesIndex = addChild(std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.9f, 0.9f), sf::Vector2f(0, 0)));
 }
 
-void ConsoleGui::mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) {
-	GuiWindow::mouseHover(position, mouseButtonsJustClicked);
+void ConsoleGui::mouseHover(Input &input) {
+	GuiWindow::mouseHover(input);
 
-	for (auto &button : mouseButtonsJustClicked) {
-		if (button == sf::Mouse::Button::Left) scrollDown();
-		if (button == sf::Mouse::Button::Right) scrollUp();
+	for (const sf::Event &event : input.getMiscellaneousEvents()) {
+		if (event.type == sf::Event::MouseWheelScrolled)
+			scrollBy(-std::ceil(event.mouseWheelScroll.delta));
 	}
 }
 
-void ConsoleGui::scrollDown() {
-	if (scroll < static_cast<int>(lines.size()) - static_cast<int>(lineCount))
-		scroll++;
+void ConsoleGui::scrollBy(int amount) {
+	scroll += amount;
+
+	if (scroll < 0) scroll = 0;
+	if (scroll > getMaximumScroll()) scroll = getMaximumScroll();
+
 	flush();
 }
 
-void ConsoleGui::scrollUp() {
-	if (scroll > 0)
-		scroll--;
-	flush();
+int ConsoleGui::getMaximumScroll() {
+	return static_cast<int>(lines.size()) - static_cast<int>(lineCount);
 }
 
 void ConsoleGui::display(Message msg, bool prependMessageType) {
@@ -40,6 +41,8 @@ void ConsoleGui::display(Message msg, bool prependMessageType) {
 
 	messages.push_back(msg);
 	for (TextLine &line : wrappedLines) lines.push_back(line);
+
+	scrollBy(getMaximumScroll());
 }
 
 void ConsoleGui::flush() {

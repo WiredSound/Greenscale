@@ -3,7 +3,6 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics/Drawable.hpp>
-#include <SFML/System/Vector2.hpp>
 #include "../Input.h"
 
 class Gui : public sf::Drawable {
@@ -19,8 +18,8 @@ public:
 	virtual sf::Vector2f getAbsolutePosition() = 0;
 	virtual sf::Vector2f getAbsoluteSize() = 0;
 
-	virtual void mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) {}
-	virtual void mouseNotHovering(sf::Vector2i position) {}
+	virtual void mouseHover(Input &input) {}
+	virtual void mouseNotHovering(Input &input) {}
 	bool isMouseOverChildren();
 
 	bool withinBounds(sf::Vector2f pos);

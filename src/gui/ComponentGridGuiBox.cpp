@@ -7,14 +7,14 @@ ComponentGridGuiBox::ComponentGridGuiBox(ComponentGridGui &parent, sf::Vector2u 
 	: GuiWindow("Component Grid Box", parent, position, size, sf::Vector2f(0, 0), backgroundColour, hoverBackgroundColour, unequippedColour, thickness),
 	gridGui(parent), gridPosition(positionInGrid), equippedBorderColour(equippedColour), unequippedBorderColour(unequippedColour), borderThickness(thickness) {}
 
-void ComponentGridGuiBox::mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) {
-	GuiWindow::mouseHover(position, mouseButtonsJustClicked);
+void ComponentGridGuiBox::mouseHover(Input &input) {
+	GuiWindow::mouseHover(input);
 
 	DEBUG_LOG_SPAM("Mouse over grid box: " << gridPosition.x << ", " << gridPosition.y);
 
 	gridGui.hoveringOverGridPosition(gridPosition);
 
-	for (sf::Mouse::Button button : mouseButtonsJustClicked) {
+	for (sf::Mouse::Button button : input.getMouseButtonsJustPressed()) {
 		if (button == sf::Mouse::Left)
 			gridGui.mouseToggleHolding(gridPosition);
 		if (button == sf::Mouse::Button::Right)

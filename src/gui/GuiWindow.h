@@ -12,8 +12,8 @@ public:
 	virtual void update(Input &input);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-	virtual void mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) override;
-	virtual void mouseNotHovering(sf::Vector2i position) override;
+	virtual void mouseHover(Input &input) override;
+	virtual void mouseNotHovering(Input &input) override;
 
 protected:
 	void setupBackground(sf::Color backgroundColour, sf::Color hoverBackgroundColour);

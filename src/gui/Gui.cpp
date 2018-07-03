@@ -13,7 +13,7 @@ void Gui::update(Input &input) {
 		if (child->withinBounds((sf::Vector2f) input.getMousePosition())) {
 			mouseOverChild(child, input);
 		}
-		else child->mouseNotHovering(input.getMousePosition());
+		else child->mouseNotHovering(input);
 	}
 }
 
@@ -22,7 +22,7 @@ void Gui::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void Gui::mouseOverChild(std::unique_ptr<Gui> &child, Input &input) {
-	child->mouseHover(input.getMousePosition(), input.getMouseButtonsJustPressed());
+	child->mouseHover(input);
 	mouseOverChildren = true;
 }
 

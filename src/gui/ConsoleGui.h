@@ -26,10 +26,10 @@ public:
 	ConsoleGui(Gui &parent, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin, unsigned int countLines,
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness);
 
-	virtual void mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) override;
+	virtual void mouseHover(Input &input) override;
 
-	void scrollDown();
-	void scrollUp();
+	void scrollBy(int amount);
+	int getMaximumScroll();
 
 	void display(Message msg, bool prependMessageType = true);
 	void flush();

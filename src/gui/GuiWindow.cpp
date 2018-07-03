@@ -17,11 +17,11 @@ void GuiWindow::setBorder(sf::Color borderColour, float borderThickness) {
 	background.setOutlineColor(borderColour);
 }
 
-void GuiWindow::mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) {
+void GuiWindow::mouseHover(Input &input) {
 	background.setFillColor(hoverBackgroundColour);
 }
 
-void GuiWindow::mouseNotHovering(sf::Vector2i position) {
+void GuiWindow::mouseNotHovering(Input &input) {
 	background.setFillColor(backgroundColour);
 }
 
