@@ -33,7 +33,7 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.4f, 0.3f), sf::Vector2f(0, 0), 8,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 1; i++) {
 		consoleGui->display({ "The quick brown fox jumped over the lazy dog. This is a very long message that should, if I coded this correctly, be spread over multiple lines!", ConsoleGui::MessageType::INFO });
 		consoleGui->display({ "This is a warning... Uh oh! " + std::to_string(i), ConsoleGui::MessageType::WARNING });
 	}

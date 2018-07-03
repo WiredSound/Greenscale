@@ -2,6 +2,7 @@
 
 #include "GuiWindow.h"
 #include "TextLinesGui.h"
+#include "TextWrapper.h"
 
 class ConsoleGui : public GuiWindow {
 public:
@@ -25,17 +26,22 @@ public:
 	ConsoleGui(Gui &parent, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin, unsigned int countLines,
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness);
 
+	virtual void mouseHover(sf::Vector2i position, const std::vector<sf::Mouse::Button> &mouseButtonsJustClicked) override;
+
+	void scrollDown();
+	void scrollUp();
+
 	void display(Message msg, bool prependMessageType = true);
 	void flush();
+	TextLine getLine(unsigned int index);
 
 private:
 	std::vector<Message> messages;
+	std::vector<TextLine> lines;
+
 	unsigned int textLinesIndex;
 	unsigned lineCount;
-	int scroll = -2;
+	int scroll = 0;
 
-	sf::Font &font;
-	unsigned int fontSize;
-
-	std::vector<TextLine> wrapMessage(Message msg);
+	TextWrapper wrapper;
 };
