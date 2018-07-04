@@ -48,16 +48,8 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				DEBUG_LOG(entity->getFullName() << " is attempting to use component...");
 
-				bool success = entity->useEquippedComponent(path);
-
-				// TODO: Display more detail about component use...
-				if (success) gui.displayConsoleMessage({ entity->getFullName() + " used component!", ConsoleGui::MessageType::INFO });
-
-				return success;
+				return entity->useEquippedComponent(path);
 			}
-
-			//if (input.isKeyJustPressed(sf::Keyboard::Key::S)) // TODO: Key bindings...
-				//return entity->useEquippedComponent(); // On self...
 		}
 	}
 

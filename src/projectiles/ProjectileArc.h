@@ -42,6 +42,6 @@ private:
 
 	sf::Time getTimeBetweenMoves();
 
-	bool hitTile(GameMap *map, sf::Vector2u pos); // Returns true if the arc cannot penetrate the tile.
-	bool hitEntity(GameMap *map, sf::Vector2u pos); // Returns true if entity/entities are hit at the given position.
+	bool hitTile(GameMap *map, sf::Vector2u pos); // Returns true if the arc cannot penetrate the tile (meaning the arc should end).
+	bool hitEntity(GameMap *map, sf::Vector2u pos); // Returns true if entity/entities are hit at the given position (meaning the arc should end).
 };

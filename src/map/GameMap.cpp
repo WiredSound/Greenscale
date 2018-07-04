@@ -56,6 +56,7 @@ void GameMap::updateProjectiles() {
 		}
 		else {
 			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
+			projectileSprite.setScale(sf::Vector2f(2, 2)); // TODO: Properly calculate size of the projectile sprite.
 			projectileSprite.setTexture(*projectilesTexture.get());
 			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * singleProjectileTextureSize.x, frame.textureY * singleProjectileTextureSize.y, singleProjectileTextureSize.x, singleProjectileTextureSize.y));
 			projectileSprite.setColor(arc.getProjectileColour());
