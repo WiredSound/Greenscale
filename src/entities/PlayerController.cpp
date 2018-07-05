@@ -4,12 +4,12 @@
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)
 #define ATTACK_PATH_COLOUR sf::Color::Magenta
 
-PlayerController::PlayerController(sf::RenderWindow &renderWindow, GameGui &gameGui) : window(renderWindow), path(sf::Vector2u(0, 0)), gui(gameGui) {}
+PlayerController::PlayerController(GameGui &gameGui) : path(sf::Vector2u(0, 0)), gui(gameGui) {}
 
 bool PlayerController::handle(Entity *entity, Input &input) {
 	GameMap *map = entity->getMapReference();
 
-	sf::Vector2u mouseTilePos = map->mousePosToTilePos(window); // Get the map tile that the mouse is currently over.
+	sf::Vector2u mouseTilePos = map->worldPosToTilePos(input.getMouseWorldPosition()); // Get the map tile that the mouse is currently over.
 
 	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
 		moveMode = !moveMode;

@@ -54,6 +54,10 @@ sf::Vector2i Input::getMousePosition() {
 	return sf::Mouse::getPosition(window);
 }
 
+sf::Vector2f Input::getMouseWorldPosition() {
+	return window.mapPixelToCoords(getMousePosition());
+}
+
 const std::vector<sf::Mouse::Button> &Input::getMouseButtonsJustPressed() {
 	return mouseButtonsJustPressed;
 }

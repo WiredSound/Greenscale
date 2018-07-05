@@ -1,5 +1,6 @@
 #include "GameMap.h"
 
+#include <cmath>
 #include <experimental/filesystem>
 #include "../entities/Robot.h"
 
@@ -84,6 +85,16 @@ bool GameMap::addEntity(std::shared_ptr<Entity> entity) {
 	return false;
 }
 
+bool GameMap::addEntities(std::vector<std::shared_ptr<Entity>> entities) {
+	bool success = true;
+
+	for (auto &entity : entities) {
+		if (!addEntity(entity)) success = false;
+	}
+
+	return success;
+}
+
 std::vector<std::shared_ptr<Entity>> GameMap::getEntitesPriorityOrdered() {
 	std::vector<std::shared_ptr<Entity>> entityList = entities->getEntities();
 	std::sort(entityList.begin(), entityList.end(), entitySortMethod);
@@ -112,11 +123,6 @@ sf::Vector2u GameMap::worldPosToTilePos(sf::Vector2f worldPos) {
 	return sf::Vector2u(static_cast<unsigned int>(std::floor(worldPos.x / tileSize.x)), static_cast<unsigned int>(std::floor(worldPos.y / tileSize.y)));
 }
 
-sf::Vector2u GameMap::mousePosToTilePos(sf::Vector2i mousePos, sf::RenderWindow &window) {
-	sf::Vector2f worldPos = window.mapPixelToCoords(mousePos);
-	return worldPosToTilePos(worldPos);
-}
-
 bool GameMap::isTilePositionFree(sf::Vector2u position) {
 	return !tiles->getTileAt(position).blocking;
 }
@@ -127,10 +133,6 @@ bool GameMap::isEntityPositionFree(sf::Vector2u position) {
 
 bool GameMap::isPositionFree(sf::Vector2u position) {
 	return isTilePositionFree(position) && isEntityPositionFree(position);
-}
-
-sf::Vector2u GameMap::mousePosToTilePos(sf::RenderWindow &window) {
-	return mousePosToTilePos(sf::Mouse::getPosition(window), window);
 }
 
 bool GameMap::withinBounds(sf::Vector2u pos) {

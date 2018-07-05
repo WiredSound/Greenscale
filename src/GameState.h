@@ -3,7 +3,7 @@
 #include <iostream>
 #include <memory>
 #include "State.h"
-#include "map/GameMap.h"
+#include "map/World.h"
 #include "map/MapBuilder.h"
 #include "gui/GameGui.h"
 #include "TurnManager.h"
@@ -16,9 +16,8 @@ public:
 	void draw() override;
 
 private:
+	World world;
 	sf::Font &font;
 	GameSettings &settings;
-	std::unique_ptr<GameMap> map;
-	TurnManager turnManager;
 	GameGui gui;
 };

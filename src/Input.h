@@ -15,6 +15,7 @@ public:
 	const std::vector<sf::Event> &getMiscellaneousEvents();
 
 	sf::Vector2i getMousePosition();
+	sf::Vector2f getMouseWorldPosition();
 
 	//Input(const Input&) = delete;
 

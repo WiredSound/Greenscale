@@ -30,13 +30,12 @@ public:
 	void construct(); // Goes through each room and rebuilds it.
 	void addRoom(std::unique_ptr<MapRoom> room);
 	bool addEntity(std::shared_ptr<Entity> entity);
+	bool addEntities(std::vector<std::shared_ptr<Entity>> entities);
 	std::vector<std::shared_ptr<Entity>> getEntitesPriorityOrdered();
 	std::vector<std::shared_ptr<Entity>> getEntitiesInFaction(Faction faction);
 	std::vector<std::shared_ptr<Entity>> getEntitiesAt(sf::Vector2u position);
 
 	sf::Vector2u worldPosToTilePos(sf::Vector2f worldPos);
-	sf::Vector2u mousePosToTilePos(sf::Vector2i mousePos, sf::RenderWindow &window);
-	sf::Vector2u mousePosToTilePos(sf::RenderWindow &window);
 
 	bool isTilePositionFree(sf::Vector2u position);
 	bool isEntityPositionFree(sf::Vector2u position);

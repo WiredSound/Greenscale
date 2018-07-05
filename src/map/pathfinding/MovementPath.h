@@ -1,9 +1,6 @@
 #pragma once
 
-#include <iostream>
-#include <memory>
 #include <vector>
-#include <cmath>
 #include <SFML/System/Vector2.hpp>
 class GameMap;
 
@@ -37,13 +34,6 @@ private:
 	unsigned int pathIndex;
 
 public:
-	static MovementPath buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length = 10);
+	static MovementPath buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length = 0);
 	static unsigned int distanceFromTo(sf::Vector2u start, sf::Vector2u target);
-
-private:
-	static float lerp(float start, float end, float t);
-	static sf::Vector2f lerpPoint(const sf::Vector2f &point0, const sf::Vector2f &point1, float t);
-	static float diagonalDistance(const sf::Vector2f &point0, const sf::Vector2f &point1);
-	static sf::Vector2u roundPoint(sf::Vector2f point);
-	static std::vector<sf::Vector2u> buildLinePathPositions(sf::Vector2f start, sf::Vector2f target, float length = 0);
 };

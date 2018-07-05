@@ -6,13 +6,12 @@
 
 class PlayerController : public EntityController {
 public:
-	PlayerController(sf::RenderWindow &renderWindow, GameGui &gameGui);
+	PlayerController(GameGui &gameGui);
 	virtual bool handle(Entity *entity, Input &input) override;
 
 private:
 	GameGui &gui; // Reference to the game gui so movement/attack paths are not drawn when the mouse is over the gui.
 	MovementPath path;
-	sf::RenderWindow &window;
 	bool moveMode = true; // Whether currently in moving or attacking mode.
 	sf::Vector2u lastMouseTilePos;
 

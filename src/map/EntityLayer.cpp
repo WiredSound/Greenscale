@@ -64,6 +64,7 @@ bool EntityLayer::save(std::string path) {
 	return false;
 }
 
+// WARNING: This function does not set the map reference within the entity - only the GameMap addEntity function does that.
 void EntityLayer::addEntity(std::shared_ptr<Entity> entity) {
 	entities.push_back(entity);
 

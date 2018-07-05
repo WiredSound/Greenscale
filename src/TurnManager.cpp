@@ -1,26 +1,23 @@
 #include "TurnManager.h"
 
-TurnManager::TurnManager(std::unique_ptr<GameMap> &gameMap) : map(gameMap) {
-}
-
-void TurnManager::update(Input &input) {
+void TurnManager::update(Input &input, std::unique_ptr<GameMap> &map) {
 	if (currentEntities.size() > 0) {
 		std::shared_ptr<Entity> &entity = getCurrentEntity();
 
-		if(!entity->isMyTurn())
+		if (!entity->isMyTurn())
 			getCurrentEntity()->yourTurnBegin();
 
 		if (decisionMade) {
 			bool complete = entity->yourTurnCurrently();
 
-			if (complete) nextEntity();
+			if (complete) nextEntity(map);
 		}
 		else {
 			decisionMade = entity->yourTurnDecision(input);
 		}
 	}
 	else {
-		fetchOrderedEntities();
+		fetchOrderedEntities(map);
 	}
 }
 
@@ -28,7 +25,7 @@ std::shared_ptr<Entity> &TurnManager::getCurrentEntity() {
 	return currentEntities.at(index);
 }
 
-void TurnManager::nextEntity() {
+void TurnManager::nextEntity(std::unique_ptr<GameMap> &map) {
 	decisionMade = false;
 
 	getCurrentEntity()->yourTurnEnd(); // End of current entity's turn.
@@ -36,10 +33,10 @@ void TurnManager::nextEntity() {
 	index++;
 
 	if (index >= currentEntities.size())  // All turns now complete.
-		fetchOrderedEntities();
+		fetchOrderedEntities(map);
 }
 
-void TurnManager::fetchOrderedEntities() {
+void TurnManager::fetchOrderedEntities(std::unique_ptr<GameMap> &map) {
 	index = 0;
 
 	currentEntities = map->getEntitesPriorityOrdered();
