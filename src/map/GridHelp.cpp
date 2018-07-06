@@ -72,3 +72,16 @@ std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius)
 
 	return points;
 }
+
+std::vector<sf::Vector2i> GridHelp::buildFilledCircle(sf::Vector2i origin, int radius) {
+	std::vector<sf::Vector2i> points;
+
+	for (int y = -radius; y <= radius; y++) {
+		for (int x = -radius; x <= radius; x++) {
+			if (x * x + y * y <= radius * radius)
+				points.push_back(sf::Vector2i(origin.x + x, origin.y + y));
+		}
+	}
+
+	return points;
+}

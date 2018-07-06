@@ -13,4 +13,5 @@ namespace GridHelp {
 
 	// Circle building:
 	std::vector<sf::Vector2i> buildCircle(sf::Vector2i origin, int radius);
+	std::vector<sf::Vector2i> buildFilledCircle(sf::Vector2i origin, int radius);
 }
