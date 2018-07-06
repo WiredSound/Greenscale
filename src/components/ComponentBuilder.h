@@ -16,5 +16,4 @@ public:
 private:
 	std::shared_ptr<ComponentManager> componentManager;
 	std::shared_ptr<ProjectileManager> projectileManager;
-	std::default_random_engine rand;
 };

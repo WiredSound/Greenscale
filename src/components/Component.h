@@ -1,6 +1,5 @@
 #pragma once
 
-#include <random>
 #include <SFML/Graphics/Texture.hpp>
 #include "ComponentManager.h"
 #include "../map/pathfinding/MovementPath.h"
@@ -69,8 +68,4 @@ private:
 	int integrity;
 	int heat = 0;
 	int disabledForTurns = 0;
-
-	std::default_random_engine rand;
-	std::uniform_int_distribution<int> randomTurnsMissed;
-	std::uniform_int_distribution<int> randomPercentage;
 };

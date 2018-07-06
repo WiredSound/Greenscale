@@ -129,12 +129,12 @@ unsigned int TileLayer::getTileCount() {
 	return size.x * size.y;
 }
 
-void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id) {
+void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, bool useDefaultColour) {
 	if (withinBounds(pos.x, pos.y)) {
 		DEBUG_LOG_SPAM("Set tile " << id << " at " << pos.x << ", " << pos.y);
 
 		tiles[pos.y * size.x + pos.x].first = id;
-		tiles[pos.y * size.x + pos.x].second = getTileAt(pos).defaultColour;
+		if (useDefaultColour) tiles[pos.y * size.x + pos.x].second = getTileAt(pos).defaultColour;
 		setupTileQuad(pos);
 	}
 }

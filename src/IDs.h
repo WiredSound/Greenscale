@@ -9,7 +9,7 @@ namespace IDs {
 		ROCK = 4,
 		GRASS = 5,
 		DIRT = 6,
-		TREE = 7
+		BUSH = 7
 	};
 
 	enum Components : char {

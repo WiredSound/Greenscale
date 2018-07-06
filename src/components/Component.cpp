@@ -1,10 +1,11 @@
 #include "Component.h"
 
+#include "../Random.h"
 #include "../entities/Entity.h"
 #include "../map/GameMap.h"
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
-	: id(componentId), rand(std::random_device()()), manager(componentManager), integrity(getMaxIntegrity()), randomTurnsMissed(1, 3), randomPercentage(0, 100) {}
+	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {}
 
 const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
@@ -17,10 +18,10 @@ void Component::yourTurn() {
 	if (disabledForTurns > 0)
 		disabledForTurns--;
 
-	if (heat >= getFatalHeatLevel() && randomPercentage(rand) >= 80) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
-		disabledForTurns += randomTurnsMissed(rand);
-	else if (heat >= getDangerousHeatLevel() && randomPercentage(rand) >= 50) // If at a dangerous heat level then the chance is 50% of becoming disabled.
-		disabledForTurns += randomTurnsMissed(rand);
+	if (heat >= getFatalHeatLevel() && Random::percentageChange(80)) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
+		disabledForTurns += Random::integerRange(2, 3);
+	else if (heat >= getDangerousHeatLevel() && Random::percentageChange(50)) // If at a dangerous heat level then the chance is 50% of becoming disabled.
+		disabledForTurns += Random::integerRange(1, 2);
 }
 
 void Component::yourTurnEnabled() {
@@ -166,11 +167,8 @@ void Component::applyThermalDamage(int heat) {
 	increaseHeat(heat);
 }
 void Component::applyDisruption(float disruption) {
-	std::uniform_real_distribution<float> chanceDist(0.0, 1.0);
-	std::uniform_int_distribution<int> turnsMissedDist(2, 3);
-
-	if (chanceDist(rand) <= disruption) {
-		disabledForTurns += turnsMissedDist(rand);
+	if (Random::percentageChange(disruption)) {
+		disabledForTurns += Random::integerRange(1, 2);
 	}
 }
 
