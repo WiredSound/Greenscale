@@ -26,12 +26,14 @@ MapBuilder::MapBuilder(unsigned int seed, GameGui &gui, sf::Vector2f sizeTile)
 	projectilesTexture->loadFromFile(PROJECTILES_TEXTURE_PATH);
 }
 
-std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, MapGenerator &generator) {
+std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators) {
 	auto tiles = makeTileLayer(size, tileSize);
 	auto entities = makeEntityLayer(size, tileSize);
 
-	generator.generateTiles(tiles);
-	generator.generateEntities(entities);
+	for (auto &generator : generators) {
+		generator->generateTiles(tiles);
+		generator->generateEntities(entities);
+	}
 
 	DEBUG_LOG("Building " << size.x << "x" << size.y << " map with " << tileSize.x << "x" << tileSize.y << " tile size...");
 

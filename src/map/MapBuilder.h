@@ -15,7 +15,7 @@ class MapBuilder {
 public:
 	MapBuilder(unsigned int seed, GameGui &gui, sf::Vector2f sizeTile); // The game gui is required by the player controller.
 
-	std::unique_ptr<GameMap> buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, MapGenerator &generator);
+	std::unique_ptr<GameMap> buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators);
 
 	std::shared_ptr<PlayerController> playerController;
 	EntityBuilder entityBuilder;
