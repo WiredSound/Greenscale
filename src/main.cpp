@@ -10,8 +10,6 @@
 #include <FastNoise.h>
 
 int main() {
-	FastNoise noise;
-
 	GameSettings settings;
 	settings.loadSettings("options.json");
 
@@ -30,11 +28,6 @@ int main() {
 	int fpsCounter = 0;
 	sf::Clock clock;
 
-	sf::Text fpsText;
-	fpsText.setFont(font);
-	fpsText.setFillColor(sf::Color::Yellow);
-	fpsText.setCharacterSize(settings.fontSize);
-
 	auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
 	Input input(window);
 
@@ -51,20 +44,13 @@ int main() {
 		state->draw(); // Allow the current state to draw to the window.
 
 		fpsCounter++;
-		if (clock.getElapsedTime() > sf::milliseconds(500)) {
-			int fps = fpsCounter * 2;
-			DEBUG_LOG_SPAM("FPS: " << fps);
-
-			if (settings.displayFps) {
-				fpsText.setString("FPS: " + std::to_string(fps));
-				fpsText.setPosition(settings.windowWidth - fpsText.getLocalBounds().width, 0);
-			}
+		if (clock.getElapsedTime() > sf::milliseconds(1000)) {
+			if (settings.displayFps)
+				std::cout << "FPS: " << fpsCounter << std::endl;
 
 			clock.restart();
 			fpsCounter = 0;
 		}
-
-		window.draw(fpsText);
 
 		window.display();
 	}
