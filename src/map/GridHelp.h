@@ -15,6 +15,6 @@ private:
 
 	// Circle building:
 public:
-	static std::vector<sf::Vector2i> buildCircle(sf::Vector2i origin, int radius, bool fillDiagonals = true);
+	static std::vector<sf::Vector2i> buildCircle(sf::Vector2i origin, int radius, int thickness = 1);
 	static std::vector<sf::Vector2i> buildFilledCircle(sf::Vector2i origin, int radius);
 };

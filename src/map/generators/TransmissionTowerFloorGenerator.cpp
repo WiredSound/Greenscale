@@ -7,7 +7,7 @@ void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &
 	sf::Vector2i centre = getCentre(tiles);
 
 	fillTiles<sf::Vector2i>(tiles, GridHelp::buildFilledCircle(centre, radius), mainFloorTile, mainFloorColour);
-	fillTiles<sf::Vector2i>(tiles, GridHelp::buildCircle(centre, radius), mainWallTile, mainWallColour);
+	fillTiles<sf::Vector2i>(tiles, GridHelp::buildCircle(centre, radius, 2), mainWallTile, mainWallColour);
 }
 
 sf::Vector2i TransmissionTowerFloorGenerator::getCentre(std::unique_ptr<TileLayer> &tiles) {
