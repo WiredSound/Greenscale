@@ -17,4 +17,6 @@ private:
 	MapBuilder builder;
 	TurnManager turnManager;
 	std::vector<std::shared_ptr<Entity>> playerEntities;
+
+	std::shared_ptr<Entity> constructNewPlayer();
 };
