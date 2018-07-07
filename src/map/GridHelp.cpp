@@ -38,7 +38,7 @@ sf::Vector2u GridHelp::roundPoint(sf::Vector2f point) {
 	return sf::Vector2u(static_cast<unsigned int>(std::round(point.x)), static_cast<unsigned int>(std::round(point.y)));
 }
 
-std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius) {
+std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius, bool fillDiagonals) {
 	int x = radius - 1;
 	int y = 0;
 	int dx = 1;
@@ -56,6 +56,17 @@ std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius)
 		points.push_back(sf::Vector2i(origin.x - y, origin.y - x));
 		points.push_back(sf::Vector2i(origin.x + y, origin.y - x));
 		points.push_back(sf::Vector2i(origin.x + x, origin.y - y));
+
+		if (fillDiagonals) {
+			points.push_back(sf::Vector2i(origin.x + x + 1, origin.y + y));
+			points.push_back(sf::Vector2i(origin.x + y + 1, origin.y + x));
+			points.push_back(sf::Vector2i(origin.x - y - 1, origin.y + x));
+			points.push_back(sf::Vector2i(origin.x - x - 1, origin.y + y));
+			points.push_back(sf::Vector2i(origin.x - x - 1, origin.y - y));
+			points.push_back(sf::Vector2i(origin.x - y - 1, origin.y - x));
+			points.push_back(sf::Vector2i(origin.x + y + 1, origin.y - x));
+			points.push_back(sf::Vector2i(origin.x + x + 1, origin.y - y));
+		}
 
 		if (err <= 0) {
 			y++;
