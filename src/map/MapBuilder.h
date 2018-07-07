@@ -9,7 +9,7 @@
 #include "../entities/PlayerController.h"
 #include "../components/ComponentBuilder.h"
 
-// Note that the MapBuilder does not handle any procedual generation, that is done by MapGen and its subclasses.
+// Note that the MapBuilder does not handle any procedual generation, that is done by MapGenerator and its subclasses.
 
 class MapBuilder {
 public:
