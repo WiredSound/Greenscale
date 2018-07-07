@@ -6,14 +6,15 @@
 
 class TransmissionTowerFloorGenerator : public MapGenerator {
 public:
-	TransmissionTowerFloorGenerator(unsigned int towerRadius, IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour);
+	TransmissionTowerFloorGenerator(unsigned int towerRadius, unsigned int towerThickness, IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour);
 	virtual void generateTiles(std::unique_ptr<TileLayer> &tiles) override;
 
 protected:
 	sf::Vector2i getCentre(std::unique_ptr<TileLayer> &tiles);
+	void buildDoor(std::unique_ptr<TileLayer> &tiles, int width, const sf::Vector2i &centre);
 
 private:
-	unsigned int radius;
+	unsigned int radius, thickness;
 	IDs::Tiles mainWallTile;
 	sf::Color mainWallColour;
 	IDs::Tiles mainFloorTile;
