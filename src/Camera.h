@@ -11,12 +11,14 @@ public:
 	void update(Input &input);
 	void moveDirectly(sf::Vector2f movement);
 	void setCentre(sf::Vector2f centre);
-	void focusOnPoint(sf::Vector2f centre, float moveSpeed);
+	void moveTowardsCentre(sf::Vector2f centre, float percent);
 
 private:
 	sf::View view;
-	sf::Vector2f target;
-	float speed;
 	sf::RenderWindow &window;
 	sf::Transformable &gui;
+
+	sf::Vector2f targetCentre;
+	float percentMove;
+	sf::Clock movementClock;
 };

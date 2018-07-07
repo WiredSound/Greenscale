@@ -11,11 +11,19 @@ void Camera::setCentre(sf::Vector2f centre) {
 }
 
 void Camera::update(Input &input) {
+	if (movementClock.getElapsedTime() >= sf::milliseconds(10)) {
+		movementClock.restart();
+
+		sf::Vector2f diff(targetCentre.x - view.getCenter().x, targetCentre.y - view.getCenter().y);
+
+		moveDirectly(sf::Vector2f(std::ceil(diff.x * percentMove), std::ceil(diff.y * percentMove)));
+	}
+
 	gui.setPosition(sf::Vector2f(view.getCenter().x - (view.getSize().x / 2), view.getCenter().y - (view.getSize().y / 2)));
 	window.setView(view);
 }
 
-void Camera::focusOnPoint(sf::Vector2f centre, float moveSpeed) {
-	target = centre;
-	speed = moveSpeed;
+void Camera::moveTowardsCentre(sf::Vector2f centre, float percent) {
+	targetCentre = centre;
+	percentMove = percent;
 }
