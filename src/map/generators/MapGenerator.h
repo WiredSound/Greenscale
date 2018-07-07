@@ -2,12 +2,13 @@
 
 #include <memory>
 #include "../TileLayer.h"
-#include "../EntityLayer.h"
+#include "../GameMap.h"
+#include "../../entities/EntityBuilder.h"
 
 class MapGenerator {
 public:
 	virtual void generateTiles(std::unique_ptr<TileLayer> &tiles) {}
-	virtual void generateEntities(std::unique_ptr<EntityLayer> &entities) {}
+	virtual void generateEntities(std::unique_ptr<GameMap> &map, EntityBuilder &builder) {}
 
 protected:
 	template <typename T>

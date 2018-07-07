@@ -30,16 +30,16 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std
 	auto tiles = makeTileLayer(size, tileSize);
 	auto entities = makeEntityLayer(size, tileSize);
 
-	for (auto &generator : generators) {
+	for (auto &generator : generators)
 		generator->generateTiles(tiles);
-		generator->generateEntities(entities);
-	}
 
 	DEBUG_LOG("Building " << size.x << "x" << size.y << " map with " << tileSize.x << "x" << tileSize.y << " tile size...");
 
 	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), projectilesTexture);
-
 	map->addEntities(initialEntities);
+
+	for (auto &generator : generators)
+		generator->generateEntities(map, entityBuilder);
 
 	return map;
 }
