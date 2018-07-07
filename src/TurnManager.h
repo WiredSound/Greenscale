@@ -5,14 +5,18 @@
 #include "map/GameMap.h"
 #include "entities/Entity.h"
 #include "Input.h"
+#include "Camera.h"
 
 class TurnManager {
 public:
+	TurnManager(Camera &gameCamera);
 	void update(Input &input, std::unique_ptr<GameMap> &map);
 	std::shared_ptr<Entity> &getCurrentEntity();
 	const std::vector<std::shared_ptr<Entity>> &getCurrentEntities();
 
 private:
+	Camera &camera;
+
 	std::vector<std::shared_ptr<Entity>> currentEntities; // The current entities being updated in order of first to last priority.
 	int index;
 

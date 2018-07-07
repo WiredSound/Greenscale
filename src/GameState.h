@@ -6,6 +6,7 @@
 #include "map/World.h"
 #include "map/MapBuilder.h"
 #include "gui/GameGui.h"
+#include "Camera.h"
 #include "TurnManager.h"
 #include "GameSettings.h"
 
@@ -17,7 +18,8 @@ public:
 
 private:
 	World world;
+	Camera camera;
+	GameGui gui;
 	sf::Font &font;
 	GameSettings &settings;
-	GameGui gui;
 };

@@ -36,6 +36,7 @@ public:
 	std::vector<std::shared_ptr<Entity>> getEntitiesAt(sf::Vector2u position);
 
 	sf::Vector2u worldPosToTilePos(sf::Vector2f worldPos);
+	sf::Vector2f tilePosToWorldPos(sf::Vector2u tilePos);
 
 	bool isTilePositionFree(sf::Vector2u position);
 	bool isEntityPositionFree(sf::Vector2u position);
@@ -43,6 +44,8 @@ public:
 
 	bool enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration);
 	unsigned int applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration);
+
+	sf::Vector2f getTileDrawSize();
 
 	bool withinBounds(sf::Vector2u pos);
 

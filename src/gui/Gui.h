@@ -3,9 +3,10 @@
 #include <memory>
 #include <vector>
 #include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Transformable.hpp>
 #include "../Input.h"
 
-class Gui : public sf::Drawable {
+class Gui : public sf::Drawable, public sf::Transformable {
 public:
 	Gui(std::string guiName);
 

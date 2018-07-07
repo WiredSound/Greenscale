@@ -18,6 +18,7 @@ void Gui::update(Input &input) {
 }
 
 void Gui::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+	states.transform *= getTransform();
 	drawChildren(target, states);
 }
 

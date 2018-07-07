@@ -1,5 +1,7 @@
 #include "TurnManager.h"
 
+TurnManager::TurnManager(Camera &gameCamera) : camera(gameCamera) {}
+
 void TurnManager::update(Input &input, std::unique_ptr<GameMap> &map) {
 	if (currentEntities.size() > 0) {
 		std::shared_ptr<Entity> &entity = getCurrentEntity();
@@ -34,6 +36,8 @@ void TurnManager::nextEntity(std::unique_ptr<GameMap> &map) {
 
 	if (index >= currentEntities.size())  // All turns now complete.
 		fetchOrderedEntities(map);
+
+	camera.setCentre(getCurrentEntity()->getAbsoluteCentrePosition()); // TODO: Add smooth camera movements.
 }
 
 void TurnManager::fetchOrderedEntities(std::unique_ptr<GameMap> &map) {

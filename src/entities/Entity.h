@@ -28,6 +28,7 @@ public:
 	virtual bool updateAttacking();
 
 	sf::Vector2u getPosition() const;
+	sf::Vector2f getAbsoluteCentrePosition() const;
 	unsigned int getX() const;
 	unsigned int getY() const;
 	bool moveTo(sf::Vector2u movePos);

@@ -50,6 +50,11 @@ sf::Vector2u Entity::getPosition() const {
 	return position;
 }
 
+sf::Vector2f Entity::getAbsoluteCentrePosition() const {
+	auto pos = map->tilePosToWorldPos(position);
+	return sf::Vector2f(pos.x + map->tileSize.x / 2, pos.y + map->tileSize.y / 2);
+}
+
 unsigned int Entity::getX() const {
 	return position.x;
 }

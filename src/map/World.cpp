@@ -3,8 +3,9 @@
 #include <ctime>
 #include "generators/PlainsGenerator.h"
 #include "generators/TransmissionTowerFloorGenerator.h"
+#include "../Camera.h"
 
-World::World(GameGui &gui, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize) {
+World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize), turnManager(camera) {
 	playerEntities.push_back(constructNewPlayer());
 
 	map = builder.buildMap(sf::Vector2u(64, 64), playerEntities,
