@@ -20,16 +20,16 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto entityListGui = std::make_unique<EntityListGui>(*this, turnManager, font, fontSize, sf::Vector2f(0.99f, 0.01f), sf::Vector2f(0.22f, 0.3f), sf::Vector2f(1, 0),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto componentGridGui = std::make_unique<ComponentGridGui>(*this, turnManager, componentsTexture, sf::Vector2f(0.01f, 0.755f), sf::Vector2f(0.08f, 0.08f * getAspectRatio()), sf::Vector2f(0, 1),
+	auto componentGridGui = std::make_unique<ComponentGridGui>(*this, turnManager, componentsTexture, sf::Vector2f(0.76f, 0.01f), sf::Vector2f(0.08f, 0.08f * getAspectRatio()), sf::Vector2f(1, 0),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto componentGui = std::make_unique<ComponentGui>(*this, *componentGridGui, font, fontSize, sf::Vector2f(0.01f, 0.99f), sf::Vector2f(0.7f, 0.225f), sf::Vector2f(0, 1),
+	auto componentGui = std::make_unique<ComponentGui>(*this, *componentGridGui, font, fontSize, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(0, 0),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto entityGui = std::make_unique<EntityGui>(*this, font, fontSize, turnManager, sf::Vector2f(0.99, 0.99), sf::Vector2f(0.18, 0.1), sf::Vector2f(1, 1),
+	auto entityGui = std::make_unique<EntityGui>(*this, font, fontSize, turnManager, sf::Vector2f(0.99f, 0.33f), sf::Vector2f(0.18f, 0.1f), sf::Vector2f(1, 0),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.4f, 0.3f), sf::Vector2f(0, 0), 8,
+	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1, 1), 8,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
 	addChild(std::move(entityListGui));
