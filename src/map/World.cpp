@@ -5,7 +5,7 @@
 #include "generators/TransmissionTowerFloorGenerator.h"
 #include "../Camera.h"
 
-World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize), turnManager(camera) {
+World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize, { Faction::PLAYER }), turnManager(camera) {
 	playerEntities.push_back(constructNewPlayer());
 
 	map = builder.buildMap(sf::Vector2u(64, 64), playerEntities,
@@ -35,6 +35,7 @@ std::shared_ptr<Entity> World::constructNewPlayer() {
 	auto player = builder.entityBuilder.buildEntity(IDs::Entities::TROOP_01, "Player", sf::Vector2u(1, 1), Faction::PLAYER, builder.playerController);
 
 	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR);
+	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE);
 
 	return player;
 }

@@ -3,7 +3,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include "RootGui.h"
 #include "ConsoleGui.h"
-#include "../TurnManager.h"
+class TurnManager;
 
 class GameGui : public RootGui {
 public:

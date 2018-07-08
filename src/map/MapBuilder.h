@@ -13,7 +13,7 @@
 
 class MapBuilder {
 public:
-	MapBuilder(unsigned int seed, GameGui &gui, sf::Vector2f sizeTile); // The game gui is required by the player controller.
+	MapBuilder(unsigned int seed, GameGui &gameGui, sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions);
 
 	std::unique_ptr<GameMap> buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators);
 
@@ -33,6 +33,10 @@ private:
 	std::shared_ptr<sf::Texture> projectilesTexture;
 
 	sf::Vector2f tileSize;
+
+	std::vector<Faction> playerFriendlyFactions;
+
+	GameGui &gui;
 
 	std::default_random_engine rand;
 };

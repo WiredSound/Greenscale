@@ -4,8 +4,10 @@
 #include <experimental/filesystem>
 #include "../entities/Robot.h"
 
-GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles) {}
+GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile,
+	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, GameGui &gameGui)
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles), gui(gameGui),
+	playerFriendlyFactions(friendlyFactions) {}
 
 void GameMap::update() {
 	entities->update();
@@ -46,6 +48,7 @@ void GameMap::updateProjectiles() {
 	if (!areAllProjectileArcsComplete()) {
 		ProjectileArc &arc = projectileArcs[0];
 		sf::Vector2u &position = arc.getCurrentProjectilePosition();
+
 		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
 		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());
 		sf::Vector2f singleProjectileTextureSize = arc.getSingleProjectileTextureSize();
@@ -53,6 +56,19 @@ void GameMap::updateProjectiles() {
 		bool destroyArc = arc.update(this);
 
 		if (arc.reachedTarget() || destroyArc) {
+			Entity *arcUser = arc.getUser();
+			assert(arcUser != nullptr);
+
+			unsigned int tilesHit = arc.getTileHitCount();
+			unsigned int entitiesHit = arc.getEntityHitCount();
+
+			bool friendlyFaction = std::find(playerFriendlyFactions.begin(), playerFriendlyFactions.end(), arcUser->getFaction()) != playerFriendlyFactions.end();
+
+			gui.displayConsoleMessage({
+				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + " tile(s) and hitting " + std::to_string(entitiesHit) + " entities.",
+				friendlyFaction ? ConsoleGui::MessageType::INFO : ConsoleGui::MessageType::WARNING
+			});
+
 			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.
 		}
 		else {

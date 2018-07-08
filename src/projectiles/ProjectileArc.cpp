@@ -3,9 +3,9 @@
 #include "../map/GameMap.h"
 #include "../entities/Entity.h"
 
-ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, MovementPath projectilePath, IDs::Projectiles projectileId,
+ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, Entity *arcUser, MovementPath projectilePath, IDs::Projectiles projectileId,
 	Damage projectileDamage, unsigned int projectilePenetration, sf::Color projectileColour)
-	: manager(projectileManager), path(projectilePath), id(projectileId), damage(projectileDamage), penetration(projectilePenetration), colour(projectileColour)
+	: manager(projectileManager), path(projectilePath), id(projectileId), damage(projectileDamage), penetration(projectilePenetration), colour(projectileColour), user(arcUser)
 {
 	path.resetPosition();
 }
@@ -37,6 +37,8 @@ bool ProjectileArc::hitTile(GameMap *map, sf::Vector2u pos) {
 			DEBUG_LOG("Projectile arc hit blocking tile and now has penetration value remaining: " << penetration);
 
 			penetration = map->applyPenetrationToTileAt(pos, penetration);
+			tileHitCount++;
+
 			return false;
 		}
 		DEBUG_LOG("Projectile destroyed by tile at: " << pos.x << ", " << pos.y);
@@ -54,6 +56,8 @@ bool ProjectileArc::hitEntity(GameMap *map, sf::Vector2u pos) {
 			DEBUG_LOG("Projectile arc hit entity: " << entity->getFullName());
 
 			entity->applyDamage(getProjectileDamage());
+			entityHitCount++;
+
 			entitiesHit = true;
 		}
 	}
@@ -91,4 +95,16 @@ sf::Vector2u ProjectileArc::getCurrentProjectilePosition() {
 
 sf::Time ProjectileArc::getAnimationTime() {
 	return animationClock.getElapsedTime();
+}
+
+Entity *ProjectileArc::getUser() {
+	return user;
+}
+
+unsigned int ProjectileArc::getTileHitCount() {
+	return tileHitCount;
+}
+
+unsigned int ProjectileArc::getEntityHitCount() {
+	return entityHitCount;
 }

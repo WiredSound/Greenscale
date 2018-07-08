@@ -11,12 +11,14 @@
 #include "EntityLayer.h"
 #include "../entities/Faction.h"
 #include "../projectiles/ProjectileArc.h"
+#include "../gui/GameGui.h"
 class Entity;
 class Robot;
 
 class GameMap {
 public:
-	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles);
+	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles,
+		std::vector<Faction> friendlyFactions, GameGui &gameGui);
 
 	void update();
 	void turnPassed();
@@ -66,6 +68,10 @@ private:
 	std::vector<ProjectileArc> projectileArcs;
 	std::shared_ptr<sf::Texture> projectilesTexture;
 	sf::Sprite projectileSprite;
+
+	std::vector<Faction> playerFriendlyFactions;
+
+	GameGui &gui;
 
 	void updateProjectiles();
 };

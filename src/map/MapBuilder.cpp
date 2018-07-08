@@ -11,9 +11,9 @@
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
 #define PROJECTILES_TEXTURE_PATH "assets/projectiles/projectiles.png"
 
-MapBuilder::MapBuilder(unsigned int seed, GameGui &gui, sf::Vector2f sizeTile)
+MapBuilder::MapBuilder(unsigned int seed, GameGui &gameGui, sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions)
 	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), projectilesTexture(std::make_shared<sf::Texture>()),
-	playerController(std::make_shared<PlayerController>(gui)), tileSize(sizeTile) {
+	playerController(std::make_shared<PlayerController>(gameGui)), gui(gameGui), tileSize(sizeTile), playerFriendlyFactions(friendlyFactions) {
 	tileManager.loadFromJsonFile(TILES_PATH);
 
 	entityBuilder.loadEntityInfo(ENTITIES_PATH);
@@ -35,7 +35,7 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std
 
 	DEBUG_LOG("Building " << size.x << "x" << size.y << " map with " << tileSize.x << "x" << tileSize.y << " tile size...");
 
-	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), projectilesTexture);
+	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), projectilesTexture, playerFriendlyFactions, gui);
 	map->addEntities(initialEntities);
 
 	for (auto &generator : generators)

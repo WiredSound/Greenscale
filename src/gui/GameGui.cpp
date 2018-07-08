@@ -4,6 +4,7 @@
 #include "ComponentGui.h"
 #include "EntityListGui.h"
 #include "EntityGui.h"
+#include "../TurnManager.h"
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
@@ -13,8 +14,6 @@ GameGui::GameGui(sf::Vector2f windowSize)
 }
 
 void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Vector2f childrenScale, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness) {
-	sf::Vector2f windowSize = getAbsoluteSize();
-
 	destroyAllChildren();
 
 	auto entityListGui = std::make_unique<EntityListGui>(*this, turnManager, font, fontSize, sf::Vector2f(0.99f, 0.01f), sf::Vector2f(0.22f, 0.3f), sf::Vector2f(1, 0),
@@ -29,7 +28,7 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto entityGui = std::make_unique<EntityGui>(*this, font, fontSize, turnManager, sf::Vector2f(0.1f, 0.99f), sf::Vector2f(0.18f, 0.1f), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1, 1), 8,
+	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1, 1), 16,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
 	addChild(std::move(entityListGui));

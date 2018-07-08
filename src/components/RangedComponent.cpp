@@ -8,7 +8,7 @@ RangedComponent::RangedComponent(IDs::Components componentId, std::shared_ptr<Co
 std::vector<ProjectileArc> RangedComponent::use(Entity &user, MovementPath path) {
 	std::vector<ProjectileArc> arcs;
 
-	arcs.resize(getProjectileCount(), ProjectileArc(projectileManager, path, getProjectileId(), getProjectileDamage(), getProjectilePenetration(), user.getFaction().colour));
+	arcs.resize(getProjectileCount(), ProjectileArc(projectileManager, &user, path, getProjectileId(), getProjectileDamage(), getProjectilePenetration(), user.getFaction().colour));
 
 	return arcs;
 }

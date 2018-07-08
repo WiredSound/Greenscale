@@ -2,6 +2,7 @@
 
 #include <map>
 #include "MapBuilder.h"
+#include "../TurnManager.h"
 
 class World {
 public:
