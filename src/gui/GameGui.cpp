@@ -28,7 +28,7 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto entityGui = std::make_unique<EntityGui>(*this, font, fontSize, turnManager, sf::Vector2f(0.1f, 0.99f), sf::Vector2f(0.18f, 0.1f), sf::Vector2f(0, 1),
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1, 1), 16,
+	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1, 1), 14,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
 	addChild(std::move(entityListGui));

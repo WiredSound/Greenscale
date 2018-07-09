@@ -19,5 +19,5 @@ private:
 	TurnManager turnManager;
 	std::vector<std::shared_ptr<Entity>> playerEntities;
 
-	std::shared_ptr<Entity> constructNewPlayer();
+	std::shared_ptr<Entity> constructNewPlayer(IDs::Entities id, sf::Vector2u position, Faction faction);
 };

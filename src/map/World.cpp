@@ -6,7 +6,9 @@
 #include "../Camera.h"
 
 World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize, { Faction::PLAYER }), turnManager(camera) {
-	playerEntities.push_back(constructNewPlayer());
+	playerEntities.push_back(constructNewPlayer(IDs::Entities::TROOP_01, sf::Vector2u(1, 1), Faction::PLAYER));
+	playerEntities.push_back(constructNewPlayer(IDs::Entities::SCANNER_01, sf::Vector2u(3, 1), Faction::CORPORATION));
+	playerEntities.push_back(constructNewPlayer(IDs::Entities::RESTRUCTOR_01, sf::Vector2u(5, 1), Faction::ROGUE));
 
 	map = builder.buildMap(sf::Vector2u(64, 64), playerEntities,
 	{ std::shared_ptr<MapGenerator>(new PlainsGenerator(IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80), { IDs::Tiles::BUSH }, 5)),
@@ -31,8 +33,8 @@ TurnManager &World::getTurnManager() {
 	return turnManager;
 }
 
-std::shared_ptr<Entity> World::constructNewPlayer() {
-	auto player = builder.entityBuilder.buildEntity(IDs::Entities::TROOP_01, "Player", sf::Vector2u(1, 1), Faction::PLAYER, builder.playerController);
+std::shared_ptr<Entity> World::constructNewPlayer(IDs::Entities id, sf::Vector2u position, Faction faction) {
+	auto player = builder.entityBuilder.buildEntity(id, "Player", position, faction, builder.playerController);
 
 	player->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR);
 	player->getComponentGrid().getComponentAt(sf::Vector2u(1, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE);

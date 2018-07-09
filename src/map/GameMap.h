@@ -47,8 +47,6 @@ public:
 	bool enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration);
 	unsigned int applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration);
 
-	sf::Vector2f getTileDrawSize();
-
 	bool withinBounds(sf::Vector2u pos);
 
 	bool save(std::string path);

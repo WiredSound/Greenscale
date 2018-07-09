@@ -22,7 +22,7 @@ The faction of robots controlled by the player.
 const Faction Faction::PLAYER(
 	"Player Controlled",
 	"PLAYER",
-	sf::Color(148, 255, 76, FACTIONS_OPACITY),
+	sf::Color(0, 250, 154, FACTIONS_OPACITY),
 	1 // Player entities can act first.
 );
 
