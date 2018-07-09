@@ -25,6 +25,7 @@ int main() {
 		return -1;
 	}
 
+	// FPS is measured by increasing fpsCounter every frame and then taking the value after one second has passed.
 	int fpsCounter = 0;
 	sf::Clock clock;
 

@@ -15,6 +15,11 @@
 class Entity;
 class Robot;
 
+/*
+ * The GameMap handles the storage and rendering of all the tiles, entities and projectiles that make a map within the game. The two classes TileLayer and EntityLayer handle the bulk of
+ * this. The GameMap also keeps track of projectiles and pathfiding (via the AStarPathBuilder).
+ */
+
 class GameMap {
 public:
 	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles,

@@ -6,13 +6,19 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Faction.h"
-#include "../Input.h"
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
 #include "../projectiles/ProjectileArc.h"
-#include "../PulsingColour.h"
 #include "../entities/EntityManager.h"
+#include "../PulsingColour.h"
+#include "../Input.h"
 class EntityController;
+
+/*
+ * The Entity class handles all the actions an entity makes and how it interacts with the GameMap it is located in. The ID of the entity determines the animation, default components, name,
+ * description and other such static values held in the relevant EntityInfo struct contained in the EntityManager. Values that vary between entities, such as the current equipped commponents,
+ * aligned factions, position as well as the behaviour (primarily via the held EntityController pointer) are stored in the Entity class itself.
+ */
 
 class Entity {
 public:
