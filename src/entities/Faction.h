@@ -3,6 +3,9 @@
 #include <string>
 #include <SFML/Graphics/Color.hpp>
 
+// TODO: Add proper factions (Church of Tsuki, Atorus, etc) with full descriptions and their opinions of other factions (which the player can influence).
+// TODO: Instead of turn order being decided upon an entity's faction, it should instead be determined by the entity's turn priority value which can be modified by installing different components.
+
 class Faction {
 public:
 	static const Faction UNALIGNED;
