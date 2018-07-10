@@ -12,5 +12,5 @@ struct Tile {
 	sf::Color defaultColour;
 	bool blocking; // Whether the tile blocks movement.
 	float cover; // Chance the tile will block an incoming projectile.
-	int strength; // The amount of damage that needs to be inflicted by a projectile for the tile to break.
+	unsigned int strength; // The amount of damage that needs to be inflicted by a projectile for the tile to break.
 };

@@ -15,7 +15,7 @@ void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &
 }
 
 sf::Vector2i TransmissionTowerFloorGenerator::getCentre(std::unique_ptr<TileLayer> &tiles) {
-	return sf::Vector2i(std::round(tiles->size.x / 2), std::round(tiles->size.y / 2));
+	return sf::Vector2i(static_cast<int>(std::round(tiles->size.x / 2)), static_cast<int>(std::round(tiles->size.y / 2)));
 }
 
 void TransmissionTowerFloorGenerator::buildDoor(std::unique_ptr<TileLayer> &tiles, int width, const sf::Vector2i &centre) {
@@ -30,7 +30,7 @@ void TransmissionTowerFloorGenerator::buildDoor(std::unique_ptr<TileLayer> &tile
 	int clearance = static_cast<int>(std::ceil(width / 2));
 
 	for (int x = xStart - clearance; x < xEnd + clearance; x++) {
-		for (int i = 1; i < thickness; i++)
+		for (int i = 1; i < static_cast<int>(thickness); i++)
 			tiles->setTileAt(sf::Vector2u(x, y + i), mainFloorTile, mainFloorColour); // Clear any wall tiles that may obstruct the door.
 	}
 }

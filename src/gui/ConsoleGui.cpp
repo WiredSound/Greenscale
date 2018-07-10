@@ -17,7 +17,7 @@ void ConsoleGui::mouseHover(Input &input) {
 
 	for (const sf::Event &event : input.getMiscellaneousEvents()) {
 		if (event.type == sf::Event::MouseWheelScrolled)
-			scrollBy(-std::ceil(event.mouseWheelScroll.delta));
+			scrollBy(static_cast<int>(-std::ceil(event.mouseWheelScroll.delta)));
 	}
 }
 

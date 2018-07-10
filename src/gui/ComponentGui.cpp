@@ -6,8 +6,8 @@ ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Components", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	font(textFont), gridGui(componentGridGui), okTextColour(sf::Color::Green), warningTextColour(sf::Color::Yellow), badTextColour(sf::Color::Red) {
-	auto nameLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95, 0.9), sf::Vector2f(0, 0));
-	auto valueLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.26f, 0.05f), sf::Vector2f(0.95, 0.9), sf::Vector2f(0, 0));
+	auto nameLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
+	auto valueLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.26f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
 
 	nameLines->addLine(TextLine(font, fontSize, { "Name:", sf::Color::White }));
 	nameLine = valueLines->addLine(TextLine(font, fontSize));

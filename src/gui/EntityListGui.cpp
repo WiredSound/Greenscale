@@ -4,7 +4,7 @@ EntityListGui::EntityListGui(Gui &parent, TurnManager &managerTurns, sf::Font &t
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
 	: GuiWindow("Entity List", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness), turnManager(managerTurns)
 {
-	auto lines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0, 0));
+	auto lines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
 	lines->setNumberOfLines(8, TextLine(textFont, textSize));
 	textLines = addChild(std::move(lines));
 }

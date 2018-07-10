@@ -62,7 +62,7 @@ sf::Vector2u MovementPath::getTargetPosition() {
 // PATH BUILDING:
 
 MovementPath MovementPath::buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length) {
-	return MovementPath(GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target), length));
+	return MovementPath(GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target), static_cast<float>(length)));
 }
 
 unsigned int MovementPath::distanceFromTo(sf::Vector2u start, sf::Vector2u target) {
