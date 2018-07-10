@@ -9,6 +9,12 @@
 class Entity;
 class GameMap;
 
+/*
+ * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
+ * the spread of heat and disruption between components. Components can have a collection of ComponentUpgrade structs which modify the base states of the component. The base stats of a
+ * component are defined by its ID which corresponds to a loaded ComponentInfo struct in the ComponentManager.
+ */
+
 class Component {
 public:
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);

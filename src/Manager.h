@@ -6,6 +6,11 @@
 #include <nlohmann/json.hpp>
 #include "debugging.h"
 
+/*
+ * The Manager template class is used to associate a key with some struct with data loaded from a given JSON file. For example, the TileManager class uses the Manager to associate a tile ID
+ * with a TileInfo struct which is loaded from the "tiles.json" file.
+ */
+
 template<typename Key, typename Managed>
 class Manager {
 protected:

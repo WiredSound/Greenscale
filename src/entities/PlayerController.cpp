@@ -48,7 +48,11 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) {
 				DEBUG_LOG(entity->getFullName() << " is attempting to use component...");
 
-				return entity->useEquippedComponent(path);
+				bool success = entity->useEquippedComponent(path);
+
+				if (!success) gui.displayConsoleMessage({ "The equipped component can either not be used in this manner or is not enabled!", ConsoleGui::MessageType::WARNING });
+
+				return success;
 			}
 		}
 	}
