@@ -2,7 +2,7 @@
 
 #include <thread>
 #include "EntityController.h"
-#include "../gui/GameGui.h"
+#include "../../gui/GameGui.h"
 
 class PlayerController : public EntityController {
 public:

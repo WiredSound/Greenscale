@@ -19,6 +19,6 @@ private:
 	struct CompareVectors;
 	struct AStarTile;
 
+	MovementPath reconstructPath(const sf::Vector2u &start, const sf::Vector2u &target, const std::map<sf::Vector2u, AStarTile, CompareVectors> &closedList) const;
 	sf::Vector2u findLowestScoringTilePosition(std::map<sf::Vector2u, AStarTile, CompareVectors> &list) const;
-	std::vector<sf::Vector2u> getAdjacentPositions(const sf::Vector2u &pos) const;
 };

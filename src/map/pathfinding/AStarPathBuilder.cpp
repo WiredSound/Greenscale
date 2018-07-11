@@ -42,8 +42,9 @@ MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u t
 
 	while (openList.size() > 0) {
 		// Return an empty path if too many iterations go by (suggesting the target is either too far away or impossible to reach).
-		if (iterations > 200) {
+		if (iterations > 100) {
 			DEBUG_LOG("Abandoning path after iterations: " << iterations);
+
 			return MovementPath(target);
 		}
 
@@ -58,7 +59,7 @@ MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u t
 
 		if (lowestScoringTilePos == target) break; // Leave the loop if the target tile has been reached.
 
-		for (sf::Vector2u position : getAdjacentPositions(lowestScoringTilePos)) {
+		for (sf::Vector2u position : map->getAdjacentPositions(lowestScoringTilePos)) {
 			if (map->isPositionFree(position)) {
 				if (closedList.count(position)) continue; // Ignore the tile if it is in the closed list.
 
@@ -90,14 +91,17 @@ MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u t
 
 	DEBUG_LOG_SPAM("Found path after iterations: " << iterations);
 
-	// Reconstruct the path:
+	return reconstructPath(start, target, closedList);
+}
+
+MovementPath AStarPathBuilder::reconstructPath(const sf::Vector2u &start, const sf::Vector2u &target, const std::map<sf::Vector2u, AStarTile, CompareVectors> &closedList) const {
 	std::vector<sf::Vector2u> finalPath;
 	finalPath.insert(finalPath.begin(), target);
-	AStarTile tile = closedList[target];
+	AStarTile tile = closedList.at(target);
 
 	while (tile.parentPosition != start) {
 		finalPath.insert(finalPath.begin(), tile.parentPosition);
-		tile = closedList[tile.parentPosition];
+		tile = closedList.at(tile.parentPosition);
 	}
 
 	return MovementPath(finalPath);
@@ -112,19 +116,4 @@ sf::Vector2u AStarPathBuilder::findLowestScoringTilePosition(std::map<sf::Vector
 	}
 
 	return lowest;
-}
-
-std::vector<sf::Vector2u> AStarPathBuilder::getAdjacentPositions(const sf::Vector2u &pos) const {
-	std::vector<sf::Vector2u> adjacent;
-
-	if (pos.x > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y));										// LEFT
-	if (pos.x < map->size.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y));							// RIGHT
-	if (pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x, pos.y - 1));										// TOP
-	if (pos.y < map->size.y) adjacent.push_back(sf::Vector2u(pos.x, pos.y + 1));							// BOTTOM
-	if (pos.x < map->size.x && pos.y < map->size.y) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y + 1));	// BOTTOM RIGHT
-	if (pos.x > 0 && pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y - 1));						// TOP LEFT
-	if (pos.y < map->size.y && pos.x > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y + 1));			// BOTTOM LEFT
-	if (pos.y > 0 && pos.x < map->size.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y - 1));			// TOP RIGHT
-
-	return adjacent;
 }

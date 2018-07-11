@@ -7,7 +7,6 @@ class GameMap;
 class MovementPath {
 public:
 	MovementPath(sf::Vector2u pos); // Incomplete movement path.
-	//MovementPath(sf::Vector2u pos, bool pathComplete);
 	MovementPath(std::vector<sf::Vector2u> tiles); // Complete movement path.
 
 	sf::Vector2u currentPosition();
@@ -23,14 +22,11 @@ public:
 	sf::Vector2u getStartPosition();
 	sf::Vector2u getTargetPosition();
 
+	void restrictLength(unsigned int size);
+
 private:
 	std::vector<sf::Vector2u> path;
-
-	sf::Vector2u startPos;
-	sf::Vector2u targetPos;
-
 	bool complete;
-	unsigned int length;
 	unsigned int pathIndex;
 
 public:

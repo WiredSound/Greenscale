@@ -6,8 +6,8 @@
 #include "GameMap.h"
 #include "SquareRoom.h"
 #include "../entities/EntityBuilder.h"
-#include "../entities/PlayerController.h"
 #include "../components/ComponentBuilder.h"
+#include "../entities/controllers/PlayerController.h"
 
 // Note that the MapBuilder does not handle any procedual generation, that is done by MapGenerator and its subclasses.
 

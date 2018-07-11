@@ -3,18 +3,12 @@
 #include "../GameMap.h"
 #include "../GridHelp.h"
 
-MovementPath::MovementPath(sf::Vector2u pos) : startPos(pos), targetPos(pos), length(1), pathIndex(1), complete(false) {
+MovementPath::MovementPath(sf::Vector2u pos) : pathIndex(1), complete(false) {
 	path.push_back(pos);
 }
-
-/*
-MovementPath::MovementPath(sf::Vector2u pos, bool pathComplete) : startPos(pos), targetPos(pos), length(1), pathIndex(pathComplete ? 0 : 1), complete(pathComplete) {
-	path.push_back(pos);
-}
-*/
 
 MovementPath::MovementPath(std::vector<sf::Vector2u> tiles)
-	: path(tiles), startPos(tiles[0]), targetPos(tiles[tiles.size() - 1]), length((int)tiles.size()), pathIndex(0), complete(true) {}
+	: path(tiles), pathIndex(0), complete(true) {}
 
 bool MovementPath::isComplete() {
 	return complete;
@@ -23,16 +17,16 @@ bool MovementPath::isComplete() {
 sf::Vector2u MovementPath::currentPosition() {
 	if (pathIndex < path.size())
 		return path[pathIndex];
-	return targetPos;
+	return getTargetPosition();
 }
 
 void MovementPath::nextPosition() {
-	if (pathIndex < length)
+	if (pathIndex < getLength())
 		pathIndex++;
 }
 
 bool MovementPath::reachedTarget() {
-	return pathIndex == length;
+	return pathIndex == getLength();
 }
 
 void MovementPath::resetPosition() {
@@ -44,7 +38,7 @@ unsigned int MovementPath::getIndex() {
 }
 
 unsigned int MovementPath::getLength() {
-	return length;
+	return static_cast<unsigned int>(path.size());
 }
 
 std::vector<sf::Vector2u> MovementPath::getPathTiles() {
@@ -52,11 +46,16 @@ std::vector<sf::Vector2u> MovementPath::getPathTiles() {
 }
 
 sf::Vector2u MovementPath::getStartPosition() {
-	return startPos;
+	return path[0];
 }
 
 sf::Vector2u MovementPath::getTargetPosition() {
-	return targetPos;
+	return path[getLength() - 1];
+}
+
+void MovementPath::restrictLength(unsigned int size) {
+	if (getLength() > size)
+		path.resize(size);
 }
 
 // PATH BUILDING:

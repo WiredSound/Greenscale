@@ -155,6 +155,22 @@ bool GameMap::isPositionFree(sf::Vector2u position) {
 	return isTilePositionFree(position) && isEntityPositionFree(position);
 }
 
+sf::Vector2u GameMap::findNearestFreePosition(sf::Vector2u position, unsigned int maximumIterations) {
+	std::vector<sf::Vector2u> adjacentPositions = getAdjacentPositions(position);
+	adjacentPositions.insert(adjacentPositions.begin(), position); // Add the given position so that it is returned should it happen to already be a free position.
+
+	for (unsigned int i = 0; i < maximumIterations && i < adjacentPositions.size(); i++) {
+		sf::Vector2u adjacentTile = adjacentPositions[i];
+
+		if (isPositionFree(adjacentTile)) return adjacentTile;
+
+		auto newAdjacentPositions = getAdjacentPositions(adjacentTile);
+		adjacentPositions.insert(adjacentPositions.end(), newAdjacentPositions.begin(), newAdjacentPositions.end()); // Warning: This vector can get very large, very quickly.
+	}
+
+	return position;
+}
+
 bool GameMap::withinBounds(sf::Vector2u pos) {
 	return tiles->withinBounds(pos.x, pos.y) && entities->withinBounds(pos.x, pos.y);
 }
@@ -186,6 +202,21 @@ unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int pe
 	}
 
 	return penetration;
+}
+
+std::vector<sf::Vector2u> GameMap::getAdjacentPositions(sf::Vector2u pos) const {
+	std::vector<sf::Vector2u> adjacent;
+
+	if (pos.x > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y));								// LEFT
+	if (pos.x < size.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y));							// RIGHT
+	if (pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x, pos.y - 1));								// TOP
+	if (pos.y < size.y) adjacent.push_back(sf::Vector2u(pos.x, pos.y + 1));							// BOTTOM
+	if (pos.x < size.x && pos.y < size.y) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y + 1));	// BOTTOM RIGHT
+	if (pos.x > 0 && pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y - 1));				// TOP LEFT
+	if (pos.y < size.y && pos.x > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y + 1));		// BOTTOM LEFT
+	if (pos.y > 0 && pos.x < size.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y - 1));		// TOP RIGHT
+
+	return adjacent;
 }
 
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right) {

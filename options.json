@@ -1,8 +1,8 @@
 {
-    "window width" : 1920,
-    "window height" : 1080,
+    "window width" : 1280,
+    "window height" : 720,
     "font size" : 14,
-    "fullscreen enabled" : true,
+    "fullscreen enabled" : false,
     "vsync enabled" : false,
     "display fps" : true
 }

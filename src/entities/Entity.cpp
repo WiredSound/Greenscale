@@ -1,6 +1,6 @@
 #include "Entity.h"
 
-#include "EntityController.h"
+#include "controllers/EntityController.h"
 
 PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
 
