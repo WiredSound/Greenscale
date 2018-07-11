@@ -130,6 +130,10 @@ unsigned int Entity::getMaxIntegrity() {
 	return componentGrid.getMaxIntegrity();
 }
 
+bool Entity::isDestroyed() {
+	return getIntegrity() <= 0;
+}
+
 int Entity::getPowerLevel() {
 	return powerLevel;
 }

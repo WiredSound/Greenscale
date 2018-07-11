@@ -11,7 +11,7 @@ bool FollowEntityController::handle(Entity *entity, Input &input) {
 		MovementPath path = map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition);
 		path.restrictLength(entity->getMovementRange());
 
-		// This loop shortens the path so that the entity stays around the ideal distance from the target.
+		// This loop shortens the path so that the entity stays around the ideal distance from the target:
 		while (MovementPath::distanceFromTo(path.getTargetPosition(), targetPosition) < idealDistanceFromTarget && path.getLength() > 0)
 			path.restrictLength(path.getLength() - 1);
 

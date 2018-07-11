@@ -60,6 +60,7 @@ public:
 
 	unsigned int getIntegrity();
 	unsigned int getMaxIntegrity();
+	bool isDestroyed();
 
 	int getPowerLevel();
 	int getMaxPowerStorage();

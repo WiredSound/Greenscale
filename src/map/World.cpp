@@ -8,8 +8,12 @@
 
 World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize, { Faction::PLAYER }), turnManager(camera) {
 	auto player = constructNewPlayer(IDs::Entities::TROOP_01, sf::Vector2u(1, 1), Faction::PLAYER);
+
+	auto follower = builder.entityBuilder.buildEntity(IDs::Entities::RESTRUCTOR_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, std::make_shared<FollowEntityController>(player, 2));
+	follower->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR));
+
 	playerEntities.push_back(player);
-	playerEntities.push_back(builder.entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, std::make_shared<FollowEntityController>(player, 2)));
+	playerEntities.push_back(follower);
 
 	map = builder.buildMap(sf::Vector2u(64, 64), playerEntities,
 	{ std::shared_ptr<MapGenerator>(new PlainsGenerator(IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80), { IDs::Tiles::BUSH }, 5)),

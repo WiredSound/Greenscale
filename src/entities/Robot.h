@@ -12,4 +12,5 @@ public:
 protected:
 	std::shared_ptr<Animation> getIdleAnimation();
 	std::shared_ptr<Animation> getMovingAnimation();
+	std::shared_ptr<Animation> getDestroyedAnimation();
 };
