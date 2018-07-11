@@ -50,7 +50,9 @@ sf::Vector2u MovementPath::getStartPosition() {
 }
 
 sf::Vector2u MovementPath::getTargetPosition() {
-	return path[getLength() - 1];
+	if (getLength() > 1)
+		return path[getLength() - 1];
+	return getStartPosition(); // Return the start position if there is only one position present in the path.
 }
 
 void MovementPath::restrictLength(unsigned int size) {
