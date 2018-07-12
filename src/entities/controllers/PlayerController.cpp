@@ -4,7 +4,7 @@
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)
 #define ATTACK_PATH_COLOUR sf::Color::Magenta
 
-PlayerController::PlayerController(GameGui &gameGui) : path(sf::Vector2u(0, 0)), gui(gameGui) {}
+PlayerController::PlayerController(GameGui &gameGui, Console &consoleRef) : path(sf::Vector2u(0, 0)), gui(gameGui), console(consoleRef) {}
 
 bool PlayerController::handle(Entity *entity, Input &input) {
 	GameMap *map = entity->getMapReference();
@@ -50,7 +50,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 
 				bool success = entity->useEquippedComponent(path);
 
-				if (!success) gui.displayConsoleMessage({ "The equipped component can either not be used in this manner or is not enabled!", ConsoleGui::MessageType::WARNING });
+				if (!success) console.display({ "The equipped component can either not be used in this manner or is not enabled!", Console::MessageType::WARNING });
 
 				return success;
 			}

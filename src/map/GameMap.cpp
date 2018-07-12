@@ -3,10 +3,11 @@
 #include <cmath>
 #include <experimental/filesystem>
 #include "../entities/Robot.h"
+#include "../Console.h"
 
 GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile,
-	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, GameGui &gameGui)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles), gui(gameGui),
+	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, Console &consoleRef)
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles), console(consoleRef),
 	playerFriendlyFactions(friendlyFactions) {}
 
 void GameMap::update() {
@@ -64,9 +65,10 @@ void GameMap::updateProjectiles() {
 
 			bool friendlyFaction = std::find(playerFriendlyFactions.begin(), playerFriendlyFactions.end(), arcUser->getFaction()) != playerFriendlyFactions.end();
 
-			gui.displayConsoleMessage({
-				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + " tile(s) and hitting " + std::to_string(entitiesHit) + " entities.",
-				friendlyFaction ? ConsoleGui::MessageType::INFO : ConsoleGui::MessageType::WARNING
+			console.display({
+				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + (tilesHit == 1 ? " tile" : " tiles")
+				+ " and hitting " + std::to_string(entitiesHit) + (entitiesHit == 1 ? " entity." : " entities."),
+				friendlyFaction ? Console::MessageType::INFO : Console::MessageType::WARNING
 			});
 
 			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.

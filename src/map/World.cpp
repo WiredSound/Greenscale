@@ -6,7 +6,9 @@
 #include "../Camera.h"
 #include "../entities/controllers/FollowEntityController.h"
 
-World::World(GameGui &gui, Camera &camera, sf::Vector2f tileSize) : builder(static_cast<unsigned int>(time(0)), gui, tileSize, { Faction::PLAYER }), turnManager(camera) {
+World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Console &consoleRef, sf::Vector2f tileSize)
+	: builder(static_cast<unsigned int>(time(0)), tileSize, { Faction::PLAYER }, controller, consoleRef), turnManager(camera), console(consoleRef)
+{
 	auto player = constructNewPlayer(IDs::Entities::TROOP_01, sf::Vector2u(1, 1), Faction::PLAYER);
 
 	auto follower = builder.entityBuilder.buildEntity(IDs::Entities::RESTRUCTOR_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, std::make_shared<FollowEntityController>(player, 2));

@@ -42,6 +42,6 @@ void GameGui::update(Input &input) {
 	Gui::update(input);
 }
 
-void GameGui::displayConsoleMessage(ConsoleGui::Message message, bool prependMessageType) {
-	getChild<ConsoleGui>(consoleGuiIndex)->display(message, prependMessageType);
+ConsoleGui *GameGui::getConsoleGui() {
+	return getChild<ConsoleGui>(consoleGuiIndex);
 }

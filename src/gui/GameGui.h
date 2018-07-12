@@ -12,7 +12,7 @@ public:
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness);
 	virtual void update(Input &input) override;
 
-	void displayConsoleMessage(ConsoleGui::Message message, bool prependMessageType = false);
+	ConsoleGui *getConsoleGui();
 
 private:
 	std::shared_ptr<sf::Texture> componentsTexture;

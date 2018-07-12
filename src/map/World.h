@@ -11,7 +11,7 @@
 
 class World {
 public:
-	World(GameGui &gui, Camera &camera, sf::Vector2f tileSize);
+	World(Camera &camera, std::shared_ptr<PlayerController> controller, Console &consoleRef, sf::Vector2f tileSize);
 
 	void update(Input &input);
 	void draw(sf::RenderWindow &window);
@@ -20,6 +20,7 @@ public:
 
 private:
 	std::unique_ptr<GameMap> map;
+	Console &console;
 	MapBuilder builder;
 	TurnManager turnManager;
 	std::vector<std::shared_ptr<Entity>> playerEntities;

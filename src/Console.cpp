@@ -1,0 +1,23 @@
+#include "Console.h"
+
+Console::MessageType::MessageType(std::string typeName, sf::Color typeColour) : name(typeName), colour(typeColour) {}
+
+const Console::MessageType Console::MessageType::INFO("INFO", sf::Color(0, 255, 0, 255));
+const Console::MessageType Console::MessageType::WARNING("WARNING", sf::Color(255, 255, 0, 255));
+
+void Console::setConsoleGui(ConsoleGui *guiPtr) {
+	gui = guiPtr;
+}
+
+void Console::display(Message msg, bool guiPrependMsgType) {
+	std::string msgTextWithType = "(" + msg.type.name + ") " + msg.text;
+
+	if (gui != nullptr) {
+		// Display via the GUI:
+		gui->display((guiPrependMsgType ? msgTextWithType : msg.text), msg.type.colour);
+	}
+	else {
+		// Display via standard console output:
+		std::cout << msgTextWithType << std::endl;
+	}
+}

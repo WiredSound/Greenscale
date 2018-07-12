@@ -1,10 +1,5 @@
 #include "ConsoleGui.h"
 
-ConsoleGui::MessageType::MessageType(std::string typeName, sf::Color typeColour) : name(typeName), colour(typeColour) {}
-
-const ConsoleGui::MessageType ConsoleGui::MessageType::INFO("INFO", sf::Color(0, 255, 0, 255));
-const ConsoleGui::MessageType ConsoleGui::MessageType::WARNING("WARNING", sf::Color(255, 255, 0, 255));
-
 ConsoleGui::ConsoleGui(Gui &parent, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin, unsigned int countLines,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)
 	: GuiWindow("Console", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness), lineCount(countLines), wrapper(textFont, textSize)
@@ -34,12 +29,9 @@ int ConsoleGui::getMaximumScroll() {
 	return static_cast<int>(lines.size()) - static_cast<int>(lineCount);
 }
 
-void ConsoleGui::display(Message msg, bool prependMessageType) {
-	if (prependMessageType) msg.text.insert(0, "(" + msg.type.name + ") - ");
+void ConsoleGui::display(std::string text, sf::Color colour) {
+	auto wrappedLines = wrapper.wrapText(text, getAbsoluteSize().x, colour);
 
-	auto wrappedLines = wrapper.wrapText(msg.text, getAbsoluteSize().x, msg.type.colour);
-
-	messages.push_back(msg);
 	for (TextLine &line : wrappedLines) lines.push_back(line);
 
 	scrollBy(getMaximumScroll());

@@ -9,6 +9,7 @@
 #include "Camera.h"
 #include "TurnManager.h"
 #include "GameSettings.h"
+#include "Console.h"
 
 class GameState : public State {
 public:
@@ -20,6 +21,7 @@ private:
 	World world;
 	Camera camera;
 	GameGui gui;
+	Console console;
 	sf::Font &font;
 	GameSettings &settings;
 };

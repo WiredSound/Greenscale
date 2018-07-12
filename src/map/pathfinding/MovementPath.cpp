@@ -67,5 +67,6 @@ MovementPath MovementPath::buildLinePath(sf::Vector2u start, sf::Vector2u target
 }
 
 unsigned int MovementPath::distanceFromTo(sf::Vector2u start, sf::Vector2u target) {
-	return GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target)).size();
+	std::size_t size = GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target)).size();
+	return static_cast<unsigned int>(size);
 }
