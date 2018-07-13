@@ -55,6 +55,8 @@ public:
 
 	std::vector<sf::Vector2u> getAdjacentPositions(sf::Vector2u pos) const;
 
+	bool isFactionPlayerFriendly(Faction faction);
+
 	bool withinBounds(sf::Vector2u pos);
 
 	bool save(std::string path);

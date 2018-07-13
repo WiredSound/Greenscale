@@ -2,10 +2,11 @@
 
 #include <SFML/Graphics/Texture.hpp>
 #include "ComponentManager.h"
+#include "Damage.h"
 #include "../map/pathfinding/MovementPath.h"
 #include "../Optional.h"
 #include "../projectiles/ProjectileArc.h"
-#include "Damage.h"
+#include "../Console.h"
 class Entity;
 class GameMap;
 
@@ -19,7 +20,7 @@ class Component {
 public:
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn();
-	bool use();
+	std::vector<ProjectileArc> use(Entity &user, MovementPath path, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 
 	const ComponentInfo &fetchInfo();
 	std::string getName();
@@ -49,7 +50,6 @@ public:
 	bool isDestroyed();
 	bool isEnabled();
 
-	virtual std::vector<ProjectileArc> use(Entity &user, MovementPath path); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);
 
 	void toggleManualEnable();
@@ -58,7 +58,7 @@ public:
 
 protected:
 	virtual void yourTurnEnabled();
-	virtual bool useEnabled();
+	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, Console &console);
 
 	void increaseIntegrity(int amount);
 	void reduceIntegrity(int amount);

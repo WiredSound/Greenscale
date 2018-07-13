@@ -63,12 +63,10 @@ void GameMap::updateProjectiles() {
 			unsigned int tilesHit = arc.getTileHitCount();
 			unsigned int entitiesHit = arc.getEntityHitCount();
 
-			bool friendlyFaction = std::find(playerFriendlyFactions.begin(), playerFriendlyFactions.end(), arcUser->getFaction()) != playerFriendlyFactions.end();
-
 			console.display({
 				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + (tilesHit == 1 ? " tile" : " tiles")
 				+ " and hitting " + std::to_string(entitiesHit) + (entitiesHit == 1 ? " entity." : " entities."),
-				friendlyFaction ? Console::MessageType::INFO : Console::MessageType::WARNING
+				isFactionPlayerFriendly(arcUser->getFaction()) ? Console::MessageType::INFO : Console::MessageType::WARNING
 			});
 
 			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.
@@ -219,6 +217,10 @@ std::vector<sf::Vector2u> GameMap::getAdjacentPositions(sf::Vector2u pos) const 
 	if (pos.y > 0 && pos.x < size.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y - 1));		// TOP RIGHT
 
 	return adjacent;
+}
+
+bool GameMap::isFactionPlayerFriendly(Faction faction) {
+	return std::find(playerFriendlyFactions.begin(), playerFriendlyFactions.end(), faction) != playerFriendlyFactions.end();
 }
 
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right) {

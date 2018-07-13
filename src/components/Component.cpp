@@ -12,8 +12,12 @@ const ComponentInfo &Component::fetchInfo() {
 }
 
 void Component::yourTurn() {
-	if (isEnabled())
+	if (isEnabled()) {
+		increaseHeat(getPassiveHeat());
+		//increasePower(getPassivePower());
+
 		yourTurnEnabled();
+	}
 
 	if (disabledForTurns > 0)
 		disabledForTurns--;
@@ -24,22 +28,21 @@ void Component::yourTurn() {
 		disabledForTurns += Random::integerRange(1, 2);
 }
 
-void Component::yourTurnEnabled() {
-	increaseHeat(getPassiveHeat());
-	//increasePower(getPassivePower());
+void Component::yourTurnEnabled() {}
+
+std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Console &console) {
+	if (isEnabled()) {
+		increaseHeat(getUseHeat());
+		//increasePower(getUsePower());
+
+		return useEnabled(user, path, console);
+	}
+
+	return std::vector<ProjectileArc>();
 }
 
-bool Component::use() {
-	if (isEnabled())
-		return useEnabled();
-
-	return true;
-}
-
-bool Component::useEnabled() {
-	increaseHeat(getUseHeat());
-	//increasePower(getUsePower());
-	return true;
+std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path, Console &console) {
+	return std::vector<ProjectileArc>();
 }
 
 std::string Component::getName() {
@@ -190,10 +193,6 @@ void Component::increaseHeat(int amount) {
 	heat += amount;
 
 	if (heat < 0) heat = 0;
-}
-
-std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path) {
-	return std::vector<ProjectileArc>();
 }
 
 MovementPath Component::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {

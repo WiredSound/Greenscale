@@ -22,7 +22,8 @@ class EntityController;
 
 class Entity {
 public:
-	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController);
+	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController,
+		Console &consoleRef);
 
 	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
 	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
@@ -69,12 +70,18 @@ public:
 	bool useEquippedComponent(MovementPath path);
 	void applyDamage(Damage damage);
 
+	void say(std::string text, std::string speechManner = "says");
+
+	bool isMemberOfPlayerFaction();
+
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
 
 protected:
 	bool moveDirectlyBy(sf::Vector2u movement);
 	bool moveDirectlyToPosition(sf::Vector2u newPos);
+
+	Console &console;
 
 	sf::Clock animationClock;
 	sf::Clock movementClock;

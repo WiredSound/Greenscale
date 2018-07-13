@@ -4,9 +4,9 @@
 
 PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
 
-Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController)
-	: id(entityId), manager(entityManager), personalName(entityName), position(pos), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
-	controller(entityController), currentPath(pos), visualMovementSpeed(sf::milliseconds(150)) {}
+Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController,
+	Console &consoleRef) : id(entityId), manager(entityManager), personalName(entityName), position(pos), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
+	controller(entityController), console(consoleRef), currentPath(pos), visualMovementSpeed(sf::milliseconds(150)) {}
 
 void Entity::yourTurnBegin() {
 	DEBUG_LOG("Turn begins for entity: " << personalName);
@@ -155,8 +155,8 @@ MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
-	if (component && component->isEnabled()) {
-		std::vector<ProjectileArc> arcs = component->use(*this, path);
+	if (component) {
+		std::vector<ProjectileArc> arcs = component->use(*this, path, console);
 
 		map->fireArcs(arcs);
 
@@ -168,6 +168,14 @@ bool Entity::useEquippedComponent(MovementPath path) {
 
 void Entity::applyDamage(Damage damage) {
 	componentGrid.applyDamageToRandomComponent(damage); // TODO: Apply damage to component based on where the entity is shot from instead.
+}
+
+void Entity::say(std::string text, std::string speechManner) {
+	console.display({ getFullName() + " " + speechManner + ": \"" + text + "\"", Console::MessageType::INFO });
+}
+
+bool Entity::isMemberOfPlayerFaction() {
+	return map->isFactionPlayerFriendly(faction);
 }
 
 bool Entity::isBlocking() {
