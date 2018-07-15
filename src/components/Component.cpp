@@ -4,6 +4,11 @@
 #include "../entities/Entity.h"
 #include "../map/GameMap.h"
 
+// This magical little macro takes a value from the ComponentInfo struct of valueName and then applies all the modifiers of modifierName in this component's upgrades:
+#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) auto baseValue = fetchInfo().valueName; auto value = baseValue; \
+															for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
+															return value;
+
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
 	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {}
 
@@ -14,7 +19,6 @@ const ComponentInfo &Component::fetchInfo() {
 void Component::yourTurn() {
 	if (isEnabled()) {
 		increaseHeat(getPassiveHeat());
-		//increasePower(getPassivePower());
 
 		yourTurnEnabled();
 	}
@@ -53,102 +57,42 @@ std::string Component::getDescription() {
 	return fetchInfo().description;
 }
 
-int Component::getIntegrity() {
+unsigned int Component::getIntegrity() {
 	return integrity;
 }
-
-int Component::getMaxIntegrity() {
-	int baseMaxIntegrity = fetchInfo().maxIntegrity;
-	int maxIntegrity = baseMaxIntegrity;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		maxIntegrity += static_cast<int>(ceil(baseMaxIntegrity * upgrade.maxIntegrityModifier));
-	}
-
-	return maxIntegrity;
-}
-
-int Component::getHeatLevel() {
+unsigned int Component::getHeatLevel() {
 	return heat;
 }
-
-int Component::getDangerousHeatLevel() {
-	int baseDangerousHeatLevel = fetchInfo().dangerousHeatLevel;
-	int dangerousHeatLevel = baseDangerousHeatLevel;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		dangerousHeatLevel += static_cast<int>(ceil(baseDangerousHeatLevel * upgrade.unsafeHeatLevelModifier));
-	}
-
-	return dangerousHeatLevel;
+unsigned int Component::getMaxIntegrity() {
+	RETURN_VALUE_WITH_UPGRADES(maxIntegrity, maxIntegrityModifier);
 }
-
-int Component::getFatalHeatLevel() {
-	int baseFatalHeatLevel = fetchInfo().fatalHeatLevel;
-	int fatalHeatLevel = baseFatalHeatLevel;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		fatalHeatLevel += static_cast<int>(ceil(baseFatalHeatLevel * upgrade.unsafeHeatLevelModifier));
-	}
-
-	return fatalHeatLevel;
+unsigned int Component::getDangerousHeatLevel() {
+	RETURN_VALUE_WITH_UPGRADES(dangerousHeatLevel, unsafeHeatLevelModifier);
 }
-
-int Component::getPassivePower() {
-	int basePassivePower = fetchInfo().passivePower;
-	int passivePower = basePassivePower;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		passivePower += static_cast<int>(ceil(basePassivePower * upgrade.powerModifier));
-	}
-
-	return passivePower;
+unsigned int Component::getFatalHeatLevel() {
+	RETURN_VALUE_WITH_UPGRADES(fatalHeatLevel, unsafeHeatLevelModifier);
 }
-
-int Component::getUsePower() {
-	int baseUsePower = fetchInfo().usePower;
-	int usePower = baseUsePower;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		usePower += static_cast<int>(ceil(baseUsePower * upgrade.powerModifier));
-	}
-
-	return usePower;
+unsigned int Component::getPassivePowerGeneration() {
+	RETURN_VALUE_WITH_UPGRADES(passivePowerGen, powerModifier);
 }
-
+unsigned int Component::getPassivePowerConsumption() {
+	RETURN_VALUE_WITH_UPGRADES(passivePowerConsume, powerModifier);
+}
+unsigned int Component::getUsePowerGeneration() {
+	RETURN_VALUE_WITH_UPGRADES(usePowerGen, powerModifier);
+}
+unsigned int Component::getUsePowerConsumption() {
+	RETURN_VALUE_WITH_UPGRADES(usePowerConsume, powerModifier);
+}
 int Component::getPassiveHeat() {
-	int basePassiveHeat = fetchInfo().passiveHeat;
-	int passiveHeat = basePassiveHeat;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		passiveHeat += static_cast<int>(ceil(basePassiveHeat * upgrade.heatModifier));
-	}
-
-	return passiveHeat;
+	RETURN_VALUE_WITH_UPGRADES(passiveHeat, heatModifier);
 }
-
 int Component::getUseHeat() {
-	int baseUseHeat = fetchInfo().useHeat;
-	int useHeat = baseUseHeat;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		useHeat += static_cast<int>(ceil(baseUseHeat * upgrade.heatModifier));
-	}
-
-	return useHeat;
+	RETURN_VALUE_WITH_UPGRADES(useHeat, heatModifier);
 }
-
-int Component::getPowerStorage() {
-	int basePowerStorage = fetchInfo().powerStorage;
-	int powerStorage = basePowerStorage;
-
-	for (const ComponentUpgrade &upgrade : upgrades) {
-		powerStorage += static_cast<int>(ceil(powerStorage * upgrade.powerModifier));
-	}
-
-	return powerStorage;
+unsigned int Component::getPowerStorage() {
+	RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier);
 }
-
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
 	return fetchInfo().possibleUpgrades;
 }
@@ -160,7 +104,7 @@ sf::Vector2f Component::getIconTextureSize() {
 int Component::applyDamage(Damage damage) {
 	applyKineticDamage(damage.kinetic);
 	applyThermalDamage(damage.thermal);
-	return applyDisruption(damage.disruption); // The number of turns the component is disabled for after applying distruption is returned when damage is applied.
+	return applyDisruption(damage.disruption); // The number of turns the component is disabled for after applying disruption is returned when damage is applied.
 }
 
 void Component::applyKineticDamage(int kinetic) {
@@ -180,14 +124,14 @@ int Component::applyDisruption(float disruption) {
 	return 0;
 }
 
-void Component::increaseIntegrity(int amount) {
+void Component::increaseIntegrity(unsigned int amount) {
 	integrity += amount;
 
 	if (integrity > getMaxIntegrity())
 		integrity = getMaxIntegrity();
 }
 
-void Component::reduceIntegrity(int amount) {
+void Component::reduceIntegrity(unsigned int amount) {
 	if (integrity >= amount)
 		integrity -= amount;
 	else
@@ -213,7 +157,7 @@ bool Component::isDestroyed() {
 }
 
 bool Component::isEnabled() {
-	return disabledForTurns <= 0 && manualEnable;
+	return disabledForTurns <= 0 && manualEnable && !isDestroyed();
 }
 
 sf::Color Component::getColour() {

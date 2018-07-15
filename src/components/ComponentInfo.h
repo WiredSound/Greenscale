@@ -12,14 +12,16 @@ struct ComponentInfo {
 	std::string type; // Determines what Component-derived class this component requires.
 	unsigned int textureX; // Texture coordinates.
 	unsigned int textureY;
-	int maxIntegrity;
-	int dangerousHeatLevel;
-	int fatalHeatLevel;
-	int passivePower;
-	int usePower;
+	unsigned int maxIntegrity;
+	unsigned int dangerousHeatLevel;
+	unsigned int fatalHeatLevel;
+	unsigned int passivePowerGen;
+	unsigned int passivePowerConsume;
+	unsigned int usePowerGen;
+	unsigned int usePowerConsume;
 	int passiveHeat;
 	int useHeat;
-	int powerStorage;
+	unsigned int powerStorage;
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades;
 	IDs::Projectiles projectileId;
 	unsigned int projectileCount;

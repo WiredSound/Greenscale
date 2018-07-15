@@ -25,16 +25,18 @@ public:
 	const ComponentInfo &fetchInfo();
 	std::string getName();
 	std::string getDescription();
-	int getIntegrity();
-	int getMaxIntegrity();
-	int getHeatLevel();
-	int getDangerousHeatLevel();
-	int getFatalHeatLevel();
-	int getPassivePower();
-	int getUsePower();
+	unsigned int getIntegrity();
+	unsigned int getHeatLevel();
+	unsigned int getMaxIntegrity();
+	unsigned int getDangerousHeatLevel();
+	unsigned int getFatalHeatLevel();
+	unsigned int getPassivePowerGeneration();
+	unsigned int getPassivePowerConsumption();
+	unsigned int getUsePowerGeneration();
+	unsigned int getUsePowerConsumption();
 	int getPassiveHeat();
 	int getUseHeat();
-	int getPowerStorage();
+	unsigned int getPowerStorage();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
 
 	sf::Vector2f getIconTextureSize();
@@ -60,8 +62,8 @@ protected:
 	virtual void yourTurnEnabled();
 	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, Console &console);
 
-	void increaseIntegrity(int amount);
-	void reduceIntegrity(int amount);
+	void increaseIntegrity(unsigned int amount);
+	void reduceIntegrity(unsigned int amount);
 
 	std::vector<ComponentUpgrade> upgrades;
 
@@ -71,7 +73,7 @@ private:
 
 	bool manualEnable;
 
-	int integrity;
-	int heat = 0;
-	int disabledForTurns = 0;
+	unsigned int integrity;
+	unsigned int heat = 0;
+	unsigned int disabledForTurns = 0;
 };

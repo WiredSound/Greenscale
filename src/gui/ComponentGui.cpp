@@ -45,11 +45,11 @@ void ComponentGui::update(Input &input) {
 		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
 		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(passivePowerLine).set(0, { std::to_string(component->getPassivePower()) + " per turn",
-			colourBasedOnSign(component->getPassivePower(), okTextColour, warningTextColour, badTextColour) });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(passivePowerLine).set(0, { std::to_string(component->getPassivePowerGeneration()) + " per turn",
+			colourBasedOnSign(component->getPassivePowerGeneration(), okTextColour, warningTextColour, badTextColour) });
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(usePowerLine).set(0, { std::to_string(component->getUsePower()) + " on use",
-			colourBasedOnSign(component->getUsePower(), okTextColour, warningTextColour, badTextColour) });
+		getChild<TextLinesGui>(propertyValueLines)->getLine(usePowerLine).set(0, { std::to_string(component->getUsePowerGeneration()) + " on use",
+			colourBasedOnSign(component->getUsePowerGeneration(), okTextColour, warningTextColour, badTextColour) });
 	}
 
 	//sizeFromParent.y = absoluteSizeToRelative(getChild<TextLinesGui>(propertyValueLines)->getDimensions()).y * 1.1f;
