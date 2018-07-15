@@ -63,11 +63,13 @@ void GameMap::updateProjectiles() {
 			unsigned int tilesHit = arc.getTileHitCount();
 			unsigned int entitiesHit = arc.getEntityHitCount();
 
+			/*
 			console.display({
 				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + (tilesHit == 1 ? " tile" : " tiles")
 				+ " and hitting " + std::to_string(entitiesHit) + (entitiesHit == 1 ? " entity." : " entities."),
 				isFactionPlayerFriendly(arcUser->getFaction()) ? Console::MessageType::INFO : Console::MessageType::WARNING
 			});
+			*/
 
 			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.
 		}

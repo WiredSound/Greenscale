@@ -33,6 +33,18 @@ Optional<Component> &ComponentGrid::getComponentAt(sf::Vector2u pos) {
 	return getComponentByIndex(getIndex(pos));
 }
 
+Optional<Component> &ComponentGrid::getRandomComponent() {
+	std::vector<unsigned int> functionalIndexes = getFunctionalComponentIndexes();
+
+	if (functionalIndexes.size() > 0) {
+		unsigned int randomFunctionalComponentIndex = functionalIndexes[rand() % functionalIndexes.size()];
+
+		return getComponentByIndex(randomFunctionalComponentIndex);
+	}
+
+	return noComponent;
+}
+
 const sf::Vector2u &ComponentGrid::getGridSize() const {
 	return gridSize;
 }
@@ -126,24 +138,6 @@ bool ComponentGrid::isComponentEquipped() {
 
 void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos) {
 	std::iter_swap(components.begin() + getIndex(firstPos), components.begin() + getIndex(secondPos)); // TODO: Add checks to ensure that both positions are within bounds.
-}
-
-void ComponentGrid::applyDamageToRandomComponent(Damage damage) {
-	std::vector<unsigned int> functionalIndexes = getFunctionalComponentIndexes();
-
-	if (functionalIndexes.size() > 0) {
-		unsigned int randomFunctionalComponentIndex = functionalIndexes[rand() % functionalIndexes.size()];
-
-		auto &randomComponent = getComponentByIndex(randomFunctionalComponentIndex);
-		assert(randomComponent);
-
-		DEBUG_LOG("Applying damage to random component: " << randomComponent->getName());
-
-		randomComponent->applyDamage(damage);
-	}
-	else {
-		DEBUG_LOG("The entity hit has no functional components to apply damage to!");
-	}
 }
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {

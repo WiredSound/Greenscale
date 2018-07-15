@@ -68,7 +68,7 @@ public:
 
 	MovementPath buildEquippedComponentPath(sf::Vector2u target);
 	bool useEquippedComponent(MovementPath path);
-	void applyDamage(Damage damage);
+	Optional<Component> &applyDamage(Damage damage, bool displayConsoleMsg = true);
 
 	void say(std::string text, std::string speechManner = "says");
 

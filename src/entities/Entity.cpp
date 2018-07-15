@@ -166,12 +166,28 @@ bool Entity::useEquippedComponent(MovementPath path) {
 	return false;
 }
 
-void Entity::applyDamage(Damage damage) {
-	componentGrid.applyDamageToRandomComponent(damage); // TODO: Apply damage to component based on where the entity is shot from instead.
+Optional<Component> &Entity::applyDamage(Damage damage, bool displayConsoleMsg) {
+	Optional<Component> &component = componentGrid.getRandomComponent(); // TODO: Apply damage to component based on where the entity is shot from instead.
+
+	if (component) {
+		DEBUG_LOG("Applying damage to random component...");
+
+		int turnsDisabledFor = component->applyDamage(damage);
+
+		if (displayConsoleMsg) {
+			std::string disabledText = (turnsDisabledFor > 0 ? " Disabled for turns: " + std::to_string(turnsDisabledFor) : "");
+
+			console.display({ getFullName() + " recieved damage to component " + component->getName() + " - New integrity: " + std::to_string(component->getIntegrity()) + "/" +
+				std::to_string(component->getMaxIntegrity()) + " Heat level: " + std::to_string(component->getHeatLevel()) + disabledText,
+				isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO }); // TODO: Take into account whether the entity is player controlled as well.
+		}
+	}
+
+	return component;
 }
 
 void Entity::say(std::string text, std::string speechManner) {
-	console.display({ getFullName() + " " + speechManner + ": \"" + text + "\"", Console::MessageType::INFO });
+	console.display({ getFullName() + " " + speechManner + ": \"" + text + "\"", Console::MessageType::SPEECH });
 }
 
 bool Entity::isMemberOfPlayerFaction() {

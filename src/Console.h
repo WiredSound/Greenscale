@@ -16,7 +16,10 @@ public:
 		sf::Color colour;
 
 		static const MessageType INFO;
+		static const MessageType INFO_NONESSENTIAL;
 		static const MessageType WARNING;
+		static const MessageType FATAL;
+		static const MessageType SPEECH;
 
 	private:
 		MessageType(std::string typeName, sf::Color typeColour);

@@ -157,10 +157,10 @@ sf::Vector2f Component::getIconTextureSize() {
 	return manager->getSingleIconTextureSize();
 }
 
-void Component::applyDamage(Damage damage) {
+int Component::applyDamage(Damage damage) {
 	applyKineticDamage(damage.kinetic);
 	applyThermalDamage(damage.thermal);
-	applyDisruption(damage.disruption);
+	return applyDisruption(damage.disruption); // The number of turns the component is disabled for after applying distruption is returned when damage is applied.
 }
 
 void Component::applyKineticDamage(int kinetic) {
@@ -169,10 +169,15 @@ void Component::applyKineticDamage(int kinetic) {
 void Component::applyThermalDamage(int heat) {
 	increaseHeat(heat);
 }
-void Component::applyDisruption(float disruption) {
+int Component::applyDisruption(float disruption) {
 	if (Random::percentageChange(disruption)) {
-		disabledForTurns += Random::integerRange(1, 2);
+		int disableFor = Random::integerRange(1, 2);
+		disabledForTurns += disableFor;
+
+		return disableFor;
 	}
+
+	return 0;
 }
 
 void Component::increaseIntegrity(int amount) {

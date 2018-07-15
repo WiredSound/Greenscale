@@ -11,6 +11,7 @@ public:
 	void turnPassed();
 	Optional<Component> &getComponentByIndex(unsigned int index);
 	Optional<Component> &getComponentAt(sf::Vector2u pos);
+	Optional<Component> &getRandomComponent();
 	const sf::Vector2u &getGridSize() const;
 	void resize(sf::Vector2u size);
 
@@ -26,8 +27,6 @@ public:
 	bool isComponentEquipped();
 
 	void swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos);
-
-	void applyDamageToRandomComponent(Damage damage);
 
 protected:
 	std::vector<unsigned int> getAdjacentComponentIndexes(sf::Vector2u pos);
