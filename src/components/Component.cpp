@@ -1,5 +1,6 @@
 #include "Component.h"
 
+#include "PowerPool.h"
 #include "../Random.h"
 #include "../entities/Entity.h"
 #include "../map/GameMap.h"
@@ -16,11 +17,13 @@ const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
 }
 
-void Component::yourTurn() {
+void Component::yourTurn(PowerPool &pool) {
 	if (isEnabled()) {
-		increaseHeat(getPassiveHeat());
+		pool.increasePower(getPassivePowerGeneration());
+		decreaseHeat(getPassiveHeatDissipation());
 
-		yourTurnEnabled();
+		if (pool.hasSufficientPower(getPassivePowerConsumption()))
+			yourTurnEnabled(pool);
 	}
 
 	if (disabledForTurns > 0)
@@ -32,13 +35,15 @@ void Component::yourTurn() {
 		disabledForTurns += Random::integerRange(1, 2);
 }
 
-void Component::yourTurnEnabled() {}
+// Note that is is only called if the component is enabled and the power pool has the same or greater power available than the passive power consumption value.
+void Component::yourTurnEnabled(PowerPool &pool) {
+	pool.decreasePower(getPassivePowerConsumption());
+	increaseHeat(getPassiveHeatGeneration());
+}
 
 std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Console &console) {
+	// TODO: Handle heat and power and what not.
 	if (isEnabled()) {
-		increaseHeat(getUseHeat());
-		//increasePower(getUsePower());
-
 		return useEnabled(user, path, console);
 	}
 
@@ -49,53 +54,23 @@ std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path
 	return std::vector<ProjectileArc>();
 }
 
-std::string Component::getName() {
-	return fetchInfo().name;
-}
-
-std::string Component::getDescription() {
-	return fetchInfo().description;
-}
-
-unsigned int Component::getIntegrity() {
-	return integrity;
-}
-unsigned int Component::getHeatLevel() {
-	return heat;
-}
-unsigned int Component::getMaxIntegrity() {
-	RETURN_VALUE_WITH_UPGRADES(maxIntegrity, maxIntegrityModifier);
-}
-unsigned int Component::getDangerousHeatLevel() {
-	RETURN_VALUE_WITH_UPGRADES(dangerousHeatLevel, unsafeHeatLevelModifier);
-}
-unsigned int Component::getFatalHeatLevel() {
-	RETURN_VALUE_WITH_UPGRADES(fatalHeatLevel, unsafeHeatLevelModifier);
-}
-unsigned int Component::getPassivePowerGeneration() {
-	RETURN_VALUE_WITH_UPGRADES(passivePowerGen, powerModifier);
-}
-unsigned int Component::getPassivePowerConsumption() {
-	RETURN_VALUE_WITH_UPGRADES(passivePowerConsume, powerModifier);
-}
-unsigned int Component::getUsePowerGeneration() {
-	RETURN_VALUE_WITH_UPGRADES(usePowerGen, powerModifier);
-}
-unsigned int Component::getUsePowerConsumption() {
-	RETURN_VALUE_WITH_UPGRADES(usePowerConsume, powerModifier);
-}
-int Component::getPassiveHeat() {
-	RETURN_VALUE_WITH_UPGRADES(passiveHeat, heatModifier);
-}
-int Component::getUseHeat() {
-	RETURN_VALUE_WITH_UPGRADES(useHeat, heatModifier);
-}
-unsigned int Component::getPowerStorage() {
-	RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier);
-}
-std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() {
-	return fetchInfo().possibleUpgrades;
-}
+std::string Component::getName() { return fetchInfo().name; }
+std::string Component::getDescription() { return fetchInfo().description; }
+unsigned int Component::getIntegrity() { return integrity; }
+unsigned int Component::getHeatLevel() { return heat; }
+unsigned int Component::getMaxIntegrity() { RETURN_VALUE_WITH_UPGRADES(maxIntegrity, maxIntegrityModifier) }
+unsigned int Component::getDangerousHeatLevel() { RETURN_VALUE_WITH_UPGRADES(dangerousHeatLevel, unsafeHeatLevelModifier) }
+unsigned int Component::getFatalHeatLevel() { RETURN_VALUE_WITH_UPGRADES(fatalHeatLevel, unsafeHeatLevelModifier) }
+unsigned int Component::getPassivePowerGeneration() { RETURN_VALUE_WITH_UPGRADES(passivePowerGen, powerModifier) }
+unsigned int Component::getPassivePowerConsumption() { RETURN_VALUE_WITH_UPGRADES(passivePowerConsume, powerModifier) }
+unsigned int Component::getUsePowerGeneration() { RETURN_VALUE_WITH_UPGRADES(usePowerGen, powerModifier) }
+unsigned int Component::getUsePowerConsumption() { RETURN_VALUE_WITH_UPGRADES(usePowerConsume, powerModifier) }
+unsigned int Component::getPassiveHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(passiveHeatDissipate, heatModifier) }
+unsigned int Component::getPassiveHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(passiveHeatGen, heatModifier) }
+unsigned int Component::getUseHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(useHeatDissipate, heatModifier) }
+unsigned int Component::getUseHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(useHeatGen, heatModifier) }
+unsigned int Component::getPowerStorage() { RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier) }
+std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() { return fetchInfo().possibleUpgrades; }
 
 sf::Vector2f Component::getIconTextureSize() {
 	return manager->getSingleIconTextureSize();
@@ -138,10 +113,12 @@ void Component::reduceIntegrity(unsigned int amount) {
 		integrity = 0;
 }
 
-void Component::increaseHeat(int amount) {
+void Component::increaseHeat(unsigned int amount) {
 	heat += amount;
+}
 
-	if (heat < 0) heat = 0;
+void Component::decreaseHeat(unsigned int amount) {
+	heat = heat >= amount ? (heat - amount) : 0;
 }
 
 MovementPath Component::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {

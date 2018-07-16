@@ -1,6 +1,6 @@
 #include "ComponentGrid.h"
 
-ComponentGrid::ComponentGrid(sf::Vector2u size) {
+ComponentGrid::ComponentGrid(sf::Vector2u size) : power(*this) {
 	resize(size);
 }
 
@@ -13,7 +13,7 @@ void ComponentGrid::turnPassed() {
 			auto &component = getComponentAt(position);
 
 			if (component) {
-				component->yourTurn();
+				component->yourTurn(power);
 
 				if (component->isDestroyed())
 					component.remove();
@@ -100,6 +100,10 @@ unsigned int ComponentGrid::getMaxIntegrity() {
 	}
 
 	return maxIntegrity;
+}
+
+unsigned int ComponentGrid::getPowerStored() {
+	return power.getPowerLevel();
 }
 
 unsigned int ComponentGrid::getMaxPowerStorage() {

@@ -135,7 +135,7 @@ bool Entity::isDestroyed() {
 }
 
 int Entity::getPowerLevel() {
-	return powerLevel;
+	return componentGrid.getPowerStored();
 }
 
 int Entity::getMaxPowerStorage() {

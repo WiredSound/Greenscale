@@ -19,8 +19,10 @@ struct ComponentInfo {
 	unsigned int passivePowerConsume;
 	unsigned int usePowerGen;
 	unsigned int usePowerConsume;
-	int passiveHeat;
-	int useHeat;
+	unsigned int passiveHeatDissipate;
+	unsigned int passiveHeatGen;
+	unsigned int useHeatDissipate;
+	unsigned int useHeatGen;
 	unsigned int powerStorage;
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades;
 	IDs::Projectiles projectileId;

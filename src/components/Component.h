@@ -9,6 +9,7 @@
 #include "../Console.h"
 class Entity;
 class GameMap;
+class PowerPool;
 
 /*
  * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
@@ -19,7 +20,7 @@ class GameMap;
 class Component {
 public:
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
-	void yourTurn();
+	void yourTurn(PowerPool &pool);
 	std::vector<ProjectileArc> use(Entity &user, MovementPath path, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 
 	const ComponentInfo &fetchInfo();
@@ -34,8 +35,10 @@ public:
 	unsigned int getPassivePowerConsumption();
 	unsigned int getUsePowerGeneration();
 	unsigned int getUsePowerConsumption();
-	int getPassiveHeat();
-	int getUseHeat();
+	unsigned int getPassiveHeatDissipation();
+	unsigned int getPassiveHeatGeneration();
+	unsigned int getUseHeatDissipation();
+	unsigned int getUseHeatGeneration();
 	unsigned int getPowerStorage();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
 
@@ -46,8 +49,8 @@ public:
 	void applyThermalDamage(int heat);
 	int applyDisruption(float disruption);
 
-	void increaseHeat(int amount);
-	//void increasePower(int amount);
+	void increaseHeat(unsigned int amount);
+	void decreaseHeat(unsigned int amount);
 
 	bool isDestroyed();
 	bool isEnabled();
@@ -59,7 +62,7 @@ public:
 	sf::Color getColour();
 
 protected:
-	virtual void yourTurnEnabled();
+	virtual void yourTurnEnabled(PowerPool &pool);
 	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, Console &console);
 
 	void increaseIntegrity(unsigned int amount);

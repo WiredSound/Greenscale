@@ -3,6 +3,7 @@
 #include <memory>
 #include <SFML/System/Vector2.hpp>
 #include "Component.h"
+#include "PowerPool.h"
 #include "../Optional.h"
 
 class ComponentGrid {
@@ -18,6 +19,7 @@ public:
 	unsigned int getCurrentIntegrity(); // The total integrity of every component in this grid.
 	unsigned int getMaxIntegrity();
 
+	unsigned int getPowerStored();
 	unsigned int getMaxPowerStorage();
 
 	Optional<Component> &getEquippedComponent();
@@ -36,6 +38,7 @@ protected:
 private:
 	sf::Vector2u gridSize;
 	std::vector<Optional<Component>> components;
+	PowerPool power;
 
 	Optional<Component> noComponent;
 
