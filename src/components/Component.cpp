@@ -20,10 +20,12 @@ const ComponentInfo &Component::fetchInfo() {
 void Component::yourTurn(PowerPool &pool) {
 	if (isEnabled()) {
 		pool.increasePower(getPassivePowerGeneration());
-		decreaseHeat(getPassiveHeatDissipation());
+		increaseHeat(getPassiveHeatGeneration());
 
-		if (pool.hasSufficientPower(getPassivePowerConsumption()))
+		if (pool.hasSufficientPower(getPassivePowerConsumption())) {
+			DEBUG_LOG("Component " << getName() << " has enough power (" << getPassivePowerConsumption() << " of " << pool.getPowerLevel() << ") to call yourTurnEnabled!");
 			yourTurnEnabled(pool);
+		}
 	}
 
 	if (disabledForTurns > 0)
@@ -38,19 +40,29 @@ void Component::yourTurn(PowerPool &pool) {
 // Note that is is only called if the component is enabled and the power pool has the same or greater power available than the passive power consumption value.
 void Component::yourTurnEnabled(PowerPool &pool) {
 	pool.decreasePower(getPassivePowerConsumption());
-	increaseHeat(getPassiveHeatGeneration());
+	decreaseHeat(getPassiveHeatDissipation());
 }
 
-std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Console &console) {
+std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
 	// TODO: Handle heat and power and what not.
 	if (isEnabled()) {
-		return useEnabled(user, path, console);
+		pool.increasePower(getUsePowerGeneration());
+		increaseHeat(getUseHeatGeneration());
+
+		if (pool.hasSufficientPower(getUsePowerConsumption())) {
+			DEBUG_LOG("Component " << getName() << " has enough power (" << getUsePowerConsumption() << " of " << pool.getPowerLevel() << ") to call useEnabled!");
+			return useEnabled(user, path, pool, console);
+		}
 	}
 
 	return std::vector<ProjectileArc>();
 }
 
-std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path, Console &console) {
+// Again like yourTurnEnabled, this method is only called if enough power is present in the power pool.
+std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
+	pool.decreasePower(getUsePowerConsumption());
+	decreaseHeat(getUseHeatDissipation());
+
 	return std::vector<ProjectileArc>();
 }
 

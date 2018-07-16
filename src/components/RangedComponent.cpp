@@ -5,13 +5,14 @@
 RangedComponent::RangedComponent(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager, std::shared_ptr<ProjectileManager> manager)
 	: Component(componentId, componentManager), projectileManager(manager) {}
 
-std::vector<ProjectileArc> RangedComponent::useEnabled(Entity &user, MovementPath path, Console &console) {
-	std::vector<ProjectileArc> arcs;
+std::vector<ProjectileArc> RangedComponent::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
+	Component::useEnabled(user, path, pool, console);
 
 	auto count = getProjectileCount();
 	auto damage = getProjectileDamage();
 	auto penetration = getProjectilePenetration();
 
+	std::vector<ProjectileArc> arcs;
 	arcs.resize(count, ProjectileArc(projectileManager, &user, path, getProjectileId(), damage, penetration, user.getFaction().colour));
 
 	console.display({ user.getFullName() + " fired " + std::to_string(count) + (count == 1 ? " projectile with " : " projectiles each with ") + std::to_string(penetration) + " penetration and damage: "

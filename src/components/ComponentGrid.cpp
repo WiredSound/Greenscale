@@ -144,6 +144,19 @@ void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos)
 	std::iter_swap(components.begin() + getIndex(firstPos), components.begin() + getIndex(secondPos)); // TODO: Add checks to ensure that both positions are within bounds.
 }
 
+std::vector<ProjectileArc> ComponentGrid::use(Optional<Component> &component, Entity &user, MovementPath path, Console &console) {
+	return component->use(user, path, power, console);
+}
+
+std::vector<ProjectileArc> ComponentGrid::use(sf::Vector2u position, Entity &user, MovementPath path, Console &console) {
+	auto &component = getComponentAt(position);
+
+	if (component)
+		return component->use(user, path, power, console);
+
+	return std::vector<ProjectileArc>();
+}
+
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {
 	return pos.y * gridSize.x + pos.x;
 }

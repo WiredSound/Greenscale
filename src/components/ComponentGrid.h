@@ -30,6 +30,9 @@ public:
 
 	void swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos);
 
+	std::vector<ProjectileArc> use(Optional<Component> &component, Entity &user, MovementPath path, Console &console);
+	std::vector<ProjectileArc> use(sf::Vector2u position, Entity &user, MovementPath path, Console &console);
+
 protected:
 	std::vector<unsigned int> getAdjacentComponentIndexes(sf::Vector2u pos);
 	std::vector<unsigned int> getFunctionalComponentIndexes(); // 'Functional' means having an integrity greater than 0 in this case.

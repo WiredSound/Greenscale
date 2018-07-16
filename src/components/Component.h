@@ -21,7 +21,7 @@ class Component {
 public:
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn(PowerPool &pool);
-	std::vector<ProjectileArc> use(Entity &user, MovementPath path, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
+	std::vector<ProjectileArc> use(Entity &user, MovementPath path, PowerPool &pool, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 
 	const ComponentInfo &fetchInfo();
 	std::string getName();
@@ -63,7 +63,7 @@ public:
 
 protected:
 	virtual void yourTurnEnabled(PowerPool &pool);
-	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, Console &console);
+	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console);
 
 	void increaseIntegrity(unsigned int amount);
 	void reduceIntegrity(unsigned int amount);
