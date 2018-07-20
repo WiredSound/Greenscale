@@ -54,7 +54,7 @@ std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Power
 		}
 		else {
 			console.display({ user.getFullName() + " was unable to use component " + getName() + " due to a lack of power - only " + std::to_string(pool.getPowerLevel())
-				+ " of the required " + std::to_string(getUsePowerConsumption()) + " was available!", (user.isMemberOfPlayerFaction() ? Console::MessageType::FATAL : Console::MessageType::INFO) });
+				+ " of the required " + std::to_string(getUsePowerConsumption()) + " was available!", (user.isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO) });
 		}
 	}
 

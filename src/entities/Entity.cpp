@@ -177,9 +177,15 @@ Optional<Component> &Entity::applyDamage(Damage damage, bool displayConsoleMsg) 
 		if (displayConsoleMsg) {
 			std::string disabledText = (turnsDisabledFor > 0 ? " Disabled for turns: " + std::to_string(turnsDisabledFor) : "");
 
-			console.display({ getFullName() + " recieved damage to component " + component->getName() + " - New integrity: " + std::to_string(component->getIntegrity()) + "/" +
-				std::to_string(component->getMaxIntegrity()) + " Heat level: " + std::to_string(component->getHeatLevel()) + disabledText,
-				isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO }); // TODO: Take into account whether the entity is player controlled as well.
+			if (component->isDestroyed()) {
+				console.display({ getFullName() + " had component " + component->getName() + " destroyed!",
+					isMemberOfPlayerFaction() ? Console::MessageType::FATAL : Console::MessageType::INFO });
+			}
+			else {
+				console.display({ getFullName() + " recieved damage to component " + component->getName() + " - New integrity: " + std::to_string(component->getIntegrity()) + "/" +
+					std::to_string(component->getMaxIntegrity()) + " Heat level: " + std::to_string(component->getHeatLevel()) + disabledText,
+					isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO }); // TODO: Take into account whether the entity is player controlled as well.
+			}
 		}
 	}
 
