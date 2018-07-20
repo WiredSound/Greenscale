@@ -44,7 +44,6 @@ void Component::yourTurnEnabled(PowerPool &pool) {
 }
 
 std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
-	// TODO: Handle heat and power and what not.
 	if (isEnabled()) {
 		pool.increasePower(getUsePowerGeneration());
 		increaseHeat(getUseHeatGeneration());
