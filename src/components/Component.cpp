@@ -64,6 +64,8 @@ std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Power
 
 // Again like yourTurnEnabled, this method is only called if enough power is present in the power pool.
 std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
+	console.display({ user.getFullName() + " used component: " + getName(), (user.isMemberOfPlayerFaction() ? Console::MessageType::INFO : Console::MessageType::WARNING) });
+
 	pool.decreasePower(getUsePowerConsumption());
 	decreaseHeat(getUseHeatDissipation());
 
