@@ -41,6 +41,11 @@ public:
 	unsigned int getUseHeatGeneration();
 	unsigned int getPowerStorage();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
+	virtual IDs::Projectiles getProjectileId();
+	virtual unsigned int getProjectileCount();
+	virtual Damage getProjectileDamage();
+	virtual unsigned int getProjectileRange();
+	virtual unsigned int getProjectilePenetration();
 
 	sf::Vector2f getIconTextureSize();
 
@@ -52,14 +57,33 @@ public:
 	void increaseHeat(unsigned int amount);
 	void decreaseHeat(unsigned int amount);
 
+	bool isFunctional();
 	bool isDestroyed();
 	bool isEnabled();
 
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);
 
 	void toggleManualEnable();
+	void setManualEnable(bool value);
 
 	sf::Color getColour();
+
+	int calculateActiveNetHeat();
+	int calculatePassiveNetHeat();
+	int calculateActiveNetPower();
+	int calculatePassiveNetPower();
+	unsigned int calculateMaxPotentialProjectileDamage();
+
+	bool isWeapon();
+	bool isActiveCooling();
+	bool isPassiveCooling();
+	bool isActiveHeating();
+	bool isPassiveHeating();
+	bool isActivePowerGenerator();
+	bool isPassivePowerGenerator();
+	bool atFatalHeatLevel();
+	bool atDangerousHeatLevel();
+	bool atDangerousOrAboveHeatLevel();
 
 protected:
 	virtual void yourTurnEnabled(PowerPool &pool);

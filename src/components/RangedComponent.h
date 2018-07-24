@@ -8,11 +8,11 @@ public:
 	virtual std::vector<ProjectileArc> useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) override;
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) override;
 
-	IDs::Projectiles getProjectileId();
-	unsigned int getProjectileCount();
-	Damage getProjectileDamage();
-	unsigned int getProjectileRange();
-	unsigned int getProjectilePenetration();
+	IDs::Projectiles getProjectileId() override;
+	unsigned int getProjectileCount() override;
+	Damage getProjectileDamage() override;
+	unsigned int getProjectileRange() override;
+	unsigned int getProjectilePenetration() override;
 
 private:
 	std::shared_ptr<ProjectileManager> projectileManager;

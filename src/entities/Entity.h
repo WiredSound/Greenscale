@@ -67,6 +67,7 @@ public:
 	int getMaxPowerStorage();
 
 	MovementPath buildEquippedComponentPath(sf::Vector2u target);
+	bool useEquippedComponentOnSelf();
 	bool useEquippedComponent(MovementPath path);
 	Optional<Component> &applyDamage(Damage damage, bool displayConsoleMsg = true);
 

@@ -33,14 +33,21 @@ public:
 	std::vector<ProjectileArc> use(Optional<Component> &component, Entity &user, MovementPath path, Console &console);
 	std::vector<ProjectileArc> use(sf::Vector2u position, Entity &user, MovementPath path, Console &console);
 
+	std::vector<sf::Vector2u> findFunctionalPositions();
+	std::vector<sf::Vector2u> findWeaponPositions();
+	std::vector<sf::Vector2u> findActiveCoolingPositions();
+	std::vector<sf::Vector2u> findPassiveCoolingPositions();
+	std::vector<sf::Vector2u> findFatalHeatPositions();
+	std::vector<sf::Vector2u> findDangerousHeatPositions();
+	std::vector<sf::Vector2u> findHotPositions();
+
 protected:
 	std::vector<unsigned int> getAdjacentComponentIndexes(sf::Vector2u pos);
-	std::vector<unsigned int> getFunctionalComponentIndexes(); // 'Functional' means having an integrity greater than 0 in this case.
 	unsigned int getIndex(const sf::Vector2u &pos);
 
 private:
-	sf::Vector2u gridSize;
 	std::vector<Optional<Component>> components;
+	sf::Vector2u gridSize;
 	PowerPool power;
 
 	Optional<Component> noComponent;

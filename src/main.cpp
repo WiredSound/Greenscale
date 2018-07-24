@@ -46,8 +46,7 @@ int main() {
 
 		fpsCounter++;
 		if (clock.getElapsedTime() > sf::milliseconds(1000)) {
-			if (settings.displayFps)
-				std::cout << "FPS: " << fpsCounter << std::endl;
+			//if (settings.displayFps) std::cout << "FPS: " << fpsCounter << std::endl;
 
 			clock.restart();
 			fpsCounter = 0;

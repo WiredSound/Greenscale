@@ -152,6 +152,19 @@ MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 	return MovementPath(getPosition());
 }
 
+bool Entity::useEquippedComponentOnSelf() {
+	auto &component = componentGrid.getEquippedComponent();
+
+	if (component) {
+		std::vector<ProjectileArc> arcs = componentGrid.use(component, *this, component->buildProjectilePath(getPosition(), getPosition(), map), console);
+
+		map->fireArcs(arcs);
+		return true;
+	}
+
+	return false;
+}
+
 bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
@@ -159,7 +172,6 @@ bool Entity::useEquippedComponent(MovementPath path) {
 		std::vector<ProjectileArc> arcs = componentGrid.use(component, *this, path, console);
 
 		map->fireArcs(arcs);
-
 		return true;
 	}
 

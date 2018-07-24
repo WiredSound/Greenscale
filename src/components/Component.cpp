@@ -6,9 +6,10 @@
 #include "../map/GameMap.h"
 
 // This magical little macro takes a value from the ComponentInfo struct of valueName and then applies all the modifiers of modifierName in this component's upgrades:
-#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) auto baseValue = fetchInfo().valueName; auto value = baseValue; \
-															for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
-															return value;
+#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) \
+	auto baseValue = fetchInfo().valueName; auto value = baseValue; \
+	for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
+	return value;
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
 	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {}
@@ -69,6 +70,7 @@ std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path
 	return std::vector<ProjectileArc>();
 }
 
+// Standard components:
 std::string Component::getName() { return fetchInfo().name; }
 std::string Component::getDescription() { return fetchInfo().description; }
 unsigned int Component::getIntegrity() { return integrity; }
@@ -86,6 +88,12 @@ unsigned int Component::getUseHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(use
 unsigned int Component::getUseHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(useHeatGen, heatModifier) }
 unsigned int Component::getPowerStorage() { RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier) }
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() { return fetchInfo().possibleUpgrades; }
+// Ranged components:
+IDs::Projectiles Component::getProjectileId() { return IDs::Projectiles::BULLET; }
+unsigned int Component::getProjectileCount() { return 0; }
+Damage Component::getProjectileDamage() { return Damage(); }
+unsigned int Component::getProjectileRange() { return 0; }
+unsigned int Component::getProjectilePenetration() { return 0; }
 
 sf::Vector2f Component::getIconTextureSize() {
 	return manager->getSingleIconTextureSize();
@@ -144,6 +152,14 @@ void Component::toggleManualEnable() {
 	manualEnable = !manualEnable;
 }
 
+void Component::setManualEnable(bool value) {
+	manualEnable = value;
+}
+
+bool Component::isFunctional() {
+	return integrity > 0;
+}
+
 bool Component::isDestroyed() {
 	return integrity <= 0;
 }
@@ -163,4 +179,52 @@ sf::Color Component::getColour() {
 	case 4: return sf::Color(255, 165, 0, opacity);		// ORANGE
 	default: return sf::Color(255, 0, 0, opacity);		// RED
 	}
+}
+
+int Component::calculateActiveNetHeat() {
+	return static_cast<int>(getUseHeatGeneration()) - static_cast<int>(getUseHeatDissipation());
+}
+int Component::calculatePassiveNetHeat() {
+	return static_cast<int>(getPassiveHeatGeneration()) - static_cast<int>(getPassiveHeatDissipation());
+}
+int Component::calculateActiveNetPower() {
+	return static_cast<int>(getUsePowerGeneration()) - static_cast<int>(getUsePowerConsumption());
+}
+int Component::calculatePassiveNetPower() {
+	return static_cast<int>(getPassivePowerGeneration()) - static_cast<int>(getPassivePowerConsumption());
+}
+unsigned int Component::calculateMaxPotentialProjectileDamage() {
+	return getProjectileCount() * getProjectileDamage().kinetic; // TODO: Take other forms of damage into account.
+}
+
+bool Component::isWeapon() {
+	// A 'weapon' is defined as a component that produces some projectiles and has a range of at least 1 tile (at least until melee weapons are added that is).
+	return getProjectileCount() > 0 && getProjectileRange() >= 1;
+}
+bool Component::isActiveCooling() {
+	return calculateActiveNetHeat() < 0;
+}
+bool Component::isPassiveCooling() {
+	return calculatePassiveNetHeat() < 0;
+}
+bool Component::isActiveHeating() {
+	return calculateActiveNetHeat() > 0;
+}
+bool Component::isPassiveHeating() {
+	return calculatePassiveNetHeat() > 0;
+}
+bool Component::isActivePowerGenerator() {
+	return calculateActiveNetPower() > 0;
+}
+bool Component::isPassivePowerGenerator() {
+	return calculatePassiveNetPower() > 0;
+}
+bool Component::atFatalHeatLevel() {
+	return heat >= getFatalHeatLevel();
+}
+bool Component::atDangerousHeatLevel() {
+	return heat >= getDangerousHeatLevel() && heat < getFatalHeatLevel();
+}
+bool Component::atDangerousOrAboveHeatLevel() {
+	return heat >= getDangerousHeatLevel();
 }

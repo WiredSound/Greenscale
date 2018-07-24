@@ -1,5 +1,22 @@
 #include "ComponentGrid.h"
 
+// This is another cryptically named macro that is similar to the one found in the Component.cpp file.
+// It's purpose is to make the creation of methods like findWeaponPositions, findActiveCoolerPositions, etc. require less boilerplate code.
+#define GET_COMPONENT_POSITIONS_WHERE(methodName) \
+	std::vector<sf::Vector2u> positions; \
+	\
+	for (unsigned int x = 0; x < gridSize.x; x++) { \
+		for (unsigned int y = 0; y < gridSize.y; y++) { \
+			sf::Vector2u position(x, y); \
+			Optional<Component> &component = getComponentAt(position); \
+			\
+			if(component && component->methodName()) positions.push_back(position); \
+		} \
+	} \
+	\
+	return positions;
+// C++ really needs multiline macros...
+
 ComponentGrid::ComponentGrid(sf::Vector2u size) : power(*this) {
 	resize(size);
 }
@@ -34,12 +51,12 @@ Optional<Component> &ComponentGrid::getComponentAt(sf::Vector2u pos) {
 }
 
 Optional<Component> &ComponentGrid::getRandomComponent() {
-	std::vector<unsigned int> functionalIndexes = getFunctionalComponentIndexes();
+	std::vector<sf::Vector2u> functionalPositions = findFunctionalPositions();
 
-	if (functionalIndexes.size() > 0) {
-		unsigned int randomFunctionalComponentIndex = functionalIndexes[rand() % functionalIndexes.size()];
+	if (functionalPositions.size() > 0) {
+		sf::Vector2u randomFunctionalPosition = functionalPositions[rand() % functionalPositions.size()];
 
-		return getComponentByIndex(randomFunctionalComponentIndex);
+		return getComponentAt(randomFunctionalPosition);
 	}
 
 	return noComponent;
@@ -62,17 +79,6 @@ std::vector<unsigned int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2
 		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y + 1)));
 	if (pos.y > 0)
 		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y - 1)));
-
-	return indexes;
-}
-
-std::vector<unsigned int> ComponentGrid::getFunctionalComponentIndexes() {
-	std::vector<unsigned int> indexes;
-
-	for (unsigned int i = 0; i < components.size(); i++) {
-		if (getComponentByIndex(i) && getComponentByIndex(i)->getIntegrity() > 0)
-			indexes.push_back(i);
-	}
 
 	return indexes;
 }
@@ -156,6 +162,14 @@ std::vector<ProjectileArc> ComponentGrid::use(sf::Vector2u position, Entity &use
 
 	return std::vector<ProjectileArc>();
 }
+
+std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions() { GET_COMPONENT_POSITIONS_WHERE(isFunctional) }
+std::vector<sf::Vector2u> ComponentGrid::findWeaponPositions() { GET_COMPONENT_POSITIONS_WHERE(isWeapon) }
+std::vector<sf::Vector2u> ComponentGrid::findActiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isActiveCooling) }
+std::vector<sf::Vector2u> ComponentGrid::findPassiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isPassiveCooling) }
+std::vector<sf::Vector2u> ComponentGrid::findFatalHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atFatalHeatLevel) }
+std::vector<sf::Vector2u> ComponentGrid::findDangerousHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousHeatLevel) }
+std::vector<sf::Vector2u> ComponentGrid::findHotPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousOrAboveHeatLevel) }
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {
 	return pos.y * gridSize.x + pos.x;

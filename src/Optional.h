@@ -6,6 +6,7 @@ template <typename T>
 class Optional {
 public:
 	Optional() : present(false) {}
+	Optional(T obj) : object(std::make_unique<T>(obj)), present(true) {}
 	Optional(std::unique_ptr<T> obj) : object(std::move(obj)), present(true) {}
 
 	std::unique_ptr<T> &get() {
@@ -18,6 +19,11 @@ public:
 
 	void set(std::unique_ptr<T> obj) {
 		object = std::move(obj);
+		present = true;
+	}
+
+	void set(T obj) {
+		object = std::make_unique<T>(obj);
 		present = true;
 	}
 
