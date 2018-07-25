@@ -11,8 +11,8 @@
 #define ENTITIES_TEXTURE_PATH "assets/entities/entities.png"
 #define PROJECTILES_TEXTURE_PATH "assets/projectiles/projectiles.png"
 
-MapBuilder::MapBuilder(unsigned int seed, sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions, std::shared_ptr<PlayerController> controller, Console &consoleRef)
-	: rand(seed), tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), projectilesTexture(std::make_shared<sf::Texture>()),
+MapBuilder::MapBuilder(sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions, std::shared_ptr<PlayerController> controller, Console &consoleRef)
+	: tilesTexture(std::make_shared<sf::Texture>()), entitiesTexture(std::make_shared<sf::Texture>()), projectilesTexture(std::make_shared<sf::Texture>()),
 	playerController(controller), entityBuilder(consoleRef), tileSize(sizeTile), playerFriendlyFactions(friendlyFactions), console(consoleRef)
 {
 	tileManager.loadFromJsonFile(TILES_PATH);

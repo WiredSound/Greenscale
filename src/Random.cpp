@@ -1,7 +1,9 @@
 #include "Random.h"
 
-std::default_random_engine Random::rand = std::default_random_engine();
-std::uniform_real_distribution<float> Random::percentDistribution(0.0f, 100.0f);
+const std::uniform_real_distribution<float> Random::percentDistribution(0.0f, 100.0f);
+
+Random::Random() : rand(std::default_random_engine()) {}
+Random::Random(unsigned int seed) : rand(seed) {}
 
 bool Random::percentageChange(float likelyhood) {
 	return likelyhood >= percentDistribution(rand);

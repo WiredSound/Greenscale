@@ -13,7 +13,7 @@
 
 class MapBuilder {
 public:
-	MapBuilder(unsigned int seed, sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions, std::shared_ptr<PlayerController> controller, Console &consoleRef);
+	MapBuilder(sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions, std::shared_ptr<PlayerController> controller, Console &consoleRef);
 
 	std::unique_ptr<GameMap> buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators);
 
@@ -37,6 +37,4 @@ private:
 	std::vector<Faction> playerFriendlyFactions;
 
 	Console &console;
-
-	std::default_random_engine rand;
 };

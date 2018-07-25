@@ -11,6 +11,8 @@
 	for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
 	return value;
 
+Random Component::random = Random();
+
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
 	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {}
 
@@ -32,10 +34,10 @@ void Component::yourTurn(PowerPool &pool) {
 	if (disabledForTurns > 0)
 		disabledForTurns--;
 
-	if (heat >= getFatalHeatLevel() && Random::percentageChange(80)) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
-		disabledForTurns += Random::integerRange(2, 3);
-	else if (heat >= getDangerousHeatLevel() && Random::percentageChange(50)) // If at a dangerous heat level then the chance is 50% of becoming disabled.
-		disabledForTurns += Random::integerRange(1, 2);
+	if (heat >= getFatalHeatLevel() && random.percentageChange(80)) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
+		disabledForTurns += random.integerRange(2, 3);
+	else if (heat >= getDangerousHeatLevel() && random.percentageChange(50)) // If at a dangerous heat level then the chance is 50% of becoming disabled.
+		disabledForTurns += random.integerRange(1, 2);
 }
 
 // Note that is is only called if the component is enabled and the power pool has the same or greater power available than the passive power consumption value.
@@ -114,8 +116,8 @@ void Component::applyThermalDamage(int heat) {
 	increaseHeat(heat);
 }
 int Component::applyDisruption(float disruption) {
-	if (Random::percentageChange(disruption)) {
-		int disableFor = Random::integerRange(1, 2);
+	if (random.percentageChange(disruption)) {
+		int disableFor = random.integerRange(1, 2);
 		disabledForTurns += disableFor;
 
 		return disableFor;

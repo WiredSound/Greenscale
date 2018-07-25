@@ -8,7 +8,7 @@
 #include "../entities/controllers/SearchAndDestroyController.h"
 
 World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Console &consoleRef, sf::Vector2f tileSize)
-	: builder(static_cast<unsigned int>(time(0)), tileSize, { Faction::PLAYER, Faction::ROGUE }, controller, consoleRef), turnManager(camera), console(consoleRef)
+	: builder(tileSize, { Faction::PLAYER, Faction::ROGUE }, controller, consoleRef), turnManager(camera), console(consoleRef)
 {
 	auto player = constructNewPlayer(IDs::Entities::RESTRUCTOR_01, sf::Vector2u(1, 1), Faction::PLAYER);
 

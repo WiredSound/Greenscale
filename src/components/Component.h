@@ -7,6 +7,7 @@
 #include "../Optional.h"
 #include "../projectiles/ProjectileArc.h"
 #include "../Console.h"
+#include "../Random.h"
 class Entity;
 class GameMap;
 class PowerPool;
@@ -93,6 +94,8 @@ protected:
 	void reduceIntegrity(unsigned int amount);
 
 	std::vector<ComponentUpgrade> upgrades;
+
+	static Random random;
 
 private:
 	IDs::Components id;
