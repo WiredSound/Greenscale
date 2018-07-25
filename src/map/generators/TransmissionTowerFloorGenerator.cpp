@@ -8,8 +8,11 @@ TransmissionTowerFloorGenerator::TransmissionTowerFloorGenerator(unsigned int to
 void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &tiles) {
 	sf::Vector2i centre = getCentre(tiles);
 
-	fillTiles<sf::Vector2i>(tiles, GridHelp::buildFilledCircle(centre, radius), mainFloorTile, mainFloorColour);
-	fillTiles<sf::Vector2i>(tiles, GridHelp::buildCircle(centre, radius, thickness), mainWallTile, mainWallColour);
+	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(centre, radius);
+	tiles->fill(mainFloorTile, mainFloorColour, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end())); // Flooring.
+
+	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(centre, radius, thickness);
+	tiles->fill(mainWallTile, mainWallColour, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end())); // Outer circular wall.
 
 	buildDoor(tiles, static_cast<int>(std::ceil(static_cast<float>(radius) / 10)), centre);
 }

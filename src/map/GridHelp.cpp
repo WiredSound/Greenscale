@@ -38,7 +38,7 @@ sf::Vector2u GridHelp::roundPoint(sf::Vector2f point) {
 	return sf::Vector2u(static_cast<unsigned int>(std::round(point.x)), static_cast<unsigned int>(std::round(point.y)));
 }
 
-std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius, int thickness) {
+std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius, int thickness) { // TODO: Potentially make this a template so the vector type can be specified.
 	int x = radius - 1;
 	int y = 0;
 	int dx = 1;
@@ -57,7 +57,7 @@ std::vector<sf::Vector2i> GridHelp::buildCircle(sf::Vector2i origin, int radius,
 			points.push_back(sf::Vector2i(origin.x - y - i, origin.y - x));
 			points.push_back(sf::Vector2i(origin.x + y + i, origin.y - x));
 			points.push_back(sf::Vector2i(origin.x + x + i, origin.y - y));
-			if (i > 0) { // Prevent doubling up on the first around.
+			if (i > 0) { // Prevent doubling up on the first time around.
 				points.push_back(sf::Vector2i(origin.x + x, origin.y + y + i));
 				points.push_back(sf::Vector2i(origin.x + y, origin.y + x + i));
 				points.push_back(sf::Vector2i(origin.x - y, origin.y + x + i));

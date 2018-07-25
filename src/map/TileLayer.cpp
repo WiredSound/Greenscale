@@ -158,8 +158,22 @@ void TileLayer::setColourAt(sf::Vector2u pos, sf::Color colour) {
 	}
 }
 
-void TileLayer::fill(IDs::Tiles id) {
+void TileLayer::fillAll(IDs::Tiles id) {
 	fillRect(id, sf::Vector2u(0, 0), size);
+}
+
+void TileLayer::fillAll(IDs::Tiles id, sf::Color colour) {
+	fillRect(id, colour, sf::Vector2u(0, 0), size);
+}
+
+void TileLayer::fill(IDs::Tiles id, std::vector<sf::Vector2u> positions) {
+	for (sf::Vector2u position : positions)
+		setTileAt(position, id);
+}
+
+void TileLayer::fill(IDs::Tiles id, sf::Color colour, std::vector<sf::Vector2u> positions) {
+	for (sf::Vector2u position : positions)
+		setTileAt(position, id, colour);
 }
 
 void TileLayer::fillRect(IDs::Tiles id, sf::Vector2u pos, sf::Vector2u rectSize) {
@@ -170,8 +184,12 @@ void TileLayer::fillRect(IDs::Tiles id, sf::Vector2u pos, sf::Vector2u rectSize)
 	}
 }
 
-void TileLayer::fillRect(IDs::Tiles id, unsigned int posX, unsigned int posY, unsigned int width, unsigned int height) {
-	fillRect(id, sf::Vector2u(posX, posY), sf::Vector2u(width, height));
+void TileLayer::fillRect(IDs::Tiles id, sf::Color colour, sf::Vector2u pos, sf::Vector2u rectSize) {
+	for (unsigned int x = pos.x; x < pos.x + rectSize.x; x++) {
+		for (unsigned int y = pos.y; y < pos.y + rectSize.y; y++) {
+			setTileAt(sf::Vector2u(x, y), id, colour);
+		}
+	}
 }
 
 void TileLayer::colourPath(MovementPath path, sf::Color colour) {
