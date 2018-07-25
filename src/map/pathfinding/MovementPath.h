@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <vector>
 #include <SFML/System/Vector2.hpp>
 class GameMap;
@@ -23,6 +24,7 @@ public:
 	sf::Vector2u getTargetPosition();
 
 	void restrictLength(unsigned int size);
+	void recursivelyShortenBasedOn(std::function<bool()> condition);
 
 private:
 	std::vector<sf::Vector2u> path;

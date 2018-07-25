@@ -58,14 +58,19 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 			return grid.getComponentAt(pos0)->calculateMaxPotentialProjectileDamage() > grid.getComponentAt(pos1)->calculateMaxPotentialProjectileDamage();
 		});
 
+		unsigned int shortestWeaponRange = 0;
+
 		for (sf::Vector2u weaponPosition : weaponPositions) {
 			Optional<Component> &weapon = grid.getComponentAt(weaponPosition);
+			unsigned int range = weapon->getProjectileRange();
 
-			if (weapon->getProjectileRange() >= requiredRange && weapon->getProjectilePenetration() >= requiredPenetration && weapon->getUsePowerConsumption() <= entity->getPowerLevel()) {
+			if (range >= requiredRange && weapon->getProjectilePenetration() >= requiredPenetration && weapon->getUsePowerConsumption() <= entity->getPowerLevel()) {
 				DEBUG_LOG(entity->getFullName() << " has decided to fire weapon " << weapon->getName() << " at target.");
 
 				grid.equipComponent(weaponPosition);
 				entity->useEquippedComponent(entity->buildEquippedComponentPath(targetEntity->getPosition()));
+
+				if (range < shortestWeaponRange) range = shortestWeaponRange;
 
 				return true;
 			}
@@ -76,7 +81,14 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 		GameMap *map = entity->getMapReference();
 		sf::Vector2u targetPosition = map->findNearestFreePosition(targetEntity->getPosition());
 
-		entity->setMovementPath(map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition));
+		MovementPath path = map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition);
+		path.restrictLength(entity->getMovementRange());
+
+		path.recursivelyShortenBasedOn([&path, &targetEntity, shortestWeaponRange]() {
+			return MovementPath::distanceFromTo(path.getTargetPosition(), targetEntity->getPosition()) < shortestWeaponRange;
+		});
+
+		entity->setMovementPath(path);
 	}
 
 	return true;

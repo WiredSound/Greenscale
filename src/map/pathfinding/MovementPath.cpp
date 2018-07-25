@@ -60,6 +60,11 @@ void MovementPath::restrictLength(unsigned int size) {
 		path.resize(size);
 }
 
+void MovementPath::recursivelyShortenBasedOn(std::function<bool()> condition) {
+	while (condition() && getLength() > 1)
+		restrictLength(getLength() - 1);
+}
+
 // PATH BUILDING:
 
 MovementPath MovementPath::buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length) {
