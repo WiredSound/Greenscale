@@ -24,6 +24,7 @@ struct ComponentInfo {
 	unsigned int useHeatDissipate;
 	unsigned int useHeatGen;
 	unsigned int powerStorage;
+	unsigned int movementRange;
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades;
 	IDs::Projectiles projectileId;
 	unsigned int projectileCount;
@@ -43,4 +44,5 @@ struct ComponentUpgrade {
 	float powerModifier = 0.0f;
 	float heatModifier = 0.0f;
 	float projectileModifier = 0.0f;
+	float transportModifier = 0.0f;
 };

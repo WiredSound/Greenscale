@@ -16,7 +16,8 @@ namespace IDs {
 		FISSION_REACTOR = 0,
 		HEAT_SINK = 1,
 		DEFENSIVE_PLATING = 2,
-		RIFLE = 3
+		RIFLE = 3,
+		MECHANICAL_LEG = 4
 	};
 
 	enum ComponentUpgrades : char {};

@@ -101,9 +101,8 @@ unsigned int ComponentGrid::getCurrentIntegrity() {
 unsigned int ComponentGrid::getMaxIntegrity() {
 	unsigned int maxIntegrity = 0;
 
-	for (auto &component : components) {
+	for (auto &component : components)
 		if (component) maxIntegrity += component->getMaxIntegrity();
-	}
 
 	return maxIntegrity;
 }
@@ -115,11 +114,19 @@ unsigned int ComponentGrid::getPowerStored() {
 unsigned int ComponentGrid::getMaxPowerStorage() {
 	unsigned int powerStorage = 0;
 
-	for (auto &component : components) {
-		if (component) powerStorage += component->getPowerStorage();
-	}
+	for (auto &component : components)
+		if (component && component->isEnabled()) powerStorage += component->getPowerStorage();
 
 	return powerStorage;
+}
+
+unsigned int ComponentGrid::getMovementRange() {
+	unsigned int movementRange = 0;
+
+	for (auto &component : components)
+		if (component && component->isEnabled()) movementRange += component->getMovementRange();
+
+	return std::max(movementRange, 1u);
 }
 
 Optional<Component> &ComponentGrid::getEquippedComponent() {

@@ -47,6 +47,7 @@ public:
 	unsigned int getUseHeatDissipation();
 	unsigned int getUseHeatGeneration();
 	unsigned int getPowerStorage();
+	unsigned int getMovementRange();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
 	virtual IDs::Projectiles getProjectileId();
 	virtual unsigned int getProjectileCount();

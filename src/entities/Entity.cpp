@@ -110,8 +110,7 @@ bool Entity::setMovementPath(MovementPath path) {
 }
 
 int Entity::getMovementRange() {
-	// TODO: Calculate movement range.
-	return 12;
+	return componentGrid.getMovementRange();
 }
 
 std::string Entity::getPersonalName() {

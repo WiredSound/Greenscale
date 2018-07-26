@@ -34,6 +34,7 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<unsigned int>("use heat dissipation", 0),
 			json.value<unsigned int>("use heat generation", 0),
 			json.value<unsigned int>("power storage", 0),
+			json.value<unsigned int>("movement range", 0),
 			json["possible upgrades"].get<std::vector<IDs::ComponentUpgrades>>(),
 			json.value<IDs::Projectiles>("projectile id", IDs::Projectiles::BULLET),
 			json.value<unsigned int>("projectile count", 1),

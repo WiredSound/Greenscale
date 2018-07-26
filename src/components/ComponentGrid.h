@@ -22,6 +22,8 @@ public:
 	unsigned int getPowerStored();
 	unsigned int getMaxPowerStorage();
 
+	unsigned int getMovementRange();
+
 	Optional<Component> &getEquippedComponent();
 	sf::Vector2u getEquippedComponentGridPosition();
 	void equipComponent(sf::Vector2u pos);

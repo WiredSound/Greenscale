@@ -93,6 +93,7 @@ unsigned int Component::getPassiveHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(
 unsigned int Component::getUseHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(useHeatDissipate, heatModifier) }
 unsigned int Component::getUseHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(useHeatGen, heatModifier) }
 unsigned int Component::getPowerStorage() { RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier) }
+unsigned int Component::getMovementRange() { RETURN_VALUE_WITH_UPGRADES(movementRange, transportModifier) }
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() { return fetchInfo().possibleUpgrades; }
 // Ranged components:
 IDs::Projectiles Component::getProjectileId() { return IDs::Projectiles::BULLET; }
