@@ -21,7 +21,7 @@ ComponentGrid::ComponentGrid(sf::Vector2u size) : power(*this) {
 	resize(size);
 }
 
-void ComponentGrid::turnPassed() {
+void ComponentGrid::turnPassed(Entity &entity, Console &console) {
 	// TODO: Handle the transfer of heat and disruption and destroy components with 0 integrity.
 
 	for (unsigned int x = 0; x < gridSize.x; x++) {
@@ -30,7 +30,7 @@ void ComponentGrid::turnPassed() {
 			auto &component = getComponentAt(position);
 
 			if (component) {
-				component->yourTurn(power);
+				component->yourTurn(entity, power, console);
 
 				if (component->isDestroyed())
 					component.remove();

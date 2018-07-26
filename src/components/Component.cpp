@@ -5,12 +5,6 @@
 #include "../entities/Entity.h"
 #include "../map/GameMap.h"
 
-// This magical little macro takes a value from the ComponentInfo struct of valueName and then applies all the modifiers of modifierName in this component's upgrades:
-#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) \
-	auto baseValue = fetchInfo().valueName; auto value = baseValue; \
-	for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
-	return value;
-
 Random Component::random = Random();
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
@@ -20,7 +14,7 @@ const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
 }
 
-void Component::yourTurn(PowerPool &pool) {
+void Component::yourTurn(Entity &entity, PowerPool &pool, Console &console) {
 	if (isEnabled()) {
 		pool.increasePower(getPassivePowerGeneration());
 		increaseHeat(getPassiveHeatGeneration());
@@ -34,10 +28,18 @@ void Component::yourTurn(PowerPool &pool) {
 	if (disabledForTurns > 0)
 		disabledForTurns--;
 
-	if (heat >= getFatalHeatLevel() && random.percentageChange(80)) // If at a fatal heat level then there is an 80% chance that the component will become disabled.
-		disabledForTurns += random.integerRange(2, 3);
-	else if (heat >= getDangerousHeatLevel() && random.percentageChange(50)) // If at a dangerous heat level then the chance is 50% of becoming disabled.
-		disabledForTurns += random.integerRange(1, 2);
+	Console::MessageType messageType = entity.isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO;
+	int disabledFor = 0;
+
+	if (atFatalHeatLevel() && random.percentageChange(80))
+		disabledFor = random.integerRange(2, 3);
+	else if (heat >= getDangerousHeatLevel() && random.percentageChange(50))
+		disabledFor = random.integerRange(1, 2);
+
+	if (disabledFor > 0) {
+		disabledForTurns += disabledFor;
+		console.display({ entity.getFullName() + " had component " + getName() + " become disabled for " + std::to_string(disabledFor) + " more turns due to overheating!", messageType });
+	}
 }
 
 // Note that is is only called if the component is enabled and the power pool has the same or greater power available than the passive power consumption value.

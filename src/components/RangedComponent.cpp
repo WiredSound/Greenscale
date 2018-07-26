@@ -38,24 +38,5 @@ Damage RangedComponent::getProjectileDamage() {
 	return fetchInfo().projectileDamage; // TODO: Apply upgrades.
 }
 
-unsigned int RangedComponent::getProjectileRange() {
-	unsigned int baseRange = fetchInfo().projectileRange;
-	unsigned int range = baseRange;
-
-	for (ComponentUpgrade &upgrade : upgrades) {
-		range += static_cast<unsigned int>(ceil(baseRange * upgrade.projectileModifier));
-	}
-
-	return range;
-}
-
-unsigned int RangedComponent::getProjectilePenetration() {
-	unsigned int basePenetration = fetchInfo().projectilePenetration;
-	unsigned int penetration = basePenetration;
-
-	for (ComponentUpgrade &upgrade : upgrades) {
-		penetration += static_cast<unsigned int>(ceil(basePenetration * upgrade.projectileModifier));
-	}
-
-	return penetration;
-}
+unsigned int RangedComponent::getProjectileRange() { RETURN_VALUE_WITH_UPGRADES(projectileRange, projectileModifier) }
+unsigned int RangedComponent::getProjectilePenetration() { RETURN_VALUE_WITH_UPGRADES(projectilePenetration, projectileModifier) }

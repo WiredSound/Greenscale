@@ -9,7 +9,7 @@
 class ComponentGrid {
 public:
 	ComponentGrid(sf::Vector2u size);
-	void turnPassed();
+	void turnPassed(Entity &entity, Console &console);
 	Optional<Component> &getComponentByIndex(unsigned int index);
 	Optional<Component> &getComponentAt(sf::Vector2u pos);
 	Optional<Component> &getRandomComponent();

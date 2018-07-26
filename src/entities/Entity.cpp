@@ -22,7 +22,7 @@ bool Entity::yourTurnCurrently() {
 }
 
 void Entity::yourTurnEnd() {
-	componentGrid.turnPassed();
+	componentGrid.turnPassed(*this, console);
 	DEBUG_LOG("Turn ends for entity: " << personalName);
 	myTurn = false;
 }

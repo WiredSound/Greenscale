@@ -12,6 +12,12 @@ class Entity;
 class GameMap;
 class PowerPool;
 
+// This magical little macro takes a value from the ComponentInfo struct of valueName and then applies all the modifiers of modifierName in this component's upgrades:
+#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) \
+	auto baseValue = fetchInfo().valueName; auto value = baseValue; \
+	for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
+	return value;
+
 /*
  * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
  * the spread of heat and disruption between components. Components can have a collection of ComponentUpgrade structs which modify the base states of the component. The base stats of a
@@ -21,7 +27,7 @@ class PowerPool;
 class Component {
 public:
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
-	void yourTurn(PowerPool &pool);
+	void yourTurn(Entity &entity, PowerPool &pool, Console &console);
 	std::vector<ProjectileArc> use(Entity &user, MovementPath path, PowerPool &pool, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 
 	const ComponentInfo &fetchInfo();
