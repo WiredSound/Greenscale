@@ -24,7 +24,7 @@ void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
 }
 
 bool EntityLayer::isPositionFree(sf::Vector2u pos) {
-	for (std::shared_ptr<Entity> &entity : getEntitiesAt(pos)) {
+	for (std::shared_ptr<Entity> &entity : getEntitiesOver(pos)) {
 		if (entity->isBlocking())
 			return false;
 	}
