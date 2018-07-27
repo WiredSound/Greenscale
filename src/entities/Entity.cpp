@@ -4,9 +4,10 @@
 
 PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
 
-Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController,
-	Console &consoleRef) : id(entityId), manager(entityManager), personalName(entityName), position(pos), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
-	controller(entityController), console(consoleRef), currentPath(pos), visualMovementSpeed(sf::milliseconds(150)) {}
+Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction,
+	std::shared_ptr<EntityController> entityController, Console &consoleRef)
+	: id(entityId), manager(entityManager), personalName(entityName), position(entityPosition), faction(entityFaction), componentGrid(sf::Vector2u(2, 2) /* TODO: Load grid size. */),
+	controller(entityController), console(consoleRef), currentPath(entityPosition), visualMovementSpeed(sf::milliseconds(150)) {}
 
 void Entity::yourTurnBegin() {
 	DEBUG_LOG("Turn begins for entity: " << personalName);
@@ -50,16 +51,13 @@ sf::Vector2u Entity::getPosition() const {
 	return position;
 }
 
+sf::Vector2u Entity::getSize() {
+	return fetchInfo().size;
+}
+
 sf::Vector2f Entity::getAbsoluteCentrePosition() const {
 	auto pos = map->tilePosToWorldPos(position);
 	return sf::Vector2f(pos.x + map->tileSize.x / 2, pos.y + map->tileSize.y / 2);
-}
-
-unsigned int Entity::getX() const {
-	return position.x;
-}
-unsigned int Entity::getY() const {
-	return position.y;
 }
 
 Faction Entity::getFaction() {
@@ -72,6 +70,11 @@ bool Entity::reachedPathTarget() {
 
 bool Entity::withinRange(int distance) {
 	return distance <= getMovementRange();
+}
+
+bool Entity::overPosition(sf::Vector2u pos) {
+	return pos.x >= position.x && pos.x < position.x + getSize().x
+		&& pos.y >= position.y && pos.y < position.y + getSize().y;
 }
 
 const EntityInfo &Entity::fetchInfo() {
@@ -221,7 +224,7 @@ sf::Color Entity::getColour() {
 
 bool Entity::moveDirectlyBy(sf::Vector2u movement) {
 	if (map != nullptr) {
-		if (map->isPositionFree(position + movement)) {
+		if (map->isPositionFree(position + movement, getSize())) {
 			position = position + movement;
 			return true;
 		}
@@ -231,7 +234,7 @@ bool Entity::moveDirectlyBy(sf::Vector2u movement) {
 
 bool Entity::moveDirectlyToPosition(sf::Vector2u newPos) {
 	if (map != nullptr) {
-		if (map->isPositionFree(newPos)) {
+		if (map->isPositionFree(newPos, getSize())) {
 			position = newPos;
 			return true;
 		}

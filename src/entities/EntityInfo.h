@@ -11,5 +11,6 @@ struct EntityInfo {
 	std::string name;
 	std::string description;
 	std::string type;
+	sf::Vector2u size;
 	std::map<const std::string, std::shared_ptr<Animation>> animations;
 };

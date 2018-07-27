@@ -32,11 +32,23 @@ bool EntityLayer::isPositionFree(sf::Vector2u pos) {
 	return true;
 }
 
+// This method only checks for entities at the exact given position and does not take into account entities that are larger than 1x1.
 std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesAt(sf::Vector2u pos) {
 	std::vector<std::shared_ptr<Entity>> entitiesHere;
 
 	for (std::shared_ptr<Entity> &entity : entities) {
 		if (entity->getPosition() == pos)
+			entitiesHere.push_back(entity);
+	}
+
+	return entitiesHere;
+}
+
+std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesOver(sf::Vector2u pos) {
+	std::vector<std::shared_ptr<Entity>> entitiesHere;
+
+	for (std::shared_ptr<Entity> &entity : entities) {
+		if (entity->overPosition(pos))
 			entitiesHere.push_back(entity);
 	}
 
@@ -74,6 +86,8 @@ void EntityLayer::addEntity(std::shared_ptr<Entity> entity) {
 void EntityLayer::updateVertices() {
 	for (int i = 0; i < entities.size(); i++) {
 		std::shared_ptr<Entity> &entity = entities[i];
+		sf::Vector2u position = entity->getPosition();
+		sf::Vector2u entitySize = entity->getSize();
 		const Animation::Frame &frame = entity->fetchFrame();
 
 		DEBUG_LOG_SPAM("Adding to vertex array entity " << entity->name << " at: " << entity->getX() << ", " << entity->getY());
@@ -81,16 +95,16 @@ void EntityLayer::updateVertices() {
 		sf::Vertex *quad = &vertices[i * 4];
 
 		// Define the four corners of the Entity's quad.
-		quad[0].position = sf::Vector2f(entity->getX() * tileSize.x, entity->getY() * tileSize.y);
-		quad[1].position = sf::Vector2f((entity->getX() + 1) * tileSize.x, entity->getY() * tileSize.y);
-		quad[2].position = sf::Vector2f((entity->getX() + 1) * tileSize.x, (entity->getY() + 1) * tileSize.y);
-		quad[3].position = sf::Vector2f(entity->getX() * tileSize.x, (entity->getY() + 1) * tileSize.y);
+		quad[0].position = sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y);
+		quad[1].position = sf::Vector2f((position.x + entitySize.x) * tileSize.x, position.y * tileSize.y);
+		quad[2].position = sf::Vector2f((position.x + entitySize.x) * tileSize.x, (position.y + entitySize.y) * tileSize.y);
+		quad[3].position = sf::Vector2f(position.x * tileSize.x, (position.y + entitySize.y) * tileSize.y);
 
 		// Define the texture coordinates.
 		quad[0].texCoords = sf::Vector2f(frame.textureX * tileTextureSize.x, frame.textureY * tileTextureSize.y);
-		quad[1].texCoords = sf::Vector2f((frame.textureX + 1) * tileTextureSize.x, frame.textureY * tileTextureSize.y);
-		quad[2].texCoords = sf::Vector2f((frame.textureX + 1) * tileTextureSize.x, (frame.textureY + 1) * tileTextureSize.y);
-		quad[3].texCoords = sf::Vector2f(frame.textureX * tileTextureSize.x, (frame.textureY + 1) * tileTextureSize.y);
+		quad[1].texCoords = sf::Vector2f((frame.textureX + entitySize.x) * tileTextureSize.x, frame.textureY * tileTextureSize.y);
+		quad[2].texCoords = sf::Vector2f((frame.textureX + entitySize.x) * tileTextureSize.x, (frame.textureY + entitySize.y) * tileTextureSize.y);
+		quad[3].texCoords = sf::Vector2f(frame.textureX * tileTextureSize.x, (frame.textureY + entitySize.y) * tileTextureSize.y);
 
 		// Set the colour.
 		quad[0].color = quad[1].color = quad[2].color = quad[3].color = ((frame.colour == sf::Color(0, 0, 0, 0)) ? entity->getColour() : frame.colour); // Use the default entity colour unless the frame overrides that colour.

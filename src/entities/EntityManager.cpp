@@ -17,6 +17,7 @@ std::pair<IDs::Entities, const EntityInfo> EntityManager::parseJsonManaged(nlohm
 		json["name"].get<std::string>(),
 		json["description"].get<std::string>(),
 		json["type"].get<std::string>(),
+		json.find("size") != json.end() ? sf::Vector2u(json["size"][0], json["size"][1]) : sf::Vector2u(1, 1),
 		JsonHelp::loadAnimationsAsMap(json["animations"])
 	};
 

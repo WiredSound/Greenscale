@@ -22,7 +22,7 @@ class EntityController;
 
 class Entity {
 public:
-	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u pos, Faction entityFaction, std::shared_ptr<EntityController> entityController,
+	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, std::shared_ptr<EntityController> entityController,
 		Console &consoleRef);
 
 	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
@@ -35,13 +35,13 @@ public:
 	virtual bool updateAttacking();
 
 	sf::Vector2u getPosition() const;
+	sf::Vector2u getSize();
 	sf::Vector2f getAbsoluteCentrePosition() const;
-	unsigned int getX() const;
-	unsigned int getY() const;
 	bool moveTo(sf::Vector2u movePos);
 	bool setMovementPath(MovementPath path);
 	bool reachedPathTarget();
 	bool withinRange(int distance);
+	bool overPosition(sf::Vector2u pos);
 
 	const EntityInfo &fetchInfo();
 	std::string getEntityName();
@@ -104,7 +104,6 @@ private:
 	ComponentGrid componentGrid;
 
 	sf::Vector2u position;
-	sf::Vector2u size;
 
 	unsigned int powerLevel = 0;
 

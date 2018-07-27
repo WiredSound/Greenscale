@@ -29,6 +29,7 @@ namespace IDs {
 	enum Entities : char {
 		TROOP_01 = 0,
 		RESTRUCTOR_01 = 1,
-		SCANNER_01 = 2
+		SCANNER_01 = 2,
+		TROOP_ULTRA = 3
 	};
 }

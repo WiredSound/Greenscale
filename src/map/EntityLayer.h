@@ -12,6 +12,7 @@ public:
 
 	void addEntity(std::shared_ptr<Entity> entity);
 	std::vector<std::shared_ptr<Entity>> getEntitiesAt(sf::Vector2u pos);
+	std::vector<std::shared_ptr<Entity>> getEntitiesOver(sf::Vector2u pos);
 	std::vector<std::shared_ptr<Entity>> getEntities();
 
 	void update();

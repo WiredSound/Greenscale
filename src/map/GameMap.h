@@ -48,7 +48,11 @@ public:
 	bool isTilePositionFree(sf::Vector2u position);
 	bool isEntityPositionFree(sf::Vector2u position);
 	bool isPositionFree(sf::Vector2u position);
+	bool isPositionFree(sf::Vector2u position, sf::Vector2u size);
 	sf::Vector2u findNearestFreePosition(sf::Vector2u position, unsigned int maximumIterations = 100);
+
+	//std::shared_ptr<Entity> findEntityNearestToPoint(sf::Vector2u point);
+	//std::shared_ptr<Entity> findEntityNearestToPoint(sf::Vector2u point, std::vector<Faction> factions);
 
 	bool enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int penetration);
 	unsigned int applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration);

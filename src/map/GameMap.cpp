@@ -157,6 +157,17 @@ bool GameMap::isPositionFree(sf::Vector2u position) {
 	return isTilePositionFree(position) && isEntityPositionFree(position);
 }
 
+bool GameMap::isPositionFree(sf::Vector2u position, sf::Vector2u size) {
+	for (unsigned int x = position.x; x < position.x + size.x; x++) {
+		for (unsigned int y = position.y; y < position.y + size.y; y++) {
+			if (!isPositionFree(sf::Vector2u(x, y)))
+				return false;
+		}
+	}
+
+	return true;
+}
+
 sf::Vector2u GameMap::findNearestFreePosition(sf::Vector2u position, unsigned int maximumIterations) {
 	std::vector<sf::Vector2u> adjacentPositions = getAdjacentPositions(position);
 	adjacentPositions.insert(adjacentPositions.begin(), position); // Add the given position so that it is returned should it happen to already be a free position.
