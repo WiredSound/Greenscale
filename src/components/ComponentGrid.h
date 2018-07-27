@@ -35,7 +35,9 @@ public:
 	std::vector<ProjectileArc> use(Optional<Component> &component, Entity &user, MovementPath path, Console &console);
 	std::vector<ProjectileArc> use(sf::Vector2u position, Entity &user, MovementPath path, Console &console);
 
+	std::vector<sf::Vector2u> findAllGridPositions();
 	std::vector<sf::Vector2u> findFunctionalPositions();
+	std::vector<sf::Vector2u> findFunctionalPositions(std::vector<sf::Vector2u> from);
 	std::vector<sf::Vector2u> findWeaponPositions();
 	std::vector<sf::Vector2u> findActiveCoolingPositions();
 	std::vector<sf::Vector2u> findPassiveCoolingPositions();
@@ -43,8 +45,9 @@ public:
 	std::vector<sf::Vector2u> findDangerousHeatPositions();
 	std::vector<sf::Vector2u> findHotPositions();
 
+	std::vector<sf::Vector2u> adjacentPositionsTo(sf::Vector2u pos);
+
 protected:
-	std::vector<unsigned int> getAdjacentComponentIndexes(sf::Vector2u pos);
 	unsigned int getIndex(const sf::Vector2u &pos);
 
 private:
@@ -57,5 +60,5 @@ private:
 	bool componentEquipped = false;
 	sf::Vector2u equippedPosition;
 
-	float heatSpreadFraction; // The amount of heat a component will distribute to adjacent components per turn.
+	float heatSpreadFraction = 0.3f;
 };

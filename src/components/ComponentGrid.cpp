@@ -2,18 +2,14 @@
 
 // This is another cryptically named macro that is similar to the one found in the Component.cpp file.
 // It's purpose is to make the creation of methods like findWeaponPositions, findActiveCoolerPositions, etc. require less boilerplate code.
-#define GET_COMPONENT_POSITIONS_WHERE(methodName) \
-	std::vector<sf::Vector2u> positions; \
-	\
-	for (unsigned int x = 0; x < gridSize.x; x++) { \
-		for (unsigned int y = 0; y < gridSize.y; y++) { \
-			sf::Vector2u position(x, y); \
-			Optional<Component> &component = getComponentAt(position); \
-			\
-			if(component && component->methodName()) positions.push_back(position); \
-		} \
-	} \
-	\
+#define GET_COMPONENT_POSITIONS_WHERE(methodName, fromComponentsPosition)					\
+	std::vector<sf::Vector2u> positions;													\
+																							\
+	for(sf::Vector2u componentPosition : (fromComponentsPosition)) {						\
+		Optional<Component> &component = getComponentAt(componentPosition);					\
+		if (component && component->methodName())											\
+			positions.push_back(componentPosition);											\
+	}																						\
 	return positions;
 // C++ really needs multiline macros...
 
@@ -24,17 +20,26 @@ ComponentGrid::ComponentGrid(sf::Vector2u size) : power(*this) {
 void ComponentGrid::turnPassed(Entity &entity, Console &console) {
 	// TODO: Handle the transfer of heat and disruption and destroy components with 0 integrity.
 
-	for (unsigned int x = 0; x < gridSize.x; x++) {
-		for (unsigned int y = 0; y < gridSize.y; y++) {
-			sf::Vector2u position(x, y);
-			auto &component = getComponentAt(position);
+	for (sf::Vector2u position : findAllGridPositions()) {
+		auto &component = getComponentAt(position);
 
-			if (component) {
-				component->yourTurn(entity, power, console);
+		if (component) {
+			component->yourTurn(entity, power, console);
 
-				if (component->isDestroyed())
-					component.remove();
+			auto adjacent = findFunctionalPositions(adjacentPositionsTo(position));
+			auto heatShareTotal = static_cast<unsigned int>(component->getHeatLevel() * heatSpreadFraction); // The amount of heat to be distributed between all of the adjacent components.
+			auto heatShare = adjacent.size() > 0 ? static_cast<unsigned int>(heatShareTotal / adjacent.size()) : 0u; // The amount of heat distributed for each component individually.
+
+			for (sf::Vector2u adjacentPosition : adjacent) {
+				Optional<Component> &adjacentComponent = getComponentAt(adjacentPosition);
+
+				DEBUG_LOG_SPAM("Component at " << position.x << ", " << position.y << " spreading heat " << heatShare << " to adjacent component at: " << adjacentPosition.x << ", " << adjacentPosition.y);
+
+				component->decreaseHeat(heatShare);
+				adjacentComponent->increaseHeat(heatShare);
 			}
+
+			if (component->isDestroyed()) component.remove();
 		}
 	}
 }
@@ -64,23 +69,6 @@ Optional<Component> &ComponentGrid::getRandomComponent() {
 
 const sf::Vector2u &ComponentGrid::getGridSize() const {
 	return gridSize;
-}
-
-// Gets the index of the components vector of components adjacent to pos (assuming they are within bounds).
-// TODO: Handle when a position on the edge of the grid is given.
-std::vector<unsigned int> ComponentGrid::getAdjacentComponentIndexes(sf::Vector2u pos) {
-	std::vector<unsigned int> indexes;
-
-	if (pos.x < gridSize.x)
-		indexes.push_back(getIndex(sf::Vector2u(pos.x + 1, pos.y)));
-	if (pos.x > 0)
-		indexes.push_back(getIndex(sf::Vector2u(pos.x - 1, pos.y)));
-	if (pos.y < gridSize.y)
-		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y + 1)));
-	if (pos.y > 0)
-		indexes.push_back(getIndex(sf::Vector2u(pos.x, pos.y - 1)));
-
-	return indexes;
 }
 
 void ComponentGrid::resize(sf::Vector2u size) {
@@ -170,13 +158,40 @@ std::vector<ProjectileArc> ComponentGrid::use(sf::Vector2u position, Entity &use
 	return std::vector<ProjectileArc>();
 }
 
-std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions() { GET_COMPONENT_POSITIONS_WHERE(isFunctional) }
-std::vector<sf::Vector2u> ComponentGrid::findWeaponPositions() { GET_COMPONENT_POSITIONS_WHERE(isWeapon) }
-std::vector<sf::Vector2u> ComponentGrid::findActiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isActiveCooling) }
-std::vector<sf::Vector2u> ComponentGrid::findPassiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isPassiveCooling) }
-std::vector<sf::Vector2u> ComponentGrid::findFatalHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atFatalHeatLevel) }
-std::vector<sf::Vector2u> ComponentGrid::findDangerousHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousHeatLevel) }
-std::vector<sf::Vector2u> ComponentGrid::findHotPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousOrAboveHeatLevel) }
+std::vector<sf::Vector2u> ComponentGrid::findAllGridPositions() {
+	std::vector<sf::Vector2u> positions;
+
+	for (unsigned int x = 0; x < gridSize.x; x++) {
+		for (unsigned int y = 0; y < gridSize.y; y++) {
+			positions.push_back(sf::Vector2u(x, y));
+		}
+	}
+
+	return positions;
+}
+std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions() { GET_COMPONENT_POSITIONS_WHERE(isFunctional, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions(std::vector<sf::Vector2u> from) { GET_COMPONENT_POSITIONS_WHERE(isFunctional, from) }
+std::vector<sf::Vector2u> ComponentGrid::findWeaponPositions() { GET_COMPONENT_POSITIONS_WHERE(isWeapon, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findActiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isActiveCooling, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findPassiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isPassiveCooling, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findFatalHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atFatalHeatLevel, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findDangerousHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousHeatLevel, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findHotPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousOrAboveHeatLevel, findAllGridPositions()) }
+
+std::vector<sf::Vector2u> ComponentGrid::adjacentPositionsTo(sf::Vector2u pos) {
+	std::vector<sf::Vector2u> adjacent;
+
+	if (pos.x > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y)); // LEFT
+	if (pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x, pos.y - 1)); // ABOVE
+	if (pos.x < gridSize.x) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y)); // RIGHT
+	if (pos.y < gridSize.y) adjacent.push_back(sf::Vector2u(pos.x, pos.y + 1)); // BELOW
+	if (pos.x > 0 && pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y - 1)); // LEFT ABOVE
+	if (pos.x > 0 && pos.y < gridSize.y) adjacent.push_back(sf::Vector2u(pos.x - 1, pos.y + 1)); // LEFT BELOW
+	if (pos.x < gridSize.x && pos.y > 0) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y - 1)); // RIGHT ABOVE
+	if (pos.x < gridSize.x && pos.y < gridSize.y) adjacent.push_back(sf::Vector2u(pos.x + 1, pos.y + 1)); // RIGHT BELOW
+
+	return adjacent;
+}
 
 unsigned int ComponentGrid::getIndex(const sf::Vector2u &pos) {
 	return pos.y * gridSize.x + pos.x;
