@@ -15,6 +15,9 @@ const ComponentInfo &Component::fetchInfo() {
 }
 
 void Component::yourTurn(Entity &entity, PowerPool &pool, Console &console) {
+	if (disabledForTurns > 0)
+		disabledForTurns--;
+
 	if (isEnabled()) {
 		pool.increasePower(getPassivePowerGeneration());
 		increaseHeat(getPassiveHeatGeneration());
@@ -23,22 +26,24 @@ void Component::yourTurn(Entity &entity, PowerPool &pool, Console &console) {
 			DEBUG_LOG("Component " << getName() << " has enough power (" << getPassivePowerConsumption() << " of " << pool.getPowerLevel() << ") to call yourTurnEnabled!");
 			yourTurnEnabled(pool);
 		}
+		else if (disabledForTurns == 0) {
+			DEBUG_LOG("Component " << getName() << " has been disabled due to a lack of power!");
+			disabledForTurns += 1;
+		}
 	}
 
-	if (disabledForTurns > 0)
-		disabledForTurns--;
-
-	Console::MessageType messageType = entity.isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO;
-	int disabledFor = 0;
+	int disabledForHeat = 0;
 
 	if (atFatalHeatLevel() && random.percentageChange(80))
-		disabledFor = random.integerRange(2, 3);
+		disabledForHeat = random.integerRange(2, 3);
 	else if (heat >= getDangerousHeatLevel() && random.percentageChange(50))
-		disabledFor = random.integerRange(1, 2);
+		disabledForHeat = random.integerRange(1, 2);
 
-	if (disabledFor > 0) {
-		disabledForTurns += disabledFor;
-		console.display({ entity.getFullName() + " had component " + getName() + " become disabled for " + std::to_string(disabledFor) + " more turns due to overheating!", messageType });
+	if (disabledForHeat > 0) {
+		disabledForTurns += disabledForHeat;
+
+		Console::MessageType messageType = entity.isMemberOfPlayerFaction() ? Console::MessageType::WARNING : Console::MessageType::INFO;
+		console.display({ entity.getFullName() + " had component " + getName() + " become disabled for " + std::to_string(disabledForHeat) + " more turns due to overheating!", messageType });
 	}
 }
 
