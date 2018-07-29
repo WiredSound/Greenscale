@@ -16,7 +16,7 @@ private:
 	TurnManager &turnManager;
 	sf::Font &font;
 	unsigned int entityInfoLines;
-	unsigned int nameLine, integrityLine, powerLine;
+	unsigned int nameLine, integrityLine, powerLine, movementRangeLine;
 
 	sf::Color colourBasedOnPercentage(unsigned int integrity, unsigned int maxIntegrity);
 };

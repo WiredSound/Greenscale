@@ -8,6 +8,7 @@ EntityGui::EntityGui(Gui &parent, sf::Font &textFont, unsigned int fontSize, Tur
 	nameLine = lines->addLine(TextLine(font, fontSize, { "Name: ", sf::Color::White }));
 	integrityLine = lines->addLine(TextLine(font, fontSize, { "Integrity: ", sf::Color::White }));
 	powerLine = lines->addLine(TextLine(font, fontSize, { "Power: ", sf::Color::White }));
+	movementRangeLine = lines->addLine(TextLine(font, fontSize, { "Movement Range: ", sf::Color::White }));
 
 	entityInfoLines = addChild(std::move(lines));
 }
@@ -16,25 +17,29 @@ void EntityGui::update(Input &input) {
 	GuiWindow::update(input);
 
 	auto &entity = turnManager.getCurrentEntity();
+	auto lines = getChild<TextLinesGui>(entityInfoLines);
 
-	getChild<TextLinesGui>(entityInfoLines)->getLine(nameLine).set(1, { entity->getFullName(), sf::Color::White });
+	lines->getLine(nameLine).set(1, { entity->getFullName(), sf::Color::White });
 
 	unsigned int integrity = entity->getIntegrity();
 	unsigned int maxIntegrity = entity->getMaxIntegrity();
-	getChild<TextLinesGui>(entityInfoLines)->getLine(integrityLine).set(1, { std::to_string(integrity) + "/" + std::to_string(maxIntegrity), colourBasedOnPercentage(integrity, maxIntegrity) });
+	lines->getLine(integrityLine).set(1, { std::to_string(integrity) + "/" + std::to_string(maxIntegrity), colourBasedOnPercentage(integrity, maxIntegrity) });
 
 	unsigned int power = entity->getPowerLevel();
 	unsigned int maxPower = entity->getMaxPowerStorage();
-	getChild<TextLinesGui>(entityInfoLines)->getLine(powerLine).set(1, { std::to_string(power) + "/" + std::to_string(maxPower), colourBasedOnPercentage(power, maxPower) });
+	lines->getLine(powerLine).set(1, { std::to_string(power) + "/" + std::to_string(maxPower), colourBasedOnPercentage(power, maxPower) });
+
+	unsigned int movementRange = entity->getMovementRange();
+	lines->getLine(movementRangeLine).set(1, { std::to_string(movementRange), sf::Color::Green });
 }
 
 sf::Color EntityGui::colourBasedOnPercentage(unsigned int integrity, unsigned int maxIntegrity) {
 	float fraction = 0.0f;
 
 	if (maxIntegrity > 0)
-		fraction = static_cast<float>(integrity / maxIntegrity);
+		fraction = static_cast<float>(integrity) / static_cast<float>(maxIntegrity);
 
 	if (fraction <= 0.25) return sf::Color::Red;
-	if (fraction <= 0.5) return sf::Color::Yellow;
+	if (fraction <= 0.75) return sf::Color::Yellow;
 	return sf::Color::Green;
 }

@@ -18,8 +18,6 @@ ComponentGrid::ComponentGrid(sf::Vector2u size) : power(*this) {
 }
 
 void ComponentGrid::turnPassed(Entity &entity, Console &console) {
-	// TODO: Handle the transfer of heat and disruption and destroy components with 0 integrity.
-
 	for (sf::Vector2u position : findAllGridPositions()) {
 		auto &component = getComponentAt(position);
 
@@ -103,7 +101,7 @@ unsigned int ComponentGrid::getMaxPowerStorage() {
 	unsigned int powerStorage = 0;
 
 	for (auto &component : components)
-		if (component && component->isEnabled()) powerStorage += component->getPowerStorage();
+		if (component) powerStorage += component->getPowerStorage();
 
 	return powerStorage;
 }
