@@ -22,8 +22,8 @@ class EntityController;
 
 class Entity {
 public:
-	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, std::shared_ptr<EntityController> entityController,
-		Console &consoleRef);
+	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, sf::Vector2u gridSize,
+		std::shared_ptr<EntityController> entityController, Console &consoleRef);
 
 	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
 	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.

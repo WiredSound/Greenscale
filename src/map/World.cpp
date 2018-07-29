@@ -12,8 +12,10 @@ World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Conso
 {
 	auto player = constructNewPlayer(IDs::Entities::TROOP_ULTRA, sf::Vector2u(1, 1), Faction::PLAYER);
 
-	auto follower = builder.entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, std::make_shared<FollowEntityController>(player, 2, console));
+	auto follower = builder.entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, sf::Vector2u(2, 2), std::make_shared<FollowEntityController>(player, 2, console));
 	follower->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR));
+	follower->getComponentGrid().getComponentAt(sf::Vector2u(0, 1)).set(builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::MECHANICAL_LEG));
+	follower->getComponentGrid().getComponentAt(sf::Vector2u(0, 1))->setManualEnable(true);
 
 	playerEntities.push_back(player);
 	playerEntities.push_back(follower);
@@ -42,7 +44,7 @@ TurnManager &World::getTurnManager() {
 }
 
 std::shared_ptr<Entity> World::constructNewPlayer(IDs::Entities id, sf::Vector2u position, Faction faction) {
-	auto player = builder.entityBuilder.buildEntity(id, "Player", position, faction, builder.playerController);
+	auto player = builder.entityBuilder.buildEntity(id, "Player", position, faction, sf::Vector2u(3, 3), builder.playerController);
 	auto &grid = player->getComponentGrid();
 
 	grid.getComponentAt(sf::Vector2u(0, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR);
