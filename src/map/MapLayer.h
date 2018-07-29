@@ -9,7 +9,8 @@
 class MapLayer : public sf::Drawable {
 public:
 	MapLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr<sf::Texture> layerTexture);
-	bool withinBounds(int x, int y);
+	bool withinBounds(sf::Vector2u pos);
+	unsigned int getIndex(sf::Vector2u pos);
 
 	const sf::Vector2u size; // Size of the layer in tiles (not pixels).
 

@@ -10,7 +10,7 @@
 World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Console &consoleRef, sf::Vector2f tileSize)
 	: builder(tileSize, { Faction::PLAYER, Faction::ROGUE }, controller, consoleRef), turnManager(camera), console(consoleRef)
 {
-	auto player = constructNewPlayer(IDs::Entities::TROOP_ULTRA, sf::Vector2u(1, 1), Faction::PLAYER);
+	auto player = constructNewPlayer(IDs::Entities::TROOP_01, sf::Vector2u(1, 1), Faction::PLAYER);
 
 	auto follower = builder.entityBuilder.buildEntity(IDs::Entities::SCANNER_01, "Follower", sf::Vector2u(1, 3), Faction::ROGUE, sf::Vector2u(2, 2), std::make_shared<FollowEntityController>(player, 2, console));
 	follower->getComponentGrid().getComponentAt(sf::Vector2u(0, 0)).set(builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR));

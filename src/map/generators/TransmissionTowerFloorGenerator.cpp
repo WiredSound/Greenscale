@@ -9,10 +9,10 @@ void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &
 	sf::Vector2i centre = getCentre(tiles);
 
 	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(centre, radius);
-	tiles->fill(mainFloorTile, mainFloorColour, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end())); // Flooring.
+	tiles->fill(mainFloorTile, mainFloorColour, 0, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end())); // Flooring.
 
 	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(centre, radius, thickness);
-	tiles->fill(mainWallTile, mainWallColour, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end())); // Outer circular wall.
+	tiles->fill(mainWallTile, mainWallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end())); // Outer circular wall.
 
 	buildDoor(tiles, static_cast<int>(std::ceil(static_cast<float>(radius) / 10)), centre);
 }
@@ -28,12 +28,12 @@ void TransmissionTowerFloorGenerator::buildDoor(std::unique_ptr<TileLayer> &tile
 	int xEnd = xStart + width;
 
 	for (int x = xStart; x < xEnd; x++)
-		tiles->setTileAt(sf::Vector2u(x, y), IDs::DOOR); // Place the door tiles.
+		tiles->setIdAt(sf::Vector2u(x, y), IDs::DOOR); // Place the door tiles.
 
 	int clearance = static_cast<int>(std::ceil(width / 2));
 
 	for (int x = xStart - clearance; x < xEnd + clearance; x++) {
 		for (int i = 1; i < static_cast<int>(thickness); i++)
-			tiles->setTileAt(sf::Vector2u(x, y + i), mainFloorTile, mainFloorColour); // Clear any wall tiles that may obstruct the door.
+			tiles->setTileAt(sf::Vector2u(x, y + i), mainFloorTile, mainFloorColour, 0); // Clear any wall tiles that may obstruct the door.
 	}
 }

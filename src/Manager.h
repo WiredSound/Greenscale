@@ -58,7 +58,6 @@ public:
 	}
 
 	const Managed &get(Key key) {
-		assert(key < map.size());
 		return map[key];
 	}
 };

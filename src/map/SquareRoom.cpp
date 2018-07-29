@@ -9,5 +9,5 @@ void SquareRoom::build(std::unique_ptr<TileLayer> &tiles) {
 	tiles->fillRect(wallTile, sf::Vector2u(position.x, position.y + size.y - 1), sf::Vector2u(size.x, 1)); // Bottom wall.
 	tiles->fillRect(wallTile, position, sf::Vector2u(1, size.y)); // Left wall.
 	tiles->fillRect(wallTile, sf::Vector2u(position.x + size.x - 1, position.y), sf::Vector2u(1, size.y)); // Left wall.
-	tiles->setTileAt(sf::Vector2u(position.x + (size.x / 2), position.y + size.y - 1), flooringTile); // Temporary door.
+	tiles->setIdAt(sf::Vector2u(position.x + (size.x / 2), position.y + size.y - 1), flooringTile); // Temporary door.
 }

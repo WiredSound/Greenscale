@@ -16,7 +16,7 @@ void GradientTerrainGenerator::fillGradientTerrain(std::unique_ptr<TileLayer> &t
 
 			DEBUG_LOG_SPAM("Filling position (" << x << ", " << y << ") with colour percentage: " << getPercentageAt(position) * 100);
 
-			tiles->setTileAt(position, tile, getColourAt(position));
+			tiles->setTileAt(position, tile, getColourAt(position), 0);
 		}
 	}
 }

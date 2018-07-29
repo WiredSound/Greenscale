@@ -10,7 +10,7 @@ void MapRoom::build(std::unique_ptr<TileLayer> &tiles) {
 
 	for (unsigned int x = 0; x < position.x + size.x; x++) {
 		for (unsigned int y = 0; y < position.y + size.y; y++) {
-			tiles->setTileAt(sf::Vector2u(x, y), IDs::Tiles::GROUND);
+			tiles->setIdAt(sf::Vector2u(x, y), IDs::Tiles::GROUND);
 		}
 	}
 }

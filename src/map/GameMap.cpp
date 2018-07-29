@@ -185,7 +185,7 @@ sf::Vector2u GameMap::findNearestFreePosition(sf::Vector2u position, unsigned in
 }
 
 bool GameMap::withinBounds(sf::Vector2u pos) {
-	return tiles->withinBounds(pos.x, pos.y) && entities->withinBounds(pos.x, pos.y);
+	return tiles->withinBounds(pos) && entities->withinBounds(pos);
 }
 
 bool GameMap::save(std::string path) {
@@ -210,7 +210,7 @@ unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int pe
 	auto strength = tiles->getTileAt(pos).strength;
 
 	if (enoughPenetrationToDestroyTileAt(pos, penetration)) {
-		tiles->setTileAt(pos, IDs::Tiles::GRASS); // TODO: Replace the tile to something more appropriate.
+		tiles->setIdAt(pos, IDs::Tiles::NOTHING); // TODO: Replace the tile to something more appropriate.
 		penetration -= strength;
 	}
 
