@@ -88,10 +88,10 @@ sf::Vertex *TileLayer::getQuadPtr(sf::Vector2u pos) {
 
 // Define the four corners of the quad.
 void TileLayer::setQuadPosition(sf::Vertex *quad, sf::Vector2u pos, char orientation) {
-	quad[static_cast<int>(orientation + 0) % 4].position = sf::Vector2f(pos.x * tileSize.x, pos.y * tileSize.y);
-	quad[static_cast<int>(orientation + 1) % 4].position = sf::Vector2f((pos.x + 1) * tileSize.x, pos.y * tileSize.y);
-	quad[static_cast<int>(orientation + 2) % 4].position = sf::Vector2f((pos.x + 1) * tileSize.x, (pos.y + 1) * tileSize.y);
-	quad[static_cast<int>(orientation + 3) % 4].position = sf::Vector2f(pos.x * tileSize.x, (pos.y + 1) * tileSize.y);
+	quad[(orientation + 0) % 4].position = sf::Vector2f(pos.x * tileSize.x, pos.y * tileSize.y);
+	quad[(orientation + 1) % 4].position = sf::Vector2f((pos.x + 1) * tileSize.x, pos.y * tileSize.y);
+	quad[(orientation + 2) % 4].position = sf::Vector2f((pos.x + 1) * tileSize.x, (pos.y + 1) * tileSize.y);
+	quad[(orientation + 3) % 4].position = sf::Vector2f(pos.x * tileSize.x, (pos.y + 1) * tileSize.y);
 }
 
 // Define the four texture coordinate pairs.
@@ -104,10 +104,7 @@ void TileLayer::setQuadTexture(sf::Vertex *quad, sf::Vector2u textureCoords) {
 
 // Set the colour of the four corners of the quad.
 void TileLayer::setQuadColour(sf::Vertex *quad, sf::Color colour) {
-	quad[0].color = colour;
-	quad[1].color = colour;
-	quad[2].color = colour;
-	quad[3].color = colour;
+	quad[0].color = quad[1].color = quad[2].color = quad[3].color = colour;
 }
 
 unsigned int TileLayer::getTileCount() {
