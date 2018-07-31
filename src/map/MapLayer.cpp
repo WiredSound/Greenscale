@@ -16,6 +16,10 @@ unsigned int MapLayer::getIndex(sf::Vector2u pos) {
 	return pos.y * size.x + pos.x;
 }
 
+sf::Vector2u MapLayer::getCentre() {
+	return sf::Vector2u(static_cast<unsigned int>(std::round(size.x / 2)), static_cast<unsigned int>(std::round(size.y / 2)));
+}
+
 void MapLayer::updateVertices() {
 	vertices.setPrimitiveType(sf::Quads);
 	vertices.resize(size.x * size.y * 4);

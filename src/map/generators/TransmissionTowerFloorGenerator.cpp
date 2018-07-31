@@ -1,39 +1,47 @@
 #include "TransmissionTowerFloorGenerator.h"
 
-TransmissionTowerFloorGenerator::TransmissionTowerFloorGenerator(unsigned int towerRadius, unsigned int towerThickness,
+TransmissionTowerFloorGenerator::TransmissionTowerFloorGenerator(unsigned int radius, unsigned int thickness,
 	IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour)
-	: radius(towerRadius), thickness(towerThickness),
+	: towerRadius(radius), wallThickness(thickness),
 	mainWallTile(towerMainWallTile), mainWallColour(towerMainWallColour), mainFloorTile(towerMainFloorTile), mainFloorColour(towerMainFloorColour) {}
 
 void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &tiles) {
-	sf::Vector2i centre = getCentre(tiles);
+	const auto centre = static_cast<sf::Vector2i>(tiles->getCentre());
 
-	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(centre, radius);
-	tiles->fill(mainFloorTile, mainFloorColour, 0, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end())); // Flooring.
+	constructCircularRoom(tiles, centre, towerRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 3);
 
-	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(centre, radius, thickness);
-	tiles->fill(mainWallTile, mainWallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end())); // Outer circular wall.
-
-	buildDoor(tiles, static_cast<int>(std::ceil(static_cast<float>(radius) / 10)), centre);
+	int innerCircleRadius = towerRadius / 2.5f;
+	int innerCircleOffset = towerRadius / 2;
+	constructCircularRoom(tiles, sf::Vector2i(centre.x, centre.y + innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 3);
+	constructCircularRoom(tiles, sf::Vector2i(centre.x, centre.y - innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 3);
 }
 
-sf::Vector2i TransmissionTowerFloorGenerator::getCentre(std::unique_ptr<TileLayer> &tiles) {
-	return sf::Vector2i(static_cast<int>(std::round(tiles->size.x / 2)), static_cast<int>(std::round(tiles->size.y / 2)));
-}
+void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2i centrePoint, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour,
+	IDs::Tiles floorTile, sf::Color floorColour, unsigned int doorSize) {
+	// Flooring:
+	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(centrePoint, radius);
+	tiles->fill(floorTile, floorColour, 0, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end()));
 
-void TransmissionTowerFloorGenerator::buildDoor(std::unique_ptr<TileLayer> &tiles, int width, const sf::Vector2i &centre) {
-	int y = centre.y - radius - thickness + 2;
+	// Circular wall:
+	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(centrePoint, radius, wallThickness);
+	tiles->fill(mainWallTile, mainWallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end()));
 
-	int xStart = centre.x - static_cast<int>(std::floor(width / 2));
-	int xEnd = xStart + width;
+	// Door:
+	int y = centrePoint.y - radius - wallThickness + 2;
+
+	int xStart = centrePoint.x - static_cast<int>(std::floor(doorSize / 2));
+	int xEnd = xStart + doorSize;
 
 	for (int x = xStart; x < xEnd; x++)
 		tiles->setIdAt(sf::Vector2u(x, y), IDs::DOOR); // Place the door tiles.
 
-	int clearance = static_cast<int>(std::ceil(width / 2));
+	int clearance = static_cast<int>(std::ceil(doorSize / 2));
 
 	for (int x = xStart - clearance; x < xEnd + clearance; x++) {
-		for (int i = 1; i < static_cast<int>(thickness); i++)
+		for (int i = 1; i < static_cast<int>(doorSize); i++)
 			tiles->setTileAt(sf::Vector2u(x, y + i), mainFloorTile, mainFloorColour, 0); // Clear any wall tiles that may obstruct the door.
 	}
+}
+
+void TransmissionTowerFloorGenerator::buildMachineLine(std::unique_ptr<TileLayer> &tiles, int length, sf::Vector2u middlePoint) {
 }

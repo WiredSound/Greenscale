@@ -6,15 +6,17 @@
 
 class TransmissionTowerFloorGenerator : public MapGenerator {
 public:
-	TransmissionTowerFloorGenerator(unsigned int towerRadius, unsigned int towerThickness, IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour);
+	TransmissionTowerFloorGenerator(unsigned int radius, unsigned int thickness, IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour);
 	virtual void generateTiles(std::unique_ptr<TileLayer> &tiles) override;
 
 protected:
-	sf::Vector2i getCentre(std::unique_ptr<TileLayer> &tiles);
-	void buildDoor(std::unique_ptr<TileLayer> &tiles, int width, const sf::Vector2i &centre);
+	void constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2i centrePoint, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour, IDs::Tiles floorTile, sf::Color floorColour,
+		unsigned int doorSize);
+	void buildDoor(std::unique_ptr<TileLayer> &tiles, unsigned int width, const sf::Vector2i &centre);
+	void buildMachineLine(std::unique_ptr<TileLayer> &tiles, int length, sf::Vector2u middlePoint);
 
 private:
-	unsigned int radius, thickness;
+	unsigned int towerRadius, wallThickness;
 	IDs::Tiles mainWallTile;
 	sf::Color mainWallColour;
 	IDs::Tiles mainFloorTile;
