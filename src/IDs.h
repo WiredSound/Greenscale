@@ -10,8 +10,9 @@ namespace IDs {
 		GRASS = 5,
 		DIRT = 6,
 		BUSH = 7,
-		MACHINARY_CONNECTION = 8,
-		MACHINARY_NODE = 9
+		MACHINERY_CONNECTION = 8,
+		MACHINERY_NODE = 9,
+		MACHINERY_TERMINAL = 10
 	};
 
 	enum Components : unsigned char {

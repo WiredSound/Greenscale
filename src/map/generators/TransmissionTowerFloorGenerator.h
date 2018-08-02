@@ -10,15 +10,14 @@ public:
 	virtual void generateTiles(std::unique_ptr<TileLayer> &tiles) override;
 
 protected:
-	void constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centrePoint, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour, IDs::Tiles floorTile, sf::Color floorColour,
+	void constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour, IDs::Tiles floorTile, sf::Color floorColour,
 		unsigned int doorSize);
-	void constructMachineryInCircularArea(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centrePoint, unsigned int radius, sf::Color colour);
-	void constructVerticalMachineryLine(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour);
+	void constructMachineryInCircularArea(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour);
+	void constructMachineryLines(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour);
+	void constructTerminalMachinery(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour);
 
 private:
 	unsigned int towerRadius, wallThickness;
-	IDs::Tiles mainWallTile;
-	sf::Color mainWallColour;
-	IDs::Tiles mainFloorTile;
-	sf::Color mainFloorColour;
+	IDs::Tiles mainWallTile, mainFloorTile;
+	sf::Color mainWallColour, mainFloorColour;
 };

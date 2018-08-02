@@ -13,25 +13,26 @@ void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &
 	unsigned int innerCircleRadius = towerRadius / 2.5f;
 	unsigned int innerCircleOffset = towerRadius / 2u;
 	constructCircularRoom(tiles, sf::Vector2u(centre.x, centre.y + innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 1);
+	constructMachineryInCircularArea(tiles, sf::Vector2u(centre.x, centre.y + innerCircleOffset), innerCircleRadius, mainFloorColour);
 	constructCircularRoom(tiles, sf::Vector2u(centre.x, centre.y - innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 1);
 	constructMachineryInCircularArea(tiles, sf::Vector2u(centre.x, centre.y - innerCircleOffset), innerCircleRadius, mainFloorColour);
 }
 
-void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centrePoint, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour,
+void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour,
 	IDs::Tiles floorTile, sf::Color floorColour, unsigned int doorSize) {
 	// Flooring:
-	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(static_cast<sf::Vector2i>(centrePoint), radius);
+	std::vector<sf::Vector2i> flooringPositions = GridHelp::buildFilledCircle(static_cast<sf::Vector2i>(centre), radius);
 	tiles->fill(floorTile, floorColour, 0, std::vector<sf::Vector2u>(flooringPositions.begin(), flooringPositions.end()));
 
 	// Circular wall:
-	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(static_cast<sf::Vector2i>(centrePoint), radius, wallThickness);
+	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(static_cast<sf::Vector2i>(centre), radius, wallThickness);
 	tiles->fill(mainWallTile, mainWallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end()));
 
 	// Door:
 	unsigned int halfDoorSize = std::ceil(doorSize / 2u);
-	unsigned int baseY = centrePoint.y - radius;
+	unsigned int baseY = centre.y - radius;
 
-	for (unsigned int x = centrePoint.x - halfDoorSize; x <= centrePoint.x + halfDoorSize; x++) {
+	for (unsigned int x = centre.x - halfDoorSize; x <= centre.x + halfDoorSize; x++) {
 		tiles->setTileAt(sf::Vector2u(x, baseY), IDs::DOOR);
 
 		// Clear the wall tiles in front of the door:
@@ -40,19 +41,28 @@ void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<Tile
 	}
 }
 
-void TransmissionTowerFloorGenerator::constructMachineryInCircularArea(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centrePoint, unsigned int radius, sf::Color colour) {
-	// Square area of vertical lines of machinery:
-	unsigned int halfRadius = radius / 2u;
-	unsigned int spacing = (radius % 2 == 0) ? 2 : 3; // Machine lines are spaced every 2 or 3 tiles apart depending on which divides equally into the radius.
-
-	for (unsigned int x = centrePoint.x - halfRadius; x <= centrePoint.x + halfRadius; x += spacing)
-		constructVerticalMachineryLine(tiles, sf::Vector2u(x, centrePoint.y), halfRadius, colour);
+void TransmissionTowerFloorGenerator::constructMachineryInCircularArea(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
+	switch (random.integerRange(1, 2)) {
+	case 1: constructTerminalMachinery(tiles, centre, radius, colour); break;
+	case 2: constructMachineryLines(tiles, centre, radius, colour); break;
+	}
 }
 
-void TransmissionTowerFloorGenerator::constructVerticalMachineryLine(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
-	tiles->setTileAt(sf::Vector2u(centre.x, centre.y - radius), IDs::Tiles::MACHINARY_NODE, colour, 0);
-	tiles->setTileAt(sf::Vector2u(centre.x, centre.y + radius), IDs::Tiles::MACHINARY_NODE, colour, 2);
+void TransmissionTowerFloorGenerator::constructMachineryLines(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
+	unsigned int halfRadius = radius / 2u;
+	unsigned int spacing = (radius % 2 == 0) ? 2 : 3; // Machine lines are spaced either 2 or 3 tiles apart from one another depending on which divides equally into the radius.
 
-	for (unsigned int y = centre.y - radius + 1; y < centre.y + radius; y++)
-		tiles->setTileAt(sf::Vector2u(centre.x, y), IDs::Tiles::MACHINARY_CONNECTION, colour, 0);
+	for (unsigned int x = centre.x - halfRadius; x <= centre.x + halfRadius; x += spacing) {
+		tiles->setTileAt(sf::Vector2u(x, centre.y - halfRadius), IDs::Tiles::MACHINERY_NODE, colour, 0);
+		tiles->setTileAt(sf::Vector2u(x, centre.y + halfRadius), IDs::Tiles::MACHINERY_NODE, colour, 2);
+
+		for (unsigned int y = centre.y - halfRadius + 1; y < centre.y + halfRadius; y++)
+			tiles->setTileAt(sf::Vector2u(x, y), IDs::Tiles::MACHINERY_CONNECTION, colour, 0);
+	}
+}
+
+void TransmissionTowerFloorGenerator::constructTerminalMachinery(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
+	tiles->setTileAt(sf::Vector2u(centre.x - 1, centre.y), IDs::MACHINERY_NODE, colour, 1);
+	tiles->setTileAt(centre, IDs::MACHINERY_TERMINAL, colour, 1);
+	tiles->setTileAt(sf::Vector2u(centre.x + 1, centre.y), IDs::MACHINERY_NODE, colour, 3);
 }
