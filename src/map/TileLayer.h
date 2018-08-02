@@ -17,8 +17,9 @@ public:
 
 	unsigned int getTileCount();
 
-	void setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, char orientation);
-	void setIdAt(sf::Vector2u pos, IDs::Tiles id, bool setDefaultColour = true);
+	void setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, char orientation = 0); // Colour specified.
+	void setTileAt(sf::Vector2u pos, IDs::Tiles id, char orientation = 0); // Default colour for tile type.
+	void setIdAt(sf::Vector2u pos, IDs::Tiles id); // Does not change the existing colour at the given position.
 	void setColourAt(sf::Vector2u pos, sf::Color colour);
 	void setOrientationAt(sf::Vector2u pos, char orientation);
 

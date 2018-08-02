@@ -22,7 +22,7 @@ World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Conso
 
 	map = builder.buildMap(sf::Vector2u(64, 64), playerEntities,
 	{ std::shared_ptr<MapGenerator>(new PlainsGenerator(IDs::Tiles::GRASS, sf::Color(130, 200, 80), sf::Color(130, 255, 80), { IDs::Tiles::BUSH }, 5)),
-	  std::make_shared<TransmissionTowerFloorGenerator>(25, 2, IDs::Tiles::WALL, sf::Color(150, 150, 150, 255), IDs::Tiles::GROUND, sf::Color(100, 100, 100, 255)) });
+	  std::make_shared<TransmissionTowerFloorGenerator>(30, 2, IDs::Tiles::WALL, sf::Color(150, 150, 150, 255), IDs::Tiles::GROUND, sf::Color(100, 100, 100, 255)) });
 }
 
 void World::update(Input &input) {

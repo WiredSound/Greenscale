@@ -15,8 +15,11 @@ void PlainsGenerator::generateTiles(std::unique_ptr<TileLayer> &tiles) {
 
 	for (unsigned int x = 0; x < tiles->size.x; x++) {
 		for (unsigned int y = 0; y < tiles->size.y; y++) {
-			if (random.percentageChange(shrubFrequency))
-				tiles->setIdAt(sf::Vector2u(x, y), shrubTiles[rand() % shrubTiles.size()], false);
+			if (random.percentageChange(shrubFrequency)) {
+				sf::Vector2u pos(x, y);
+
+				tiles->setIdAt(pos, shrubTiles[rand() % shrubTiles.size()]);
+			}
 		}
 	}
 }

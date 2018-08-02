@@ -113,19 +113,28 @@ unsigned int TileLayer::getTileCount() {
 
 void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, char orientation) {
 	if (withinBounds(pos)) {
-		DEBUG_LOG_SPAM("Set tile colour " << id << " at " << pos.x << ", " << pos.y << " to: " << colour);
+		DEBUG_LOG_SPAM("Set tile at " << pos.x << ", " << pos.y << " to id: " << id << " colour: " << colour << " orientation: " << orientation);
 
-		tiles[getIndex(pos)] = { id, colour, 0 };
+		tiles[getIndex(pos)] = { id, colour, orientation };
 		setupTileQuad(pos);
 	}
 }
 
-void TileLayer::setIdAt(sf::Vector2u pos, IDs::Tiles id, bool setDefaultColour) {
+void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, char orientation) {
+	if (withinBounds(pos)) {
+		DEBUG_LOG_SPAM("Set tile using default colour at " << pos.x << ", " << pos.y << " to id: " << id << " orientation: " << orientation);
+
+		sf::Color defaultColour = manager.get(id).defaultColour;
+		tiles[getIndex(pos)] = { id, defaultColour, orientation };
+		setupTileQuad(pos);
+	}
+}
+
+void TileLayer::setIdAt(sf::Vector2u pos, IDs::Tiles id) {
 	if (withinBounds(pos)) {
 		DEBUG_LOG_SPAM("Set tile ID " << id << " at " << pos.x << ", " << pos.y);
 
 		tiles[getIndex(pos)].id = id;
-		if (setDefaultColour) tiles[getIndex(pos)].colour = getTileAt(pos).defaultColour;
 		setupTileQuad(pos);
 	}
 }
