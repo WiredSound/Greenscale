@@ -10,12 +10,15 @@ void TransmissionTowerFloorGenerator::generateTiles(std::unique_ptr<TileLayer> &
 
 	constructCircularRoom(tiles, centre, towerRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 5);
 
-	unsigned int innerCircleRadius = towerRadius / 2.5f;
-	unsigned int innerCircleOffset = towerRadius / 2u;
-	constructCircularRoom(tiles, sf::Vector2u(centre.x, centre.y + innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 1);
-	constructMachineryInCircularArea(tiles, sf::Vector2u(centre.x, centre.y + innerCircleOffset), innerCircleRadius, mainFloorColour);
-	constructCircularRoom(tiles, sf::Vector2u(centre.x, centre.y - innerCircleOffset), innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 1);
-	constructMachineryInCircularArea(tiles, sf::Vector2u(centre.x, centre.y - innerCircleOffset), innerCircleRadius, mainFloorColour);
+	unsigned int innerCircleRadius = towerRadius / 3;
+	unsigned int innerCircleOffset = towerRadius / 1.8f;
+	auto innerCirclePositions = { sf::Vector2u(centre.x + innerCircleOffset, centre.y), sf::Vector2u(centre.x - innerCircleOffset, centre.y),
+		sf::Vector2u(centre.x, centre.y + innerCircleOffset), sf::Vector2u(centre.x, centre.y - innerCircleOffset) };
+
+	for (sf::Vector2u position : innerCirclePositions) {
+		constructCircularRoom(tiles, position, innerCircleRadius, mainWallTile, mainWallColour, mainFloorTile, mainFloorColour, 1);
+		constructMachineryInCircularArea(tiles, position, innerCircleRadius, mainFloorColour);
+	}
 }
 
 void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour,
@@ -42,9 +45,9 @@ void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<Tile
 }
 
 void TransmissionTowerFloorGenerator::constructMachineryInCircularArea(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
-	switch (random.integerRange(1, 2)) {
-	case 1: constructTerminalMachinery(tiles, centre, radius, colour); break;
-	case 2: constructMachineryLines(tiles, centre, radius, colour); break;
+	switch (random.integerRange(0, 1)) {
+	case 0: constructTerminalMachinery(tiles, centre, radius, colour); break;
+	case 1: constructMachineryLines(tiles, centre, radius, colour); break;
 	}
 }
 
@@ -62,7 +65,5 @@ void TransmissionTowerFloorGenerator::constructMachineryLines(std::unique_ptr<Ti
 }
 
 void TransmissionTowerFloorGenerator::constructTerminalMachinery(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
-	tiles->setTileAt(sf::Vector2u(centre.x - 1, centre.y), IDs::MACHINERY_NODE, colour, 1);
-	tiles->setTileAt(centre, IDs::MACHINERY_TERMINAL, colour, 1);
-	tiles->setTileAt(sf::Vector2u(centre.x + 1, centre.y), IDs::MACHINERY_NODE, colour, 3);
+	tiles->setTileAt(centre, IDs::MACHINERY_TERMINAL, colour);
 }
