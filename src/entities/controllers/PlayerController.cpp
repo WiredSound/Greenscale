@@ -4,12 +4,13 @@
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)
 #define ATTACK_PATH_COLOUR sf::Color::Magenta
 
-PlayerController::PlayerController(GameGui &gameGui, Console &consoleRef) : path(sf::Vector2u(0, 0)), gui(gameGui), console(consoleRef) {}
+PlayerController::PlayerController(GameGui &gameGui, Console &consoleRef, Camera &cameraRef) : path(sf::Vector2u(0, 0)), gui(gameGui), console(consoleRef), camera(cameraRef) {}
 
 bool PlayerController::handle(Entity *entity, Input &input) {
 	GameMap *map = entity->getMapReference();
 
-	sf::Vector2u mouseTilePos = map->worldPosToTilePos(input.getMouseWorldPosition()); // Get the map tile that the mouse is currently over.
+	sf::Vector2f mousePos = input.getMouseWorldPosition();
+	sf::Vector2u mouseTilePos = map->worldPosToTilePos(mousePos); // Get the map tile that the mouse is currently over.
 
 	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
 		moveMode = !moveMode;
@@ -36,6 +37,9 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 					return true; // Path now set so player's turn ends.
 				}
 			}
+
+			if (input.isMouseButtonJustPressed(sf::Mouse::Button::Right))
+				camera.moveTowardsCentre(mousePos, 0.15f); // Allow the player to right click on an area and have the camera focus on that point.
 		}
 		else { // Attack mode:
 			if (lastMouseTilePos != mouseTilePos && map->withinBounds(mouseTilePos)) {

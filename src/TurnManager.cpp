@@ -6,21 +6,20 @@ void TurnManager::update(Input &input, std::unique_ptr<GameMap> &map) {
 	if (currentEntities.size() > 0) {
 		std::shared_ptr<Entity> &entity = getCurrentEntity();
 
-		if (!entity->isMyTurn())
-			getCurrentEntity()->yourTurnBegin();
+		if (!entity->isMyTurn()) {
+			entity->focusCameraOn(camera);
+
+			entity->yourTurnBegin();
+		}
 
 		if (decisionMade) {
 			bool complete = entity->yourTurnCurrently();
 
 			if (complete) nextEntity(map);
 		}
-		else {
-			decisionMade = entity->yourTurnDecision(input);
-		}
+		else decisionMade = entity->yourTurnDecision(input);
 	}
-	else {
-		fetchOrderedEntities(map);
-	}
+	else fetchOrderedEntities(map);
 }
 
 std::shared_ptr<Entity> &TurnManager::getCurrentEntity() {
@@ -36,8 +35,6 @@ void TurnManager::nextEntity(std::unique_ptr<GameMap> &map) {
 
 	if (index >= currentEntities.size())  // All turns now complete.
 		fetchOrderedEntities(map);
-
-	camera.moveTowardsCentre(getCurrentEntity()->getAbsoluteCentrePosition(), 0.1f); // TODO: Add smooth camera movements.
 }
 
 void TurnManager::fetchOrderedEntities(std::unique_ptr<GameMap> &map) {

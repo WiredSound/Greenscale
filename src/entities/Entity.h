@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Faction.h"
+#include "../Camera.h"
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
 #include "../projectiles/ProjectileArc.h"
@@ -74,6 +75,8 @@ public:
 	void say(std::string text, std::string speechManner = "says");
 
 	bool isMemberOfPlayerFaction();
+
+	void focusCameraOn(Camera &camera);
 
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();

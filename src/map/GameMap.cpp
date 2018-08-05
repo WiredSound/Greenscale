@@ -145,6 +145,10 @@ sf::Vector2f GameMap::tilePosToWorldPos(sf::Vector2u tilePos) {
 	return sf::Vector2f(static_cast<float>(tilePos.x) * tileSize.x, static_cast<float>(tilePos.y) * tileSize.y);
 }
 
+sf::Vector2u GameMap::getCentre() {
+	return tiles->getCentre();
+}
+
 bool GameMap::isTilePositionFree(sf::Vector2u position) {
 	return !tiles->getTileAt(position).blocking;
 }

@@ -40,7 +40,7 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std
 	map->addEntities(initialEntities);
 
 	for (auto &generator : generators)
-		generator->generateEntities(map, entityBuilder);
+		generator->generateEntities(map, entityBuilder, componentBuilder);
 
 	return map;
 }

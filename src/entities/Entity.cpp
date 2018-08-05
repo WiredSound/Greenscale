@@ -214,6 +214,10 @@ bool Entity::isMemberOfPlayerFaction() {
 	return map->isFactionPlayerFriendly(faction);
 }
 
+void Entity::focusCameraOn(Camera &camera) {
+	camera.moveTowardsCentre(getAbsoluteCentrePosition(), 0.1f);
+}
+
 bool Entity::isBlocking() {
 	return true; // TODO: Implement this properly.
 }

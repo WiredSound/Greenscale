@@ -45,6 +45,8 @@ public:
 	sf::Vector2u worldPosToTilePos(sf::Vector2f worldPos);
 	sf::Vector2f tilePosToWorldPos(sf::Vector2u tilePos);
 
+	sf::Vector2u getCentre();
+
 	bool isTilePositionFree(sf::Vector2u position);
 	bool isEntityPositionFree(sf::Vector2u position);
 	bool isPositionFree(sf::Vector2u position);
