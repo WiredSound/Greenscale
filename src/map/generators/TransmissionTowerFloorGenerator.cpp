@@ -1,5 +1,7 @@
 #include "TransmissionTowerFloorGenerator.h"
 
+#include "../../entities/controllers/SearchAndDestroyController.h"
+
 TransmissionTowerFloorGenerator::TransmissionTowerFloorGenerator(unsigned int radius, unsigned int thickness,
 	IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour)
 	: towerRadius(radius), wallThickness(thickness),
@@ -66,4 +68,17 @@ void TransmissionTowerFloorGenerator::constructMachineryLines(std::unique_ptr<Ti
 
 void TransmissionTowerFloorGenerator::constructTerminalMachinery(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, sf::Color colour) {
 	tiles->setTileAt(centre, IDs::MACHINERY_TERMINAL, colour);
+}
+
+void TransmissionTowerFloorGenerator::generateEntities(std::unique_ptr<GameMap> &map, EntityBuilder &entityBuilder, ComponentBuilder &componentBuilder) {
+	auto controller = std::make_shared<SearchAndDestroyController>(Faction::PLAYER);
+
+	auto troop = entityBuilder.buildEntity(IDs::Entities::TROOP_01, "Troop", map->getCentre(), Faction::CORPORATION, sf::Vector2u(3, 3), controller);
+	auto &grid = troop->getComponentGrid();
+	grid.getComponentAt(sf::Vector2u(0, 0)) = componentBuilder.buildComponentNoUpgrades(IDs::Components::FISSION_REACTOR);
+	grid.getComponentAt(sf::Vector2u(1, 0)) = componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE);
+	grid.getComponentAt(sf::Vector2u(0, 1)) = componentBuilder.buildComponentNoUpgrades(IDs::Components::HEAT_SINK);
+	grid.getComponentAt(sf::Vector2u(1, 1)) = componentBuilder.buildComponentNoUpgrades(IDs::Components::MECHANICAL_LEG);
+
+	map->addEntity(troop);
 }

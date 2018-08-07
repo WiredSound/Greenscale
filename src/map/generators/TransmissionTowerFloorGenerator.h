@@ -8,6 +8,7 @@ class TransmissionTowerFloorGenerator : public MapGenerator {
 public:
 	TransmissionTowerFloorGenerator(unsigned int radius, unsigned int thickness, IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour);
 	virtual void generateTiles(std::unique_ptr<TileLayer> &tiles) override;
+	virtual void generateEntities(std::unique_ptr<GameMap> &map, EntityBuilder &entityBuilder, ComponentBuilder &componentBuilder) override;
 
 protected:
 	void constructCircularRoom(std::unique_ptr<TileLayer> &tiles, sf::Vector2u centre, unsigned int radius, IDs::Tiles wallTile, sf::Color wallColour, IDs::Tiles floorTile, sf::Color floorColour,
