@@ -26,11 +26,14 @@ struct ComponentInfo {
 	unsigned int powerStorage;
 	unsigned int movementRange;
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades;
+
 	IDs::Projectiles projectileId;
 	unsigned int projectileCount;
 	Damage projectileDamage;
 	unsigned int projectileRange;
 	unsigned int projectilePenetration;
+
+	IDs::Entities spawnerEntityId;
 };
 
 struct ComponentUpgrade {

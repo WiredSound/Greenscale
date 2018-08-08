@@ -1,8 +1,10 @@
 #pragma once
 
 #include "EntityManager.h"
-#include "Entity.h"
-#include "Robot.h"
+#include "Faction.h"
+#include "../Console.h"
+class Entity;
+class EntityController;
 
 class EntityBuilder {
 public:

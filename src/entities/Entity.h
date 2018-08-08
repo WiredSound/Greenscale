@@ -6,6 +6,7 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Faction.h"
+#include "EntityBuilder.h"
 #include "../Camera.h"
 #include "../map/GameMap.h"
 #include "../components/ComponentGrid.h"
@@ -24,7 +25,7 @@ class EntityController;
 class Entity {
 public:
 	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, sf::Vector2u gridSize,
-		std::shared_ptr<EntityController> entityController, Console &consoleRef);
+		std::shared_ptr<EntityController> entityController, Console &consoleRef, EntityBuilder &entityBuilder);
 
 	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
 	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
@@ -81,6 +82,10 @@ public:
 	void setMap(GameMap *gameMap);
 	GameMap *getMapReference();
 
+	std::shared_ptr<EntityController> getController();
+
+	EntityBuilder &builder;
+
 protected:
 	bool moveDirectlyBy(sf::Vector2u movement);
 	bool moveDirectlyToPosition(sf::Vector2u newPos);
@@ -103,16 +108,9 @@ private:
 	std::shared_ptr<EntityManager> manager;
 
 	GameMap *map;
-
-	ComponentGrid componentGrid;
-
 	sf::Vector2u position;
 
-	unsigned int powerLevel = 0;
-
-	// Removed as integrity is now based entirely upon the components equipped.
-	//int integrity;
-	//int maxIntegrity;
+	ComponentGrid componentGrid;
 
 	std::shared_ptr<EntityController> controller;
 	bool myTurn = false;

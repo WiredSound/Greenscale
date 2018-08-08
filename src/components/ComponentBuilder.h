@@ -2,7 +2,6 @@
 
 #include <memory>
 #include "Component.h"
-#include "RangedComponent.h"
 
 class ComponentBuilder {
 public:

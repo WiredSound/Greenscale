@@ -49,11 +49,14 @@ public:
 	unsigned int getPowerStorage();
 	unsigned int getMovementRange();
 	std::vector<IDs::ComponentUpgrades> getPossibleUpgrades();
+
 	virtual IDs::Projectiles getProjectileId();
 	virtual unsigned int getProjectileCount();
 	virtual Damage getProjectileDamage();
 	virtual unsigned int getProjectileRange();
 	virtual unsigned int getProjectilePenetration();
+
+	virtual IDs::Entities getSpawnerEntityId();
 
 	sf::Vector2f getIconTextureSize();
 

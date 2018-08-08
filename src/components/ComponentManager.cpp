@@ -40,7 +40,8 @@ std::pair<IDs::Components, const ComponentInfo> ComponentManager::parseJsonManag
 			json.value<unsigned int>("projectile count", 1),
 			json.find("projectile damage") != json.end() ? JsonHelp::parseDamage(json["projectile damage"]) : Damage(),
 			json.value<unsigned int>("projectile range", 1),
-			json.value<unsigned int>("projectile penetration", 0)
+			json.value<unsigned int>("projectile penetration", 0),
+			json.value<IDs::Entities>("spawn entity id", IDs::Entities::TROOP_01)
 		}
 	);
 

@@ -1,5 +1,8 @@
 #include "ComponentBuilder.h"
 
+#include "RangedComponent.h"
+#include "SpawnerComponent.h"
+
 ComponentBuilder::ComponentBuilder() : componentManager(std::make_shared<ComponentManager>()), projectileManager(std::make_shared<ProjectileManager>()) {}
 
 bool ComponentBuilder::loadComponentInfo(std::string filename) {
@@ -16,6 +19,7 @@ std::unique_ptr<Component> ComponentBuilder::buildComponentNoUpgrades(IDs::Compo
 	std::string type = componentManager->get(id).type;
 
 	if (type == "ranged") return std::make_unique<RangedComponent>(id, componentManager, projectileManager);
+	if (type == "spawner") return std::make_unique<SpawnerComponent>(id, componentManager);
 	return std::make_unique<Component>(id, componentManager);
 }
 
@@ -24,7 +28,7 @@ std::unique_ptr<Component> ComponentBuilder::buildComponentRandomised(IDs::Compo
 
 	std::vector<IDs::ComponentUpgrades> possibleUpgrades = component->getPossibleUpgrades();
 
-	// TODO...
+	// TODO: ...
 
 	return component;
 }

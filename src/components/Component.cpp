@@ -106,6 +106,8 @@ unsigned int Component::getProjectileCount() { return 0; }
 Damage Component::getProjectileDamage() { return Damage(); }
 unsigned int Component::getProjectileRange() { return 0; }
 unsigned int Component::getProjectilePenetration() { return 0; }
+// Spawner components:
+IDs::Entities Component::getSpawnerEntityId() { return IDs::Entities::TROOP_01; }
 
 sf::Vector2f Component::getIconTextureSize() {
 	return manager->getSingleIconTextureSize();

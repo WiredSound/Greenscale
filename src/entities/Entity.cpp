@@ -5,9 +5,9 @@
 PulsingColour Entity::myTurnColourPulse(0.8f, 1.0f, 0.005f);
 
 Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, sf::Vector2u gridSize,
-	std::shared_ptr<EntityController> entityController, Console &consoleRef)
+	std::shared_ptr<EntityController> entityController, Console &consoleRef, EntityBuilder &entityBuilder)
 	: id(entityId), manager(entityManager), personalName(entityName), position(entityPosition), faction(entityFaction), componentGrid(gridSize),
-	controller(entityController), console(consoleRef), currentPath(entityPosition), visualMovementSpeed(sf::milliseconds(150)) {}
+	controller(entityController), console(consoleRef), builder(entityBuilder), currentPath(entityPosition), visualMovementSpeed(sf::milliseconds(150)) {}
 
 void Entity::yourTurnBegin() {
 	DEBUG_LOG("Turn begins for entity: " << personalName);
@@ -252,6 +252,10 @@ void Entity::setMap(GameMap *gameMap) {
 
 GameMap *Entity::getMapReference() {
 	return map;
+}
+
+std::shared_ptr<EntityController> Entity::getController() {
+	return controller;
 }
 
 char Entity::getPriority() {
