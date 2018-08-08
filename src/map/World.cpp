@@ -51,6 +51,7 @@ std::shared_ptr<Entity> World::constructNewPlayer(IDs::Entities id, sf::Vector2u
 	grid.getComponentAt(sf::Vector2u(1, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::RIFLE);
 	grid.getComponentAt(sf::Vector2u(0, 1)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::MECHANICAL_LEG);
 	grid.getComponentAt(sf::Vector2u(1, 1)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::MECHANICAL_LEG);
+	grid.getComponentAt(sf::Vector2u(2, 0)) = builder.componentBuilder.buildComponentNoUpgrades(IDs::Components::TROOP_FABRICATOR);
 
 	return player;
 }

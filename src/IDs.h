@@ -20,7 +20,8 @@ namespace IDs {
 		HEAT_SINK = 1,
 		DEFENSIVE_PLATING = 2,
 		RIFLE = 3,
-		MECHANICAL_LEG = 4
+		MECHANICAL_LEG = 4,
+		TROOP_FABRICATOR = 5
 	};
 
 	enum ComponentUpgrades : unsigned char {};
