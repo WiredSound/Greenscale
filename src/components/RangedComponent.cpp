@@ -3,7 +3,8 @@
 #include "../entities/Entity.h"
 
 RangedComponent::RangedComponent(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager, std::shared_ptr<ProjectileManager> manager)
-	: Component(componentId, componentManager), projectileManager(manager) {}
+	: Component(componentId, componentManager), projectileManager(manager) {
+}
 
 std::vector<ProjectileArc> RangedComponent::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
 	Component::useEnabled(user, path, pool, console);
@@ -13,7 +14,8 @@ std::vector<ProjectileArc> RangedComponent::useEnabled(Entity &user, MovementPat
 	auto penetration = getProjectilePenetration();
 
 	std::vector<ProjectileArc> arcs;
-	arcs.resize(count, ProjectileArc(projectileManager, &user, path, getProjectileId(), damage, penetration, user.getFaction().colour));
+	ProjectileArc defaultArc(projectileManager, &user, path, getProjectileId(), damage, penetration, user.getFaction().colour);
+	arcs.resize(count, defaultArc);
 
 	console.display({ user.getFullName() + " fired " + std::to_string(count) + (count == 1 ? " projectile with " : " projectiles each with ") + std::to_string(penetration) + " penetration and damage: "
 		+ std::to_string(damage.kinetic) + " kinetic, " + std::to_string(damage.thermal) + " thermal, " + std::to_string(static_cast<int>(damage.disruption * 100)) + "% disruption.",
@@ -38,5 +40,6 @@ Damage RangedComponent::getProjectileDamage() {
 	return fetchInfo().projectileDamage; // TODO: Apply upgrades.
 }
 
-unsigned int RangedComponent::getProjectileRange() { RETURN_VALUE_WITH_UPGRADES(projectileRange, projectileModifier) }
-unsigned int RangedComponent::getProjectilePenetration() { RETURN_VALUE_WITH_UPGRADES(projectilePenetration, projectileModifier) }
+ModifierFuncType projectileModifier = [](auto &upgrade) {return upgrade.projectileModifier; };
+unsigned int RangedComponent::getProjectileRange() { return statWithUpgradesApplied<unsigned int>(fetchInfo().projectileRange, projectileModifier); }
+unsigned int RangedComponent::getProjectilePenetration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().projectilePenetration, projectileModifier); }

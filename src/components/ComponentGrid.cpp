@@ -170,11 +170,14 @@ std::vector<sf::Vector2u> ComponentGrid::findAllGridPositions() {
 std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions() { GET_COMPONENT_POSITIONS_WHERE(isFunctional, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findFunctionalPositions(std::vector<sf::Vector2u> from) { GET_COMPONENT_POSITIONS_WHERE(isFunctional, from) }
 std::vector<sf::Vector2u> ComponentGrid::findWeaponPositions() { GET_COMPONENT_POSITIONS_WHERE(isWeapon, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findSpawnerPositions() { GET_COMPONENT_POSITIONS_WHERE(isSpawner, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findActiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isActiveCooling, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findPassiveCoolingPositions() { GET_COMPONENT_POSITIONS_WHERE(isPassiveCooling, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findFatalHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atFatalHeatLevel, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findDangerousHeatPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousHeatLevel, findAllGridPositions()) }
 std::vector<sf::Vector2u> ComponentGrid::findHotPositions() { GET_COMPONENT_POSITIONS_WHERE(atDangerousOrAboveHeatLevel, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findActivePowerGenPositions() { GET_COMPONENT_POSITIONS_WHERE(isActivePowerGenerator, findAllGridPositions()) }
+std::vector<sf::Vector2u> ComponentGrid::findPassivePowerGenPositions() { GET_COMPONENT_POSITIONS_WHERE(isPassivePowerGenerator, findAllGridPositions()) }
 
 std::vector<sf::Vector2u> ComponentGrid::adjacentPositionsTo(sf::Vector2u pos) {
 	std::vector<sf::Vector2u> adjacent;

@@ -58,8 +58,6 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 			return grid.getComponentAt(pos0)->calculateMaxPotentialProjectileDamage() > grid.getComponentAt(pos1)->calculateMaxPotentialProjectileDamage();
 		});
 
-		unsigned int shortestWeaponRange = 0;
-
 		for (sf::Vector2u weaponPosition : weaponPositions) {
 			Optional<Component> &weapon = grid.getComponentAt(weaponPosition);
 			unsigned int range = weapon->getProjectileRange();
@@ -69,8 +67,6 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 
 				grid.equipComponent(weaponPosition);
 				entity->useEquippedComponent(entity->buildEquippedComponentPath(targetEntity->getPosition()));
-
-				if (range < shortestWeaponRange) range = shortestWeaponRange;
 
 				return true;
 			}
@@ -84,8 +80,8 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 		MovementPath path = map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition);
 		path.restrictLength(entity->getMovementRange());
 
-		path.recursivelyShortenBasedOn([&path, &targetEntity, shortestWeaponRange]() {
-			return MovementPath::distanceFromTo(path.getTargetPosition(), targetEntity->getPosition()) < shortestWeaponRange;
+		path.recursivelyShortenBasedOn([&path, &targetEntity]() {
+			return MovementPath::distanceFromTo(path.getTargetPosition(), targetEntity->getPosition()) < 3; // TODO: Find best distance to target based upon the range of the shortest weapon.
 		});
 
 		entity->setMovementPath(path);

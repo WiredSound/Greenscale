@@ -12,11 +12,7 @@ class Entity;
 class GameMap;
 class PowerPool;
 
-// This magical little macro takes a value from the ComponentInfo struct of valueName and then applies all the modifiers of modifierName in this component's upgrades:
-#define RETURN_VALUE_WITH_UPGRADES(valueName, modifierName) \
-	auto baseValue = fetchInfo().valueName; auto value = baseValue; \
-	for (const ComponentUpgrade &upgrade : upgrades) value += std::ceil(baseValue * upgrade.modifierName); \
-	return value;
+using ModifierFuncType = std::function<float(const ComponentUpgrade&)>;
 
 /*
  * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
@@ -56,6 +52,7 @@ public:
 	virtual unsigned int getProjectileRange();
 	virtual unsigned int getProjectilePenetration();
 
+	virtual unsigned int getSpawnerEntityCount();
 	virtual IDs::Entities getSpawnerEntityId();
 
 	sf::Vector2f getIconTextureSize();
@@ -86,12 +83,14 @@ public:
 	unsigned int calculateMaxPotentialProjectileDamage();
 
 	bool isWeapon();
+	bool isSpawner();
 	bool isActiveCooling();
 	bool isPassiveCooling();
 	bool isActiveHeating();
 	bool isPassiveHeating();
 	bool isActivePowerGenerator();
 	bool isPassivePowerGenerator();
+
 	bool atFatalHeatLevel();
 	bool atDangerousHeatLevel();
 	bool atDangerousOrAboveHeatLevel();
@@ -116,4 +115,21 @@ private:
 	unsigned int integrity;
 	unsigned int heat = 0;
 	unsigned int disabledForTurns = 0;
+
+protected:
+	// This template is a replacement for the very ugly macro that was employed previously.
+	// It takes a base stat (eg. the components max integrity) and then goes through all the upgrades the component has and applies them.
+	// The modifierFunc argument takes each component upgrade and returns the modifier that should be used (eg. upgrade.maxIntegrityModifier).
+	template <typename T>
+	T statWithUpgradesApplied(T baseValue, ModifierFuncType modiferFunc) {
+		T value = baseValue;
+
+		for (const ComponentUpgrade &upgrade : upgrades) {
+			auto increase = modiferFunc(upgrade);
+			value += static_cast<T>(increase);
+		}
+		sf::Vector2u;
+
+		return value;
+	}
 };

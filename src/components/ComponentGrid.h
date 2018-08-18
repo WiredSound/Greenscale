@@ -39,11 +39,14 @@ public:
 	std::vector<sf::Vector2u> findFunctionalPositions();
 	std::vector<sf::Vector2u> findFunctionalPositions(std::vector<sf::Vector2u> from);
 	std::vector<sf::Vector2u> findWeaponPositions();
+	std::vector<sf::Vector2u> findSpawnerPositions();
 	std::vector<sf::Vector2u> findActiveCoolingPositions();
 	std::vector<sf::Vector2u> findPassiveCoolingPositions();
 	std::vector<sf::Vector2u> findFatalHeatPositions();
 	std::vector<sf::Vector2u> findDangerousHeatPositions();
 	std::vector<sf::Vector2u> findHotPositions();
+	std::vector<sf::Vector2u> findActivePowerGenPositions();
+	std::vector<sf::Vector2u> findPassivePowerGenPositions();
 
 	std::vector<sf::Vector2u> adjacentPositionsTo(sf::Vector2u pos);
 

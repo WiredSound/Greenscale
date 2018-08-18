@@ -8,7 +8,8 @@
 Random Component::random = Random();
 
 Component::Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager)
-	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {}
+	: id(componentId), manager(componentManager), integrity(getMaxIntegrity()) {
+}
 
 const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
@@ -86,27 +87,41 @@ std::string Component::getName() { return fetchInfo().name; }
 std::string Component::getDescription() { return fetchInfo().description; }
 unsigned int Component::getIntegrity() { return integrity; }
 unsigned int Component::getHeatLevel() { return heat; }
-unsigned int Component::getMaxIntegrity() { RETURN_VALUE_WITH_UPGRADES(maxIntegrity, maxIntegrityModifier) }
-unsigned int Component::getDangerousHeatLevel() { RETURN_VALUE_WITH_UPGRADES(dangerousHeatLevel, unsafeHeatLevelModifier) }
-unsigned int Component::getFatalHeatLevel() { RETURN_VALUE_WITH_UPGRADES(fatalHeatLevel, unsafeHeatLevelModifier) }
-unsigned int Component::getPassivePowerGeneration() { RETURN_VALUE_WITH_UPGRADES(passivePowerGen, powerModifier) }
-unsigned int Component::getPassivePowerConsumption() { RETURN_VALUE_WITH_UPGRADES(passivePowerConsume, powerModifier) }
-unsigned int Component::getUsePowerGeneration() { RETURN_VALUE_WITH_UPGRADES(usePowerGen, powerModifier) }
-unsigned int Component::getUsePowerConsumption() { RETURN_VALUE_WITH_UPGRADES(usePowerConsume, powerModifier) }
-unsigned int Component::getPassiveHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(passiveHeatDissipate, heatModifier) }
-unsigned int Component::getPassiveHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(passiveHeatGen, heatModifier) }
-unsigned int Component::getUseHeatDissipation() { RETURN_VALUE_WITH_UPGRADES(useHeatDissipate, heatModifier) }
-unsigned int Component::getUseHeatGeneration() { RETURN_VALUE_WITH_UPGRADES(useHeatGen, heatModifier) }
-unsigned int Component::getPowerStorage() { RETURN_VALUE_WITH_UPGRADES(powerStorage, powerModifier) }
-unsigned int Component::getMovementRange() { RETURN_VALUE_WITH_UPGRADES(movementRange, transportModifier) }
+
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() { return fetchInfo().possibleUpgrades; }
+
+ModifierFuncType integrityModifier = [](auto &upgrade) { return upgrade.maxIntegrityModifier; };
+unsigned int Component::getMaxIntegrity() { return statWithUpgradesApplied<unsigned int>(fetchInfo().maxIntegrity, integrityModifier); }
+
+ModifierFuncType unsafeHeatLevelModifier = [](auto &upgrade) {return upgrade.unsafeHeatLevelModifier; };
+unsigned int Component::getDangerousHeatLevel() { return statWithUpgradesApplied<unsigned int>(fetchInfo().dangerousHeatLevel, unsafeHeatLevelModifier); }
+unsigned int Component::getFatalHeatLevel() { return statWithUpgradesApplied<unsigned int>(fetchInfo().fatalHeatLevel, unsafeHeatLevelModifier); }
+
+ModifierFuncType powerModifier = [](auto &upgrade) { return upgrade.powerModifier; };
+unsigned int Component::getPassivePowerGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passivePowerGen, powerModifier); }
+unsigned int Component::getPassivePowerConsumption() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passivePowerConsume, powerModifier); }
+unsigned int Component::getUsePowerGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().usePowerGen, powerModifier); }
+unsigned int Component::getUsePowerConsumption() { return statWithUpgradesApplied<unsigned int>(fetchInfo().usePowerConsume, powerModifier); }
+unsigned int Component::getPowerStorage() { return statWithUpgradesApplied<unsigned int>(fetchInfo().powerStorage, powerModifier); }
+
+ModifierFuncType heatModifier = [](auto &upgrade) { return upgrade.heatModifier; };
+unsigned int Component::getPassiveHeatDissipation() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passiveHeatDissipate, heatModifier); }
+unsigned int Component::getPassiveHeatGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passiveHeatGen, heatModifier); }
+unsigned int Component::getUseHeatDissipation() { return statWithUpgradesApplied<unsigned int>(fetchInfo().useHeatDissipate, heatModifier); }
+unsigned int Component::getUseHeatGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().useHeatGen, heatModifier); }
+
+ModifierFuncType transportModifier = [](auto &upgrade) { return upgrade.transportModifier; };
+unsigned int Component::getMovementRange() { return statWithUpgradesApplied<unsigned int>(fetchInfo().movementRange, transportModifier); }
+
 // Ranged components:
 IDs::Projectiles Component::getProjectileId() { return IDs::Projectiles::BULLET; }
 unsigned int Component::getProjectileCount() { return 0; }
 Damage Component::getProjectileDamage() { return Damage(); }
 unsigned int Component::getProjectileRange() { return 0; }
 unsigned int Component::getProjectilePenetration() { return 0; }
+
 // Spawner components:
+unsigned int Component::getSpawnerEntityCount() { return 0; }
 IDs::Entities Component::getSpawnerEntityId() { return IDs::Entities::TROOP_01; }
 
 sf::Vector2f Component::getIconTextureSize() {
@@ -214,6 +229,9 @@ unsigned int Component::calculateMaxPotentialProjectileDamage() {
 bool Component::isWeapon() {
 	// A 'weapon' is defined as a component that produces some projectiles and has a range of at least 1 tile (at least until melee weapons are added that is).
 	return getProjectileCount() > 0 && getProjectileRange() >= 1;
+}
+bool Component::isSpawner() {
+	return getSpawnerEntityCount() > 0;
 }
 bool Component::isActiveCooling() {
 	return calculateActiveNetHeat() < 0;

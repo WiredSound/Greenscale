@@ -33,6 +33,7 @@ struct ComponentInfo {
 	unsigned int projectileRange;
 	unsigned int projectilePenetration;
 
+	unsigned int spawnerEntityCount;
 	IDs::Entities spawnerEntityId;
 };
 
