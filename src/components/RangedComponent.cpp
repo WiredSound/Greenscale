@@ -40,6 +40,6 @@ Damage RangedComponent::getProjectileDamage() {
 	return fetchInfo().projectileDamage; // TODO: Apply upgrades.
 }
 
-ModifierFuncType projectileModifier = [](auto &upgrade) {return upgrade.projectileModifier; };
+Component::ModifierFunc projectileModifier = [](auto &upgrade) {return upgrade.projectileModifier; };
 unsigned int RangedComponent::getProjectileRange() { return statWithUpgradesApplied<unsigned int>(fetchInfo().projectileRange, projectileModifier); }
 unsigned int RangedComponent::getProjectilePenetration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().projectilePenetration, projectileModifier); }

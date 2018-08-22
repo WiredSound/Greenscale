@@ -12,8 +12,6 @@ class Entity;
 class GameMap;
 class PowerPool;
 
-using ModifierFuncType = std::function<float(const ComponentUpgrade&)>;
-
 /*
  * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
  * the spread of heat and disruption between components. Components can have a collection of ComponentUpgrade structs which modify the base states of the component. The base stats of a
@@ -117,18 +115,19 @@ private:
 	unsigned int disabledForTurns = 0;
 
 protected:
+	using ModifierFunc = std::function<float(const ComponentUpgrade&)>;
+
 	// This template is a replacement for the very ugly macro that was employed previously.
 	// It takes a base stat (eg. the components max integrity) and then goes through all the upgrades the component has and applies them.
 	// The modifierFunc argument takes each component upgrade and returns the modifier that should be used (eg. upgrade.maxIntegrityModifier).
 	template <typename T>
-	T statWithUpgradesApplied(T baseValue, ModifierFuncType modiferFunc) {
+	T statWithUpgradesApplied(T baseValue, ModifierFunc modiferFunc) {
 		T value = baseValue;
 
 		for (const ComponentUpgrade &upgrade : upgrades) {
 			auto increase = modiferFunc(upgrade);
 			value += static_cast<T>(increase);
 		}
-		sf::Vector2u;
 
 		return value;
 	}

@@ -90,27 +90,27 @@ unsigned int Component::getHeatLevel() { return heat; }
 
 std::vector<IDs::ComponentUpgrades> Component::getPossibleUpgrades() { return fetchInfo().possibleUpgrades; }
 
-ModifierFuncType integrityModifier = [](auto &upgrade) { return upgrade.maxIntegrityModifier; };
+Component::ModifierFunc integrityModifier = [](auto &upgrade) { return upgrade.maxIntegrityModifier; };
 unsigned int Component::getMaxIntegrity() { return statWithUpgradesApplied<unsigned int>(fetchInfo().maxIntegrity, integrityModifier); }
 
-ModifierFuncType unsafeHeatLevelModifier = [](auto &upgrade) {return upgrade.unsafeHeatLevelModifier; };
+Component::ModifierFunc unsafeHeatLevelModifier = [](auto &upgrade) {return upgrade.unsafeHeatLevelModifier; };
 unsigned int Component::getDangerousHeatLevel() { return statWithUpgradesApplied<unsigned int>(fetchInfo().dangerousHeatLevel, unsafeHeatLevelModifier); }
 unsigned int Component::getFatalHeatLevel() { return statWithUpgradesApplied<unsigned int>(fetchInfo().fatalHeatLevel, unsafeHeatLevelModifier); }
 
-ModifierFuncType powerModifier = [](auto &upgrade) { return upgrade.powerModifier; };
+Component::ModifierFunc powerModifier = [](auto &upgrade) { return upgrade.powerModifier; };
 unsigned int Component::getPassivePowerGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passivePowerGen, powerModifier); }
 unsigned int Component::getPassivePowerConsumption() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passivePowerConsume, powerModifier); }
 unsigned int Component::getUsePowerGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().usePowerGen, powerModifier); }
 unsigned int Component::getUsePowerConsumption() { return statWithUpgradesApplied<unsigned int>(fetchInfo().usePowerConsume, powerModifier); }
 unsigned int Component::getPowerStorage() { return statWithUpgradesApplied<unsigned int>(fetchInfo().powerStorage, powerModifier); }
 
-ModifierFuncType heatModifier = [](auto &upgrade) { return upgrade.heatModifier; };
+Component::ModifierFunc heatModifier = [](auto &upgrade) { return upgrade.heatModifier; };
 unsigned int Component::getPassiveHeatDissipation() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passiveHeatDissipate, heatModifier); }
 unsigned int Component::getPassiveHeatGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().passiveHeatGen, heatModifier); }
 unsigned int Component::getUseHeatDissipation() { return statWithUpgradesApplied<unsigned int>(fetchInfo().useHeatDissipate, heatModifier); }
 unsigned int Component::getUseHeatGeneration() { return statWithUpgradesApplied<unsigned int>(fetchInfo().useHeatGen, heatModifier); }
 
-ModifierFuncType transportModifier = [](auto &upgrade) { return upgrade.transportModifier; };
+Component::ModifierFunc transportModifier = [](auto &upgrade) { return upgrade.transportModifier; };
 unsigned int Component::getMovementRange() { return statWithUpgradesApplied<unsigned int>(fetchInfo().movementRange, transportModifier); }
 
 // Ranged components:
