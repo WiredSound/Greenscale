@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Entity.h"
-#include "../components/Weapon.h"
 
 class Robot : public Entity {
 public:
