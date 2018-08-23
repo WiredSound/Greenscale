@@ -2,7 +2,7 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
-#include "Input.h"
+#include "../Input.h"
 
 /*
  * The main program is based around a state machine so that distinct parts of the game (such as the main menu, the game itself, the options menu, etc) are seperated and can be switched

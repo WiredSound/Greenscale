@@ -1,13 +1,10 @@
 #include <memory>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/Text.hpp>
-#include "State.h"
-#include "GameState.h"
+#include "states/GameState.h"
 #include "Input.h"
 #include "GameSettings.h"
 #include "debugging.h"
-#include <FastNoise.h>
 
 int main() {
 	GameSettings settings;
