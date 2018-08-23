@@ -20,6 +20,8 @@ class PowerPool;
 
 class Component {
 public:
+	using ModifierFunc = std::function<float(const ComponentUpgrade&)>;
+
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
 	void yourTurn(Entity &entity, PowerPool &pool, Console &console);
 	std::vector<ProjectileArc> use(Entity &user, MovementPath path, PowerPool &pool, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
@@ -115,8 +117,6 @@ private:
 	unsigned int disabledForTurns = 0;
 
 protected:
-	using ModifierFunc = std::function<float(const ComponentUpgrade&)>;
-
 	// This template is a replacement for the very ugly macro that was employed previously.
 	// It takes a base stat (eg. the components max integrity) and then goes through all the upgrades the component has and applies them.
 	// The modifierFunc argument takes each component upgrade and returns the modifier that should be used (eg. upgrade.maxIntegrityModifier).
@@ -125,8 +125,8 @@ protected:
 		T value = baseValue;
 
 		for (const ComponentUpgrade &upgrade : upgrades) {
-			auto increase = modiferFunc(upgrade);
-			value += static_cast<T>(increase);
+			auto increasePercent = modiferFunc(upgrade);
+			value += static_cast<T>(baseValue * increasePercent);
 		}
 
 		return value;
