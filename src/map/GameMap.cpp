@@ -5,6 +5,8 @@
 #include "../entities/Robot.h"
 #include "../Console.h"
 
+bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right);
+
 GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile,
 	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, Console &consoleRef)
 	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles), console(consoleRef),

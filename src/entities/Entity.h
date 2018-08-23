@@ -18,7 +18,7 @@ class EntityController;
 
 /*
  * The Entity class handles all the actions an entity makes and how it interacts with the GameMap it is located in. The ID of the entity determines the animation, default components, name,
- * description and other such static values held in the relevant EntityInfo struct contained in the EntityManager. Values that vary between entities, such as the current equipped commponents,
+ * description and other such static values held in the relevant EntityInfo struct contained in the EntityManager. Values that vary between entities, such as the current equipped components,
  * aligned factions, position as well as the behaviour (primarily via the held EntityController pointer) are stored in the Entity class itself.
  */
 
@@ -27,10 +27,10 @@ public:
 	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, sf::Vector2u gridSize,
 		std::shared_ptr<EntityController> entityController, Console &consoleRef, EntityBuilder &entityBuilder);
 
-	virtual void yourTurnBegin(); // When it first becomes this entity's turn.
-	virtual bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
-	virtual bool yourTurnCurrently(); // Where the entity can performs things that take multiple frames to complete such as movement before the turn manager can move onto the next entity.
-	virtual void yourTurnEnd(); // When the entity has finished moving, animating, etc.
+	void yourTurnBegin(); // When it first becomes this entity's turn.
+	bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
+	bool yourTurnCurrently(); // Where the entity can performs things that take multiple frames to complete such as movement before the turn manager can move onto the next entity.
+	void yourTurnEnd(); // When the entity has finished moving, animating, etc.
 	bool isMyTurn();
 
 	bool updateMovement();

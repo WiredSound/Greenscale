@@ -89,5 +89,3 @@ private:
 
 	void updateProjectiles();
 };
-
-bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right);

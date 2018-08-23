@@ -18,5 +18,5 @@ void PowerPool::increasePower(unsigned int amount) {
 }
 
 void PowerPool::decreasePower(unsigned int amount) {
-	power = hasSufficientPower(amount) ? (power - amount) : 0;
+	power = hasSufficientPower(amount) ? (power - amount) : 0u;
 }

@@ -33,9 +33,7 @@ int main() {
 	Input input(window);
 
 	while (window.isOpen()) {
-		bool closeWindow = input.update();
-
-		if (closeWindow) // Handle close window event.
+		if (input.update()) // Handle close window event.
 			window.close();
 		else
 			state->update(input); // Send input to the current state.
@@ -46,7 +44,7 @@ int main() {
 
 		fpsCounter++;
 		if (clock.getElapsedTime() > sf::milliseconds(1000)) {
-			//if (settings.displayFps) std::cout << "FPS: " << fpsCounter << std::endl;
+			// TODO: Display FPS.
 
 			clock.restart();
 			fpsCounter = 0;

@@ -8,8 +8,8 @@
 #include "Camera.h"
 
 /*
- * The game is of course turn-based so it is the role of the TurnManager class to handle the turn system. It takes a GameMap reference in its update function and then fetches all the entities
- * present on that map. Each turn for an entity is split into serveral distinct phases:
+ * The game is of course turn-based so it is the role of the TurnManager class is to handle the turn system. It takes a GameMap reference in its update function and then fetches all the entities
+ * present on that map. Each turn for an entity is split into several distinct phases:
  * First, the entity's yourTurnBegin method is called once.
  * Next, yourTurnDecision is called which in turn calls upon the entity's controller. This method is called every frame until true is returned which indicates that the controller has at that
  * point decided what the entity will do this turn.

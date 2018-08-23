@@ -5,14 +5,14 @@
 #include "../debugging.h"
 #include "pathfinding/MovementPath.h"
 
-struct TileColourOrientation {
-	IDs::Tiles id;
-	sf::Color colour;
-	char orientation;
-};
-
 class TileLayer : public MapLayer {
 public:
+	struct TileColourOrientation {
+		IDs::Tiles id;
+		sf::Color colour;
+		char orientation;
+	};
+
 	TileLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, std::shared_ptr<sf::Texture> layerTexture, TileManager tileManager);
 
 	unsigned int getTileCount();
