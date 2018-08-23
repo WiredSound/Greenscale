@@ -335,4 +335,4 @@ ASALocalRun/
 .mfractor/
 
 # Ignore the game assets folder
-assets/
+assets/assets/
