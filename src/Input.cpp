@@ -4,7 +4,7 @@
 
 Input::Input(sf::RenderWindow &renderWindow) : window(renderWindow) {}
 
-// Returns true if the close event is detected.
+// Returns true if the close event is triggered.
 bool Input::update() {
 	keysJustPressed.clear();
 	mouseButtonsJustPressed.clear();
