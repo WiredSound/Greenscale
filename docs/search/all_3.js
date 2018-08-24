@@ -1,12 +1,7 @@
 var searchData=
 [
-  ['entities',['Entities',['../namespace_i_ds.html#a53891f40d8838b129f503411cb691c33',1,'IDs']]],
-  ['entity',['Entity',['../class_entity.html',1,'']]],
-  ['entitybuilder',['EntityBuilder',['../class_entity_builder.html',1,'']]],
-  ['entitycontroller',['EntityController',['../class_entity_controller.html',1,'']]],
-  ['entitygui',['EntityGui',['../class_entity_gui.html',1,'']]],
-  ['entityinfo',['EntityInfo',['../struct_entity_info.html',1,'']]],
-  ['entitylayer',['EntityLayer',['../class_entity_layer.html',1,'']]],
-  ['entitylistgui',['EntityListGui',['../class_entity_list_gui.html',1,'']]],
-  ['entitymanager',['EntityManager',['../class_entity_manager.html',1,'']]]
+  ['damage',['Damage',['../struct_damage.html',1,'']]],
+  ['display',['display',['../class_console.html#a13391e5284ec606089dbf5b6bb6223d9',1,'Console']]],
+  ['distancefromto',['distanceFromTo',['../class_movement_path.html#a54b49be4d6008469e754016dc88d4b24',1,'MovementPath']]],
+  ['draw',['draw',['../class_world.html#a0cb6c63048db0fdbaed92fe439dbfefb',1,'World::draw()'],['../class_game_state.html#ad3a574e8d22aa60b9580ae2d0640bfcc',1,'GameState::draw()'],['../class_state.html#ae261605bc40b7e3959ce5df5457e4942',1,'State::draw()']]]
 ];

@@ -5,6 +5,10 @@
 #include <SFML/System/Vector2.hpp>
 class GameMap;
 
+/**
+ * Stores the points on a grid that make up a path that an entity or projectile can follow.
+ * A path can be either complete or incomplete based on which constructor is called. There are no checks to ensure that a path is actually complete yet.
+ */
 class MovementPath {
 public:
 	MovementPath(sf::Vector2u pos); // Incomplete movement path.

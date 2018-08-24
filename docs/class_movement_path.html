@@ -70,6 +70,11 @@ $(function() {
 <div class="title">MovementPath Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Stores the points on a grid that make up a path that an entity or projectile can follow.  
+ <a href="class_movement_path.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_movement_path_8h_source.html">MovementPath.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -119,13 +124,18 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>recursivelyShortenBas
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ab479c86e5cae71703ee37d702b7579b7"><td class="memItemLeft" align="right" valign="top"><a id="ab479c86e5cae71703ee37d702b7579b7"></a>
-static <a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buildLinePath</b> (sf::Vector2u start, sf::Vector2u target, unsigned int length=0)</td></tr>
+static <a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_movement_path.html#ab479c86e5cae71703ee37d702b7579b7">buildLinePath</a> (sf::Vector2u start, sf::Vector2u target, unsigned int length=0)</td></tr>
+<tr class="memdesc:ab479c86e5cae71703ee37d702b7579b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a <a class="el" href="class_movement_path.html" title="Stores the points on a grid that make up a path that an entity or projectile can follow. ">MovementPath</a> that directly connects two points in a line. See GridHelp::buildLine for actual implementation as just wraps the positions returned into a <a class="el" href="class_movement_path.html" title="Stores the points on a grid that make up a path that an entity or projectile can follow. ">MovementPath</a> instance. <br /></td></tr>
 <tr class="separator:ab479c86e5cae71703ee37d702b7579b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a54b49be4d6008469e754016dc88d4b24"><td class="memItemLeft" align="right" valign="top"><a id="a54b49be4d6008469e754016dc88d4b24"></a>
-static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>distanceFromTo</b> (sf::Vector2u start, sf::Vector2u target)</td></tr>
+static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_movement_path.html#a54b49be4d6008469e754016dc88d4b24">distanceFromTo</a> (sf::Vector2u start, sf::Vector2u target)</td></tr>
+<tr class="memdesc:a54b49be4d6008469e754016dc88d4b24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the number of tiles directly between two points by counting the number of positions returned by GridHelp::buildLine. <br /></td></tr>
 <tr class="separator:a54b49be4d6008469e754016dc88d4b24"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Stores the points on a grid that make up a path that an entity or projectile can follow. </p>
+<p>A path can be either complete or incomplete based on which constructor is called. There are no checks to ensure that a path is actually complete yet. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/pathfinding/<a class="el" href="_movement_path_8h_source.html">MovementPath.h</a></li>
 <li>src/map/pathfinding/MovementPath.cpp</li>
 </ul>

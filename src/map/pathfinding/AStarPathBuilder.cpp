@@ -19,7 +19,7 @@ struct AStarPathBuilder::AStarTile {
 	}
 };
 
-// std::map requires a way to compare keys which sf::Vector2u does not provide by default.
+//! `std::map` requires a way to compare keys which sf::Vector2u does not provide by default.
 struct AStarPathBuilder::CompareVectors {
 public:
 	CompareVectors(sf::Vector2u sizeMap) : mapSize(sizeMap) {}
@@ -31,6 +31,12 @@ private:
 	const sf::Vector2u mapSize;
 };
 
+/**
+ * Build a new MovementPath between two points.
+ * \param start Start position.
+ * \param target Target position.
+ * \return Newly constructed path.
+ */
 MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u target) const {
 	std::map<sf::Vector2u, AStarTile, CompareVectors> openList(map.size), closedList(map.size);
 
@@ -94,6 +100,11 @@ MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u t
 	return reconstructPath(start, target, closedList);
 }
 
+/**
+ * Reconstructs a complete MovementPath from the closed list.
+ * \param closedList The closed list of positions.
+ * \return Newly constructed path.
+ */
 MovementPath AStarPathBuilder::reconstructPath(const sf::Vector2u &start, const sf::Vector2u &target, const std::map<sf::Vector2u, AStarTile, CompareVectors> &closedList) const {
 	std::vector<sf::Vector2u> finalPath;
 	finalPath.insert(finalPath.begin(), target);

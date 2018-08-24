@@ -72,16 +72,169 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a47ee67525d4aefa39ae2d4d7537d1a11"><td class="memItemLeft" align="right" valign="top"><a id="a47ee67525d4aefa39ae2d4d7537d1a11"></a>
-static std::vector&lt; sf::Vector2u &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buildLine</b> (sf::Vector2f start, sf::Vector2f target, float length=0)</td></tr>
+<tr class="memitem:a47ee67525d4aefa39ae2d4d7537d1a11"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; sf::Vector2u &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_help.html#a47ee67525d4aefa39ae2d4d7537d1a11">buildLine</a> (sf::Vector2f start, sf::Vector2f target, float length=0)</td></tr>
+<tr class="memdesc:a47ee67525d4aefa39ae2d4d7537d1a11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all the grid positions from the start to the target position using linear interpolation.  <a href="#a47ee67525d4aefa39ae2d4d7537d1a11">More...</a><br /></td></tr>
 <tr class="separator:a47ee67525d4aefa39ae2d4d7537d1a11"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3b9a323f82dbafce9195849a77d136b4"><td class="memItemLeft" align="right" valign="top"><a id="a3b9a323f82dbafce9195849a77d136b4"></a>
-static std::vector&lt; sf::Vector2i &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buildCircle</b> (sf::Vector2i origin, int radius, int thickness=1)</td></tr>
+<tr class="memitem:a3b9a323f82dbafce9195849a77d136b4"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; sf::Vector2i &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_help.html#a3b9a323f82dbafce9195849a77d136b4">buildCircle</a> (sf::Vector2i origin, int radius, int thickness=1)</td></tr>
+<tr class="memdesc:a3b9a323f82dbafce9195849a77d136b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a hollow circle of a given radius about the specified origin point.  <a href="#a3b9a323f82dbafce9195849a77d136b4">More...</a><br /></td></tr>
 <tr class="separator:a3b9a323f82dbafce9195849a77d136b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9f5e5507a6bbf6f382565a2884a4ebe3"><td class="memItemLeft" align="right" valign="top"><a id="a9f5e5507a6bbf6f382565a2884a4ebe3"></a>
-static std::vector&lt; sf::Vector2i &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buildFilledCircle</b> (sf::Vector2i origin, int radius)</td></tr>
+<tr class="memitem:a9f5e5507a6bbf6f382565a2884a4ebe3"><td class="memItemLeft" align="right" valign="top">static std::vector&lt; sf::Vector2i &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_help.html#a9f5e5507a6bbf6f382565a2884a4ebe3">buildFilledCircle</a> (sf::Vector2i origin, int radius)</td></tr>
+<tr class="memdesc:a9f5e5507a6bbf6f382565a2884a4ebe3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Builds a filled-in circle of the specified radius about the given origin point.  <a href="#a9f5e5507a6bbf6f382565a2884a4ebe3">More...</a><br /></td></tr>
 <tr class="separator:a9f5e5507a6bbf6f382565a2884a4ebe3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3b9a323f82dbafce9195849a77d136b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9a323f82dbafce9195849a77d136b4">&#9670;&nbsp;</a></span>buildCircle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; sf::Vector2i &gt; GridHelp::buildCircle </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2i&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>radius</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>thickness</em> = <code>1</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Constructs a hollow circle of a given radius about the specified origin point. </p>
+<p>See <a class="el" href="class_grid_help.html#a9f5e5507a6bbf6f382565a2884a4ebe3" title="Builds a filled-in circle of the specified radius about the given origin point. ">GridHelp::buildFilledCircle</a> for constructing a filled-in circle. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origin</td><td>Origin point of the circle. </td></tr>
+    <tr><td class="paramname">radius</td><td>Radius of the circle. </td></tr>
+    <tr><td class="paramname">thickness</td><td>Thickness of the circle (defaults to 1). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector</code> of the positions that make up the constructed circle. </dd></dl>
+
+</div>
+</div>
+<a id="a9f5e5507a6bbf6f382565a2884a4ebe3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f5e5507a6bbf6f382565a2884a4ebe3">&#9670;&nbsp;</a></span>buildFilledCircle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; sf::Vector2i &gt; GridHelp::buildFilledCircle </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2i&#160;</td>
+          <td class="paramname"><em>origin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>radius</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Builds a filled-in circle of the specified radius about the given origin point. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">origin</td><td>Origin point of the circle. </td></tr>
+    <tr><td class="paramname">radius</td><td>Radius of the circle. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector</code> of the positions that make up the constructed circle. </dd></dl>
+
+</div>
+</div>
+<a id="a47ee67525d4aefa39ae2d4d7537d1a11"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a47ee67525d4aefa39ae2d4d7537d1a11">&#9670;&nbsp;</a></span>buildLine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; sf::Vector2u &gt; GridHelp::buildLine </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2f&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>length</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Finds all the grid positions from the start to the target position using linear interpolation. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Start position. </td></tr>
+    <tr><td class="paramname">target</td><td>Target position. </td></tr>
+    <tr><td class="paramname">length</td><td>Specify a maximum length for the line produced. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><code>std::vector</code> of positions that make up the line. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/<a class="el" href="_grid_help_8h_source.html">GridHelp.h</a></li>
 <li>src/map/GridHelp.cpp</li>

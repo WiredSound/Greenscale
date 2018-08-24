@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['camera',['Camera',['../class_camera.html#afbd1feb2e3d3638bfdbbb6aab93c98c4',1,'Camera']]],
-  ['colourtilepath',['colourTilePath',['../class_game_map.html#a9e1a241c2bc1f659a86fcfcae526c804',1,'GameMap']]]
+  ['buildastarpath',['buildAStarPath',['../class_a_star_path_builder.html#ae4461c0030ee4406958887ad96cb3fb4',1,'AStarPathBuilder']]],
+  ['buildlinepath',['buildLinePath',['../class_movement_path.html#ab479c86e5cae71703ee37d702b7579b7',1,'MovementPath']]]
 ];

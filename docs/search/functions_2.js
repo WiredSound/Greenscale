@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['display',['display',['../class_console.html#a13391e5284ec606089dbf5b6bb6223d9',1,'Console']]],
-  ['draw',['draw',['../class_world.html#a0cb6c63048db0fdbaed92fe439dbfefb',1,'World::draw()'],['../class_game_state.html#ad3a574e8d22aa60b9580ae2d0640bfcc',1,'GameState::draw()'],['../class_state.html#ae261605bc40b7e3959ce5df5457e4942',1,'State::draw()']]]
+  ['camera',['Camera',['../class_camera.html#afbd1feb2e3d3638bfdbbb6aab93c98c4',1,'Camera']]],
+  ['colourtilepath',['colourTilePath',['../class_game_map.html#a9e1a241c2bc1f659a86fcfcae526c804',1,'GameMap']]]
 ];

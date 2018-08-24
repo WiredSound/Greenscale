@@ -70,23 +70,71 @@ $(function() {
 <div class="title">AStarPathBuilder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>An implementation of the A* pathfinding algorithm.  
+ <a href="class_a_star_path_builder.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_a_star_path_builder_8h_source.html">AStarPathBuilder.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_a_star_path_builder_1_1_a_star_tile.html">AStarTile</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_a_star_path_builder_1_1_compare_vectors.html">CompareVectors</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><code>std::map</code> requires a way to compare keys which sf::Vector2u does not provide by default.  <a href="struct_a_star_path_builder_1_1_compare_vectors.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0abbb236f7a0a42ccef48ce657e94096"><td class="memItemLeft" align="right" valign="top"><a id="a0abbb236f7a0a42ccef48ce657e94096"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>AStarPathBuilder</b> (<a class="el" href="class_game_map.html">GameMap</a> *gameMap)</td></tr>
-<tr class="separator:a0abbb236f7a0a42ccef48ce657e94096"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4461c0030ee4406958887ad96cb3fb4"><td class="memItemLeft" align="right" valign="top"><a id="ae4461c0030ee4406958887ad96cb3fb4"></a>
-<a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buildAStarPath</b> (sf::Vector2u start, sf::Vector2u target) const</td></tr>
+<tr class="memitem:a3cff2ce6dc0e9961d660c3fff8225b8b"><td class="memItemLeft" align="right" valign="top"><a id="a3cff2ce6dc0e9961d660c3fff8225b8b"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>AStarPathBuilder</b> (<a class="el" href="class_game_map.html">GameMap</a> &amp;gameMap)</td></tr>
+<tr class="separator:a3cff2ce6dc0e9961d660c3fff8225b8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4461c0030ee4406958887ad96cb3fb4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_a_star_path_builder.html#ae4461c0030ee4406958887ad96cb3fb4">buildAStarPath</a> (sf::Vector2u start, sf::Vector2u target) const</td></tr>
+<tr class="memdesc:ae4461c0030ee4406958887ad96cb3fb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Build a new <a class="el" href="class_movement_path.html" title="Stores the points on a grid that make up a path that an entity or projectile can follow. ">MovementPath</a> between two points.  <a href="#ae4461c0030ee4406958887ad96cb3fb4">More...</a><br /></td></tr>
 <tr class="separator:ae4461c0030ee4406958887ad96cb3fb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>An implementation of the A* pathfinding algorithm. </p>
+<p>Unlike the path building methods in <a class="el" href="class_movement_path.html" title="Stores the points on a grid that make up a path that an entity or projectile can follow. ">MovementPath</a>, buildAStarPath is not static and the <a class="el" href="class_a_star_path_builder.html" title="An implementation of the A* pathfinding algorithm. ">AStarPathBuilder</a> has to be initialised with a reference to the <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae4461c0030ee4406958887ad96cb3fb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4461c0030ee4406958887ad96cb3fb4">&#9670;&nbsp;</a></span>buildAStarPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_movement_path.html">MovementPath</a> AStarPathBuilder::buildAStarPath </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>start</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>target</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Build a new <a class="el" href="class_movement_path.html" title="Stores the points on a grid that make up a path that an entity or projectile can follow. ">MovementPath</a> between two points. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>Start position. </td></tr>
+    <tr><td class="paramname">target</td><td>Target position. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Newly constructed path. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/pathfinding/<a class="el" href="_a_star_path_builder_8h_source.html">AStarPathBuilder.h</a></li>
 <li>src/map/pathfinding/AStarPathBuilder.cpp</li>

@@ -60,6 +60,9 @@ void MovementPath::restrictLength(unsigned int size) {
 		path.resize(size);
 }
 
+/**
+ *
+ */
 void MovementPath::recursivelyShortenBasedOn(std::function<bool()> condition) {
 	while (condition() && getLength() > 1)
 		restrictLength(getLength() - 1);
@@ -67,10 +70,12 @@ void MovementPath::recursivelyShortenBasedOn(std::function<bool()> condition) {
 
 // PATH BUILDING:
 
+//! Build a MovementPath that directly connects two points in a line. See GridHelp::buildLine for actual implementation as just wraps the positions returned into a MovementPath instance.
 MovementPath MovementPath::buildLinePath(sf::Vector2u start, sf::Vector2u target, unsigned int length) {
 	return MovementPath(GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target), static_cast<float>(length)));
 }
 
+//! Calculate the number of tiles directly between two points by counting the number of positions returned by GridHelp::buildLine.
 unsigned int MovementPath::distanceFromTo(sf::Vector2u start, sf::Vector2u target) {
 	std::size_t size = GridHelp::buildLine(static_cast<sf::Vector2f>(start), static_cast<sf::Vector2f>(target)).size();
 	return static_cast<unsigned int>(size);
