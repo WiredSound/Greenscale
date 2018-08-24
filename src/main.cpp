@@ -6,6 +6,14 @@
 #include "GameSettings.h"
 #include "debugging.h"
 
+/**
+ * \mainpage Greenscale
+ * \htmlonly
+ * <p>Please see <a href="classes.html">Classes</a> and <a href="namespaces.html">Namespaces</a> for the project's documentation.</p>
+ * <p>Visit the <a href="http://github.com/WiredSound/GreenScale">Greenscale GitHub page</a> should you wish to browse the codebase or contribute.</p>
+ * \endhtmlonly
+ */
+
 int main() {
 	GameSettings settings;
 	settings.loadSettings("options.json");
