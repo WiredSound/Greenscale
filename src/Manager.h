@@ -6,11 +6,11 @@
 #include <nlohmann/json.hpp>
 #include "debugging.h"
 
-/*
- * The Manager template class is used to associate a key with some struct with data loaded from a given JSON file. For example, the TileManager class uses the Manager to associate a tile ID
- * with a TileInfo struct which is loaded from the "tiles.json" file.
+/**
+ * Manager is a class template that is designed to make the loading of tiles, projectiles, entities, components and component upgrades from JSON files easier.
+ * \tparam Key The key that points to a managed item. Typically an enum stored in the IDs namespace.
+ * \tparam Managed An object/struct storing all the data relevant to what is being managed.
  */
-
 template<typename Key, typename Managed>
 class Manager {
 protected:
@@ -18,12 +18,26 @@ protected:
 	const std::string managedKey;
 	std::map<Key, const Managed> map;
 
+	/**
+	 * This method is where all information stored in the root of the JSON object can be parsed.
+	 * \param json The root JSON object.
+	 */
 	virtual void parseJson(nlohmann::json json) = 0;
+	/**
+	 * Where all managed objects can be created from the JSON object.
+	 * \param json The JSON object representing the managed item.
+	 * \return A `std::pair` of the key and its associated managed object.
+	 */
 	virtual std::pair<Key, const Managed> parseJsonManaged(nlohmann::json json) = 0;
 
 public:
 	Manager(std::string name, std::string keyManaged) : managedName(name), managedKey(keyManaged) {}
 
+	/**
+	 * Loads all the relevant information from the specified JSON file.
+	 * \param filename The path to the JSON file.
+	 * \return Returns `true` if the JSON file was successfully read and parsed.
+	 */
 	bool loadFromJsonFile(std::string filename) {
 		nlohmann::json json;
 		std::ifstream file(filename);

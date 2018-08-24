@@ -3,6 +3,11 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 
+/**
+ * This class makes it simpler to know which keys and mouse buttons are held and which have been immediately just pressed in addition to event handling.
+ * I created the Input class after I realised that SFML provided no easy why to check if a key had pressed just in the last frame. It also provides the position of the mouse relative to the game window
+ * which simply calling sf::Mouse::getPosition() does not account for.
+ */
 class Input {
 public:
 	Input(sf::RenderWindow &renderWindow);

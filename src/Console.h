@@ -3,13 +3,14 @@
 #include <iostream>
 #include "gui/ConsoleGui.h"
 
-/*
- * The Console class is set up to display a Message (containing a string of text and a MessageType) using the ConsoleGui or, should no pointer to a ConsoleGui instance by provided,
- * to standard console output as a fallback.
+/**
+ * Allows for messages to be displayed to the console.
  */
-
 class Console {
 public:
+	/**
+	 * Each of the message types have a name as well as a colour (and will likely have some sort of priority in the future).
+	 */
 	class MessageType {
 	public:
 		std::string name;

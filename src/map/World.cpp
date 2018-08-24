@@ -25,6 +25,9 @@ World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Conso
 	  std::make_shared<TransmissionTowerFloorGenerator>(35, 2, IDs::Tiles::WALL, sf::Color(150, 150, 150, 255), IDs::Tiles::GROUND, sf::Color(100, 100, 100, 255)) });
 }
 
+/**
+ * Calls the required update methods GameMap::update (of the currently loaded map) and TurnManager::update.
+ */
 void World::update(Input &input) {
 	map->update();
 	turnManager.update(input, map);
@@ -35,6 +38,9 @@ void World::update(Input &input) {
 		map->load("M:/Visual Studio Projects/Greenscale/test");
 }
 
+/**
+ * Calls GameMap::draw for the currently loaded map.
+ */
 void World::draw(sf::RenderWindow &window) {
 	map->draw(window);
 }

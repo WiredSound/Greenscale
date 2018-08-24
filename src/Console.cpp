@@ -12,6 +12,11 @@ void Console::setConsoleGui(ConsoleGui *guiPtr) {
 	gui = guiPtr;
 }
 
+/**
+ * Displays a Console::Message (containing a string of text and a Console::MessageType) using the ConsoleGui or, should no pointer to a ConsoleGui instance by provided, to `stdout` as a fallback.
+ * \param msg The message to display.
+ * \param guiPrependMsgType Whether or not the type of the message should be displayed when outputting to GUI (note that the type of message is always displayed when outputting to `stdout`).
+*/
 void Console::display(Message msg, bool guiPrependMsgType) {
 	std::string msgTextWithType = "(" + msg.type.name + ") " + msg.text;
 

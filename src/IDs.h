@@ -1,5 +1,9 @@
 #pragma once
 
+/**
+ * Components, component upgrades, projectiles, tile and entities are all referenced via an ID system.
+ * The IDs namespace stores all the enums that represent these different items.
+ */
 namespace IDs {
 	enum Tiles : unsigned char {
 		NOTHING = 0,
