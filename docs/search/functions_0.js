@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['camera',['Camera',['../class_camera.html#afbd1feb2e3d3638bfdbbb6aab93c98c4',1,'Camera']]]
+  ['addentity',['addEntity',['../class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9',1,'GameMap']]]
 ];

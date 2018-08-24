@@ -5,6 +5,7 @@
  * The IDs namespace stores all the enums that represent these different items.
  */
 namespace IDs {
+	//! Tile IDs.
 	enum Tiles : unsigned char {
 		NOTHING = 0,
 		GROUND = 1,
@@ -19,6 +20,7 @@ namespace IDs {
 		MACHINERY_TERMINAL = 10
 	};
 
+	//! Component IDs.
 	enum Components : unsigned char {
 		FISSION_REACTOR = 0,
 		HEAT_SINK = 1,
@@ -28,12 +30,15 @@ namespace IDs {
 		TROOP_FABRICATOR = 5
 	};
 
+	//! Component upgrade IDs.
 	enum ComponentUpgrades : unsigned char {};
 
+	//! Projectile IDs.
 	enum Projectiles : unsigned char {
 		BULLET = 0
 	};
 
+	//! Entity IDs.
 	enum Entities : unsigned char {
 		TROOP_01 = 0,
 		RESTRUCTOR_01 = 1,

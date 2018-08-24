@@ -8,13 +8,17 @@
 class GameMap;
 class MovementPath;
 
+/**
+ * An implementation of the A* pathfinding algorithm.
+ * Unlike the path building methods in MovementPath, buildAStarPath is not static and the AStarPathBuilder has to be initialised with a reference to the GameMap.
+ */
 class AStarPathBuilder {
 public:
-	AStarPathBuilder(GameMap *gameMap);
+	AStarPathBuilder(GameMap &gameMap);
 	MovementPath buildAStarPath(sf::Vector2u start, sf::Vector2u target) const;
 
 private:
-	GameMap *map;
+	GameMap &map;
 
 	struct CompareVectors;
 	struct AStarTile;

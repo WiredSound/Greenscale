@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['movedirectly',['moveDirectly',['../class_camera.html#a990de7dc71896b6c0ac828c908c3d4ba',1,'Camera']]],
-  ['movetowardscentre',['moveTowardsCentre',['../class_camera.html#ac25094a72d0d9ba5fc2e48f6e12c8505',1,'Camera']]]
+  ['iskeyheld',['isKeyHeld',['../class_input.html#a0309da92cda78cee5a6b45881d2f1395',1,'Input']]],
+  ['iskeyjustpressed',['isKeyJustPressed',['../class_input.html#ab88930114816743caf6872cacc60a57c',1,'Input']]],
+  ['ismousebuttonjustpressed',['isMouseButtonJustPressed',['../class_input.html#aaf34dcc71ef1f9b76bc525ca338dcb97',1,'Input']]]
 ];

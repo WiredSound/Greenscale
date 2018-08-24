@@ -9,8 +9,11 @@
 #include "../components/ComponentBuilder.h"
 #include "../entities/controllers/PlayerController.h"
 
-// Note that the MapBuilder does not handle any procedual generation, that is done by MapGenerator and its subclasses.
-
+/**
+ * This class handles the construction of a new GameMap instance and also performs all the processes required to do so (it does not prefer any procedual generation).
+ * This includes loading all the required textures from the assets folder, building tile and entity layers, calling map generators, adding the initial group and entities, and finally actually building
+ * and returning a unique pointer to an instance of GameMap.
+ */
 class MapBuilder {
 public:
 	MapBuilder(sf::Vector2f sizeTile, std::vector<Faction> friendlyFactions, std::shared_ptr<PlayerController> controller, Console &consoleRef);

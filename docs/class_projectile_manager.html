@@ -95,7 +95,7 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getSingleProj
 <tr class="memdesc:a8f627ffe8cab341193d459275a590de3 inherit pub_methods_class_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all the relevant information from the specified JSON file.  <a href="class_manager.html#a8f627ffe8cab341193d459275a590de3">More...</a><br /></td></tr>
 <tr class="separator:a8f627ffe8cab341193d459275a590de3 inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc6be6ffd6a853905a55ebfa66f2f6b inherit pub_methods_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a7cc6be6ffd6a853905a55ebfa66f2f6b"></a>
-const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (IDs::Projectiles key)</td></tr>
+const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="namespace_i_ds.html#a080b638017e8653294839a2bcda4f421">IDs::Projectiles</a> key)</td></tr>
 <tr class="separator:a7cc6be6ffd6a853905a55ebfa66f2f6b inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
@@ -103,7 +103,7 @@ Protected Member Functions</h2></td></tr>
 <tr class="memitem:a3ca3fe1a2c1ed06c2ff34c84aa62be6e"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_projectile_manager.html#a3ca3fe1a2c1ed06c2ff34c84aa62be6e">parseJson</a> (nlohmann::json json) override</td></tr>
 <tr class="memdesc:a3ca3fe1a2c1ed06c2ff34c84aa62be6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is where all information stored in the root of the JSON object can be parsed.  <a href="#a3ca3fe1a2c1ed06c2ff34c84aa62be6e">More...</a><br /></td></tr>
 <tr class="separator:a3ca3fe1a2c1ed06c2ff34c84aa62be6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1039598d4951943e5d8c2150b330fcab"><td class="memItemLeft" align="right" valign="top">virtual std::pair&lt; IDs::Projectiles, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_projectile_manager.html#a1039598d4951943e5d8c2150b330fcab">parseJsonManaged</a> (nlohmann::json json) override</td></tr>
+<tr class="memitem:a1039598d4951943e5d8c2150b330fcab"><td class="memItemLeft" align="right" valign="top">virtual std::pair&lt; <a class="el" href="namespace_i_ds.html#a080b638017e8653294839a2bcda4f421">IDs::Projectiles</a>, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_projectile_manager.html#a1039598d4951943e5d8c2150b330fcab">parseJsonManaged</a> (nlohmann::json json) override</td></tr>
 <tr class="memdesc:a1039598d4951943e5d8c2150b330fcab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where all managed objects can be created from the JSON object.  <a href="#a1039598d4951943e5d8c2150b330fcab">More...</a><br /></td></tr>
 <tr class="separator:a1039598d4951943e5d8c2150b330fcab"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -117,7 +117,7 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>managedN
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>managedKey</b></td></tr>
 <tr class="separator:a9db5c272ae211d5aca5f64a646b4d018 inherit pro_attribs_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a837f56cd4feda2475d6367960aefbb inherit pro_attribs_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a2a837f56cd4feda2475d6367960aefbb"></a>
-std::map&lt; IDs::Projectiles, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>map</b></td></tr>
+std::map&lt; <a class="el" href="namespace_i_ds.html#a080b638017e8653294839a2bcda4f421">IDs::Projectiles</a>, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>map</b></td></tr>
 <tr class="separator:a2a837f56cd4feda2475d6367960aefbb inherit pro_attribs_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -167,7 +167,7 @@ std::map&lt; IDs::Projectiles, const <a class="el" href="struct_projectile_visua
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; IDs::Projectiles, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt; ProjectileManager::parseJsonManaged </td>
+          <td class="memname">std::pair&lt; <a class="el" href="namespace_i_ds.html#a080b638017e8653294839a2bcda4f421">IDs::Projectiles</a>, const <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> &gt; ProjectileManager::parseJsonManaged </td>
           <td>(</td>
           <td class="paramtype">nlohmann::json&#160;</td>
           <td class="paramname"><em>json</em></td><td>)</td>

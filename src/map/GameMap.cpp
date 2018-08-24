@@ -9,7 +9,7 @@ bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr
 
 GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile,
 	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, Console &consoleRef)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(this), projectilesTexture(textureProjectiles), console(consoleRef),
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(*this), projectilesTexture(textureProjectiles), console(consoleRef),
 	playerFriendlyFactions(friendlyFactions) {}
 
 void GameMap::update() {
@@ -31,10 +31,19 @@ void GameMap::draw(sf::RenderWindow &window) {
 	//tiles->resetColouring();
 }
 
+/**
+ * Change the display colour of all tiles (and entities in the future but this is not yet implemented) in the specified movement path to the given colour.
+ * \param path The path to colour in.
+ * \param colour The colour to set the path to.
+ */
 void GameMap::colourTilePath(MovementPath path, sf::Color colour) {
 	tiles->colourPath(path, colour);
 }
 
+/**
+ * Set the colour of all the tiles in the given movement path to their default colours.
+ * \param path The path to reset the colours of.
+ */
 void GameMap::resetColourTilePath(MovementPath path) {
 	tiles->resetColourPath(path);
 }
@@ -95,6 +104,11 @@ void GameMap::addRoom(std::unique_ptr<MapRoom> room) {
 	rooms.push_back(std::move(room));
 }
 
+/**
+ * Added a new entity to the map and sets said entity's map pointer. An entity's map pointer is not set correctly when added directly to an EntityLayer so always use this method over EntityLayer::addEntity.
+ * \param entity The entity to add to the map.
+ * \return Whether adding the entity was successful. This is determinded by whether the position the entity is at is not already occupied on this map.
+ */
 bool GameMap::addEntity(std::shared_ptr<Entity> entity) {
 	if (isPositionFree(entity->getPosition())) {
 		entity->setMap(this);
@@ -115,6 +129,10 @@ bool GameMap::addEntities(std::vector<std::shared_ptr<Entity>> entities) {
 	return success;
 }
 
+/**
+ * Fetches all the entities on the map ordered based on their faction's priority value from smallest to largest.
+ * \return Vector of all entities ordered on priority.
+ */
 std::vector<std::shared_ptr<Entity>> GameMap::getEntitesPriorityOrdered() {
 	std::vector<std::shared_ptr<Entity>> entityList = entities->getEntities();
 	std::sort(entityList.begin(), entityList.end(), entitySortMethod);
@@ -174,6 +192,12 @@ bool GameMap::isPositionFree(sf::Vector2u position, sf::Vector2u size) {
 	return true;
 }
 
+/**
+ * Finds the nearest position to the given position where there are no blocking tiles or entities.
+ * \param position The position to begin searching from.
+ * \param maximumIterations The number of positions to look through before giving up. If the `maximumIterations` limit is reached then `position` is returned.
+ * \return The nearest free position or just `position` if no free position was found in the given number of iterations.
+ */
 sf::Vector2u GameMap::findNearestFreePosition(sf::Vector2u position, unsigned int maximumIterations) {
 	std::vector<sf::Vector2u> adjacentPositions = getAdjacentPositions(position);
 	adjacentPositions.insert(adjacentPositions.begin(), position); // Add the given position so that it is returned should it happen to already be a free position.

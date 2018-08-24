@@ -92,7 +92,7 @@ const std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html"
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The game is of course turn-based so it is the role of the <a class="el" href="class_turn_manager.html" title="The game is of course turn-based so it is the role of the TurnManager class is to handle the turn sys...">TurnManager</a> class is to handle the turn system. </p>
-<p>It takes a <a class="el" href="class_game_map.html">GameMap</a> reference in its update function and then fetches all the entities present on that map. Each turn for an entity is split into several distinct phases:</p><ol type="1">
+<p>It takes a <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> reference in its update function and then fetches all the entities present on that map. Each turn for an entity is split into several distinct phases:</p><ol type="1">
 <li>First, the entity's Entity::yourTurnBegin method is called once.</li>
 <li>Next, Entity::yourTurnDecision is called which in turn calls upon the entity's controller. This method is called every frame until true is returned which indicates that the controller has at that point decided what the entity will do this turn.</li>
 <li>The next method called by the turn manager is Entity::yourTurnCurrently which is where the entity actually carries out their action (whether that may be attacking, moving, etc). This is again called continually until true is returned.</li>

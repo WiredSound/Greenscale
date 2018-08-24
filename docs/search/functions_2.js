@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['getframe',['getFrame',['../class_animation.html#adb02eaa4db7fc27606bb8f2a78884084',1,'Animation']]],
-  ['getframefromindex',['getFrameFromIndex',['../class_animation.html#a73b42d3e43fdd6d0f6fe73c67f28da1e',1,'Animation']]],
-  ['getmouseposition',['getMousePosition',['../class_input.html#a934282720a6dfd1aaa38f99f21ca766a',1,'Input']]],
-  ['getmouseworldposition',['getMouseWorldPosition',['../class_input.html#a5c04a0cd944fa5f7ff0f06c5e4a53e8c',1,'Input']]]
+  ['display',['display',['../class_console.html#a13391e5284ec606089dbf5b6bb6223d9',1,'Console']]],
+  ['draw',['draw',['../class_world.html#a0cb6c63048db0fdbaed92fe439dbfefb',1,'World::draw()'],['../class_game_state.html#ad3a574e8d22aa60b9580ae2d0640bfcc',1,'GameState::draw()'],['../class_state.html#ae261605bc40b7e3959ce5df5457e4942',1,'State::draw()']]]
 ];

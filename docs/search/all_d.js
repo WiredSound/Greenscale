@@ -7,6 +7,7 @@ var searchData=
   ['tilecolourorientation',['TileColourOrientation',['../struct_tile_layer_1_1_tile_colour_orientation.html',1,'TileLayer']]],
   ['tilelayer',['TileLayer',['../class_tile_layer.html',1,'']]],
   ['tilemanager',['TileManager',['../class_tile_manager.html',1,'']]],
+  ['tiles',['Tiles',['../namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58',1,'IDs']]],
   ['transmissiontowerfloorgenerator',['TransmissionTowerFloorGenerator',['../class_transmission_tower_floor_generator.html',1,'']]],
   ['turnmanager',['TurnManager',['../class_turn_manager.html',1,'']]]
 ];

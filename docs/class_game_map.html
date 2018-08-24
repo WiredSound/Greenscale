@@ -70,6 +70,11 @@ $(function() {
 <div class="title">GameMap Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> is were all map information (such as entities present, tiles and projectiles) is stored and also where the rendering of this information takes place.  
+ <a href="class_game_map.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_game_map_8h_source.html">GameMap.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -85,11 +90,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>turnPassed</b> ()</td
 <tr class="memitem:a88d0633b2be7b5c081ed562898d6bb8b"><td class="memItemLeft" align="right" valign="top"><a id="a88d0633b2be7b5c081ed562898d6bb8b"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (sf::RenderWindow &amp;window)</td></tr>
 <tr class="separator:a88d0633b2be7b5c081ed562898d6bb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e1a241c2bc1f659a86fcfcae526c804"><td class="memItemLeft" align="right" valign="top"><a id="a9e1a241c2bc1f659a86fcfcae526c804"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>colourTilePath</b> (<a class="el" href="class_movement_path.html">MovementPath</a> path, sf::Color colour)</td></tr>
+<tr class="memitem:a9e1a241c2bc1f659a86fcfcae526c804"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a9e1a241c2bc1f659a86fcfcae526c804">colourTilePath</a> (<a class="el" href="class_movement_path.html">MovementPath</a> path, sf::Color colour)</td></tr>
+<tr class="memdesc:a9e1a241c2bc1f659a86fcfcae526c804"><td class="mdescLeft">&#160;</td><td class="mdescRight">Change the display colour of all tiles (and entities in the future but this is not yet implemented) in the specified movement path to the given colour.  <a href="#a9e1a241c2bc1f659a86fcfcae526c804">More...</a><br /></td></tr>
 <tr class="separator:a9e1a241c2bc1f659a86fcfcae526c804"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a336cb6e0f8f40f511c01d1b04135792e"><td class="memItemLeft" align="right" valign="top"><a id="a336cb6e0f8f40f511c01d1b04135792e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>resetColourTilePath</b> (<a class="el" href="class_movement_path.html">MovementPath</a> path)</td></tr>
+<tr class="memitem:a336cb6e0f8f40f511c01d1b04135792e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a336cb6e0f8f40f511c01d1b04135792e">resetColourTilePath</a> (<a class="el" href="class_movement_path.html">MovementPath</a> path)</td></tr>
+<tr class="memdesc:a336cb6e0f8f40f511c01d1b04135792e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the colour of all the tiles in the given movement path to their default colours.  <a href="#a336cb6e0f8f40f511c01d1b04135792e">More...</a><br /></td></tr>
 <tr class="separator:a336cb6e0f8f40f511c01d1b04135792e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6f61b92319b52485ecfcb1a8cd668bbf"><td class="memItemLeft" align="right" valign="top"><a id="a6f61b92319b52485ecfcb1a8cd668bbf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>fireArcs</b> (std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt; arcs)</td></tr>
@@ -103,14 +108,14 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>construct</b> ()</td>
 <tr class="memitem:af9779dff312445a1d4124b9c9255465e"><td class="memItemLeft" align="right" valign="top"><a id="af9779dff312445a1d4124b9c9255465e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>addRoom</b> (std::unique_ptr&lt; <a class="el" href="class_map_room.html">MapRoom</a> &gt; room)</td></tr>
 <tr class="separator:af9779dff312445a1d4124b9c9255465e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="memItemLeft" align="right" valign="top"><a id="a2a0f038c0b75b042882bee12f2ec5fc9"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>addEntity</b> (std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; entity)</td></tr>
+<tr class="memitem:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9">addEntity</a> (std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; entity)</td></tr>
+<tr class="memdesc:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Added a new entity to the map and sets said entity's map pointer.  <a href="#a2a0f038c0b75b042882bee12f2ec5fc9">More...</a><br /></td></tr>
 <tr class="separator:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a30ab79a3b319530110a3b66dff2f546f"><td class="memItemLeft" align="right" valign="top"><a id="a30ab79a3b319530110a3b66dff2f546f"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>addEntities</b> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt;&gt; entities)</td></tr>
 <tr class="separator:a30ab79a3b319530110a3b66dff2f546f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e5473df5c2b7d2f21a92379d1217884"><td class="memItemLeft" align="right" valign="top"><a id="a5e5473df5c2b7d2f21a92379d1217884"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEntitesPriorityOrdered</b> ()</td></tr>
+<tr class="memitem:a5e5473df5c2b7d2f21a92379d1217884"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a5e5473df5c2b7d2f21a92379d1217884">getEntitesPriorityOrdered</a> ()</td></tr>
+<tr class="memdesc:a5e5473df5c2b7d2f21a92379d1217884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fetches all the entities on the map ordered based on their faction's priority value from smallest to largest.  <a href="#a5e5473df5c2b7d2f21a92379d1217884">More...</a><br /></td></tr>
 <tr class="separator:a5e5473df5c2b7d2f21a92379d1217884"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a68307ff6d050f644cdf62759ff6762a8"><td class="memItemLeft" align="right" valign="top"><a id="a68307ff6d050f644cdf62759ff6762a8"></a>
 std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEntitiesInFaction</b> (<a class="el" href="class_faction.html">Faction</a> faction)</td></tr>
@@ -139,8 +144,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPositionFree</b> (s
 <tr class="memitem:ac1397cd20c18b2bbd04733a84cb27363"><td class="memItemLeft" align="right" valign="top"><a id="ac1397cd20c18b2bbd04733a84cb27363"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isPositionFree</b> (sf::Vector2u position, sf::Vector2u size)</td></tr>
 <tr class="separator:ac1397cd20c18b2bbd04733a84cb27363"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c6e5957336ac89cd49fae7269457501"><td class="memItemLeft" align="right" valign="top"><a id="a5c6e5957336ac89cd49fae7269457501"></a>
-sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>findNearestFreePosition</b> (sf::Vector2u position, unsigned int maximumIterations=100)</td></tr>
+<tr class="memitem:a5c6e5957336ac89cd49fae7269457501"><td class="memItemLeft" align="right" valign="top">sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a5c6e5957336ac89cd49fae7269457501">findNearestFreePosition</a> (sf::Vector2u position, unsigned int maximumIterations=100)</td></tr>
+<tr class="memdesc:a5c6e5957336ac89cd49fae7269457501"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds the nearest position to the given position where there are no blocking tiles or entities.  <a href="#a5c6e5957336ac89cd49fae7269457501">More...</a><br /></td></tr>
 <tr class="separator:a5c6e5957336ac89cd49fae7269457501"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab26c2ef5ce5ad4166c8aec0aa36264ec"><td class="memItemLeft" align="right" valign="top"><a id="ab26c2ef5ce5ad4166c8aec0aa36264ec"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>enoughPenetrationToDestroyTileAt</b> (sf::Vector2u pos, unsigned int penetration)</td></tr>
@@ -176,6 +181,158 @@ const sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>size</b
 const sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSize</b></td></tr>
 <tr class="separator:a1fc83f06c719d3421c0afa3147bbc878"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> is were all map information (such as entities present, tiles and projectiles) is stored and also where the rendering of this information takes place. </p>
+<p>Contains both a <a class="el" href="class_tile_layer.html">TileLayer</a> and <a class="el" href="class_entity_layer.html">EntityLayer</a> as well as all ProjectileArcs plus an instance of <a class="el" href="class_a_star_path_builder.html">AStarPathBuilder</a>. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2a0f038c0b75b042882bee12f2ec5fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0f038c0b75b042882bee12f2ec5fc9">&#9670;&nbsp;</a></span>addEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool GameMap::addEntity </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Added a new entity to the map and sets said entity's map pointer. </p>
+<p>An entity's map pointer is not set correctly when added directly to an <a class="el" href="class_entity_layer.html">EntityLayer</a> so always use this method over EntityLayer::addEntity. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entity</td><td>The entity to add to the map. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether adding the entity was successful. This is determinded by whether the position the entity is at is not already occupied on this map. </dd></dl>
+
+</div>
+</div>
+<a id="a9e1a241c2bc1f659a86fcfcae526c804"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e1a241c2bc1f659a86fcfcae526c804">&#9670;&nbsp;</a></span>colourTilePath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameMap::colourTilePath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Color&#160;</td>
+          <td class="paramname"><em>colour</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Change the display colour of all tiles (and entities in the future but this is not yet implemented) in the specified movement path to the given colour. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to colour in. </td></tr>
+    <tr><td class="paramname">colour</td><td>The colour to set the path to. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5c6e5957336ac89cd49fae7269457501"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c6e5957336ac89cd49fae7269457501">&#9670;&nbsp;</a></span>findNearestFreePosition()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">sf::Vector2u GameMap::findNearestFreePosition </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">unsigned int&#160;</td>
+          <td class="paramname"><em>maximumIterations</em> = <code>100</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Finds the nearest position to the given position where there are no blocking tiles or entities. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">position</td><td>The position to begin searching from. </td></tr>
+    <tr><td class="paramname">maximumIterations</td><td>The number of positions to look through before giving up. If the <code>maximumIterations</code> limit is reached then <code>position</code> is returned. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The nearest free position or just <code>position</code> if no free position was found in the given number of iterations. </dd></dl>
+
+</div>
+</div>
+<a id="a5e5473df5c2b7d2f21a92379d1217884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e5473df5c2b7d2f21a92379d1217884">&#9670;&nbsp;</a></span>getEntitesPriorityOrdered()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt; GameMap::getEntitesPriorityOrdered </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Fetches all the entities on the map ordered based on their faction's priority value from smallest to largest. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector of all entities ordered on priority. </dd></dl>
+
+</div>
+</div>
+<a id="a336cb6e0f8f40f511c01d1b04135792e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a336cb6e0f8f40f511c01d1b04135792e">&#9670;&nbsp;</a></span>resetColourTilePath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameMap::resetColourTilePath </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the colour of all the tiles in the given movement path to their default colours. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>The path to reset the colours of. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/<a class="el" href="_game_map_8h_source.html">GameMap.h</a></li>
 <li>src/map/GameMap.cpp</li>

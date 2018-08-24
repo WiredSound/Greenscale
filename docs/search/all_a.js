@@ -7,6 +7,7 @@ var searchData=
   ['powerpool',['PowerPool',['../class_power_pool.html',1,'']]],
   ['projectilearc',['ProjectileArc',['../class_projectile_arc.html',1,'']]],
   ['projectilemanager',['ProjectileManager',['../class_projectile_manager.html',1,'']]],
+  ['projectiles',['Projectiles',['../namespace_i_ds.html#a080b638017e8653294839a2bcda4f421',1,'IDs']]],
   ['projectilevisual',['ProjectileVisual',['../struct_projectile_visual.html',1,'']]],
   ['pulsingcolour',['PulsingColour',['../class_pulsing_colour.html',1,'']]]
 ];

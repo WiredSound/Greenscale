@@ -86,7 +86,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aca50c9b4c7579ee38c2c94dcc8316cf6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_manager.html#aca50c9b4c7579ee38c2c94dcc8316cf6">parseJson</a> (nlohmann::json json) override</td></tr>
 <tr class="memdesc:aca50c9b4c7579ee38c2c94dcc8316cf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is where all information stored in the root of the JSON object can be parsed.  <a href="#aca50c9b4c7579ee38c2c94dcc8316cf6">More...</a><br /></td></tr>
 <tr class="separator:aca50c9b4c7579ee38c2c94dcc8316cf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7c20d8a3ea7aa9c7b56c48440a638a1c"><td class="memItemLeft" align="right" valign="top">virtual std::pair&lt; IDs::Tiles, const <a class="el" href="struct_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_manager.html#a7c20d8a3ea7aa9c7b56c48440a638a1c">parseJsonManaged</a> (nlohmann::json json) override</td></tr>
+<tr class="memitem:a7c20d8a3ea7aa9c7b56c48440a638a1c"><td class="memItemLeft" align="right" valign="top">virtual std::pair&lt; <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a>, const <a class="el" href="struct_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_manager.html#a7c20d8a3ea7aa9c7b56c48440a638a1c">parseJsonManaged</a> (nlohmann::json json) override</td></tr>
 <tr class="memdesc:a7c20d8a3ea7aa9c7b56c48440a638a1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where all managed objects can be created from the JSON object.  <a href="#a7c20d8a3ea7aa9c7b56c48440a638a1c">More...</a><br /></td></tr>
 <tr class="separator:a7c20d8a3ea7aa9c7b56c48440a638a1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0dcf43a5bf3c860010c2d0a1de2d7e24"><td class="memItemLeft" align="right" valign="top"><a id="a0dcf43a5bf3c860010c2d0a1de2d7e24"></a>
@@ -100,7 +100,7 @@ const sf::Vector2f &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>g
 <tr class="memdesc:a8f627ffe8cab341193d459275a590de3 inherit pub_methods_class_manager"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads all the relevant information from the specified JSON file.  <a href="class_manager.html#a8f627ffe8cab341193d459275a590de3">More...</a><br /></td></tr>
 <tr class="separator:a8f627ffe8cab341193d459275a590de3 inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc6be6ffd6a853905a55ebfa66f2f6b inherit pub_methods_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a7cc6be6ffd6a853905a55ebfa66f2f6b"></a>
-const <a class="el" href="struct_tile.html">Tile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (IDs::Tiles key)</td></tr>
+const <a class="el" href="struct_tile.html">Tile</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>get</b> (<a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> key)</td></tr>
 <tr class="separator:a7cc6be6ffd6a853905a55ebfa66f2f6b inherit pub_methods_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
@@ -113,7 +113,7 @@ const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>managedN
 const std::string&#160;</td><td class="memItemRight" valign="bottom"><b>managedKey</b></td></tr>
 <tr class="separator:a9db5c272ae211d5aca5f64a646b4d018 inherit pro_attribs_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a837f56cd4feda2475d6367960aefbb inherit pro_attribs_class_manager"><td class="memItemLeft" align="right" valign="top"><a id="a2a837f56cd4feda2475d6367960aefbb"></a>
-std::map&lt; IDs::Tiles, const <a class="el" href="struct_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>map</b></td></tr>
+std::map&lt; <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a>, const <a class="el" href="struct_tile.html">Tile</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>map</b></td></tr>
 <tr class="separator:a2a837f56cd4feda2475d6367960aefbb inherit pro_attribs_class_manager"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -163,7 +163,7 @@ std::map&lt; IDs::Tiles, const <a class="el" href="struct_tile.html">Tile</a> &g
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::pair&lt; IDs::Tiles, const <a class="el" href="struct_tile.html">Tile</a> &gt; TileManager::parseJsonManaged </td>
+          <td class="memname">std::pair&lt; <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a>, const <a class="el" href="struct_tile.html">Tile</a> &gt; TileManager::parseJsonManaged </td>
           <td>(</td>
           <td class="paramtype">nlohmann::json&#160;</td>
           <td class="paramname"><em>json</em></td><td>)</td>

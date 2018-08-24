@@ -3,7 +3,7 @@
 #include "../GameMap.h"
 #include "MovementPath.h"
 
-AStarPathBuilder::AStarPathBuilder(GameMap *gameMap) : map(gameMap) {}
+AStarPathBuilder::AStarPathBuilder(GameMap &gameMap) : map(gameMap) {}
 
 struct AStarPathBuilder::AStarTile {
 	sf::Vector2u parentPosition;
@@ -32,7 +32,7 @@ private:
 };
 
 MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u target) const {
-	std::map<sf::Vector2u, AStarTile, CompareVectors> openList(map->size), closedList(map->size);
+	std::map<sf::Vector2u, AStarTile, CompareVectors> openList(map.size), closedList(map.size);
 
 	// Add the starting tile to the open list.
 	AStarTile startTile = { start, 0, 0 };
@@ -59,8 +59,8 @@ MovementPath AStarPathBuilder::buildAStarPath(sf::Vector2u start, sf::Vector2u t
 
 		if (lowestScoringTilePos == target) break; // Leave the loop if the target tile has been reached.
 
-		for (sf::Vector2u position : map->getAdjacentPositions(lowestScoringTilePos)) {
-			if (map->isPositionFree(position)) {
+		for (sf::Vector2u position : map.getAdjacentPositions(lowestScoringTilePos)) {
+			if (map.isPositionFree(position)) {
 				if (closedList.count(position)) continue; // Ignore the tile if it is in the closed list.
 
 				AStarTile walkableTile = {
