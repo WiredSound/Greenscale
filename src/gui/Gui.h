@@ -6,6 +6,9 @@
 #include <SFML/Graphics/Transformable.hpp>
 #include "../Input.h"
 
+/**
+ * Pure abstract class that has a collection of children also of Gui type in addition to update and draw methods.
+ */
 class Gui : public sf::Drawable, public sf::Transformable {
 public:
 	Gui(std::string guiName);

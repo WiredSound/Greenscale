@@ -1,5 +1,7 @@
 var searchData=
 [
+  ['getabsoluteposition',['getAbsolutePosition',['../class_child_gui.html#af54992677536a3472d0a3cfaa6c8d4cc',1,'ChildGui']]],
+  ['getabsolutesize',['getAbsoluteSize',['../class_child_gui.html#a8475c692bd0bfeeaa05eea1408c49149',1,'ChildGui']]],
   ['getentitespriorityordered',['getEntitesPriorityOrdered',['../class_game_map.html#a5e5473df5c2b7d2f21a92379d1217884',1,'GameMap']]],
   ['getframe',['getFrame',['../class_animation.html#adb02eaa4db7fc27606bb8f2a78884084',1,'Animation']]],
   ['getframefromindex',['getFrameFromIndex',['../class_animation.html#a73b42d3e43fdd6d0f6fe73c67f28da1e',1,'Animation']]],

@@ -4,6 +4,7 @@ var searchData=
   ['parsejsonmanaged',['parseJsonManaged',['../class_component_manager.html#acb6b43478d014ebce8517c409098f103',1,'ComponentManager::parseJsonManaged()'],['../class_entity_manager.html#afbf0bd6a77cd16bfed4a52f1d9921104',1,'EntityManager::parseJsonManaged()'],['../class_manager.html#ab1100b2e891e14f32a0ee758fa32a0ec',1,'Manager::parseJsonManaged()'],['../class_tile_manager.html#a7c20d8a3ea7aa9c7b56c48440a638a1c',1,'TileManager::parseJsonManaged()'],['../class_projectile_manager.html#a1039598d4951943e5d8c2150b330fcab',1,'ProjectileManager::parseJsonManaged()']]],
   ['plainsgenerator',['PlainsGenerator',['../class_plains_generator.html',1,'']]],
   ['playercontroller',['PlayerController',['../class_player_controller.html',1,'']]],
+  ['positionfromparent',['positionFromParent',['../class_child_gui.html#a8d67a60a574b59c89f8f9d649b7a951f',1,'ChildGui']]],
   ['powerpool',['PowerPool',['../class_power_pool.html',1,'']]],
   ['projectilearc',['ProjectileArc',['../class_projectile_arc.html',1,'']]],
   ['projectilemanager',['ProjectileManager',['../class_projectile_manager.html',1,'']]],
