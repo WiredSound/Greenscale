@@ -61,7 +61,8 @@ void MovementPath::restrictLength(unsigned int size) {
 }
 
 /**
- *
+ * Continue to reduce the length of the path by while the condition function returns `true`.
+ * \param condition Condition function - the path will only stop being shortened when either this function returns `true` or there is no path left.
  */
 void MovementPath::recursivelyShortenBasedOn(std::function<bool()> condition) {
 	while (condition() && getLength() > 1)

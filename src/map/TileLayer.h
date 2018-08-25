@@ -5,8 +5,14 @@
 #include "../debugging.h"
 #include "pathfinding/MovementPath.h"
 
+/**
+ * Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data.
+ */
 class TileLayer : public MapLayer {
 public:
+	/**
+	 * Each tile that makes up the layer is stored as an id, colour and orientation value.
+	 */
 	struct TileColourOrientation {
 		IDs::Tiles id;
 		sf::Color colour;

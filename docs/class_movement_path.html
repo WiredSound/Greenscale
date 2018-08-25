@@ -117,8 +117,8 @@ sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>getTargetPosi
 <tr class="memitem:adb0f9f9671762cedd4967dd7b49ae550"><td class="memItemLeft" align="right" valign="top"><a id="adb0f9f9671762cedd4967dd7b49ae550"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>restrictLength</b> (unsigned int size)</td></tr>
 <tr class="separator:adb0f9f9671762cedd4967dd7b49ae550"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1306a687b187ea8aee119cf1c596ed26"><td class="memItemLeft" align="right" valign="top"><a id="a1306a687b187ea8aee119cf1c596ed26"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>recursivelyShortenBasedOn</b> (std::function&lt; bool()&gt; condition)</td></tr>
+<tr class="memitem:a1306a687b187ea8aee119cf1c596ed26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_movement_path.html#a1306a687b187ea8aee119cf1c596ed26">recursivelyShortenBasedOn</a> (std::function&lt; bool()&gt; condition)</td></tr>
+<tr class="memdesc:a1306a687b187ea8aee119cf1c596ed26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Continue to reduce the length of the path by while the condition function returns <code>true</code>.  <a href="#a1306a687b187ea8aee119cf1c596ed26">More...</a><br /></td></tr>
 <tr class="separator:a1306a687b187ea8aee119cf1c596ed26"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
@@ -135,7 +135,34 @@ static unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class=
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Stores the points on a grid that make up a path that an entity or projectile can follow. </p>
 <p>A path can be either complete or incomplete based on which constructor is called. There are no checks to ensure that a path is actually complete yet. </p>
-</div><hr/>The documentation for this class was generated from the following files:<ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1306a687b187ea8aee119cf1c596ed26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1306a687b187ea8aee119cf1c596ed26">&#9670;&nbsp;</a></span>recursivelyShortenBasedOn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MovementPath::recursivelyShortenBasedOn </td>
+          <td>(</td>
+          <td class="paramtype">std::function&lt; bool()&gt;&#160;</td>
+          <td class="paramname"><em>condition</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Continue to reduce the length of the path by while the condition function returns <code>true</code>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">condition</td><td>Condition function - the path will only stop being shortened when either this function returns <code>true</code> or there is no path left. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/pathfinding/<a class="el" href="_movement_path_8h_source.html">MovementPath.h</a></li>
 <li>src/map/pathfinding/MovementPath.cpp</li>
 </ul>

@@ -16,21 +16,20 @@
 #include "../Input.h"
 class EntityController;
 
-/*
- * The Entity class handles all the actions an entity makes and how it interacts with the GameMap it is located in. The ID of the entity determines the animation, default components, name,
- * description and other such static values held in the relevant EntityInfo struct contained in the EntityManager. Values that vary between entities, such as the current equipped components,
- * aligned factions, position as well as the behaviour (primarily via the held EntityController pointer) are stored in the Entity class itself.
+/**
+ * Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) and are capable of moving and interacting with the game world around them.
+ * The ID of the entity determines the animation, default components, name, description and other such static values held in the relevant EntityInfo struct contained in the EntityManager. Values that vary
+ * between entities, such as the current equipped components, aligned factions, position, as well as the behaviour (primarily via the held EntityController pointer) are stored in the Entity class itself.
  */
-
 class Entity {
 public:
 	Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityManager, std::string entityName, sf::Vector2u entityPosition, Faction entityFaction, sf::Vector2u gridSize,
 		std::shared_ptr<EntityController> entityController, Console &consoleRef, EntityBuilder &entityBuilder);
 
-	void yourTurnBegin(); // When it first becomes this entity's turn.
-	bool yourTurnDecision(Input &input); // Where the entity calls upon its controller in order to decide what to do.
-	bool yourTurnCurrently(); // Where the entity can performs things that take multiple frames to complete such as movement before the turn manager can move onto the next entity.
-	void yourTurnEnd(); // When the entity has finished moving, animating, etc.
+	void yourTurnBegin();
+	bool yourTurnDecision(Input &input);
+	bool yourTurnCurrently();
+	void yourTurnEnd();
 	bool isMyTurn();
 
 	bool updateMovement();
@@ -42,7 +41,7 @@ public:
 	bool moveTo(sf::Vector2u movePos);
 	bool setMovementPath(MovementPath path);
 	bool reachedPathTarget();
-	bool withinRange(int distance);
+	bool withinRange(unsigned int distance);
 	bool overPosition(sf::Vector2u pos);
 
 	const EntityInfo &fetchInfo();
@@ -57,7 +56,7 @@ public:
 	Faction getFaction();
 	virtual Animation::Frame fetchFrame() = 0;
 	ComponentGrid &getComponentGrid();
-	int getMovementRange();
+	unsigned int getMovementRange();
 	std::string getPersonalName();
 	std::string getFullName();
 
@@ -80,7 +79,7 @@ public:
 	void focusCameraOn(Camera &camera);
 
 	void setMap(GameMap *gameMap);
-	GameMap *getMapReference();
+	GameMap *getMapPtr();
 
 	std::shared_ptr<EntityController> getController();
 

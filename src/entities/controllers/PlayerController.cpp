@@ -7,7 +7,7 @@
 PlayerController::PlayerController(GameGui &gameGui, Console &consoleRef, Camera &cameraRef) : path(sf::Vector2u(0, 0)), gui(gameGui), console(consoleRef), camera(cameraRef) {}
 
 bool PlayerController::handle(Entity *entity, Input &input) {
-	GameMap *map = entity->getMapReference();
+	GameMap *map = entity->getMapPtr();
 
 	sf::Vector2f mousePos = input.getMouseWorldPosition();
 	sf::Vector2u mouseTilePos = map->worldPosToTilePos(mousePos); // Get the map tile that the mouse is currently over.

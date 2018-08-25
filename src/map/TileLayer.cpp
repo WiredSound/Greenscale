@@ -70,6 +70,9 @@ bool TileLayer::load(std::string path) {
 	return false;
 }
 
+/**
+ * Updates the sf::VertexArray at a given grid position.
+ */
 void TileLayer::setupTileQuad(sf::Vector2u pos) {
 	sf::Vertex *quad = getQuadPtr(pos); // Get a pointer to the current quad in the vertex array.
 
@@ -82,8 +85,11 @@ void TileLayer::setupTileQuad(sf::Vector2u pos) {
 	setQuadColour(quad, colour);
 }
 
+/**
+ * Fetches a sf::Vertex raw pointer for the quad at the given grid position.
+ */
 sf::Vertex *TileLayer::getQuadPtr(sf::Vector2u pos) {
-	return &vertices[(pos.y * size.x + pos.x) * 4];
+	return &vertices[getIndex(pos) * 4];
 }
 
 // Define the four corners of the quad.
@@ -111,6 +117,9 @@ unsigned int TileLayer::getTileCount() {
 	return size.x * size.y;
 }
 
+/**
+ * Set the tile ID, override colour and (optionally) orientation at the given position.
+ */
 void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, char orientation) {
 	if (withinBounds(pos)) {
 		DEBUG_LOG_SPAM("Set tile at " << pos.x << ", " << pos.y << " to id: " << id << " colour: " << colour << " orientation: " << orientation);
@@ -120,6 +129,9 @@ void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, cha
 	}
 }
 
+/**
+ * Set tile ID and (optionally) orientation and use the default colour for the given tile ID.
+ */
 void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, char orientation) {
 	if (withinBounds(pos)) {
 		DEBUG_LOG_SPAM("Set tile using default colour at " << pos.x << ", " << pos.y << " to id: " << id << " orientation: " << orientation);
@@ -130,6 +142,9 @@ void TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, char orientation) {
 	}
 }
 
+/**
+ * Set the tile ID at the specified position without changing the colour already at said position.
+ */
 void TileLayer::setIdAt(sf::Vector2u pos, IDs::Tiles id) {
 	if (withinBounds(pos)) {
 		DEBUG_LOG_SPAM("Set tile ID " << id << " at " << pos.x << ", " << pos.y);

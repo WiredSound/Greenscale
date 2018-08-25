@@ -74,7 +74,7 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 
 		// The method returns if a weapon is used so below is only run if no appropriate weapon is found.
 
-		GameMap *map = entity->getMapReference();
+		GameMap *map = entity->getMapPtr();
 		sf::Vector2u targetPosition = map->findNearestFreePosition(targetEntity->getPosition());
 
 		MovementPath path = map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition);
@@ -93,7 +93,7 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 Optional<std::shared_ptr<Entity>> SearchAndDestroyController::findMostAppropriateTarget(Entity *entity) {
 	if (targetingIndividual) return targetEntity.lock();
 
-	GameMap *map = entity->getMapReference();
+	GameMap *map = entity->getMapPtr();
 
 	Optional<std::shared_ptr<Entity>> bestTarget;
 	unsigned int distanceToBestTarget;

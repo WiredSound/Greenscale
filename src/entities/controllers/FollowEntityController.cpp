@@ -4,7 +4,7 @@ FollowEntityController::FollowEntityController(std::shared_ptr<Entity> target, u
 	: targetEntity(target), idealDistanceFromTarget(idealDistance), console(consoleRef) {}
 
 bool FollowEntityController::handle(Entity *entity, Input &input) {
-	GameMap *map = entity->getMapReference();
+	GameMap *map = entity->getMapPtr();
 
 	if (auto target = targetEntity.lock()) {
 		sf::Vector2u targetPosition = map->findNearestFreePosition(target->getPosition());

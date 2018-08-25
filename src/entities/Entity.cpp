@@ -9,19 +9,33 @@ Entity::Entity(IDs::Entities entityId, std::shared_ptr<EntityManager> entityMana
 	: id(entityId), manager(entityManager), personalName(entityName), position(entityPosition), faction(entityFaction), componentGrid(gridSize),
 	controller(entityController), console(consoleRef), builder(entityBuilder), currentPath(entityPosition), visualMovementSpeed(sf::milliseconds(150)) {}
 
+/**
+ * Called once by TurnManager when it first becomes this entity's turn.
+ */
 void Entity::yourTurnBegin() {
 	DEBUG_LOG("Turn begins for entity: " << personalName);
 	myTurn = true;
 }
 
+/**
+ * Where the Entity call upon its EntityController in order to decide what action it will take this turn.
+ * TurnManager will continually call this method until `true` is returned.
+ */
 bool Entity::yourTurnDecision(Input &input) {
 	return controller->handle(this, input); // Controller, can you handle this? I don't think they can handle this!
 }
 
+/**
+ * Once it is decided what the entity will do this turn, this method is called to allow that action to take place.
+ * TurnManager will continually call this method until `true` is returned.
+ */
 bool Entity::yourTurnCurrently() {
 	return updateMovement() && updateAttacking();
 }
 
+/**
+ * Called once by TurnManager when this entity's turn has ended.
+ */
 void Entity::yourTurnEnd() {
 	componentGrid.turnPassed(*this, console);
 	DEBUG_LOG("Turn ends for entity: " << personalName);
@@ -32,6 +46,10 @@ bool Entity::isMyTurn() {
 	return myTurn;
 }
 
+/**
+ * Moves the entity along its current movement path.
+ * \return Whether the entity has reached ther target position of its current movement path.
+ */
 bool Entity::updateMovement() {
 	if (!currentPath.reachedTarget() && movementClock.getElapsedTime() >= visualMovementSpeed) {
 		movementClock.restart();
@@ -43,6 +61,9 @@ bool Entity::updateMovement() {
 	return currentPath.reachedTarget();
 }
 
+/**
+ * Checks whether the GameMap has finished showing all ProjectileArcs.
+ */
 bool Entity::updateAttacking() {
 	return map->areAllProjectileArcsComplete();
 }
@@ -68,7 +89,7 @@ bool Entity::reachedPathTarget() {
 	return currentPath.reachedTarget();
 }
 
-bool Entity::withinRange(int distance) {
+bool Entity::withinRange(unsigned int distance) {
 	return distance <= getMovementRange();
 }
 
@@ -112,7 +133,7 @@ bool Entity::setMovementPath(MovementPath path) {
 	return false;
 }
 
-int Entity::getMovementRange() {
+unsigned int Entity::getMovementRange() {
 	return componentGrid.getMovementRange();
 }
 
@@ -124,6 +145,9 @@ std::string Entity::getFullName() {
 	return getPersonalName() + " (" + getEntityName() + ")";
 }
 
+/**
+ * The integrity of an entity is the sum of the integrity of every component in its component grid. See ComponentGrid::getCurrentIntegrity.
+ */
 unsigned int Entity::getIntegrity() {
 	return componentGrid.getCurrentIntegrity();
 }
@@ -144,6 +168,12 @@ int Entity::getMaxPowerStorage() {
 	return componentGrid.getMaxPowerStorage();
 }
 
+/**
+ * Attempts to build a use path for the currently equipped component.
+ * If the equipped component is a weapon for example, the returned path will be the path that the projectile will follow. Most regular components meant to be self-used just return an incomplete path
+ * initialised with the entity's position.
+ * \return Whether using the component was successful.
+ */
 MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 	auto &component = componentGrid.getEquippedComponent();
 
@@ -154,19 +184,18 @@ MovementPath Entity::buildEquippedComponentPath(sf::Vector2u target) {
 	return MovementPath(getPosition());
 }
 
+/**
+ * Use the equipped component on this entity.
+ * \return Whether using the component was successful.
+ */
 bool Entity::useEquippedComponentOnSelf() {
-	auto &component = componentGrid.getEquippedComponent();
-
-	if (component) {
-		std::vector<ProjectileArc> arcs = componentGrid.use(component, *this, component->buildProjectilePath(getPosition(), getPosition(), map), console);
-
-		map->fireArcs(arcs);
-		return true;
-	}
-
-	return false;
+	return useEquippedComponent(buildEquippedComponentPath(getPosition()));
 }
 
+/**
+ * Use the equipped component along the specified movement path. Should the component produce any projectile arcs, they will be passed to the map via GameMap::fireArcs.
+ * \return Whether using the component was successful.
+ */
 bool Entity::useEquippedComponent(MovementPath path) {
 	auto &component = componentGrid.getEquippedComponent();
 
@@ -180,6 +209,9 @@ bool Entity::useEquippedComponent(MovementPath path) {
 	return false;
 }
 
+/**
+ * Applies damage to the entity. Since entities have no health of their own, all damage is applied to a random component in the entity's ComponentGrid.
+ */
 Optional<Component> &Entity::applyDamage(Damage damage, bool displayConsoleMsg) {
 	Optional<Component> &component = componentGrid.getRandomComponent(); // TODO: Apply damage to component based on where the entity is shot from instead.
 
@@ -214,6 +246,9 @@ bool Entity::isMemberOfPlayerFaction() {
 	return map->isFactionPlayerFriendly(faction);
 }
 
+/**
+ * Makes the camera move towards the centre of this entity.
+ */
 void Entity::focusCameraOn(Camera &camera) {
 	camera.moveTowardsCentre(getAbsoluteCentrePosition(), 0.1f);
 }
@@ -250,7 +285,7 @@ void Entity::setMap(GameMap *gameMap) {
 	map = gameMap;
 }
 
-GameMap *Entity::getMapReference() {
+GameMap *Entity::getMapPtr() {
 	return map;
 }
 

@@ -69,6 +69,11 @@ $(function() {
 <div class="title">EntityLayer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Stores all entities present and handles the construction of a sf::VertexArray to draw these entities.  
+ <a href="class_entity_layer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_entity_layer_8h_source.html">EntityLayer.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for EntityLayer:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -77,7 +82,7 @@ $(function() {
  <div class="center">
   <img src="class_entity_layer.png" usemap="#EntityLayer_map" alt=""/>
   <map id="EntityLayer_map" name="EntityLayer_map">
-<area href="class_map_layer.html" alt="MapLayer" shape="rect" coords="0,56,76,80"/>
+<area href="class_map_layer.html" title="Handles the drawing of map data (such as tiles or entities) through the maintance of a sf::VertexArra..." alt="MapLayer" shape="rect" coords="0,56,76,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -86,14 +91,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac0ae28c97a12be9294558aea2906cf29"><td class="memItemLeft" align="right" valign="top"><a id="ac0ae28c97a12be9294558aea2906cf29"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>EntityLayer</b> (sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr&lt; sf::Texture &gt; layerTexture)</td></tr>
 <tr class="separator:ac0ae28c97a12be9294558aea2906cf29"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4ca580a58e17d2c837a246566f3ea672"><td class="memItemLeft" align="right" valign="top"><a id="a4ca580a58e17d2c837a246566f3ea672"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addEntity</b> (std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; entity)</td></tr>
+<tr class="memitem:a4ca580a58e17d2c837a246566f3ea672"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_layer.html#a4ca580a58e17d2c837a246566f3ea672">addEntity</a> (std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; entity)</td></tr>
+<tr class="memdesc:a4ca580a58e17d2c837a246566f3ea672"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds an entity to the <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> and resizes the sf::VertexArray accordingly.  <a href="#a4ca580a58e17d2c837a246566f3ea672">More...</a><br /></td></tr>
 <tr class="separator:a4ca580a58e17d2c837a246566f3ea672"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac49aa92fcad339de59344c333a2fcbb4"><td class="memItemLeft" align="right" valign="top"><a id="ac49aa92fcad339de59344c333a2fcbb4"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEntitiesAt</b> (sf::Vector2u pos)</td></tr>
+std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_layer.html#ac49aa92fcad339de59344c333a2fcbb4">getEntitiesAt</a> (sf::Vector2u pos)</td></tr>
+<tr class="memdesc:ac49aa92fcad339de59344c333a2fcbb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds entities exactly at a given position - ignores large entities that overlap with the given position. <br /></td></tr>
 <tr class="separator:ac49aa92fcad339de59344c333a2fcbb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad665af64fe08b75df12e01e7226ee808"><td class="memItemLeft" align="right" valign="top"><a id="ad665af64fe08b75df12e01e7226ee808"></a>
-std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEntitiesOver</b> (sf::Vector2u pos)</td></tr>
+std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_layer.html#ad665af64fe08b75df12e01e7226ee808">getEntitiesOver</a> (sf::Vector2u pos)</td></tr>
+<tr class="memdesc:ad665af64fe08b75df12e01e7226ee808"><td class="mdescLeft">&#160;</td><td class="mdescRight">Finds all the entities at given position - this does take into account entities that are larger than a single tile. <br /></td></tr>
 <tr class="separator:ad665af64fe08b75df12e01e7226ee808"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a915cce955014c360d3f215018121501d"><td class="memItemLeft" align="right" valign="top"><a id="a915cce955014c360d3f215018121501d"></a>
 std::vector&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getEntities</b> ()</td></tr>
@@ -118,7 +125,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>save</b> (std::string
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>withinBounds</b> (sf::Vector2u pos)</td></tr>
 <tr class="separator:aec413929a2317485bccd1d51a1c9a7b1 inherit pub_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a5e1e1afe3a6752af4a68719f5493684e"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getIndex</b> (sf::Vector2u pos)</td></tr>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#a5e1e1afe3a6752af4a68719f5493684e">getIndex</a> (sf::Vector2u pos)</td></tr>
+<tr class="memdesc:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns a map position into an array index. <br /></td></tr>
 <tr class="separator:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bbc1ae8dbcc8afa0b9386220cdce902 inherit pub_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a6bbc1ae8dbcc8afa0b9386220cdce902"></a>
 sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>getCentre</b> ()</td></tr>
@@ -132,7 +140,8 @@ const sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>size</b
 <tr class="separator:abeb2aa6b485cb3c090b4c29c7e46105f inherit pub_attribs_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_map_layer"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_map_layer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_map_layer.html">MapLayer</a></td></tr>
 <tr class="memitem:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="af752cab9862de98d02b744aae51941ae"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#af752cab9862de98d02b744aae51941ae">draw</a> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+<tr class="memdesc:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <code>texture</code> member as the texture used by the sf::RenderStates and then draws the sf::VertexArray <code>vertices</code> member. <br /></td></tr>
 <tr class="separator:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_map_layer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_map_layer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_map_layer.html">MapLayer</a></td></tr>
 <tr class="memitem:a19c514c1401fd5b86d530ce193f089f1 inherit pro_attribs_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a19c514c1401fd5b86d530ce193f089f1"></a>
@@ -148,6 +157,30 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSize</b><
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileTextureSize</b></td></tr>
 <tr class="separator:a480cca6ea3e30ec264cb2d1b0cd5a4dc inherit pro_attribs_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Stores all entities present and handles the construction of a sf::VertexArray to draw these entities. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a4ca580a58e17d2c837a246566f3ea672"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ca580a58e17d2c837a246566f3ea672">&#9670;&nbsp;</a></span>addEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EntityLayer::addEntity </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt;&#160;</td>
+          <td class="paramname"><em>entity</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds an entity to the <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> and resizes the sf::VertexArray accordingly. </p>
+<p>Note that this function does not set the map pointer member of the entity - only <a class="el" href="class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9" title="Added a new entity to the map and sets said entity&#39;s map pointer. ">GameMap::addEntity</a> does that. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/<a class="el" href="_entity_layer_8h_source.html">EntityLayer.h</a></li>
 <li>src/map/EntityLayer.cpp</li>

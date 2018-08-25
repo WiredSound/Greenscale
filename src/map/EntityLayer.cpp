@@ -14,6 +14,8 @@ void EntityLayer::update() {
 }
 
 void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
+	throw std::exception("EntityLayer::colourEntitiesInPath is unimplemented!");
+
 	for (sf::Vector2u pos : path.getPathTiles()) {
 		auto entities = getEntitiesAt(pos);
 
@@ -32,7 +34,9 @@ bool EntityLayer::isPositionFree(sf::Vector2u pos) {
 	return true;
 }
 
-// This method only checks for entities at the exact given position and does not take into account entities that are larger than 1x1.
+/**
+ * Finds entities exactly at a given position - ignores large entities that overlap with the given position.
+ */
 std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesAt(sf::Vector2u pos) {
 	std::vector<std::shared_ptr<Entity>> entitiesHere;
 
@@ -44,6 +48,9 @@ std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesAt(sf::Vector2u pos
 	return entitiesHere;
 }
 
+/**
+ * Finds all the entities at given position - this does take into account entities that are larger than a single tile.
+ */
 std::vector<std::shared_ptr<Entity>> EntityLayer::getEntitiesOver(sf::Vector2u pos) {
 	std::vector<std::shared_ptr<Entity>> entitiesHere;
 
@@ -76,7 +83,9 @@ bool EntityLayer::save(std::string path) {
 	return false;
 }
 
-// WARNING: This function does not set the map reference within the entity - only the GameMap addEntity function does that.
+/**
+ * Adds an entity to the EntityLayer and resizes the sf::VertexArray accordingly. Note that this function does not set the map pointer member of the entity - only GameMap::addEntity does that.
+ */
 void EntityLayer::addEntity(std::shared_ptr<Entity> entity) {
 	entities.push_back(entity);
 

@@ -6,6 +6,10 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include "Tile.h"
 
+/**
+ * Handles the drawing of map data (such as tiles or entities) through the maintance of a sf::VertexArray.
+ * Has two primary subclasses: TileLayer and EntityLayer.
+ */
 class MapLayer : public sf::Drawable {
 public:
 	MapLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr<sf::Texture> layerTexture);

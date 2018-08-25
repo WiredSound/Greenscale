@@ -72,6 +72,11 @@ $(function() {
 <div class="title">MapLayer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Handles the drawing of map data (such as tiles or entities) through the maintance of a sf::VertexArray.  
+ <a href="class_map_layer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_map_layer_8h_source.html">MapLayer.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for MapLayer:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -80,8 +85,8 @@ $(function() {
  <div class="center">
   <img src="class_map_layer.png" usemap="#MapLayer_map" alt=""/>
   <map id="MapLayer_map" name="MapLayer_map">
-<area href="class_entity_layer.html" alt="EntityLayer" shape="rect" coords="0,112,76,136"/>
-<area href="class_tile_layer.html" alt="TileLayer" shape="rect" coords="86,112,162,136"/>
+<area href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities..." alt="EntityLayer" shape="rect" coords="0,112,76,136"/>
+<area href="class_tile_layer.html" title="Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data..." alt="TileLayer" shape="rect" coords="86,112,162,136"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -94,7 +99,8 @@ Public Member Functions</h2></td></tr>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>withinBounds</b> (sf::Vector2u pos)</td></tr>
 <tr class="separator:aec413929a2317485bccd1d51a1c9a7b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1e1afe3a6752af4a68719f5493684e"><td class="memItemLeft" align="right" valign="top"><a id="a5e1e1afe3a6752af4a68719f5493684e"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getIndex</b> (sf::Vector2u pos)</td></tr>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#a5e1e1afe3a6752af4a68719f5493684e">getIndex</a> (sf::Vector2u pos)</td></tr>
+<tr class="memdesc:a5e1e1afe3a6752af4a68719f5493684e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns a map position into an array index. <br /></td></tr>
 <tr class="separator:a5e1e1afe3a6752af4a68719f5493684e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bbc1ae8dbcc8afa0b9386220cdce902"><td class="memItemLeft" align="right" valign="top"><a id="a6bbc1ae8dbcc8afa0b9386220cdce902"></a>
 sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>getCentre</b> ()</td></tr>
@@ -112,7 +118,8 @@ Protected Member Functions</h2></td></tr>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>updateVertices</b> ()</td></tr>
 <tr class="separator:a9eaa0602a31fcc1386a1b13cc06caf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af752cab9862de98d02b744aae51941ae"><td class="memItemLeft" align="right" valign="top"><a id="af752cab9862de98d02b744aae51941ae"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#af752cab9862de98d02b744aae51941ae">draw</a> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+<tr class="memdesc:af752cab9862de98d02b744aae51941ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <code>texture</code> member as the texture used by the sf::RenderStates and then draws the sf::VertexArray <code>vertices</code> member. <br /></td></tr>
 <tr class="separator:af752cab9862de98d02b744aae51941ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -130,7 +137,10 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSize</b><
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileTextureSize</b></td></tr>
 <tr class="separator:a480cca6ea3e30ec264cb2d1b0cd5a4dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles the drawing of map data (such as tiles or entities) through the maintance of a sf::VertexArray. </p>
+<p>Has two primary subclasses: <a class="el" href="class_tile_layer.html" title="Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data...">TileLayer</a> and <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a>. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/<a class="el" href="_map_layer_8h_source.html">MapLayer.h</a></li>
 <li>src/map/MapLayer.cpp</li>
 </ul>

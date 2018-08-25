@@ -73,6 +73,11 @@ $(function() {
 <div class="title">Entity Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Entities exist in instances of <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> (or more specifically in <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> owned <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> instances) and are capable of moving and interacting with the game world around them.  
+ <a href="class_entity.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_entity_8h_source.html">Entity.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for Entity:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -91,25 +96,28 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Entity</b> (<a class="el" href="namespace_i_ds.html#a53891f40d8838b129f503411cb691c33">IDs::Entities</a> entityId, std::shared_ptr&lt; <a class="el" href="class_entity_manager.html">EntityManager</a> &gt; entityManager, std::string entityName, sf::Vector2u entityPosition, <a class="el" href="class_faction.html">Faction</a> entityFaction, sf::Vector2u gridSize, std::shared_ptr&lt; <a class="el" href="class_entity_controller.html">EntityController</a> &gt; entityController, <a class="el" href="class_console.html">Console</a> &amp;consoleRef, <a class="el" href="class_entity_builder.html">EntityBuilder</a> &amp;entityBuilder)</td></tr>
 <tr class="separator:a13eff1e9107a6cbc5c5c3b832c356b18"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abfff8575e09224d4713c545ef0433578"><td class="memItemLeft" align="right" valign="top"><a id="abfff8575e09224d4713c545ef0433578"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurnBegin</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#abfff8575e09224d4713c545ef0433578">yourTurnBegin</a> ()</td></tr>
+<tr class="memdesc:abfff8575e09224d4713c545ef0433578"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once by <a class="el" href="class_turn_manager.html" title="The game is of course turn-based so it is the role of the TurnManager class is to handle the turn sys...">TurnManager</a> when it first becomes this entity's turn. <br /></td></tr>
 <tr class="separator:abfff8575e09224d4713c545ef0433578"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adf215f7fe824f7b9b86c62262dac453b"><td class="memItemLeft" align="right" valign="top"><a id="adf215f7fe824f7b9b86c62262dac453b"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurnDecision</b> (<a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
+<tr class="memitem:adf215f7fe824f7b9b86c62262dac453b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#adf215f7fe824f7b9b86c62262dac453b">yourTurnDecision</a> (<a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
+<tr class="memdesc:adf215f7fe824f7b9b86c62262dac453b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where the <a class="el" href="class_entity.html" title="Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) ...">Entity</a> call upon its <a class="el" href="class_entity_controller.html">EntityController</a> in order to decide what action it will take this turn.  <a href="#adf215f7fe824f7b9b86c62262dac453b">More...</a><br /></td></tr>
 <tr class="separator:adf215f7fe824f7b9b86c62262dac453b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2bc33032504fb9f8f96b4b27da774c08"><td class="memItemLeft" align="right" valign="top"><a id="a2bc33032504fb9f8f96b4b27da774c08"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurnCurrently</b> ()</td></tr>
+<tr class="memitem:a2bc33032504fb9f8f96b4b27da774c08"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a2bc33032504fb9f8f96b4b27da774c08">yourTurnCurrently</a> ()</td></tr>
+<tr class="memdesc:a2bc33032504fb9f8f96b4b27da774c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Once it is decided what the entity will do this turn, this method is called to allow that action to take place.  <a href="#a2bc33032504fb9f8f96b4b27da774c08">More...</a><br /></td></tr>
 <tr class="separator:a2bc33032504fb9f8f96b4b27da774c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a31fef9172bc649f7e3b7f4f18b073a6c"><td class="memItemLeft" align="right" valign="top"><a id="a31fef9172bc649f7e3b7f4f18b073a6c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurnEnd</b> ()</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a31fef9172bc649f7e3b7f4f18b073a6c">yourTurnEnd</a> ()</td></tr>
+<tr class="memdesc:a31fef9172bc649f7e3b7f4f18b073a6c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called once by <a class="el" href="class_turn_manager.html" title="The game is of course turn-based so it is the role of the TurnManager class is to handle the turn sys...">TurnManager</a> when this entity's turn has ended. <br /></td></tr>
 <tr class="separator:a31fef9172bc649f7e3b7f4f18b073a6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a95af24e383109ab4fb9d54d1e017b1d7"><td class="memItemLeft" align="right" valign="top"><a id="a95af24e383109ab4fb9d54d1e017b1d7"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMyTurn</b> ()</td></tr>
 <tr class="separator:a95af24e383109ab4fb9d54d1e017b1d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a135b3ec91a20e3fd39cbe541de7c21"><td class="memItemLeft" align="right" valign="top"><a id="a0a135b3ec91a20e3fd39cbe541de7c21"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateMovement</b> ()</td></tr>
+<tr class="memitem:a0a135b3ec91a20e3fd39cbe541de7c21"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a0a135b3ec91a20e3fd39cbe541de7c21">updateMovement</a> ()</td></tr>
+<tr class="memdesc:a0a135b3ec91a20e3fd39cbe541de7c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Moves the entity along its current movement path.  <a href="#a0a135b3ec91a20e3fd39cbe541de7c21">More...</a><br /></td></tr>
 <tr class="separator:a0a135b3ec91a20e3fd39cbe541de7c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acca4fff6a7165c3c1042fd12a2b2ee80"><td class="memItemLeft" align="right" valign="top"><a id="acca4fff6a7165c3c1042fd12a2b2ee80"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>updateAttacking</b> ()</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#acca4fff6a7165c3c1042fd12a2b2ee80">updateAttacking</a> ()</td></tr>
+<tr class="memdesc:acca4fff6a7165c3c1042fd12a2b2ee80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> has finished showing all ProjectileArcs. <br /></td></tr>
 <tr class="separator:acca4fff6a7165c3c1042fd12a2b2ee80"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad622a82193de0f5466c15bb66c98f655"><td class="memItemLeft" align="right" valign="top"><a id="ad622a82193de0f5466c15bb66c98f655"></a>
 sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>getPosition</b> () const</td></tr>
@@ -129,9 +137,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>setMovementPath</b> (
 <tr class="memitem:aaaa415a46c177fc74fff0219fa2534f9"><td class="memItemLeft" align="right" valign="top"><a id="aaaa415a46c177fc74fff0219fa2534f9"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>reachedPathTarget</b> ()</td></tr>
 <tr class="separator:aaaa415a46c177fc74fff0219fa2534f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac7162b80376fa2295d6ce0c9244d58d3"><td class="memItemLeft" align="right" valign="top"><a id="ac7162b80376fa2295d6ce0c9244d58d3"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>withinRange</b> (int distance)</td></tr>
-<tr class="separator:ac7162b80376fa2295d6ce0c9244d58d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a91c704bd13d161cf15ff7fc96e92f1"><td class="memItemLeft" align="right" valign="top"><a id="a6a91c704bd13d161cf15ff7fc96e92f1"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>withinRange</b> (unsigned int distance)</td></tr>
+<tr class="separator:a6a91c704bd13d161cf15ff7fc96e92f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6d6a3bbe584df2b34be292c862e9e641"><td class="memItemLeft" align="right" valign="top"><a id="a6d6a3bbe584df2b34be292c862e9e641"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>overPosition</b> (sf::Vector2u pos)</td></tr>
 <tr class="separator:a6d6a3bbe584df2b34be292c862e9e641"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -168,17 +176,17 @@ virtual <a class="el" href="struct_animation_1_1_frame.html">Animation::Frame</a
 <tr class="memitem:ab3015f8a85a04e8d8f5bc378b7883bae"><td class="memItemLeft" align="right" valign="top"><a id="ab3015f8a85a04e8d8f5bc378b7883bae"></a>
 <a class="el" href="class_component_grid.html">ComponentGrid</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getComponentGrid</b> ()</td></tr>
 <tr class="separator:ab3015f8a85a04e8d8f5bc378b7883bae"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3de6209b62d326e927ee582c460b70f"><td class="memItemLeft" align="right" valign="top"><a id="ae3de6209b62d326e927ee582c460b70f"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getMovementRange</b> ()</td></tr>
-<tr class="separator:ae3de6209b62d326e927ee582c460b70f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07ab881787f4d2c68febc9948049c93e"><td class="memItemLeft" align="right" valign="top"><a id="a07ab881787f4d2c68febc9948049c93e"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getMovementRange</b> ()</td></tr>
+<tr class="separator:a07ab881787f4d2c68febc9948049c93e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4e392beed8d5e56e24a07160f0ab4e16"><td class="memItemLeft" align="right" valign="top"><a id="a4e392beed8d5e56e24a07160f0ab4e16"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getPersonalName</b> ()</td></tr>
 <tr class="separator:a4e392beed8d5e56e24a07160f0ab4e16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a472160b75e01d74c360e6948203a5ee1"><td class="memItemLeft" align="right" valign="top"><a id="a472160b75e01d74c360e6948203a5ee1"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>getFullName</b> ()</td></tr>
 <tr class="separator:a472160b75e01d74c360e6948203a5ee1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa9b87c90ab736390d071e0b96e0ac03d"><td class="memItemLeft" align="right" valign="top"><a id="aa9b87c90ab736390d071e0b96e0ac03d"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getIntegrity</b> ()</td></tr>
+<tr class="memitem:aa9b87c90ab736390d071e0b96e0ac03d"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#aa9b87c90ab736390d071e0b96e0ac03d">getIntegrity</a> ()</td></tr>
+<tr class="memdesc:aa9b87c90ab736390d071e0b96e0ac03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The integrity of an entity is the sum of the integrity of every component in its component grid.  <a href="#aa9b87c90ab736390d071e0b96e0ac03d">More...</a><br /></td></tr>
 <tr class="separator:aa9b87c90ab736390d071e0b96e0ac03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7c47c6b64d4538e63bacdacb2d272fd1"><td class="memItemLeft" align="right" valign="top"><a id="a7c47c6b64d4538e63bacdacb2d272fd1"></a>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getMaxIntegrity</b> ()</td></tr>
@@ -192,17 +200,17 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>getPowerLevel</b> ()</
 <tr class="memitem:af62c204b1a7cadf5aff85b2b28b07dd0"><td class="memItemLeft" align="right" valign="top"><a id="af62c204b1a7cadf5aff85b2b28b07dd0"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>getMaxPowerStorage</b> ()</td></tr>
 <tr class="separator:af62c204b1a7cadf5aff85b2b28b07dd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ea300a45316474dde285948a1d4e35c"><td class="memItemLeft" align="right" valign="top"><a id="a3ea300a45316474dde285948a1d4e35c"></a>
-<a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buildEquippedComponentPath</b> (sf::Vector2u target)</td></tr>
+<tr class="memitem:a3ea300a45316474dde285948a1d4e35c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a3ea300a45316474dde285948a1d4e35c">buildEquippedComponentPath</a> (sf::Vector2u target)</td></tr>
+<tr class="memdesc:a3ea300a45316474dde285948a1d4e35c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempts to build a use path for the currently equipped component.  <a href="#a3ea300a45316474dde285948a1d4e35c">More...</a><br /></td></tr>
 <tr class="separator:a3ea300a45316474dde285948a1d4e35c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a24cc89fb6e6ab1627cbd447384f882c2"><td class="memItemLeft" align="right" valign="top"><a id="a24cc89fb6e6ab1627cbd447384f882c2"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>useEquippedComponentOnSelf</b> ()</td></tr>
+<tr class="memitem:a24cc89fb6e6ab1627cbd447384f882c2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a24cc89fb6e6ab1627cbd447384f882c2">useEquippedComponentOnSelf</a> ()</td></tr>
+<tr class="memdesc:a24cc89fb6e6ab1627cbd447384f882c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the equipped component on this entity.  <a href="#a24cc89fb6e6ab1627cbd447384f882c2">More...</a><br /></td></tr>
 <tr class="separator:a24cc89fb6e6ab1627cbd447384f882c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c2eb452040055199aa8a67be79be1c"><td class="memItemLeft" align="right" valign="top"><a id="ac8c2eb452040055199aa8a67be79be1c"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>useEquippedComponent</b> (<a class="el" href="class_movement_path.html">MovementPath</a> path)</td></tr>
+<tr class="memitem:ac8c2eb452040055199aa8a67be79be1c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#ac8c2eb452040055199aa8a67be79be1c">useEquippedComponent</a> (<a class="el" href="class_movement_path.html">MovementPath</a> path)</td></tr>
+<tr class="memdesc:ac8c2eb452040055199aa8a67be79be1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Use the equipped component along the specified movement path.  <a href="#ac8c2eb452040055199aa8a67be79be1c">More...</a><br /></td></tr>
 <tr class="separator:ac8c2eb452040055199aa8a67be79be1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a064ea307dbb47f0c2aca86f59757fa42"><td class="memItemLeft" align="right" valign="top"><a id="a064ea307dbb47f0c2aca86f59757fa42"></a>
-<a class="el" href="class_optional.html">Optional</a>&lt; <a class="el" href="class_component.html">Component</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>applyDamage</b> (<a class="el" href="struct_damage.html">Damage</a> damage, bool displayConsoleMsg=true)</td></tr>
+<tr class="memitem:a064ea307dbb47f0c2aca86f59757fa42"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_optional.html">Optional</a>&lt; <a class="el" href="class_component.html">Component</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#a064ea307dbb47f0c2aca86f59757fa42">applyDamage</a> (<a class="el" href="struct_damage.html">Damage</a> damage, bool displayConsoleMsg=true)</td></tr>
+<tr class="memdesc:a064ea307dbb47f0c2aca86f59757fa42"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies damage to the entity.  <a href="#a064ea307dbb47f0c2aca86f59757fa42">More...</a><br /></td></tr>
 <tr class="separator:a064ea307dbb47f0c2aca86f59757fa42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa247dd34cde743b013fe52b4d2d3516e"><td class="memItemLeft" align="right" valign="top"><a id="aa247dd34cde743b013fe52b4d2d3516e"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>say</b> (std::string text, std::string speechManner=&quot;says&quot;)</td></tr>
@@ -211,14 +219,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>say</b> (std::string 
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isMemberOfPlayerFaction</b> ()</td></tr>
 <tr class="separator:aa3db98a85b1332fb566adf065ac15d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab73f2ff6a523f3488cc6ab5ca29c252f"><td class="memItemLeft" align="right" valign="top"><a id="ab73f2ff6a523f3488cc6ab5ca29c252f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>focusCameraOn</b> (<a class="el" href="class_camera.html">Camera</a> &amp;camera)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity.html#ab73f2ff6a523f3488cc6ab5ca29c252f">focusCameraOn</a> (<a class="el" href="class_camera.html">Camera</a> &amp;camera)</td></tr>
+<tr class="memdesc:ab73f2ff6a523f3488cc6ab5ca29c252f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Makes the camera move towards the centre of this entity. <br /></td></tr>
 <tr class="separator:ab73f2ff6a523f3488cc6ab5ca29c252f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3555ff867f07e4c942e1e3b4cc21fdf7"><td class="memItemLeft" align="right" valign="top"><a id="a3555ff867f07e4c942e1e3b4cc21fdf7"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setMap</b> (<a class="el" href="class_game_map.html">GameMap</a> *gameMap)</td></tr>
 <tr class="separator:a3555ff867f07e4c942e1e3b4cc21fdf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a704cf485252d9bdd43fd094387ecef6c"><td class="memItemLeft" align="right" valign="top"><a id="a704cf485252d9bdd43fd094387ecef6c"></a>
-<a class="el" href="class_game_map.html">GameMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getMapReference</b> ()</td></tr>
-<tr class="separator:a704cf485252d9bdd43fd094387ecef6c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a452a7d0cfa2601231abba4129ea3a585"><td class="memItemLeft" align="right" valign="top"><a id="a452a7d0cfa2601231abba4129ea3a585"></a>
+<a class="el" href="class_game_map.html">GameMap</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>getMapPtr</b> ()</td></tr>
+<tr class="separator:a452a7d0cfa2601231abba4129ea3a585"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a91720d65b893522d2235b1a9bc7c565b"><td class="memItemLeft" align="right" valign="top"><a id="a91720d65b893522d2235b1a9bc7c565b"></a>
 std::shared_ptr&lt; <a class="el" href="class_entity_controller.html">EntityController</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getController</b> ()</td></tr>
 <tr class="separator:a91720d65b893522d2235b1a9bc7c565b"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -268,6 +277,184 @@ Static Protected Attributes</h2></td></tr>
 static <a class="el" href="class_pulsing_colour.html">PulsingColour</a>&#160;</td><td class="memItemRight" valign="bottom"><b>myTurnColourPulse</b></td></tr>
 <tr class="separator:ad272b8da35845f28bf329dc3e91c0a4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Entities exist in instances of <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> (or more specifically in <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> owned <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> instances) and are capable of moving and interacting with the game world around them. </p>
+<p>The ID of the entity determines the animation, default components, name, description and other such static values held in the relevant <a class="el" href="struct_entity_info.html">EntityInfo</a> struct contained in the <a class="el" href="class_entity_manager.html">EntityManager</a>. Values that vary between entities, such as the current equipped components, aligned factions, position, as well as the behaviour (primarily via the held <a class="el" href="class_entity_controller.html">EntityController</a> pointer) are stored in the <a class="el" href="class_entity.html" title="Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) ...">Entity</a> class itself. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a064ea307dbb47f0c2aca86f59757fa42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a064ea307dbb47f0c2aca86f59757fa42">&#9670;&nbsp;</a></span>applyDamage()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_optional.html">Optional</a>&lt; <a class="el" href="class_component.html">Component</a> &gt; &amp; Entity::applyDamage </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="struct_damage.html">Damage</a>&#160;</td>
+          <td class="paramname"><em>damage</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>displayConsoleMsg</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies damage to the entity. </p>
+<p>Since entities have no health of their own, all damage is applied to a random component in the entity's <a class="el" href="class_component_grid.html">ComponentGrid</a>. </p>
+
+</div>
+</div>
+<a id="a3ea300a45316474dde285948a1d4e35c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ea300a45316474dde285948a1d4e35c">&#9670;&nbsp;</a></span>buildEquippedComponentPath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_movement_path.html">MovementPath</a> Entity::buildEquippedComponentPath </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Attempts to build a use path for the currently equipped component. </p>
+<p>If the equipped component is a weapon for example, the returned path will be the path that the projectile will follow. Most regular components meant to be self-used just return an incomplete path initialised with the entity's position. </p><dl class="section return"><dt>Returns</dt><dd>Whether using the component was successful. </dd></dl>
+
+</div>
+</div>
+<a id="aa9b87c90ab736390d071e0b96e0ac03d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9b87c90ab736390d071e0b96e0ac03d">&#9670;&nbsp;</a></span>getIntegrity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned int Entity::getIntegrity </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The integrity of an entity is the sum of the integrity of every component in its component grid. </p>
+<p>See ComponentGrid::getCurrentIntegrity. </p>
+
+</div>
+</div>
+<a id="a0a135b3ec91a20e3fd39cbe541de7c21"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a135b3ec91a20e3fd39cbe541de7c21">&#9670;&nbsp;</a></span>updateMovement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::updateMovement </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Moves the entity along its current movement path. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether the entity has reached ther target position of its current movement path. </dd></dl>
+
+</div>
+</div>
+<a id="ac8c2eb452040055199aa8a67be79be1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c2eb452040055199aa8a67be79be1c">&#9670;&nbsp;</a></span>useEquippedComponent()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::useEquippedComponent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td>
+          <td class="paramname"><em>path</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use the equipped component along the specified movement path. </p>
+<p>Should the component produce any projectile arcs, they will be passed to the map via GameMap::fireArcs. </p><dl class="section return"><dt>Returns</dt><dd>Whether using the component was successful. </dd></dl>
+
+</div>
+</div>
+<a id="a24cc89fb6e6ab1627cbd447384f882c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a24cc89fb6e6ab1627cbd447384f882c2">&#9670;&nbsp;</a></span>useEquippedComponentOnSelf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::useEquippedComponentOnSelf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Use the equipped component on this entity. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether using the component was successful. </dd></dl>
+
+</div>
+</div>
+<a id="a2bc33032504fb9f8f96b4b27da774c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bc33032504fb9f8f96b4b27da774c08">&#9670;&nbsp;</a></span>yourTurnCurrently()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::yourTurnCurrently </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Once it is decided what the entity will do this turn, this method is called to allow that action to take place. </p>
+<p><a class="el" href="class_turn_manager.html" title="The game is of course turn-based so it is the role of the TurnManager class is to handle the turn sys...">TurnManager</a> will continually call this method until <code>true</code> is returned. </p>
+
+</div>
+</div>
+<a id="adf215f7fe824f7b9b86c62262dac453b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf215f7fe824f7b9b86c62262dac453b">&#9670;&nbsp;</a></span>yourTurnDecision()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Entity::yourTurnDecision </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_input.html">Input</a> &amp;&#160;</td>
+          <td class="paramname"><em>input</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Where the <a class="el" href="class_entity.html" title="Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) ...">Entity</a> call upon its <a class="el" href="class_entity_controller.html">EntityController</a> in order to decide what action it will take this turn. </p>
+<p><a class="el" href="class_turn_manager.html" title="The game is of course turn-based so it is the role of the TurnManager class is to handle the turn sys...">TurnManager</a> will continually call this method until <code>true</code> is returned. </p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/entities/<a class="el" href="_entity_8h_source.html">Entity.h</a></li>
 <li>src/entities/Entity.cpp</li>

@@ -183,7 +183,7 @@ const sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSiz
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>The <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> is were all map information (such as entities present, tiles and projectiles) is stored and also where the rendering of this information takes place. </p>
-<p>Contains both a <a class="el" href="class_tile_layer.html">TileLayer</a> and <a class="el" href="class_entity_layer.html">EntityLayer</a> as well as all ProjectileArcs plus an instance of <a class="el" href="class_a_star_path_builder.html" title="An implementation of the A* pathfinding algorithm. ">AStarPathBuilder</a>. </p>
+<p>Contains both a <a class="el" href="class_tile_layer.html" title="Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data...">TileLayer</a> and <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> as well as all ProjectileArcs plus an instance of <a class="el" href="class_a_star_path_builder.html" title="An implementation of the A* pathfinding algorithm. ">AStarPathBuilder</a>. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a2a0f038c0b75b042882bee12f2ec5fc9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a0f038c0b75b042882bee12f2ec5fc9">&#9670;&nbsp;</a></span>addEntity()</h2>
@@ -202,7 +202,7 @@ const sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSiz
 </div><div class="memdoc">
 
 <p>Added a new entity to the map and sets said entity's map pointer. </p>
-<p>An entity's map pointer is not set correctly when added directly to an <a class="el" href="class_entity_layer.html">EntityLayer</a> so always use this method over EntityLayer::addEntity. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>An entity's map pointer is not set correctly when added directly to an <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> so always use this method over <a class="el" href="class_entity_layer.html#a4ca580a58e17d2c837a246566f3ea672" title="Adds an entity to the EntityLayer and resizes the sf::VertexArray accordingly. ">EntityLayer::addEntity</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">entity</td><td>The entity to add to the map. </td></tr>
   </table>

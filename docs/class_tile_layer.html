@@ -70,6 +70,11 @@ $(function() {
 <div class="title">TileLayer Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data.  
+ <a href="class_tile_layer.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_tile_layer_8h_source.html">TileLayer.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for TileLayer:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -78,13 +83,14 @@ $(function() {
  <div class="center">
   <img src="class_tile_layer.png" usemap="#TileLayer_map" alt=""/>
   <map id="TileLayer_map" name="TileLayer_map">
-<area href="class_map_layer.html" alt="MapLayer" shape="rect" coords="0,56,70,80"/>
+<area href="class_map_layer.html" title="Handles the drawing of map data (such as tiles or entities) through the maintance of a sf::VertexArra..." alt="MapLayer" shape="rect" coords="0,56,70,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="struct_tile_layer_1_1_tile_colour_orientation.html">TileColourOrientation</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Each tile that makes up the layer is stored as an id, colour and orientation value.  <a href="struct_tile_layer_1_1_tile_colour_orientation.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
@@ -96,13 +102,16 @@ Public Member Functions</h2></td></tr>
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getTileCount</b> ()</td></tr>
 <tr class="separator:aca0296c251e23ead4ae652266f5c1189"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fc28b327499903ee58e1a75c30495e3"><td class="memItemLeft" align="right" valign="top"><a id="a5fc28b327499903ee58e1a75c30495e3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setTileAt</b> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id, sf::Color colour, char orientation=0)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_layer.html#a5fc28b327499903ee58e1a75c30495e3">setTileAt</a> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id, sf::Color colour, char orientation=0)</td></tr>
+<tr class="memdesc:a5fc28b327499903ee58e1a75c30495e3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tile ID, override colour and (optionally) orientation at the given position. <br /></td></tr>
 <tr class="separator:a5fc28b327499903ee58e1a75c30495e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7e460323c5032eff159b0a189fe4916a"><td class="memItemLeft" align="right" valign="top"><a id="a7e460323c5032eff159b0a189fe4916a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setTileAt</b> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id, char orientation=0)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_layer.html#a7e460323c5032eff159b0a189fe4916a">setTileAt</a> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id, char orientation=0)</td></tr>
+<tr class="memdesc:a7e460323c5032eff159b0a189fe4916a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set tile ID and (optionally) orientation and use the default colour for the given tile ID. <br /></td></tr>
 <tr class="separator:a7e460323c5032eff159b0a189fe4916a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad3c4c87556aef2ceea0551e73fa8f906"><td class="memItemLeft" align="right" valign="top"><a id="ad3c4c87556aef2ceea0551e73fa8f906"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setIdAt</b> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id)</td></tr>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_tile_layer.html#ad3c4c87556aef2ceea0551e73fa8f906">setIdAt</a> (sf::Vector2u pos, <a class="el" href="namespace_i_ds.html#a4f29ea1169b1b0cd9e7f3886f50bfa58">IDs::Tiles</a> id)</td></tr>
+<tr class="memdesc:ad3c4c87556aef2ceea0551e73fa8f906"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the tile ID at the specified position without changing the colour already at said position. <br /></td></tr>
 <tr class="separator:ad3c4c87556aef2ceea0551e73fa8f906"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad6657b2b602f2bbd2692fdaaae9315ab"><td class="memItemLeft" align="right" valign="top"><a id="ad6657b2b602f2bbd2692fdaaae9315ab"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setColourAt</b> (sf::Vector2u pos, sf::Color colour)</td></tr>
@@ -169,7 +178,8 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>load</b> (std::string
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>withinBounds</b> (sf::Vector2u pos)</td></tr>
 <tr class="separator:aec413929a2317485bccd1d51a1c9a7b1 inherit pub_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a5e1e1afe3a6752af4a68719f5493684e"></a>
-unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getIndex</b> (sf::Vector2u pos)</td></tr>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#a5e1e1afe3a6752af4a68719f5493684e">getIndex</a> (sf::Vector2u pos)</td></tr>
+<tr class="memdesc:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Turns a map position into an array index. <br /></td></tr>
 <tr class="separator:a5e1e1afe3a6752af4a68719f5493684e inherit pub_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bbc1ae8dbcc8afa0b9386220cdce902 inherit pub_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a6bbc1ae8dbcc8afa0b9386220cdce902"></a>
 sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>getCentre</b> ()</td></tr>
@@ -183,7 +193,8 @@ const sf::Vector2u&#160;</td><td class="memItemRight" valign="bottom"><b>size</b
 <tr class="separator:abeb2aa6b485cb3c090b4c29c7e46105f inherit pub_attribs_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_map_layer"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_map_layer')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_map_layer.html">MapLayer</a></td></tr>
 <tr class="memitem:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="af752cab9862de98d02b744aae51941ae"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_map_layer.html#af752cab9862de98d02b744aae51941ae">draw</a> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
+<tr class="memdesc:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the <code>texture</code> member as the texture used by the sf::RenderStates and then draws the sf::VertexArray <code>vertices</code> member. <br /></td></tr>
 <tr class="separator:af752cab9862de98d02b744aae51941ae inherit pro_methods_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_map_layer"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_map_layer')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_map_layer.html">MapLayer</a></td></tr>
 <tr class="memitem:a19c514c1401fd5b86d530ce193f089f1 inherit pro_attribs_class_map_layer"><td class="memItemLeft" align="right" valign="top"><a id="a19c514c1401fd5b86d530ce193f089f1"></a>
@@ -199,7 +210,9 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileSize</b><
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>tileTextureSize</b></td></tr>
 <tr class="separator:a480cca6ea3e30ec264cb2d1b0cd5a4dc inherit pro_attribs_class_map_layer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Stores all tile data and handles the construction of a sf::VertexArray for rendering of this data. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/map/<a class="el" href="_tile_layer_8h_source.html">TileLayer.h</a></li>
 <li>src/map/TileLayer.cpp</li>
 </ul>

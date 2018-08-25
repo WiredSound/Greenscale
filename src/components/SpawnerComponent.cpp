@@ -11,7 +11,7 @@ unsigned int SpawnerComponent::getSpawnerEntityCount() {
 }
 
 std::vector<ProjectileArc> SpawnerComponent::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
-	GameMap *map = user.getMapReference();
+	GameMap *map = user.getMapPtr();
 
 	for (unsigned int i = 0; i < getSpawnerEntityCount(); i++) {
 		sf::Vector2u position = map->findNearestFreePosition(user.getPosition());

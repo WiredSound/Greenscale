@@ -6,6 +6,9 @@
 class Entity;
 class Robot;
 
+/**
+ * Stores all entities present and handles the construction of a sf::VertexArray to draw these entities.
+ */
 class EntityLayer : public MapLayer {
 public:
 	EntityLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr<sf::Texture> layerTexture);

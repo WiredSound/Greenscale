@@ -66,7 +66,11 @@ $(function() {
 
 <h3><a id="index_a"></a>- a -</h3><ul>
 <li>addEntity()
-: <a class="el" href="class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9">GameMap</a>
+: <a class="el" href="class_entity_layer.html#a4ca580a58e17d2c837a246566f3ea672">EntityLayer</a>
+, <a class="el" href="class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9">GameMap</a>
+</li>
+<li>applyDamage()
+: <a class="el" href="class_entity.html#a064ea307dbb47f0c2aca86f59757fa42">Entity</a>
 </li>
 </ul>
 
@@ -74,6 +78,9 @@ $(function() {
 <h3><a id="index_b"></a>- b -</h3><ul>
 <li>buildAStarPath()
 : <a class="el" href="class_a_star_path_builder.html#ae4461c0030ee4406958887ad96cb3fb4">AStarPathBuilder</a>
+</li>
+<li>buildEquippedComponentPath()
+: <a class="el" href="class_entity.html#a3ea300a45316474dde285948a1d4e35c">Entity</a>
 </li>
 <li>buildLinePath()
 : <a class="el" href="class_movement_path.html#ab479c86e5cae71703ee37d702b7579b7">MovementPath</a>
@@ -100,6 +107,7 @@ $(function() {
 </li>
 <li>draw()
 : <a class="el" href="class_game_state.html#ad3a574e8d22aa60b9580ae2d0640bfcc">GameState</a>
+, <a class="el" href="class_map_layer.html#af752cab9862de98d02b744aae51941ae">MapLayer</a>
 , <a class="el" href="class_state.html#ae261605bc40b7e3959ce5df5457e4942">State</a>
 , <a class="el" href="class_world.html#a0cb6c63048db0fdbaed92fe439dbfefb">World</a>
 </li>
@@ -109,6 +117,9 @@ $(function() {
 <h3><a id="index_f"></a>- f -</h3><ul>
 <li>findNearestFreePosition()
 : <a class="el" href="class_game_map.html#a5c6e5957336ac89cd49fae7269457501">GameMap</a>
+</li>
+<li>focusCameraOn()
+: <a class="el" href="class_entity.html#ab73f2ff6a523f3488cc6ab5ca29c252f">Entity</a>
 </li>
 </ul>
 
@@ -123,11 +134,23 @@ $(function() {
 <li>getEntitesPriorityOrdered()
 : <a class="el" href="class_game_map.html#a5e5473df5c2b7d2f21a92379d1217884">GameMap</a>
 </li>
+<li>getEntitiesAt()
+: <a class="el" href="class_entity_layer.html#ac49aa92fcad339de59344c333a2fcbb4">EntityLayer</a>
+</li>
+<li>getEntitiesOver()
+: <a class="el" href="class_entity_layer.html#ad665af64fe08b75df12e01e7226ee808">EntityLayer</a>
+</li>
 <li>getFrame()
 : <a class="el" href="class_animation.html#adb02eaa4db7fc27606bb8f2a78884084">Animation</a>
 </li>
 <li>getFrameFromIndex()
 : <a class="el" href="class_animation.html#a73b42d3e43fdd6d0f6fe73c67f28da1e">Animation</a>
+</li>
+<li>getIndex()
+: <a class="el" href="class_map_layer.html#a5e1e1afe3a6752af4a68719f5493684e">MapLayer</a>
+</li>
+<li>getIntegrity()
+: <a class="el" href="class_entity.html#aa9b87c90ab736390d071e0b96e0ac03d">Entity</a>
 </li>
 <li>getMousePosition()
 : <a class="el" href="class_input.html#a934282720a6dfd1aaa38f99f21ca766a">Input</a>
@@ -197,6 +220,9 @@ $(function() {
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
+<li>recursivelyShortenBasedOn()
+: <a class="el" href="class_movement_path.html#a1306a687b187ea8aee119cf1c596ed26">MovementPath</a>
+</li>
 <li>resetColourTilePath()
 : <a class="el" href="class_game_map.html#a336cb6e0f8f40f511c01d1b04135792e">GameMap</a>
 </li>
@@ -207,6 +233,12 @@ $(function() {
 <li>setCentre()
 : <a class="el" href="class_camera.html#a5a34a14f8d8770c6e22f44495fe169ce">Camera</a>
 </li>
+<li>setIdAt()
+: <a class="el" href="class_tile_layer.html#ad3c4c87556aef2ceea0551e73fa8f906">TileLayer</a>
+</li>
+<li>setTileAt()
+: <a class="el" href="class_tile_layer.html#a5fc28b327499903ee58e1a75c30495e3">TileLayer</a>
+</li>
 </ul>
 
 
@@ -216,6 +248,34 @@ $(function() {
 , <a class="el" href="class_game_state.html#a2dfbd9716a3991554cdf8a397bca96ff">GameState</a>
 , <a class="el" href="class_state.html#a98ba0650a71672b02248962c448b5f51">State</a>
 , <a class="el" href="class_world.html#a1c71a67c3efff3958435a436ff7727e1">World</a>
+</li>
+<li>updateAttacking()
+: <a class="el" href="class_entity.html#acca4fff6a7165c3c1042fd12a2b2ee80">Entity</a>
+</li>
+<li>updateMovement()
+: <a class="el" href="class_entity.html#a0a135b3ec91a20e3fd39cbe541de7c21">Entity</a>
+</li>
+<li>useEquippedComponent()
+: <a class="el" href="class_entity.html#ac8c2eb452040055199aa8a67be79be1c">Entity</a>
+</li>
+<li>useEquippedComponentOnSelf()
+: <a class="el" href="class_entity.html#a24cc89fb6e6ab1627cbd447384f882c2">Entity</a>
+</li>
+</ul>
+
+
+<h3><a id="index_y"></a>- y -</h3><ul>
+<li>yourTurnBegin()
+: <a class="el" href="class_entity.html#abfff8575e09224d4713c545ef0433578">Entity</a>
+</li>
+<li>yourTurnCurrently()
+: <a class="el" href="class_entity.html#a2bc33032504fb9f8f96b4b27da774c08">Entity</a>
+</li>
+<li>yourTurnDecision()
+: <a class="el" href="class_entity.html#adf215f7fe824f7b9b86c62262dac453b">Entity</a>
+</li>
+<li>yourTurnEnd()
+: <a class="el" href="class_entity.html#a31fef9172bc649f7e3b7f4f18b073a6c">Entity</a>
 </li>
 </ul>
 </div><!-- contents -->
