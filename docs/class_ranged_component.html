@@ -77,7 +77,7 @@ $(function() {
  <div class="center">
   <img src="class_ranged_component.png" usemap="#RangedComponent_map" alt=""/>
   <map id="RangedComponent_map" name="RangedComponent_map">
-<area href="class_component.html" alt="Component" shape="rect" coords="0,0,118,24"/>
+<area href="class_component.html" title="Components function in the game as the equippable items used to customise the functionality of entiti..." alt="Component" shape="rect" coords="0,0,118,24"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -86,11 +86,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4d49b2236472ad6f7d021713de32dbd1"><td class="memItemLeft" align="right" valign="top"><a id="a4d49b2236472ad6f7d021713de32dbd1"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RangedComponent</b> (<a class="el" href="namespace_i_ds.html#afbbe9e8f6931afcfff34c5c433cb775a">IDs::Components</a> componentId, std::shared_ptr&lt; <a class="el" href="class_component_manager.html">ComponentManager</a> &gt; componentManager, std::shared_ptr&lt; <a class="el" href="class_projectile_manager.html">ProjectileManager</a> &gt; manager)</td></tr>
 <tr class="separator:a4d49b2236472ad6f7d021713de32dbd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a634446011a72ff11b608c3f287525815"><td class="memItemLeft" align="right" valign="top"><a id="a634446011a72ff11b608c3f287525815"></a>
-virtual std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>useEnabled</b> (<a class="el" href="class_entity.html">Entity</a> &amp;user, <a class="el" href="class_movement_path.html">MovementPath</a> path, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console) override</td></tr>
+<tr class="memitem:a634446011a72ff11b608c3f287525815"><td class="memItemLeft" align="right" valign="top">virtual std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ranged_component.html#a634446011a72ff11b608c3f287525815">useEnabled</a> (<a class="el" href="class_entity.html">Entity</a> &amp;user, <a class="el" href="class_movement_path.html">MovementPath</a> path, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console) override</td></tr>
+<tr class="memdesc:a634446011a72ff11b608c3f287525815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by <a class="el" href="class_component.html#a6e37ce6d8b890174f5139893e5d887c2" title="Called when the owning entity equips and uses this component. ">Component::use</a> when the component is enabled and the has access to sufficient power.  <a href="#a634446011a72ff11b608c3f287525815">More...</a><br /></td></tr>
 <tr class="separator:a634446011a72ff11b608c3f287525815"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6eb168ed5bcf72e90ba2430eca352e25"><td class="memItemLeft" align="right" valign="top"><a id="a6eb168ed5bcf72e90ba2430eca352e25"></a>
-virtual <a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><b>buildProjectilePath</b> (sf::Vector2u source, sf::Vector2u target, <a class="el" href="class_game_map.html">GameMap</a> *map) override</td></tr>
+<tr class="memitem:a6eb168ed5bcf72e90ba2430eca352e25"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ranged_component.html#a6eb168ed5bcf72e90ba2430eca352e25">buildProjectilePath</a> (sf::Vector2u source, sf::Vector2u target, <a class="el" href="class_game_map.html">GameMap</a> *map) override</td></tr>
+<tr class="memdesc:a6eb168ed5bcf72e90ba2430eca352e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whenever a component is used it requires a path for its usage which is constructed by this method.  <a href="#a6eb168ed5bcf72e90ba2430eca352e25">More...</a><br /></td></tr>
 <tr class="separator:a6eb168ed5bcf72e90ba2430eca352e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac8d024c22ee8e2d91d3e0ffcc336c306"><td class="memItemLeft" align="right" valign="top"><a id="ac8d024c22ee8e2d91d3e0ffcc336c306"></a>
 <a class="el" href="namespace_i_ds.html#a080b638017e8653294839a2bcda4f421">IDs::Projectiles</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getProjectileId</b> () override</td></tr>
@@ -111,11 +111,11 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getProjectile
 <tr class="memitem:a86121fd2334be1b2b6c821206cc6f830 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a86121fd2334be1b2b6c821206cc6f830"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Component</b> (<a class="el" href="namespace_i_ds.html#afbbe9e8f6931afcfff34c5c433cb775a">IDs::Components</a> componentId, std::shared_ptr&lt; <a class="el" href="class_component_manager.html">ComponentManager</a> &gt; componentManager)</td></tr>
 <tr class="separator:a86121fd2334be1b2b6c821206cc6f830 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a605f9e122c4c2cf02e4e215c5cec420e inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a605f9e122c4c2cf02e4e215c5cec420e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurn</b> (<a class="el" href="class_entity.html">Entity</a> &amp;entity, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console)</td></tr>
+<tr class="memitem:a605f9e122c4c2cf02e4e215c5cec420e inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#a605f9e122c4c2cf02e4e215c5cec420e">yourTurn</a> (<a class="el" href="class_entity.html">Entity</a> &amp;entity, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console)</td></tr>
+<tr class="memdesc:a605f9e122c4c2cf02e4e215c5cec420e inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called once at the end of the owning entity's turn.  <a href="class_component.html#a605f9e122c4c2cf02e4e215c5cec420e">More...</a><br /></td></tr>
 <tr class="separator:a605f9e122c4c2cf02e4e215c5cec420e inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e37ce6d8b890174f5139893e5d887c2 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a6e37ce6d8b890174f5139893e5d887c2"></a>
-std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>use</b> (<a class="el" href="class_entity.html">Entity</a> &amp;user, <a class="el" href="class_movement_path.html">MovementPath</a> path, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console)</td></tr>
+<tr class="memitem:a6e37ce6d8b890174f5139893e5d887c2 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#a6e37ce6d8b890174f5139893e5d887c2">use</a> (<a class="el" href="class_entity.html">Entity</a> &amp;user, <a class="el" href="class_movement_path.html">MovementPath</a> path, <a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool, <a class="el" href="class_console.html">Console</a> &amp;console)</td></tr>
+<tr class="memdesc:a6e37ce6d8b890174f5139893e5d887c2 inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the owning entity equips and uses this component.  <a href="class_component.html#a6e37ce6d8b890174f5139893e5d887c2">More...</a><br /></td></tr>
 <tr class="separator:a6e37ce6d8b890174f5139893e5d887c2 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a813ff89c749ddce7cc6886ffa5702d00 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a813ff89c749ddce7cc6886ffa5702d00"></a>
 const <a class="el" href="struct_component_info.html">ComponentInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>fetchInfo</b> ()</td></tr>
@@ -217,7 +217,8 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>toggleManualEnable</b
 void&#160;</td><td class="memItemRight" valign="bottom"><b>setManualEnable</b> (bool value)</td></tr>
 <tr class="separator:adf60279ca2000cb13558b137e421808c inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad046b950787da1aeff7315ca69f126f2 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="ad046b950787da1aeff7315ca69f126f2"></a>
-sf::Color&#160;</td><td class="memItemRight" valign="bottom"><b>getColour</b> ()</td></tr>
+sf::Color&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#ad046b950787da1aeff7315ca69f126f2">getColour</a> ()</td></tr>
+<tr class="memdesc:ad046b950787da1aeff7315ca69f126f2 inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">The colour of a component is determinded by the number of upgrades it has with its opacity based on whether it is enabled or not. <br /></td></tr>
 <tr class="separator:ad046b950787da1aeff7315ca69f126f2 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa55e237a6cf812f47fea3d7e8dfab71e inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="aa55e237a6cf812f47fea3d7e8dfab71e"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>calculateActiveNetHeat</b> ()</td></tr>
@@ -235,10 +236,12 @@ int&#160;</td><td class="memItemRight" valign="bottom"><b>calculatePassiveNetPow
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>calculateMaxPotentialProjectileDamage</b> ()</td></tr>
 <tr class="separator:a56d093c6c3999bf2018e04e48850c8c6 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a675369dd95df11e49ac6946657f47159 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a675369dd95df11e49ac6946657f47159"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isWeapon</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#a675369dd95df11e49ac6946657f47159">isWeapon</a> ()</td></tr>
+<tr class="memdesc:a675369dd95df11e49ac6946657f47159 inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 'weapon' is defined as a component that produces at least 1 projectile and has a range of at least 1 tile (well, until melee weapons are added that is). <br /></td></tr>
 <tr class="separator:a675369dd95df11e49ac6946657f47159 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37b9655d82ef13472f984904869d7914 inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a37b9655d82ef13472f984904869d7914"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>isSpawner</b> ()</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#a37b9655d82ef13472f984904869d7914">isSpawner</a> ()</td></tr>
+<tr class="memdesc:a37b9655d82ef13472f984904869d7914 inherit pub_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">A 'spawner' is defined as a component with a spawner entity count greater than 0. <br /></td></tr>
 <tr class="separator:a37b9655d82ef13472f984904869d7914 inherit pub_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7010544cf1cd307c26ab32fcf22199ce inherit pub_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a7010544cf1cd307c26ab32fcf22199ce"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isActiveCooling</b> ()</td></tr>
@@ -275,8 +278,8 @@ Additional Inherited Members</h2></td></tr>
 using&#160;</td><td class="memItemRight" valign="bottom"><b>ModifierFunc</b> = std::function&lt; float(const <a class="el" href="struct_component_upgrade.html">ComponentUpgrade</a> &amp;)&gt;</td></tr>
 <tr class="separator:add6643087ee004617e7d8b1d036f850e inherit pub_types_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_methods_class_component"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_class_component')"><img src="closed.png" alt="-"/>&#160;Protected Member Functions inherited from <a class="el" href="class_component.html">Component</a></td></tr>
-<tr class="memitem:ae0d88990131471c4256da5c9a2f3f586 inherit pro_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="ae0d88990131471c4256da5c9a2f3f586"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>yourTurnEnabled</b> (<a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool)</td></tr>
+<tr class="memitem:ae0d88990131471c4256da5c9a2f3f586 inherit pro_methods_class_component"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_component.html#ae0d88990131471c4256da5c9a2f3f586">yourTurnEnabled</a> (<a class="el" href="class_power_pool.html">PowerPool</a> &amp;pool)</td></tr>
+<tr class="memdesc:ae0d88990131471c4256da5c9a2f3f586 inherit pro_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called by <a class="el" href="class_component.html#a605f9e122c4c2cf02e4e215c5cec420e" title="This method is called once at the end of the owning entity&#39;s turn. ">Component::yourTurn</a> if this component is enabled and the power pool has the same or greater power available than the passive power consumption value.  <a href="class_component.html#ae0d88990131471c4256da5c9a2f3f586">More...</a><br /></td></tr>
 <tr class="separator:ae0d88990131471c4256da5c9a2f3f586 inherit pro_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9e74cf1a1d34dd54f7c6f127b4b1dccf inherit pro_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a9e74cf1a1d34dd54f7c6f127b4b1dccf"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>increaseIntegrity</b> (unsigned int amount)</td></tr>
@@ -284,9 +287,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>increaseIntegrity</b>
 <tr class="memitem:a92b77357543149a8dc9c500223807c2c inherit pro_methods_class_component"><td class="memItemLeft" align="right" valign="top"><a id="a92b77357543149a8dc9c500223807c2c"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>reduceIntegrity</b> (unsigned int amount)</td></tr>
 <tr class="separator:a92b77357543149a8dc9c500223807c2c inherit pro_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="memTemplParams" colspan="2"><a id="afc3d5be94d7a6dcd04f09ea288586524"></a>
-template&lt;typename T &gt; </td></tr>
-<tr class="memitem:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><b>statWithUpgradesApplied</b> (T baseValue, ModifierFunc modiferFunc)</td></tr>
+<tr class="memitem:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="memTemplItemLeft" align="right" valign="top">T&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="class_component.html#afc3d5be94d7a6dcd04f09ea288586524">statWithUpgradesApplied</a> (T baseValue, ModifierFunc modiferFunc)</td></tr>
+<tr class="memdesc:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method takes a base stat (eg.  <a href="class_component.html#afc3d5be94d7a6dcd04f09ea288586524">More...</a><br /></td></tr>
 <tr class="separator:afc3d5be94d7a6dcd04f09ea288586524 inherit pro_methods_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_class_component"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_class_component')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="class_component.html">Component</a></td></tr>
 <tr class="memitem:aa2efe4c4feced88f09cedd3bd52e8921 inherit pro_attribs_class_component"><td class="memItemLeft" align="right" valign="top"><a id="aa2efe4c4feced88f09cedd3bd52e8921"></a>
@@ -297,6 +300,107 @@ std::vector&lt; <a class="el" href="struct_component_upgrade.html">ComponentUpgr
 static <a class="el" href="class_random.html">Random</a>&#160;</td><td class="memItemRight" valign="bottom"><b>random</b> = <a class="el" href="class_random.html">Random</a>()</td></tr>
 <tr class="separator:ab5b4eea351efcf0634bf95a3671afcd5 inherit pro_static_attribs_class_component"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6eb168ed5bcf72e90ba2430eca352e25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eb168ed5bcf72e90ba2430eca352e25">&#9670;&nbsp;</a></span>buildProjectilePath()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_movement_path.html">MovementPath</a> RangedComponent::buildProjectilePath </td>
+          <td>(</td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_game_map.html">GameMap</a> *&#160;</td>
+          <td class="paramname"><em>map</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Whenever a component is used it requires a path for its usage which is constructed by this method. </p>
+<p>By having a usage path, components that fire projectiles or perform effects on other elements of the map can specify where this behaviour is directed at. By default however, an incomplete path initialised just with the starting position is returned. </p>
+
+<p>Reimplemented from <a class="el" href="class_component.html#a70301445e9e9f58fbb6e6659c6a0bbba">Component</a>.</p>
+
+</div>
+</div>
+<a id="a634446011a72ff11b608c3f287525815"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a634446011a72ff11b608c3f287525815">&#9670;&nbsp;</a></span>useEnabled()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt; RangedComponent::useEnabled </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_entity.html">Entity</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_movement_path.html">MovementPath</a>&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_power_pool.html">PowerPool</a> &amp;&#160;</td>
+          <td class="paramname"><em>pool</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_console.html">Console</a> &amp;&#160;</td>
+          <td class="paramname"><em>console</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called by <a class="el" href="class_component.html#a6e37ce6d8b890174f5139893e5d887c2" title="Called when the owning entity equips and uses this component. ">Component::use</a> when the component is enabled and the has access to sufficient power. </p>
+<p>Unless overriden, this method consumes power based on the active/use power consumption value and dissipates heat based on the active/use heat dissipation value. </p>
+
+<p>Reimplemented from <a class="el" href="class_component.html#a40ab903fa0b0909da4deb7a35d419c4f">Component</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/components/<a class="el" href="_ranged_component_8h_source.html">RangedComponent.h</a></li>
 <li>src/components/RangedComponent.cpp</li>

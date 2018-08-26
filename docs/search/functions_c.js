@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['update',['update',['../class_camera.html#a9ebefe93eeb9fc035ddf50cf508dd4e7',1,'Camera::update()'],['../class_world.html#a1c71a67c3efff3958435a436ff7727e1',1,'World::update()'],['../class_game_state.html#a2dfbd9716a3991554cdf8a397bca96ff',1,'GameState::update()'],['../class_state.html#a98ba0650a71672b02248962c448b5f51',1,'State::update()']]],
-  ['updateattacking',['updateAttacking',['../class_entity.html#acca4fff6a7165c3c1042fd12a2b2ee80',1,'Entity']]],
-  ['updatemovement',['updateMovement',['../class_entity.html#a0a135b3ec91a20e3fd39cbe541de7c21',1,'Entity']]],
-  ['useequippedcomponent',['useEquippedComponent',['../class_entity.html#ac8c2eb452040055199aa8a67be79be1c',1,'Entity']]],
-  ['useequippedcomponentonself',['useEquippedComponentOnSelf',['../class_entity.html#a24cc89fb6e6ab1627cbd447384f882c2',1,'Entity']]]
+  ['setcentre',['setCentre',['../class_camera.html#a5a34a14f8d8770c6e22f44495fe169ce',1,'Camera']]],
+  ['setidat',['setIdAt',['../class_tile_layer.html#ad3c4c87556aef2ceea0551e73fa8f906',1,'TileLayer']]],
+  ['settileat',['setTileAt',['../class_tile_layer.html#a5fc28b327499903ee58e1a75c30495e3',1,'TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, sf::Color colour, char orientation=0)'],['../class_tile_layer.html#a7e460323c5032eff159b0a189fe4916a',1,'TileLayer::setTileAt(sf::Vector2u pos, IDs::Tiles id, char orientation=0)']]],
+  ['statwithupgradesapplied',['statWithUpgradesApplied',['../class_component.html#afc3d5be94d7a6dcd04f09ea288586524',1,'Component']]]
 ];

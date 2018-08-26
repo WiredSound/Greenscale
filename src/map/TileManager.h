@@ -5,6 +5,9 @@
 #include "../IDs.h"
 #include "Tile.h"
 
+/**
+ * Uses the Manager class template to load tile data from a JSON file.
+ */
 class TileManager : public Manager<IDs::Tiles, Tile> {
 public:
 	TileManager();

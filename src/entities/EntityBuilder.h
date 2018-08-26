@@ -6,6 +6,9 @@
 class Entity;
 class EntityController;
 
+/**
+ * Handles the setup of the EntityManager and allows for the construction of new entities.
+ */
 class EntityBuilder {
 public:
 	EntityBuilder(Console &consoleRef);

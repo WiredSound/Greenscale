@@ -12,17 +12,19 @@ class Entity;
 class GameMap;
 class PowerPool;
 
-/*
- * Components allow entities to perform actions such as generate power, shoot projectiles, etc. They are arranged inside a ComponentGrid which, based on how they are positioned, dictates
- * the spread of heat and disruption between components. Components can have a collection of ComponentUpgrade structs which modify the base states of the component. The base stats of a
- * component are defined by its ID which corresponds to a loaded ComponentInfo struct in the ComponentManager.
+/**
+ * Components function in the game as the equippable items used to customise the functionality of entities.
+ * Components can perform actions or modify stats on a per-turn basis as well as when they are used. There are also various upgrades that can be added to modify the effects and stats of components
+ * (see ComponentUpgrade). The base stats of each component are defined in a JSON file and stored in the component manager as ComponentInfo structs. One of the more vital elements of these structs is
+ * their `std::string value` member which determines which Component subclass that component is designed to be initialised as. Components are meant to bearranged inside a ComponentGrid which, based on
+ * how they are positioned, dictates the spread of heat and disruption between components.
  */
-
 class Component {
 public:
 	using ModifierFunc = std::function<float(const ComponentUpgrade&)>;
 
 	Component(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager);
+
 	void yourTurn(Entity &entity, PowerPool &pool, Console &console);
 	std::vector<ProjectileArc> use(Entity &user, MovementPath path, PowerPool &pool, Console &console); // Can optionally fire some projectiles (or alternatively just apply changes to self).
 
@@ -117,9 +119,14 @@ private:
 	unsigned int disabledForTurns = 0;
 
 protected:
-	// This template is a replacement for the very ugly macro that was employed previously.
-	// It takes a base stat (eg. the components max integrity) and then goes through all the upgrades the component has and applies them.
-	// The modifierFunc argument takes each component upgrade and returns the modifier that should be used (eg. upgrade.maxIntegrityModifier).
+	/**
+	 * This method takes a base stat (eg. the component's max integrity) and then goes through all the upgrades the component has and applies them to said stat.
+	 * This template is a replacement for the very ugly macro that was employed for this purpose previously.
+	 * \tparam T Type of the stat.
+	 * \param baseValue The base value of the stat.
+	 * \param modifierFunc Function that takes each component upgrade and returns the modifier that should be used (eg. upgrade.maxIntegrityModifier).
+	 * \return The stat after all upgrades have been applied.
+	 */
 	template <typename T>
 	T statWithUpgradesApplied(T baseValue, ModifierFunc modiferFunc) {
 		T value = baseValue;

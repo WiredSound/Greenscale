@@ -8,14 +8,12 @@
 #include "ProjectileManager.h"
 class Entity;
 
-/*
- * A projectile arc handles the movement of a projectile and how said projectile interacts with tiles and entities on the map. Typically when an entity uses a ranged
- * component, the component and entity may a build a number of projectile arcs which are parsed to the GameMap. The GameMap handles the drawing of the projectiles to the screen
- * based on infomation sorted in each projectile arc (primarily by returning an appropriate ProjectileVisual structure based on the projectile's ID which is in turn handled
- * by the ProjectileManager class).
- * The projectile arc is also tasked with inflicting damage upon any entities hit and destroying tiles based upon the projectile's penetration value.
+/**
+ * A projectile arc handles the movement of a projectile and how said projectile interacts with tiles and entities on the map.
+ * Typically when an entity uses a ranged component or weapon (see RangedComponent), the component and entity may build a number of projectile arcs which are passed to the GameMap. The GameMap
+ * handles the drawing of these projectiles to the screen based on the infomation sorted in each projectile arc (primarily by fetching a ProjectileVisual from the projectile manager based on the
+ * ID stored in the arc). The projectile arc is also tasked with inflicting damage or effects on any entities it may hit as well as destroying tiles based upon the projectile's penetration value.
  */
-
 class ProjectileArc {
 public:
 	ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, Entity *arcUser, MovementPath projectilePath, IDs::Projectiles projectileId,
@@ -38,7 +36,7 @@ public:
 	unsigned int getEntityHitCount();
 
 private:
-	// This is a raw pointer and not reference as, rather annoyingly, this object becomes non-copyable if it is a reference.
+	// This is a raw pointer and not reference as this object would become non-copyable if it is a reference.
 	Entity *user; // The entity that created/fired this projectile arc.
 
 	MovementPath path;

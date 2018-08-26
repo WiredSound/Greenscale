@@ -89,13 +89,55 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab3e8ca37ad75c2b5889120c4118f6925"><td class="memItemLeft" align="right" valign="top"><a id="ab3e8ca37ad75c2b5889120c4118f6925"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>SearchAndDestroyController</b> (<a class="el" href="class_faction.html">Faction</a> target)</td></tr>
 <tr class="separator:ab3e8ca37ad75c2b5889120c4118f6925"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a05efdd026c3f1c9e70a35999a8714e0c"><td class="memItemLeft" align="right" valign="top"><a id="a05efdd026c3f1c9e70a35999a8714e0c"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>handle</b> (<a class="el" href="class_entity.html">Entity</a> *entity, <a class="el" href="class_input.html">Input</a> &amp;input) override</td></tr>
+<tr class="memitem:a05efdd026c3f1c9e70a35999a8714e0c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_search_and_destroy_controller.html#a05efdd026c3f1c9e70a35999a8714e0c">handle</a> (<a class="el" href="class_entity.html">Entity</a> *entity, <a class="el" href="class_input.html">Input</a> &amp;input) override</td></tr>
+<tr class="memdesc:a05efdd026c3f1c9e70a35999a8714e0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decides on the given entity's action for this turn.  <a href="#a05efdd026c3f1c9e70a35999a8714e0c">More...</a><br /></td></tr>
 <tr class="separator:a05efdd026c3f1c9e70a35999a8714e0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ded5045a735b7923deae51ecd20887f"><td class="memItemLeft" align="right" valign="top"><a id="a0ded5045a735b7923deae51ecd20887f"></a>
 <a class="el" href="class_optional.html">Optional</a>&lt; std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>findMostAppropriateTarget</b> (<a class="el" href="class_entity.html">Entity</a> *entity)</td></tr>
 <tr class="separator:a0ded5045a735b7923deae51ecd20887f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a05efdd026c3f1c9e70a35999a8714e0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a05efdd026c3f1c9e70a35999a8714e0c">&#9670;&nbsp;</a></span>handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SearchAndDestroyController::handle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_entity.html">Entity</a> *&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_input.html">Input</a> &amp;&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Decides on the given entity's action for this turn. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether the controller has finished dictating what the entity will do. This method will be called continually by <a class="el" href="class_entity.html#adf215f7fe824f7b9b86c62262dac453b" title="Where the Entity call upon its EntityController in order to decide what action it will take this turn...">Entity::yourTurnDecision</a> until <code>true</code> is returned. </dd></dl>
+
+<p>Implements <a class="el" href="class_entity_controller.html#a5ecd449c3c1bff90ed7bc5fa50e61690">EntityController</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/entities/controllers/<a class="el" href="_search_and_destroy_controller_8h_source.html">SearchAndDestroyController.h</a></li>
 <li>src/entities/controllers/SearchAndDestroyController.cpp</li>

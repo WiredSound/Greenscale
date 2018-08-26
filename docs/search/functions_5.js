@@ -2,6 +2,7 @@ var searchData=
 [
   ['getabsoluteposition',['getAbsolutePosition',['../class_child_gui.html#af54992677536a3472d0a3cfaa6c8d4cc',1,'ChildGui']]],
   ['getabsolutesize',['getAbsoluteSize',['../class_child_gui.html#a8475c692bd0bfeeaa05eea1408c49149',1,'ChildGui']]],
+  ['getcolour',['getColour',['../class_component.html#ad046b950787da1aeff7315ca69f126f2',1,'Component']]],
   ['getentitespriorityordered',['getEntitesPriorityOrdered',['../class_game_map.html#a5e5473df5c2b7d2f21a92379d1217884',1,'GameMap']]],
   ['getentitiesat',['getEntitiesAt',['../class_entity_layer.html#ac49aa92fcad339de59344c333a2fcbb4',1,'EntityLayer']]],
   ['getentitiesover',['getEntitiesOver',['../class_entity_layer.html#ad665af64fe08b75df12e01e7226ee808',1,'EntityLayer']]],

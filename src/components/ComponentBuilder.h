@@ -3,6 +3,9 @@
 #include <memory>
 #include "Component.h"
 
+/**
+ * Handles the setup of both the component and projectile managers as well as allows for the construction of new components.
+ */
 class ComponentBuilder {
 public:
 	ComponentBuilder();

@@ -2,6 +2,9 @@
 
 class ComponentGrid;
 
+/**
+ * Represents the amount of power available to a component grid.
+ */
 class PowerPool {
 public:
 	PowerPool(ComponentGrid &componentGrid);

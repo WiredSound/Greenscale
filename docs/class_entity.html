@@ -86,7 +86,7 @@ $(function() {
  <div class="center">
   <img src="class_entity.png" usemap="#Entity_map" alt=""/>
   <map id="Entity_map" name="Entity_map">
-<area href="class_robot.html" alt="Robot" shape="rect" coords="0,56,44,80"/>
+<area href="class_robot.html" title="Robots are defined as a specific type entity with the three animation states: idle, moving and destroyed. " alt="Robot" shape="rect" coords="0,56,44,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -279,7 +279,7 @@ static <a class="el" href="class_pulsing_colour.html">PulsingColour</a>&#160;</t
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Entities exist in instances of <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> (or more specifically in <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> owned <a class="el" href="class_entity_layer.html" title="Stores all entities present and handles the construction of a sf::VertexArray to draw these entities...">EntityLayer</a> instances) and are capable of moving and interacting with the game world around them. </p>
-<p>The ID of the entity determines the animation, default components, name, description and other such static values held in the relevant <a class="el" href="struct_entity_info.html">EntityInfo</a> struct contained in the <a class="el" href="class_entity_manager.html">EntityManager</a>. Values that vary between entities, such as the current equipped components, aligned factions, position, as well as the behaviour (primarily via the held <a class="el" href="class_entity_controller.html">EntityController</a> pointer) are stored in the <a class="el" href="class_entity.html" title="Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) ...">Entity</a> class itself. </p>
+<p>The ID of the entity determines the animation, default components, name, description and other such static values held in the relevant <a class="el" href="struct_entity_info.html">EntityInfo</a> struct contained in the <a class="el" href="class_entity_manager.html" title="Uses the Manager class template to load entity data from a JSON file. ">EntityManager</a>. Values that vary between entities, such as the current equipped components, aligned factions, position, as well as the behaviour (primarily via the held <a class="el" href="class_entity_controller.html">EntityController</a> pointer) are stored in the <a class="el" href="class_entity.html" title="Entities exist in instances of GameMap (or more specifically in GameMap owned EntityLayer instances) ...">Entity</a> class itself. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a064ea307dbb47f0c2aca86f59757fa42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a064ea307dbb47f0c2aca86f59757fa42">&#9670;&nbsp;</a></span>applyDamage()</h2>

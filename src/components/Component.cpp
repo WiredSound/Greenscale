@@ -15,6 +15,11 @@ const ComponentInfo &Component::fetchInfo() {
 	return manager->get(id);
 }
 
+/**
+ * This method is called once at the end of the owning entity's turn.
+ * Should the component be enabled and have sufficent power, Component::yourTurnEnabled is called. If there is not enough power available for this component then it becomes disabled for 1 turn.
+ * If the component is at a dangerous heat level then there is a posibility it may become disable for 1 to 3 turns.
+ */
 void Component::yourTurn(Entity &entity, PowerPool &pool, Console &console) {
 	if (disabledForTurns > 0)
 		disabledForTurns--;
@@ -48,12 +53,22 @@ void Component::yourTurn(Entity &entity, PowerPool &pool, Console &console) {
 	}
 }
 
-// Note that is is only called if the component is enabled and the power pool has the same or greater power available than the passive power consumption value.
+/**
+ * Called by Component::yourTurn if this component is enabled and the power pool has the same or greater power available than the passive power consumption value.
+ * Unless overriden, this method consumes power based on the passive power consumption value and dissipates heat based on the passive heat dissipation value.
+ */
 void Component::yourTurnEnabled(PowerPool &pool) {
 	pool.decreasePower(getPassivePowerConsumption());
 	decreaseHeat(getPassiveHeatDissipation());
 }
 
+/**
+ * Called when the owning entity equips and uses this component.
+ * \param user The user of this component.
+ * \param path The usage path - usually built by Component::buildProjectilePath.
+ * \param pool The power available for this component to use or add to.
+ * \return Components can optionally return a collection of projectile arcs which are then added to the map (see RangedComponent).
+ */
 std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
 	if (isEnabled()) {
 		pool.increasePower(getUsePowerGeneration());
@@ -72,7 +87,10 @@ std::vector<ProjectileArc> Component::use(Entity &user, MovementPath path, Power
 	return std::vector<ProjectileArc>();
 }
 
-// Again like yourTurnEnabled, this method is only called if enough power is present in the power pool.
+/**
+ * Called by Component::use when the component is enabled and the has access to sufficient power.
+ * Unless overriden, this method consumes power based on the active/use power consumption value and dissipates heat based on the active/use heat dissipation value.
+ */
 std::vector<ProjectileArc> Component::useEnabled(Entity &user, MovementPath path, PowerPool &pool, Console &console) {
 	console.display({ user.getFullName() + " used component: " + getName(), (user.isMemberOfPlayerFaction() ? Console::MessageType::INFO : Console::MessageType::WARNING) });
 
@@ -173,6 +191,10 @@ void Component::decreaseHeat(unsigned int amount) {
 	heat = heat >= amount ? (heat - amount) : 0;
 }
 
+/**
+ * Whenever a component is used it requires a path for its usage which is constructed by this method. By having a usage path, components that fire projectiles or perform effects on other elements of
+ * the map can specify where this behaviour is directed at. By default however, an incomplete path initialised just with the starting position is returned.
+ */
 MovementPath Component::buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map) {
 	return MovementPath(source); // A regular component can only be used on itself.
 }
@@ -197,6 +219,9 @@ bool Component::isEnabled() {
 	return disabledForTurns <= 0 && manualEnable && !isDestroyed();
 }
 
+/**
+ * The colour of a component is determinded by the number of upgrades it has with its opacity based on whether it is enabled or not.
+ */
 sf::Color Component::getColour() {
 	sf::Uint8 opacity = isEnabled() ? 255 : 130; // Opacity is based on whether the component is enabled or not.
 
@@ -226,10 +251,11 @@ unsigned int Component::calculateMaxPotentialProjectileDamage() {
 	return getProjectileCount() * getProjectileDamage().kinetic; // TODO: Take other forms of damage into account.
 }
 
+//! A 'weapon' is defined as a component that produces at least 1 projectile and has a range of at least 1 tile (well, until melee weapons are added that is).
 bool Component::isWeapon() {
-	// A 'weapon' is defined as a component that produces some projectiles and has a range of at least 1 tile (at least until melee weapons are added that is).
 	return getProjectileCount() > 0 && getProjectileRange() >= 1;
 }
+//! A 'spawner' is defined as a component with a spawner entity count greater than 0.
 bool Component::isSpawner() {
 	return getSpawnerEntityCount() > 0;
 }

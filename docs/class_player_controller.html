@@ -86,10 +86,52 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa713f4a615833394db618adbd87b82d3"><td class="memItemLeft" align="right" valign="top"><a id="aa713f4a615833394db618adbd87b82d3"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>PlayerController</b> (<a class="el" href="class_game_gui.html">GameGui</a> &amp;gameGui, <a class="el" href="class_console.html">Console</a> &amp;consoleRef, <a class="el" href="class_camera.html">Camera</a> &amp;cameraRef)</td></tr>
 <tr class="separator:aa713f4a615833394db618adbd87b82d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aec83f15b31e59eb8dcbdcb4dfa07051f"><td class="memItemLeft" align="right" valign="top"><a id="aec83f15b31e59eb8dcbdcb4dfa07051f"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>handle</b> (<a class="el" href="class_entity.html">Entity</a> *entity, <a class="el" href="class_input.html">Input</a> &amp;input) override</td></tr>
+<tr class="memitem:aec83f15b31e59eb8dcbdcb4dfa07051f"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_player_controller.html#aec83f15b31e59eb8dcbdcb4dfa07051f">handle</a> (<a class="el" href="class_entity.html">Entity</a> *entity, <a class="el" href="class_input.html">Input</a> &amp;input) override</td></tr>
+<tr class="memdesc:aec83f15b31e59eb8dcbdcb4dfa07051f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decides on the given entity's action for this turn.  <a href="#aec83f15b31e59eb8dcbdcb4dfa07051f">More...</a><br /></td></tr>
 <tr class="separator:aec83f15b31e59eb8dcbdcb4dfa07051f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="aec83f15b31e59eb8dcbdcb4dfa07051f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aec83f15b31e59eb8dcbdcb4dfa07051f">&#9670;&nbsp;</a></span>handle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool PlayerController::handle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_entity.html">Entity</a> *&#160;</td>
+          <td class="paramname"><em>entity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_input.html">Input</a> &amp;&#160;</td>
+          <td class="paramname"><em>input</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Decides on the given entity's action for this turn. </p>
+<dl class="section return"><dt>Returns</dt><dd>Whether the controller has finished dictating what the entity will do. This method will be called continually by <a class="el" href="class_entity.html#adf215f7fe824f7b9b86c62262dac453b" title="Where the Entity call upon its EntityController in order to decide what action it will take this turn...">Entity::yourTurnDecision</a> until <code>true</code> is returned. </dd></dl>
+
+<p>Implements <a class="el" href="class_entity_controller.html#a5ecd449c3c1bff90ed7bc5fa50e61690">EntityController</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/entities/controllers/<a class="el" href="_player_controller_8h_source.html">PlayerController.h</a></li>
 <li>src/entities/controllers/PlayerController.cpp</li>

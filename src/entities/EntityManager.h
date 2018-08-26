@@ -5,6 +5,9 @@
 #include "../Manager.h"
 #include "../IDs.h"
 
+/**
+ * Uses the Manager class template to load entity data from a JSON file.
+ */
 class EntityManager : public Manager<IDs::Entities, EntityInfo> {
 public:
 	EntityManager();

@@ -69,6 +69,11 @@ $(function() {
 <div class="title">EntityBuilder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Handles the setup of the <a class="el" href="class_entity_manager.html" title="Uses the Manager class template to load entity data from a JSON file. ">EntityManager</a> and allows for the construction of new entities.  
+ <a href="class_entity_builder.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_entity_builder_8h_source.html">EntityBuilder.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -78,13 +83,82 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a885a2903e4fc83e91724aa0a82aa3bd5"><td class="memItemLeft" align="right" valign="top"><a id="a885a2903e4fc83e91724aa0a82aa3bd5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>loadEntityInfo</b> (std::string filename)</td></tr>
 <tr class="separator:a885a2903e4fc83e91724aa0a82aa3bd5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a808559f163fc1ffef9bdbd6cda9d8c08"><td class="memItemLeft" align="right" valign="top"><a id="a808559f163fc1ffef9bdbd6cda9d8c08"></a>
-std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>buildEntity</b> (<a class="el" href="namespace_i_ds.html#a53891f40d8838b129f503411cb691c33">IDs::Entities</a> id, std::string personalName, sf::Vector2u position, <a class="el" href="class_faction.html">Faction</a> faction, sf::Vector2u gridSize, std::shared_ptr&lt; <a class="el" href="class_entity_controller.html">EntityController</a> &gt; controller)</td></tr>
+<tr class="memitem:a808559f163fc1ffef9bdbd6cda9d8c08"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_entity_builder.html#a808559f163fc1ffef9bdbd6cda9d8c08">buildEntity</a> (<a class="el" href="namespace_i_ds.html#a53891f40d8838b129f503411cb691c33">IDs::Entities</a> id, std::string personalName, sf::Vector2u position, <a class="el" href="class_faction.html">Faction</a> faction, sf::Vector2u gridSize, std::shared_ptr&lt; <a class="el" href="class_entity_controller.html">EntityController</a> &gt; controller)</td></tr>
+<tr class="memdesc:a808559f163fc1ffef9bdbd6cda9d8c08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a new entity.  <a href="#a808559f163fc1ffef9bdbd6cda9d8c08">More...</a><br /></td></tr>
 <tr class="separator:a808559f163fc1ffef9bdbd6cda9d8c08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec3cdd65cd0f0915f5512104d7313531"><td class="memItemLeft" align="right" valign="top"><a id="aec3cdd65cd0f0915f5512104d7313531"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getFrameSize</b> ()</td></tr>
 <tr class="separator:aec3cdd65cd0f0915f5512104d7313531"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Handles the setup of the <a class="el" href="class_entity_manager.html" title="Uses the Manager class template to load entity data from a JSON file. ">EntityManager</a> and allows for the construction of new entities. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a808559f163fc1ffef9bdbd6cda9d8c08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a808559f163fc1ffef9bdbd6cda9d8c08">&#9670;&nbsp;</a></span>buildEntity()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; EntityBuilder::buildEntity </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespace_i_ds.html#a53891f40d8838b129f503411cb691c33">IDs::Entities</a>&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>personalName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_faction.html">Faction</a>&#160;</td>
+          <td class="paramname"><em>faction</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">sf::Vector2u&#160;</td>
+          <td class="paramname"><em>gridSize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="class_entity_controller.html">EntityController</a> &gt;&#160;</td>
+          <td class="paramname"><em>controller</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Constructs a new entity. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The ID of the entity to be constructed. </td></tr>
+    <tr><td class="paramname">personalName</td><td>The unique name of the entity that is not defined by their type. </td></tr>
+    <tr><td class="paramname">position</td><td>The entity's position on the map. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_faction.html">Faction</a></td><td>The faction that the entity is aligned with. </td></tr>
+    <tr><td class="paramname">gridSize</td><td>The dimensions of the <a class="el" href="class_component_grid.html">ComponentGrid</a> the entity has. </td></tr>
+    <tr><td class="paramname">controller</td><td>The <a class="el" href="class_entity_controller.html">EntityController</a> tasked with controlling the entity. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The newly constructed entity. </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/entities/<a class="el" href="_entity_builder_8h_source.html">EntityBuilder.h</a></li>
 <li>src/entities/EntityBuilder.cpp</li>

@@ -69,6 +69,11 @@ $(function() {
 <div class="title">ProjectileArc Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A projectile arc handles the movement of a projectile and how said projectile interacts with tiles and entities on the map.  
+ <a href="class_projectile_arc.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_projectile_arc_8h_source.html">ProjectileArc.h</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -112,7 +117,10 @@ unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getTileHitCou
 unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>getEntityHitCount</b> ()</td></tr>
 <tr class="separator:a355cf94055f5ae29a21c45e3973ba683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A projectile arc handles the movement of a projectile and how said projectile interacts with tiles and entities on the map. </p>
+<p>Typically when an entity uses a ranged component or weapon (see <a class="el" href="class_ranged_component.html">RangedComponent</a>), the component and entity may build a number of projectile arcs which are passed to the <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a>. The <a class="el" href="class_game_map.html" title="The GameMap is were all map information (such as entities present, tiles and projectiles) is stored a...">GameMap</a> handles the drawing of these projectiles to the screen based on the infomation sorted in each projectile arc (primarily by fetching a <a class="el" href="struct_projectile_visual.html">ProjectileVisual</a> from the projectile manager based on the ID stored in the arc). The projectile arc is also tasked with inflicting damage or effects on any entities it may hit as well as destroying tiles based upon the projectile's penetration value. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/projectiles/<a class="el" href="_projectile_arc_8h_source.html">ProjectileArc.h</a></li>
 <li>src/projectiles/ProjectileArc.cpp</li>
 </ul>
