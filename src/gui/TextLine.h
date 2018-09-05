@@ -11,6 +11,7 @@ public:
 	struct ColourText {
 		std::string text;
 		sf::Color colour;
+		sf::Text::Style style;
 	};
 
 	TextLine(sf::Font &textFont, unsigned int size);

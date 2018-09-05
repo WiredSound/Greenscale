@@ -57,6 +57,7 @@ void TextLine::set(unsigned int index, ColourText colourText) {
 	sf::Text &text = texts[index];
 	text.setString(colourText.text);
 	text.setFillColor(colourText.colour);
+	text.setStyle(colourText.style);
 }
 
 void TextLine::setText(unsigned int index, std::string text) {

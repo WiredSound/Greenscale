@@ -5,54 +5,38 @@
 ComponentGui::ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::Font &textFont, unsigned int fontSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)
 	: GuiWindow("Components", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
-	font(textFont), gridGui(componentGridGui), okTextColour(sf::Color::Green), warningTextColour(sf::Color::Yellow), badTextColour(sf::Color::Red) {
-	auto nameLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.025f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
-	auto valueLines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.26f, 0.05f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
+	font(textFont), textSize(fontSize), gridGui(componentGridGui), okTextColour(sf::Color::Green), warningTextColour(sf::Color::Yellow), badTextColour(sf::Color::Red), wrapper(textFont, fontSize)
+{
+	auto lines = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.95f, 0.9f), sf::Vector2f(0.0f, 0.0f));
 
-	nameLines->addLine(TextLine(font, fontSize, { "Name:", sf::Color::White }));
-	nameLine = valueLines->addLine(TextLine(font, fontSize));
+	nameLineIndex = lines->addLine(TextLine(font, textSize));
+	descriptionLineIndex = lines->addLine(TextLine(font, textSize));
 
-	nameLines->addLine(TextLine(font, fontSize, { "Description:", sf::Color::White }));
-	descriptionLine = valueLines->addLine(TextLine(font, fontSize));
-
-	nameLines->addLine(TextLine(font, fontSize, { "Integrity:", sf::Color::White }));
-	integrityLine = valueLines->addLine(TextLine(font, fontSize));
-
-	nameLines->addLine(TextLine(font, fontSize, { "Heat level:", sf::Color::White }));
-	heatLevelLine = valueLines->addLine(TextLine(font, fontSize));
-
-	nameLines->addLine(TextLine(font, fontSize, { "Passive power:", sf::Color::White }));
-	passivePowerLine = valueLines->addLine(TextLine(font, fontSize));
-
-	nameLines->addLine(TextLine(font, fontSize, { "Use power:", sf::Color::White }));
-	usePowerLine = valueLines->addLine(TextLine(font, fontSize));
-
-	propertyNameLines = addChild(std::move(nameLines));
-	propertyValueLines = addChild(std::move(valueLines));
+	linesIndex = addChild(std::move(lines));
 }
 
 void ComponentGui::update(Input &input) {
 	auto &component = gridGui.getComponentHoveredOver();
 
 	if (component) {
-		// TODO: This use of dynamic_cast is probably not best practise...
-		getChild<TextLinesGui>(propertyValueLines)->getLine(nameLine).set(0, { component->getName(), okTextColour });
+		auto lines = getChild<TextLinesGui>(linesIndex);
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(descriptionLine).set(0, { component->getDescription(), okTextColour });
+		lines->getLine(nameLineIndex).set(0, { component->getName(), sf::Color::White, sf::Text::Style::Underlined });
+		lines->getLine(nameLineIndex).set(1, { " (integrity: ", sf::Color::White, sf::Text::Style::Regular });
+		lines->getLine(nameLineIndex).set(2, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour, sf::Text::Style::Bold });
+		lines->getLine(nameLineIndex).set(3, { " heat: ", sf::Color::White, sf::Text::Style::Regular });
+		lines->getLine(nameLineIndex).set(4, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second, sf::Text::Style::Bold });
+		lines->getLine(nameLineIndex).set(5, { ")", sf::Color::White, sf::Text::Style::Regular });
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(integrityLine).set(0, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour });
+		auto wrappedLines = wrapper.wrapText(component->getDescription(), lines->getAbsoluteSize().x);
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(0, { std::to_string(component->getHeatLevel()), getHeatLevelColourText(*component).second });
-		getChild<TextLinesGui>(propertyValueLines)->getLine(heatLevelLine).set(1, { " (" + getHeatLevelColourText(*component).first + ")", getHeatLevelColourText(*component).second });
+		lines->setNumberOfLines(1 + wrappedLines.size(), TextLine(font, textSize));
 
-		getChild<TextLinesGui>(propertyValueLines)->getLine(passivePowerLine).set(0, { std::to_string(component->getPassivePowerGeneration()) + " per turn",
-			colourBasedOnSign(component->getPassivePowerGeneration(), okTextColour, warningTextColour, badTextColour) });
-
-		getChild<TextLinesGui>(propertyValueLines)->getLine(usePowerLine).set(0, { std::to_string(component->getUsePowerGeneration()) + " on use",
-			colourBasedOnSign(component->getUsePowerGeneration(), okTextColour, warningTextColour, badTextColour) });
+		for (unsigned int i = 0; i < wrappedLines.size(); i++) {
+			auto wrappedLine = wrappedLines[i].get(0);
+			lines->getLine(i + 1).set(0, { wrappedLine.text, wrappedLine.colour, sf::Text::Style::Italic });
+		}
 	}
-
-	//sizeFromParent.y = absoluteSizeToRelative(getChild<TextLinesGui>(propertyValueLines)->getDimensions()).y * 1.1f;
 
 	GuiWindow::update(input);
 }

@@ -15,13 +15,16 @@ public:
 private:
 	ComponentGridGui &gridGui;
 	sf::Font &font;
+	unsigned int textSize;
 
-	unsigned int propertyNameLines, propertyValueLines;
-	unsigned int nameLine, descriptionLine, integrityLine, heatLevelLine, passivePowerLine, usePowerLine;
+	unsigned int linesIndex;
+	unsigned int nameLineIndex, descriptionLineIndex;
 
 	sf::Color okTextColour;
 	sf::Color warningTextColour;
 	sf::Color badTextColour;
+
+	TextWrapper wrapper;
 
 	std::pair<std::string, sf::Color> getHeatLevelColourText(Component &component);
 	sf::Color colourBasedOnSign(int value, sf::Color positiveColour, sf::Color zeroColour, sf::Color negativeColour);
