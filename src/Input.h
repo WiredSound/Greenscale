@@ -15,12 +15,21 @@ public:
 
 	bool isKeyJustPressed(sf::Keyboard::Key key);
 	bool isKeyHeld(sf::Keyboard::Key key);
+
 	bool isMouseButtonJustPressed(sf::Mouse::Button button);
+	bool isMouseButtonHeld(sf::Mouse::Button button);
+
 	const std::vector<sf::Mouse::Button> &getMouseButtonsJustPressed();
 	const std::vector<sf::Event> &getMiscellaneousEvents();
 
 	sf::Vector2i getMousePosition();
 	sf::Vector2f getMouseWorldPosition();
+
+protected:
+	template <typename T>
+	bool contains(std::vector<T> vector, T value) {
+		return std::find(vector.begin(), vector.end(), value) != vector.end();
+	}
 
 private:
 	sf::RenderWindow &window;
@@ -28,5 +37,6 @@ private:
 	std::vector<sf::Keyboard::Key> keysJustPressed;
 	std::vector<sf::Keyboard::Key> keysHeld;
 	std::vector<sf::Mouse::Button> mouseButtonsJustPressed;
+	std::vector<sf::Mouse::Button> mouseButtonsHeld;
 	std::vector<sf::Event> miscellaneousEvents;
 };

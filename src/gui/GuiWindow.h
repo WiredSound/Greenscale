@@ -16,12 +16,12 @@ public:
 	virtual void mouseNotHovering(Input &input) override;
 
 protected:
+	void setBackgroundColour(sf::Color colour);
 	void setupBackground(sf::Color backgroundColour, sf::Color hoverBackgroundColour);
 	void setBorder(sf::Color borderColour, float borderThickness);
 
-private:
-	sf::RectangleShape background;
-
 	sf::Color backgroundColour; // The normal background colour.
 	sf::Color hoverBackgroundColour; // The background colour when the mouse hovers over the window.
+
+	sf::RectangleShape background;
 };

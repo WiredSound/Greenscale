@@ -6,6 +6,10 @@ GuiWindow::GuiWindow(std::string guiName, Gui &parent, sf::Vector2f position, sf
 	setBorder(borderColour, borderThickness);
 }
 
+void GuiWindow::setBackgroundColour(sf::Color colour) {
+	background.setFillColor(colour);
+}
+
 void GuiWindow::setupBackground(sf::Color colourBackground, sf::Color colourBackgroundHover) {
 	backgroundColour = colourBackground;
 	hoverBackgroundColour = colourBackgroundHover;

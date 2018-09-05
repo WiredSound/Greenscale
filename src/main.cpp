@@ -2,6 +2,7 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
 #include "states/GameState.h"
+#include "states/MainMenuState.h"
 #include "Input.h"
 #include "GameSettings.h"
 #include "debugging.h"
@@ -35,6 +36,7 @@ int main() {
 	sf::Clock clock;
 
 	auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
+	//auto state = std::make_unique<MainMenuState>(window);
 	Input input(window);
 
 	while (window.isOpen()) {

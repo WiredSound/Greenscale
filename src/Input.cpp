@@ -4,7 +4,7 @@
 
 Input::Input(sf::RenderWindow &renderWindow) : window(renderWindow) {}
 
-// Returns true if the close event is triggered.
+//! \return Returns true if the close event is triggered.
 bool Input::update() {
 	keysJustPressed.clear();
 	mouseButtonsJustPressed.clear();
@@ -28,6 +28,11 @@ bool Input::update() {
 
 	case sf::Event::MouseButtonPressed:
 		mouseButtonsJustPressed.push_back(event.mouseButton.button);
+		mouseButtonsHeld.push_back(event.mouseButton.button);
+		break;
+
+	case sf::Event::MouseButtonReleased:
+		std::remove(mouseButtonsHeld.begin(), mouseButtonsHeld.end(), event.mouseButton.button);
 		break;
 
 	default:
@@ -44,7 +49,7 @@ bool Input::update() {
  * \return Whether the key was indeed pressed or not.
  */
 bool Input::isKeyJustPressed(sf::Keyboard::Key key) {
-	return std::find(keysJustPressed.begin(), keysJustPressed.end(), key) != keysJustPressed.end();
+	return contains<sf::Keyboard::Key>(keysJustPressed, key);
 }
 /**
 * Check whether the specified key is being held down. Will continuely output `true` until the key is released.
@@ -52,7 +57,7 @@ bool Input::isKeyJustPressed(sf::Keyboard::Key key) {
 * \return Whether the key is being held.
 */
 bool Input::isKeyHeld(sf::Keyboard::Key key) {
-	return std::find(keysHeld.begin(), keysHeld.end(), key) != keysHeld.end();
+	return contains<sf::Keyboard::Key>(keysHeld, key);
 }
 /**
 * Check whether the specified mouse button was pressed in the last frame.
@@ -60,7 +65,15 @@ bool Input::isKeyHeld(sf::Keyboard::Key key) {
 * \return Whether the mouse button was indeed pressed or not.
 */
 bool Input::isMouseButtonJustPressed(sf::Mouse::Button button) {
-	return std::find(mouseButtonsJustPressed.begin(), mouseButtonsJustPressed.end(), button) != mouseButtonsJustPressed.end();
+	return contains<sf::Mouse::Button>(mouseButtonsJustPressed, button);
+}
+/**
+* Check whether the specified mouse button is being held down. Will continuely output `true` until the mouse button is released.
+* \param key The mouse button to test for.
+* \return Whether the mouse button is being held.
+*/
+bool Input::isMouseButtonHeld(sf::Mouse::Button button) {
+	return contains<sf::Mouse::Button>(mouseButtonsHeld, button);
 }
 
 /**
