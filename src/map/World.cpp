@@ -1,6 +1,5 @@
 #include "World.h"
 
-#include <ctime>
 #include "generators/PlainsGenerator.h"
 #include "generators/TransmissionTowerFloorGenerator.h"
 #include "../Camera.h"
