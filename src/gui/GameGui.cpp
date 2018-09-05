@@ -32,15 +32,11 @@ void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontS
 	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1.0f, 1.0), 14,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
-	auto testButton = std::make_unique<GuiButton>("Test", *this, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.25f, 0.25f), sf::Vector2f(0.5f, 0.5f),
-		sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Magenta, 1.0f);
-
 	addChild(std::move(entityListGui));
 	addChild(std::move(componentGridGui));
 	addChild(std::move(componentGui));
 	addChild(std::move(entityGui));
 	consoleGuiIndex = addChild(std::move(consoleGui));
-	addChild(std::move(testButton));
 }
 
 void GameGui::update(Input &input) {

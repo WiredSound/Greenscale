@@ -35,8 +35,8 @@ int main() {
 	int fpsCounter = 0;
 	sf::Clock clock;
 
-	auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
-	//auto state = std::make_unique<MainMenuState>(window);
+	//auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
+	auto state = std::make_unique<MainMenuState>(window, font);
 	Input input(window);
 
 	while (window.isOpen()) {

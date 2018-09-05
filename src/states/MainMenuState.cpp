@@ -1,6 +1,8 @@
 #include "MainMenuState.h"
 
-MainMenuState::MainMenuState(sf::RenderWindow &renderWindow) : State(renderWindow), gui((sf::Vector2f) renderWindow.getSize()) {}
+MainMenuState::MainMenuState(sf::RenderWindow &renderWindow, sf::Font &font) : State(renderWindow), gui((sf::Vector2f) renderWindow.getSize()) {
+	gui.setup(font, 16);
+}
 
 void MainMenuState::update(Input &input) {
 	gui.update(input);

@@ -11,4 +11,5 @@ void MainMenuGui::setup(sf::Font &font, unsigned int fontSize) {
 		sf::Color::Red, sf::Color::Green, sf::Color::Blue, sf::Color::Magenta, 3.0f);
 
 	addChild(std::move(testButton));
+	//addChild(std::make_unique<GuiWindow>("", *this, sf::Vector2f(0.01f, 0.01f), sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0, 0), sf::Color::Blue, sf::Color::Blue, sf::Color::Blue, 1.0f));
 }
