@@ -6,6 +6,7 @@
 #include "components/Damage.h"
 
 namespace JsonHelp {
+	bool containsKey(const nlohmann::json &json, std::string key);
 	sf::Color parseColour(const nlohmann::json &colourJson);
 	Damage parseDamage(const nlohmann::json &json);
 	Animation loadAnimation(const nlohmann::json &json);

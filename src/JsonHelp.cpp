@@ -1,5 +1,9 @@
 #include "JsonHelp.h"
 
+bool JsonHelp::containsKey(const nlohmann::json &json, std::string key) {
+	return json.find(key) != json.end();
+}
+
 sf::Color JsonHelp::parseColour(const nlohmann::json &colourJson) {
 	try {
 		return sf::Color(colourJson[0].get<int>(), colourJson[1].get<int>(), colourJson[2].get<int>(), colourJson[3].get<int>());

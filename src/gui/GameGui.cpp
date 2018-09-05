@@ -14,7 +14,7 @@ GameGui::GameGui(sf::Vector2f windowSize)
 	componentsTexture->loadFromFile(COMPONENTS_TEXTURE_PATH);
 }
 
-void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Vector2f childrenScale, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) {
+void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) {
 	destroyAllChildren();
 
 	auto entityListGui = std::make_unique<EntityListGui>(*this, turnManager, font, fontSize, sf::Vector2f(0.99f, 0.01f), sf::Vector2f(0.22f, 0.3f), sf::Vector2f(1.0f, 0.0f),

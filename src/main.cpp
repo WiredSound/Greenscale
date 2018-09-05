@@ -36,7 +36,7 @@ int main() {
 	sf::Clock clock;
 
 	//auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
-	auto state = std::make_unique<MainMenuState>(window, font);
+	auto state = std::make_unique<MainMenuState>(window, font, settings);
 	Input input(window);
 
 	while (window.isOpen()) {
@@ -61,32 +61,4 @@ int main() {
 	}
 
 	return 0;
-}
-
-GameSettings loadSettings(std::string filename) {
-	GameSettings settings;
-	nlohmann::json json;
-	std::ifstream file(filename);
-
-	if (file.is_open()) {
-		try {
-			file >> json;
-
-			settings.windowWidth = json["window width"].get<unsigned int>();
-			settings.windowHeight = json["window height"].get<unsigned int>();
-			settings.vsyncEnabled = json["vsync enabled"].get<bool>();
-			settings.fullscreenEnabled = json["fullscreen enabled"].get<bool>();
-			settings.fullscreenEnabled = json["display fps"].get<bool>();
-
-			file.close();
-		}
-		catch (nlohmann::json::type_error &e) {
-			DEBUG_LOG_ERROR("Failed to load settings file due to type error: " << e.what() << "\nException ID: " << e.id);
-		}
-		catch (nlohmann::json::parse_error &e) {
-			DEBUG_LOG_ERROR("Failed to load settings file due to parse error: " << e.what() << "\nException ID: " << e.id << "\nAt byte: " << e.byte);
-		}
-	}
-
-	return settings;
 }
