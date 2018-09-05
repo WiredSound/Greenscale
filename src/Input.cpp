@@ -19,20 +19,10 @@ bool Input::update() {
 
 	case sf::Event::KeyPressed:
 		keysJustPressed.push_back(event.key.code);
-		keysHeld.push_back(event.key.code);
-		break;
-
-	case sf::Event::KeyReleased:
-		std::remove(keysHeld.begin(), keysHeld.end(), event.key.code);
 		break;
 
 	case sf::Event::MouseButtonPressed:
 		mouseButtonsJustPressed.push_back(event.mouseButton.button);
-		mouseButtonsHeld.push_back(event.mouseButton.button);
-		break;
-
-	case sf::Event::MouseButtonReleased:
-		std::remove(mouseButtonsHeld.begin(), mouseButtonsHeld.end(), event.mouseButton.button);
 		break;
 
 	default:
@@ -57,7 +47,7 @@ bool Input::isKeyJustPressed(sf::Keyboard::Key key) {
 * \return Whether the key is being held.
 */
 bool Input::isKeyHeld(sf::Keyboard::Key key) {
-	return contains<sf::Keyboard::Key>(keysHeld, key);
+	return sf::Keyboard::isKeyPressed(key);
 }
 /**
 * Check whether the specified mouse button was pressed in the last frame.
@@ -73,7 +63,7 @@ bool Input::isMouseButtonJustPressed(sf::Mouse::Button button) {
 * \return Whether the mouse button is being held.
 */
 bool Input::isMouseButtonHeld(sf::Mouse::Button button) {
-	return contains<sf::Mouse::Button>(mouseButtonsHeld, button);
+	return sf::Mouse::isButtonPressed(button);
 }
 
 /**

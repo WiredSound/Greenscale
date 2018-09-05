@@ -7,10 +7,8 @@ GuiButton::GuiButton(std::string guiName, Gui &parent, sf::Vector2f position, sf
 void GuiButton::mouseHover(Input &input) {
 	GuiWindow::mouseHover(input);
 
-	if (input.isMouseButtonHeld(sf::Mouse::Button::Left)) {
-		DEBUG_LOG("held!");
+	if (input.isMouseButtonHeld(sf::Mouse::Button::Left))
 		setBackgroundColour(clickBackgroundColour);
-	}
 
 	if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) clicked(input);
 }

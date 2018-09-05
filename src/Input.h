@@ -35,8 +35,6 @@ private:
 	sf::RenderWindow &window;
 
 	std::vector<sf::Keyboard::Key> keysJustPressed;
-	std::vector<sf::Keyboard::Key> keysHeld;
 	std::vector<sf::Mouse::Button> mouseButtonsJustPressed;
-	std::vector<sf::Mouse::Button> mouseButtonsHeld;
 	std::vector<sf::Event> miscellaneousEvents;
 };
