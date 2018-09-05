@@ -17,7 +17,7 @@ void TextLine::setPosition(sf::Vector2f basePosition) {
 	}
 }
 
-float TextLine::getLineHeight() {
+unsigned int TextLine::getLineHeight() {
 	if (texts.size() > 0) {
 		return texts[0].getCharacterSize();
 	}
@@ -38,6 +38,7 @@ void TextLine::add() {
 	sf::Text text;
 	text.setFont(font);
 	text.setCharacterSize(fontSize);
+	text.setStyle(sf::Text::Style::Regular);
 	text.setPosition(currentPosition);
 
 	texts.push_back(text);
@@ -49,6 +50,7 @@ void TextLine::add(ColourText colourText) {
 	add();
 	texts[texts.size() - 1].setString(colourText.text);
 	texts[texts.size() - 1].setFillColor(colourText.colour);
+	texts[texts.size() - 1].setStyle(colourText.style);
 }
 
 void TextLine::set(unsigned int index, ColourText colourText) {
@@ -73,13 +75,14 @@ void TextLine::setColour(unsigned int index, sf::Color colour) {
 }
 
 TextLine::ColourText TextLine::get(unsigned int index) {
-	ensureMinimumTexts(index);
+	ensureMinimumTexts(index + 1);
 
 	sf::Text &text = texts[index];
 
 	return{
 		text.getString(),
-		text.getFillColor()
+		text.getFillColor(),
+		text.getStyle()
 	};
 }
 
@@ -88,9 +91,8 @@ void TextLine::clear() {
 }
 
 void TextLine::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-	for (const sf::Text &text : texts) {
+	for (const sf::Text &text : texts)
 		target.draw(text, states);
-	}
 }
 
 void TextLine::ensureMinimumTexts(unsigned int amount) {

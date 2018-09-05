@@ -11,7 +11,7 @@ public:
 	struct ColourText {
 		std::string text;
 		sf::Color colour;
-		sf::Text::Style style;
+		sf::Uint32 style;
 	};
 
 	TextLine(sf::Font &textFont, unsigned int size);
@@ -26,7 +26,7 @@ public:
 	void clear();
 
 	float getLineWidth();
-	float getLineHeight();
+	unsigned int getLineHeight();
 
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
