@@ -14,7 +14,7 @@ bool SpawnerController::handle(Entity *entity, Input &input) {
 	for (sf::Vector2u spawnerPos : grid.findSpawnerPositions()) {
 		auto &component = grid.getComponentAt(spawnerPos);
 
-		if (entity->getPowerLevel() >= component->getUsePowerConsumption()) {
+		if (entity->getPowerLevel() >= static_cast<int>(component->getUsePowerConsumption())) {
 			grid.equipComponent(spawnerPos);
 			entity->useEquippedComponentOnSelf();
 

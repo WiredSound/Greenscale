@@ -11,7 +11,7 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 	for (sf::Vector2u position : positions) {
 		Optional<Component> &component = grid.getComponentAt(position);
 
-		if (component->atDangerousOrAboveHeatLevel() && entity->getPowerLevel() >= component->getPassivePowerConsumption()) {
+		if (component->atDangerousOrAboveHeatLevel() && entity->getPowerLevel() >= static_cast<int>(component->getPassivePowerConsumption())) {
 			// If this hot component has cooling capabilities then use it:
 			if (component->isActiveCooling()) {
 				DEBUG_LOG(entity->getFullName() << " has decided to use active cooler " << component->getName() << " as it is currently at a fatal heat level.");
@@ -62,7 +62,7 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 			Optional<Component> &weapon = grid.getComponentAt(weaponPosition);
 			unsigned int range = weapon->getProjectileRange();
 
-			if (range >= requiredRange && weapon->getProjectilePenetration() >= requiredPenetration && weapon->getUsePowerConsumption() <= entity->getPowerLevel()) {
+			if (range >= requiredRange && weapon->getProjectilePenetration() >= requiredPenetration && static_cast<int>(weapon->getUsePowerConsumption()) <= entity->getPowerLevel()) {
 				DEBUG_LOG(entity->getFullName() << " has decided to fire weapon " << weapon->getName() << " at target.");
 
 				grid.equipComponent(weaponPosition);

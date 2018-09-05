@@ -8,12 +8,12 @@ namespace Debug {
 	// TODO: Log to file.
 }
 
+#define DEBUG_LOG_ERROR(msg) std::cerr << Debug::getTimestamp() << " (ERROR) - " << msg << std::endl;
+
 #ifdef DEBUG
 #define DEBUG_LOG(msg) std::cout << Debug::getTimestamp() << " - " << msg << std::endl;
-#define DEBUG_LOG_ERROR(msg) std::cerr << Debug::getTimestamp() << " (ERROR) - " << msg << std::endl;
 #else
 #define DEBUG_LOG(msg)
-#define DEBUG_LOG_ERROR(msg)
 #endif
 
 #ifdef DEBUG_SPAM

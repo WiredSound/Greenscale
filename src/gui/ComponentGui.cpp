@@ -29,8 +29,7 @@ void ComponentGui::update(Input &input) {
 		lines->getLine(nameLineIndex).set(5, { ")", sf::Color::White, sf::Text::Style::Regular });
 
 		auto wrappedLines = wrapper.wrapText(component->getDescription(), lines->getAbsoluteSize().x);
-
-		lines->setNumberOfLines(1 + wrappedLines.size(), TextLine(font, textSize));
+		lines->setNumberOfLines(1u + static_cast<unsigned int>(wrappedLines.size()), TextLine(font, textSize));
 
 		for (unsigned int i = 0; i < wrappedLines.size(); i++) {
 			auto wrappedLine = wrappedLines[i].get(0);

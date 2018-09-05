@@ -1,7 +1,7 @@
 #include "ComponentGridGui.h"
 
 ComponentGridGui::ComponentGridGui(Gui &parent, TurnManager &manager, std::shared_ptr<sf::Texture> texture, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
-	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, int borderThickness)
+	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)
 	: GuiWindow("Component Grid", parent, position, size, origin, backgroundColour, hoverBackgroundColour, borderColour, borderThickness),
 	turnManager(manager), componentsTexture(texture),
 	padding(0.05f, 0.05f), componentBoxColour(75, 75, 75, 255), componentBoxHoverColour(60, 60, 60, 255), componentBoxUnequippedBorderColour(borderColour), componentBoxEquippedBorderColour(sf::Color::Blue)
