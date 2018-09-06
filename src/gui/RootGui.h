@@ -6,8 +6,8 @@ class RootGui : public Gui {
 public:
 	RootGui(std::string name, sf::Vector2f position, sf::Vector2f size);
 
-	sf::Vector2f getAbsolutePosition() override;
-	sf::Vector2f getAbsoluteSize() override;
+	sf::Vector2f getAbsolutePosition() const override;
+	sf::Vector2f getAbsoluteSize() const override;
 	float getAspectRatio();
 	void resize(sf::Vector2f size);
 

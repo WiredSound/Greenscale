@@ -10,8 +10,8 @@ class ChildGui : public Gui {
 public:
 	ChildGui(std::string name, Gui &guiParent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f guiOrigin);
 
-	virtual sf::Vector2f getAbsolutePosition() override;
-	virtual sf::Vector2f getAbsoluteSize() override;
+	virtual sf::Vector2f getAbsolutePosition() const override;
+	virtual sf::Vector2f getAbsoluteSize() const override;
 
 	sf::Vector2f absoluteSizeToRelative(sf::Vector2f absoluteSize);
 

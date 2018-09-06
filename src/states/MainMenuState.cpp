@@ -12,5 +12,6 @@ void MainMenuState::update(Input &input) {
 }
 
 void MainMenuState::draw() {
+	window.clear(sf::Color(0, 180, 0, 255));
 	window.draw(gui);
 }

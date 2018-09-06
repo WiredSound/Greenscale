@@ -60,6 +60,12 @@ void Gui::removeChild(std::unique_ptr<Gui> child) {
 	children.erase(std::remove(children.begin(), children.end(), child), children.end());
 }
 
+sf::Vector2f Gui::getAbsoluteCentre() const {
+	auto pos = getAbsolutePosition();
+	auto size = getAbsoluteSize();
+	return sf::Vector2f(pos.x + (size.x / 2), pos.y + (size.y / 2));
+}
+
 bool Gui::withinBounds(sf::Vector2f pos) {
 	sf::Vector2f absPos = getAbsolutePosition();
 	sf::Vector2f absSize = getAbsoluteSize();

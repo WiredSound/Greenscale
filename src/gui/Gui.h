@@ -19,8 +19,9 @@ public:
 	void updateChildren(Input &input);
 	void drawChildren(sf::RenderTarget& target, sf::RenderStates states) const;
 
-	virtual sf::Vector2f getAbsolutePosition() = 0;
-	virtual sf::Vector2f getAbsoluteSize() = 0;
+	virtual sf::Vector2f getAbsolutePosition() const = 0;
+	virtual sf::Vector2f getAbsoluteSize() const = 0;
+	sf::Vector2f getAbsoluteCentre() const;
 
 	virtual void mouseHover(Input &input) {}
 	virtual void mouseNotHovering(Input &input) {}

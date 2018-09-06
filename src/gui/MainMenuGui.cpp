@@ -1,6 +1,6 @@
 #include "MainMenuGui.h"
 
-#include "GuiButton.h"
+#include "GuiTextButton.h"
 #include "../states/GameState.h"
 
 MainMenuGui::MainMenuGui(sf::Vector2f size) : RootGui("Main Menu", sf::Vector2f(0, 0), size) {}
@@ -13,6 +13,6 @@ void MainMenuGui::load(sf::Font &font, unsigned int fontSize, sf::Color backgrou
 		stateManager.changeState(std::make_unique<GameState>(stateManager, window, font, settings));
 	};
 
-	addChild(std::make_unique<GuiButton>("Play", *this, sf::Vector2f(0.5f, 0.5f), sf::Vector2f(0.25f, 0.25f), sf::Vector2f(0.5f, 0.5f),
-		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, playCallback));
+	addChild(std::make_unique<GuiTextButton>("Play", *this, sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
+		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, playCallback, font, settings.fontSize, "New Game"));
 }
