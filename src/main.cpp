@@ -42,10 +42,10 @@ int main() {
 	manager.changeState(std::make_unique<MainMenuState>(manager, window, font, settings));
 
 	while (window.isOpen()) {
-		if (input.update()) // Handle close window event.
-			window.close();
-		else
-			manager.update(input); // Send input to the current state.
+		bool closeWindowEvent = input.update();
+		bool noState = manager.update(input);
+
+		if (closeWindowEvent || noState) window.close();
 
 		window.clear(sf::Color::Black);
 		manager.draw(); // Allow the current state to draw to the window.

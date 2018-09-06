@@ -6,9 +6,10 @@ class State;
 
 class StateManager {
 public:
-	void update(Input &in);
+	bool update(Input &in);
 	void draw();
 	void changeState(std::unique_ptr<State> newState);
+	void exit();
 
 private:
 	std::unique_ptr<State> state;

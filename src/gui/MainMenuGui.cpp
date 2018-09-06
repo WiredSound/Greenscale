@@ -9,10 +9,17 @@ void MainMenuGui::load(sf::Font &font, unsigned int fontSize, sf::Color backgrou
 	StateManager &stateManager, sf::RenderWindow &window, GameSettings &settings) {
 	destroyAllChildren();
 
-	GuiButton::CallbackType playCallback = [&stateManager, &window, &font, &settings](Input &in) {
+	GuiButton::CallbackType playCallback = [&](Input &in) {
 		stateManager.changeState(std::make_unique<GameState>(stateManager, window, font, settings));
 	};
 
-	addChild(std::make_unique<GuiTextButton>("Play", *this, sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
+	GuiButton::CallbackType exitCallback = [&stateManager](Input &in) {
+		stateManager.exit();
+	};
+
+	addChild(std::make_unique<GuiTextButton>("New Game Button", *this, sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
 		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, playCallback, font, settings.fontSize, "New Game"));
+
+	addChild(std::make_unique<GuiTextButton>("Exit Button", *this, sf::Vector2f(0.5f, 0.48f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
+		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, exitCallback, font, settings.fontSize, "Exit"));
 }
