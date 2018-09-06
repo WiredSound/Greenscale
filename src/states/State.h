@@ -2,6 +2,7 @@
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "StateManager.h"
 #include "../Input.h"
 
 /**
@@ -10,12 +11,14 @@
  */
 class State {
 public:
-	State(sf::RenderWindow &renderWindow) : window(renderWindow) {};
-	//! Where all game logic takes place.
-	virtual void update(Input &input) = 0;
-	//! Where rendering takes place.
-	virtual void draw() = 0;
+	State(std::string stateName, StateManager &stateManager, sf::RenderWindow &renderWindow)
+		: name(stateName), manager(stateManager), window(renderWindow) {};
+	virtual void update(Input &input) = 0; //! Where all game logic takes place.
+	virtual void draw() = 0; //! Where rendering takes place.
+
+	const std::string name;
 
 protected:
+	StateManager &manager;
 	sf::RenderWindow &window;
 };

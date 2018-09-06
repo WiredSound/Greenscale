@@ -10,11 +10,11 @@
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
 GameGui::GameGui(sf::Vector2f windowSize)
-	: RootGui("Game", sf::Vector2f(0, 0), windowSize), componentsTexture(std::make_shared<sf::Texture>()) {
-	componentsTexture->loadFromFile(COMPONENTS_TEXTURE_PATH);
-}
+	: RootGui("Game", sf::Vector2f(0, 0), windowSize), componentsTexture(std::make_shared<sf::Texture>()) {}
 
-void GameGui::setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) {
+void GameGui::load(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) {
+	componentsTexture->loadFromFile(COMPONENTS_TEXTURE_PATH);
+
 	destroyAllChildren();
 
 	auto entityListGui = std::make_unique<EntityListGui>(*this, turnManager, font, fontSize, sf::Vector2f(0.99f, 0.01f), sf::Vector2f(0.22f, 0.3f), sf::Vector2f(1.0f, 0.0f),

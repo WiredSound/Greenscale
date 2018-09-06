@@ -5,10 +5,12 @@
 
 class MainMenuState : public State {
 public:
-	MainMenuState(sf::RenderWindow &renderWindow, sf::Font &font, GameSettings &gameSettings);
-	virtual void update(Input &input) override;
-	virtual void draw() override;
+	MainMenuState(StateManager &manager, sf::RenderWindow &renderWindow, sf::Font &textFont, GameSettings &gameSettings);
+	void update(Input &input) override;
+	void draw() override;
 
 private:
 	MainMenuGui gui;
+	sf::Font &font;
+	GameSettings &settings;
 };

@@ -1,6 +1,7 @@
 #include <memory>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include "states/StateManager.h"
 #include "states/GameState.h"
 #include "states/MainMenuState.h"
 #include "Input.h"
@@ -35,19 +36,20 @@ int main() {
 	int fpsCounter = 0;
 	sf::Clock clock;
 
-	//auto state = std::make_unique<GameState>(window, font, settings); // Create the game state.
-	auto state = std::make_unique<MainMenuState>(window, font, settings);
 	Input input(window);
+
+	StateManager manager;
+	manager.changeState(std::make_unique<MainMenuState>(manager, window, font, settings));
 
 	while (window.isOpen()) {
 		if (input.update()) // Handle close window event.
 			window.close();
 		else
-			state->update(input); // Send input to the current state.
+			manager.update(input); // Send input to the current state.
 
 		window.clear(sf::Color::Black);
-
-		state->draw(); // Allow the current state to draw to the window.
+		manager.draw(); // Allow the current state to draw to the window.
+		window.display();
 
 		fpsCounter++;
 		if (clock.getElapsedTime() > sf::milliseconds(1000)) {
@@ -56,8 +58,6 @@ int main() {
 			clock.restart();
 			fpsCounter = 0;
 		}
-
-		window.display();
 	}
 
 	return 0;

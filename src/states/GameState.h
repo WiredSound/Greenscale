@@ -18,7 +18,7 @@
  */
 class GameState : public State {
 public:
-	GameState(sf::RenderWindow &renderWindow, sf::Font &textFont, GameSettings &gameSettings);
+	GameState(StateManager &manager, sf::RenderWindow &renderWindow, sf::Font &textFont, GameSettings &gameSettings);
 	void update(Input &input) override;
 	void draw() override;
 

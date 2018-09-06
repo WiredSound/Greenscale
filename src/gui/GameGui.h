@@ -8,7 +8,7 @@ class TurnManager;
 class GameGui : public RootGui {
 public:
 	GameGui(sf::Vector2f windowSize);
-	void setup(TurnManager &turnManager, sf::Font &font, unsigned int fontSize,
+	void load(TurnManager &turnManager, sf::Font &font, unsigned int fontSize,
 		sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness);
 	virtual void update(Input &input) override;
 
