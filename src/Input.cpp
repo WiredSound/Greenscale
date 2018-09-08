@@ -1,6 +1,7 @@
 #include "Input.h"
 
 #include <SFML/Window/Mouse.hpp>
+#include <iostream>
 
 Input::Input(sf::RenderWindow &renderWindow) : window(renderWindow) {}
 
@@ -11,23 +12,23 @@ bool Input::update() {
 	miscellaneousEvents.clear();
 
 	sf::Event event;
-	window.pollEvent(event);
+	while (window.pollEvent(event)) {
+		switch (event.type) {
+		case sf::Event::Closed:
+			return true;
 
-	switch (event.type) {
-	case sf::Event::Closed:
-		return true;
+		case sf::Event::KeyPressed:
+			keysJustPressed.push_back(event.key.code);
+			break;
 
-	case sf::Event::KeyPressed:
-		keysJustPressed.push_back(event.key.code);
-		break;
+		case sf::Event::MouseButtonPressed:
+			mouseButtonsJustPressed.push_back(event.mouseButton.button);
+			break;
 
-	case sf::Event::MouseButtonPressed:
-		mouseButtonsJustPressed.push_back(event.mouseButton.button);
-		break;
-
-	default:
-		miscellaneousEvents.push_back(event);
-		break;
+		default:
+			miscellaneousEvents.push_back(event);
+			break;
+		}
 	}
 
 	return false;
