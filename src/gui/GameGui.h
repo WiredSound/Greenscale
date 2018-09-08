@@ -3,6 +3,7 @@
 #include <SFML/Graphics/Font.hpp>
 #include "RootGui.h"
 #include "ConsoleGui.h"
+#include "../FpsCounter.h"
 class TurnManager;
 
 class GameGui : public RootGui {
@@ -15,6 +16,7 @@ public:
 	ConsoleGui *getConsoleGui();
 
 private:
+	FpsCounter fps;
 	std::shared_ptr<sf::Texture> componentsTexture;
-	unsigned int consoleGuiIndex;
+	unsigned int consoleGuiIndex, fpsGuiIndex;
 };
