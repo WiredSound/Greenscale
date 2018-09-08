@@ -32,10 +32,6 @@ int main() {
 		return -1;
 	}
 
-	// FPS is measured by increasing fpsCounter every frame and then taking the value after one second has passed.
-	int fpsCounter = 0;
-	sf::Clock clock;
-
 	Input input(window);
 
 	StateManager manager;
@@ -50,14 +46,6 @@ int main() {
 		window.clear(sf::Color::Black);
 		manager.draw(); // Allow the current state to draw to the window.
 		window.display();
-
-		fpsCounter++;
-		if (clock.getElapsedTime() > sf::milliseconds(1000)) {
-			// TODO: Display FPS.
-
-			clock.restart();
-			fpsCounter = 0;
-		}
 	}
 
 	return 0;

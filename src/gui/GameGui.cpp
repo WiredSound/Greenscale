@@ -10,7 +10,7 @@
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 
 GameGui::GameGui(sf::Vector2f windowSize)
-	: RootGui("Game", sf::Vector2f(0, 0), windowSize), componentsTexture(std::make_shared<sf::Texture>()) {}
+	: RootGui("Game", sf::Vector2f(0, 0), windowSize), componentsTexture(std::make_shared<sf::Texture>()), fps(sf::milliseconds(2000)) {}
 
 void GameGui::load(TurnManager &turnManager, sf::Font &font, unsigned int fontSize, sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) {
 	componentsTexture->loadFromFile(COMPONENTS_TEXTURE_PATH);
@@ -32,15 +32,22 @@ void GameGui::load(TurnManager &turnManager, sf::Font &font, unsigned int fontSi
 	auto consoleGui = std::make_unique<ConsoleGui>(*this, font, fontSize, sf::Vector2f(0.99f, 0.99f), sf::Vector2f(0.38f, 0.3f), sf::Vector2f(1.0f, 1.0), 14,
 		backgroundColour, hoverBackgroundColour, borderColour, borderThickness);
 
+	auto fpsGui = std::make_unique<TextLinesGui>(*this, sf::Vector2f(0.0f, 0.0f), sf::Vector2f(0.2f, 0.1f), sf::Vector2f(0.0f, 0.0f));
+	fpsGui->addLine(TextLine(font, fontSize, { "FPS: ", sf::Color::Yellow }));
+
 	addChild(std::move(entityListGui));
 	addChild(std::move(componentGridGui));
 	addChild(std::move(componentGui));
 	addChild(std::move(entityGui));
 	consoleGuiIndex = addChild(std::move(consoleGui));
+	fpsGuiIndex = addChild(std::move(fpsGui));
 }
 
 void GameGui::update(Input &input) {
 	Gui::update(input);
+
+	fps.update();
+	getChild<TextLinesGui>(fpsGuiIndex)->getLine(0).set(1, { std::to_string(fps.get()), sf::Color::Yellow });
 }
 
 ConsoleGui *GameGui::getConsoleGui() {
