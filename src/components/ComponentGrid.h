@@ -60,8 +60,8 @@ private:
 
 	Optional<Component> noComponent;
 
-	bool componentEquipped = false;
+	bool componentEquipped{ false };
 	sf::Vector2u equippedPosition;
 
-	float heatSpreadFraction = 0.3f;
+	float heatSpreadFraction{ 0.3f };
 };

@@ -48,7 +48,7 @@ Optional<Component> &ComponentGridGui::getHeldComponent() {
 	if (mouseHoldingComponent)
 		return fetchCurrentGrid().getComponentAt(mouseHeldGridPosition);
 
-	return Optional<Component>();
+	//return Optional<Component>();
 }
 
 void ComponentGridGui::hoveringOverGridPosition(sf::Vector2u gridPosition) {

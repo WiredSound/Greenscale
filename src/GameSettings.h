@@ -14,7 +14,7 @@ public:
 	bool vsyncEnabled;
 	bool fullscreenEnabled;
 	bool displayFps;
-	sf::Color guiBackgroundColour = sf::Color(5, 5, 5, 200);
-	sf::Color guiHoverBackgroundColour = sf::Color(5, 5, 5, 230);
-	sf::Color guiBorderColour = sf::Color(35, 140, 35, 255);
+	sf::Color guiBackgroundColour;
+	sf::Color guiHoverBackgroundColour;
+	sf::Color guiBorderColour;
 };

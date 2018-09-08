@@ -23,7 +23,7 @@ private:
 
 	unsigned int textLinesIndex;
 	unsigned lineCount;
-	int scroll = 0;
+	int scroll{ 0 };
 
 	TextWrapper wrapper;
 };

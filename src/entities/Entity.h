@@ -112,5 +112,5 @@ private:
 	ComponentGrid componentGrid;
 
 	std::shared_ptr<EntityController> controller;
-	bool myTurn = false;
+	bool myTurn{ false };
 };

@@ -16,5 +16,5 @@ public:
 
 private:
 	ComponentGrid &grid;
-	unsigned int power = 0;
+	unsigned int power{ 0 };
 };

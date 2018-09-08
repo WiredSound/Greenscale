@@ -14,7 +14,7 @@ private:
 	Camera &camera;
 
 	MovementPath path;
-	bool moveMode = true; // Whether currently in moving or attacking mode.
+	bool moveMode{ true }; // Whether currently in moving or attacking mode.
 	sf::Vector2u lastMouseTilePos;
 
 	void drawMovementPath(MovementPath &drawPath, Entity *entity, GameMap *map);

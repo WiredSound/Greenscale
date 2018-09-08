@@ -52,8 +52,8 @@ private:
 	Damage damage;
 	unsigned int penetration;
 
-	unsigned int tileHitCount = 0;
-	unsigned int entityHitCount = 0;
+	unsigned int tileHitCount{ 0 };
+	unsigned int entityHitCount{ 0 };
 
 	std::shared_ptr<ProjectileManager> manager;
 
