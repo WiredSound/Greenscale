@@ -13,4 +13,5 @@ public:
 
 private:
 	std::unique_ptr<State> state;
+	std::unique_ptr<State> nextState;
 };
