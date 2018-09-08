@@ -64,8 +64,8 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 	return false;
 }
 
-void PlayerController::drawMovementPath(MovementPath &path, Entity *entity, GameMap *map) {
-	map->colourTilePath(path, (path.isComplete() && entity->withinRange(path.getLength()) ? PATH_IN_RANGE_COLOUR : PATH_NOT_IN_RANGE_COLOUR));
+void PlayerController::drawMovementPath(MovementPath &drawPath, Entity *entity, GameMap *map) {
+	map->colourTilePath(drawPath, (path.isComplete() && entity->withinRange(drawPath.getLength()) ? PATH_IN_RANGE_COLOUR : PATH_NOT_IN_RANGE_COLOUR));
 }
 
 MovementPath PlayerController::buildMoveModePath(Entity *entity, GameMap *map, const sf::Vector2u &mouseTilePos) {
@@ -83,7 +83,6 @@ MovementPath PlayerController::buildAttackModePath(Entity *entity, GameMap *map,
 	return entity->buildEquippedComponentPath(mouseTilePos);
 }
 
-void PlayerController::reset(MovementPath &path, sf::Vector2u pos, GameMap *map) {
-	map->resetColourTilePath(path);
-	path = MovementPath(pos);
+void PlayerController::reset(MovementPath &resetPath, sf::Vector2u pos, GameMap *map) {
+	map->resetColourTilePath(resetPath);
 }

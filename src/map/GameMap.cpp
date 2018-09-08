@@ -59,7 +59,7 @@ bool GameMap::areAllProjectileArcsComplete() {
 void GameMap::updateProjectiles() {
 	if (!areAllProjectileArcsComplete()) {
 		ProjectileArc &arc = projectileArcs[0];
-		sf::Vector2u &position = arc.getCurrentProjectilePosition();
+		sf::Vector2u position = arc.getCurrentProjectilePosition();
 
 		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
 		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());

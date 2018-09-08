@@ -17,9 +17,9 @@ void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
 	throw std::exception("EntityLayer::colourEntitiesInPath is unimplemented!");
 
 	for (sf::Vector2u pos : path.getPathTiles()) {
-		auto entities = getEntitiesAt(pos);
+		auto entitiesAt = getEntitiesAt(pos);
 
-		for (std::shared_ptr<Entity> &entity : entities) {
+		for (std::shared_ptr<Entity> &entity : entitiesAt) {
 			// ...
 		}
 	}

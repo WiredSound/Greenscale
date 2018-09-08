@@ -31,7 +31,7 @@ void TransmissionTowerFloorGenerator::constructCircularRoom(std::unique_ptr<Tile
 
 	// Circular wall:
 	std::vector<sf::Vector2i> outerWallPositions = GridHelp::buildCircle(static_cast<sf::Vector2i>(centre), radius, wallThickness);
-	tiles->fill(mainWallTile, mainWallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end()));
+	tiles->fill(wallTile, wallColour, 0, std::vector<sf::Vector2u>(outerWallPositions.begin(), outerWallPositions.end()));
 
 	// Door:
 	unsigned int halfDoorSize = std::ceil(doorSize / 2u);

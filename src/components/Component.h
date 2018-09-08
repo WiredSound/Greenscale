@@ -60,9 +60,9 @@ public:
 	sf::Vector2f getIconTextureSize();
 
 	int applyDamage(Damage damage);
-	void applyKineticDamage(int kinetic);
-	void applyThermalDamage(int heat);
-	int applyDisruption(float disruption);
+	void applyKineticDamage(int amount);
+	void applyThermalDamage(int amount);
+	int applyDisruption(float amount);
 
 	void increaseHeat(unsigned int amount);
 	void decreaseHeat(unsigned int amount);

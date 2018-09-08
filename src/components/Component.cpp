@@ -152,14 +152,14 @@ int Component::applyDamage(Damage damage) {
 	return applyDisruption(damage.disruption); // The number of turns the component is disabled for after applying disruption is returned when damage is applied.
 }
 
-void Component::applyKineticDamage(int kinetic) {
-	reduceIntegrity(kinetic);
+void Component::applyKineticDamage(int amount) {
+	reduceIntegrity(amount);
 }
-void Component::applyThermalDamage(int heat) {
-	increaseHeat(heat);
+void Component::applyThermalDamage(int amount) {
+	increaseHeat(amount);
 }
-int Component::applyDisruption(float disruption) {
-	if (random.percentageChange(disruption)) {
+int Component::applyDisruption(float amount) {
+	if (random.percentageChange(amount)) {
 		int disableFor = random.integerRange(1, 2);
 		disabledForTurns += disableFor;
 

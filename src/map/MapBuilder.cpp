@@ -28,8 +28,8 @@ MapBuilder::MapBuilder(sf::Vector2f sizeTile, std::vector<Faction> friendlyFacti
 }
 
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators) {
-	auto tiles = makeTileLayer(size, tileSize);
-	auto entities = makeEntityLayer(size, tileSize);
+	auto tiles = makeTileLayer(size);
+	auto entities = makeEntityLayer(size);
 
 	for (auto &generator : generators)
 		generator->generateTiles(tiles);
@@ -45,9 +45,9 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std
 	return map;
 }
 
-std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u size, sf::Vector2f tileSize) {
+std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u size) {
 	return std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
 }
-std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize) {
+std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size) {
 	return std::make_unique<EntityLayer>(size, tileSize, entityBuilder.getFrameSize(), entitiesTexture);
 }

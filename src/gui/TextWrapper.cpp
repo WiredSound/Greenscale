@@ -16,7 +16,7 @@ std::vector<TextLine> TextWrapper::wrapText(std::string text, float maximumWidth
 		auto &line = lines[lines.size() - 1];
 		line.setColour(0, colour);
 
-		std::string text = line.get(0).text;
+		text = line.get(0).text;
 
 		line.setText(0, text + words[wordIndex] + " ");
 

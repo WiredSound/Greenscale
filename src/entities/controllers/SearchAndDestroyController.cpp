@@ -44,11 +44,11 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 	Optional<std::shared_ptr<Entity>> maybeTarget = findMostAppropriateTarget(entity);
 
 	if (maybeTarget) {
-		std::shared_ptr<Entity> targetEntity = *maybeTarget;
+		std::shared_ptr<Entity> target = *maybeTarget;
 
-		DEBUG_LOG(entity->getFullName() << " has identified an appropriate target: " << targetEntity->getFullName());
+		DEBUG_LOG(entity->getFullName() << " has identified an appropriate target: " << target->getFullName());
 
-		unsigned int requiredRange = MovementPath::distanceFromTo(entity->getPosition(), targetEntity->getPosition());
+		unsigned int requiredRange = MovementPath::distanceFromTo(entity->getPosition(), target->getPosition());
 		unsigned int requiredPenetration = 0; // TODO: Calculate the required penetration.
 
 		std::vector<sf::Vector2u> weaponPositions = grid.findWeaponPositions();
@@ -66,7 +66,7 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 				DEBUG_LOG(entity->getFullName() << " has decided to fire weapon " << weapon->getName() << " at target.");
 
 				grid.equipComponent(weaponPosition);
-				entity->useEquippedComponent(entity->buildEquippedComponentPath(targetEntity->getPosition()));
+				entity->useEquippedComponent(entity->buildEquippedComponentPath(target->getPosition()));
 
 				return true;
 			}
@@ -75,13 +75,13 @@ bool SearchAndDestroyController::handle(Entity *entity, Input &input) {
 		// The method returns if a weapon is used so below is only run if no appropriate weapon is found.
 
 		GameMap *map = entity->getMapPtr();
-		sf::Vector2u targetPosition = map->findNearestFreePosition(targetEntity->getPosition());
+		sf::Vector2u targetPosition = map->findNearestFreePosition(target->getPosition());
 
 		MovementPath path = map->pathfinder.buildAStarPath(entity->getPosition(), targetPosition);
 		path.restrictLength(entity->getMovementRange());
 
-		path.recursivelyShortenBasedOn([&path, &targetEntity]() {
-			return MovementPath::distanceFromTo(path.getTargetPosition(), targetEntity->getPosition()) < 3; // TODO: Find best distance to target based upon the range of the shortest weapon.
+		path.recursivelyShortenBasedOn([&path, &target]() {
+			return MovementPath::distanceFromTo(path.getTargetPosition(), target->getPosition()) < 3; // TODO: Find best distance to target based upon the range of the shortest weapon.
 		});
 
 		entity->setMovementPath(path);
@@ -96,7 +96,7 @@ Optional<std::shared_ptr<Entity>> SearchAndDestroyController::findMostAppropriat
 	GameMap *map = entity->getMapPtr();
 
 	Optional<std::shared_ptr<Entity>> bestTarget;
-	unsigned int distanceToBestTarget;
+	unsigned int distanceToBestTarget = 0;
 
 	for (auto &potentialTarget : map->getEntitiesInFaction(targetFaction)) {
 		unsigned int distance = MovementPath::distanceFromTo(entity->getPosition(), potentialTarget->getPosition());

@@ -25,8 +25,8 @@ public:
 	ComponentBuilder componentBuilder;
 
 protected:
-	std::unique_ptr<TileLayer> makeTileLayer(sf::Vector2u size, sf::Vector2f tileSize);
-	std::unique_ptr<EntityLayer> makeEntityLayer(sf::Vector2u size, sf::Vector2f tileSize);
+	std::unique_ptr<TileLayer> makeTileLayer(sf::Vector2u size);
+	std::unique_ptr<EntityLayer> makeEntityLayer(sf::Vector2u size);
 
 private:
 	TileManager tileManager;
