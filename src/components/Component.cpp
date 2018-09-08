@@ -215,8 +215,12 @@ bool Component::isDestroyed() {
 	return integrity <= 0;
 }
 
+bool Component::isForcedDisabled() {
+	return disabledForTurns > 0;
+}
+
 bool Component::isEnabled() {
-	return disabledForTurns <= 0 && manualEnable && !isDestroyed();
+	return manualEnable && isFunctional() && !isForcedDisabled();
 }
 
 /**

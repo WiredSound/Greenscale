@@ -69,6 +69,7 @@ public:
 
 	bool isFunctional();
 	bool isDestroyed();
+	bool isForcedDisabled();
 	bool isEnabled();
 
 	virtual MovementPath buildProjectilePath(sf::Vector2u source, sf::Vector2u target, GameMap *map);

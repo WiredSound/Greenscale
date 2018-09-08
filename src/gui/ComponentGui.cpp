@@ -21,7 +21,10 @@ void ComponentGui::update(Input &input) {
 	if (component) {
 		auto lines = getChild<TextLinesGui>(linesIndex);
 
-		lines->getLine(nameLineIndex).set(0, { component->getName(), sf::Color::White, sf::Text::Style::Underlined | sf::Text::Style::Bold });
+		// If the component is either forcibly disabled or destroyed then its name will appear with a strike through rather than an underline:
+		sf::Uint32 strikethroughOrUnderlined = (component->isForcedDisabled() || component->isDestroyed() ? sf::Text::Style::StrikeThrough : sf::Text::Style::Underlined);
+
+		lines->getLine(nameLineIndex).set(0, { component->getName(), sf::Color::White, strikethroughOrUnderlined | sf::Text::Style::Bold });
 		lines->getLine(nameLineIndex).set(1, { " (integrity: ", sf::Color::White, sf::Text::Style::Regular });
 		lines->getLine(nameLineIndex).set(2, { std::to_string(component->getIntegrity()) + "/" + std::to_string(component->getMaxIntegrity()), okTextColour, sf::Text::Style::Bold });
 		lines->getLine(nameLineIndex).set(3, { " heat: ", sf::Color::White, sf::Text::Style::Regular });
