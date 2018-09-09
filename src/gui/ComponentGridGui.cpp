@@ -64,7 +64,9 @@ void ComponentGridGui::equipGridPosition(sf::Vector2u gridPosition) {
 		getGridBox(grid.getEquippedComponentGridPosition(), grid)->unequip();
 	getGridBox(gridPosition, grid)->equip();
 
+	// Equip and enable specified gird position:
 	grid.equipComponent(gridPosition);
+	grid.getComponentAt(gridPosition)->setManualEnable(true);
 }
 
 void ComponentGridGui::toggleEnableGridPosition(sf::Vector2u gridPosition) {
