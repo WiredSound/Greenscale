@@ -9,6 +9,7 @@
 #include "pathfinding/AStarPathBuilder.h"
 #include "TileLayer.h"
 #include "EntityLayer.h"
+#include "ProjectileLayer.h"
 #include "../entities/Faction.h"
 #include "../projectiles/ProjectileArc.h"
 #include "../Console.h"
@@ -21,16 +22,17 @@ class Robot;
  */
 class GameMap {
 public:
-	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles,
+	GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::unique_ptr<ProjectileLayer> projectileLayer,
 		std::vector<Faction> friendlyFactions, Console &consoleRef);
 
 	void update();
 	void turnPassed();
 	void draw(sf::RenderWindow &window);
+
 	void colourTilePath(MovementPath path, sf::Color colour);
 	void resetColourTilePath(MovementPath path);
 
-	void fireArcs(std::vector<ProjectileArc> arcs);
+	void fireProjectileArcs(std::vector<ProjectileArc> arcs);
 	bool areAllProjectileArcsComplete();
 
 	void construct(); // Goes through each room and rebuilds it.
@@ -75,16 +77,13 @@ public:
 private:
 	std::unique_ptr<TileLayer> tiles;
 	std::unique_ptr<EntityLayer> entities;
+	std::unique_ptr<ProjectileLayer> projectiles;
 
 	std::vector<std::unique_ptr<MapRoom>> rooms; // Obsolete...
 
-	std::vector<ProjectileArc> projectileArcs;
-	std::shared_ptr<sf::Texture> projectilesTexture;
 	sf::Sprite projectileSprite;
 
 	std::vector<Faction> playerFriendlyFactions;
 
 	Console &console;
-
-	void updateProjectiles();
 };

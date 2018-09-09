@@ -8,13 +8,13 @@
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right);
 
 GameMap::GameMap(sf::Vector2u mapSize, sf::Vector2f sizeTile,
-	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::shared_ptr<sf::Texture> textureProjectiles, std::vector<Faction> friendlyFactions, Console &consoleRef)
-	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), pathfinder(*this), projectilesTexture(textureProjectiles), console(consoleRef),
+	std::unique_ptr<TileLayer> tileLayer, std::unique_ptr<EntityLayer> entityLayer, std::unique_ptr<ProjectileLayer> projectileLayer, std::vector<Faction> friendlyFactions, Console &consoleRef)
+	: size(mapSize), tileSize(sizeTile), tiles(std::move(tileLayer)), entities(std::move(entityLayer)), projectiles(std::move(projectileLayer)), pathfinder(*this), console(consoleRef),
 	playerFriendlyFactions(friendlyFactions) {}
 
 void GameMap::update() {
 	entities->update();
-	updateProjectiles();
+	projectiles->update(this);
 }
 
 void GameMap::turnPassed() {
@@ -24,11 +24,7 @@ void GameMap::turnPassed() {
 void GameMap::draw(sf::RenderWindow &window) {
 	window.draw(*tiles);
 	window.draw(*entities);
-
-	if (!areAllProjectileArcsComplete())
-		window.draw(projectileSprite);
-
-	//tiles->resetColouring();
+	window.draw(*projectiles);
 }
 
 /**
@@ -48,50 +44,12 @@ void GameMap::resetColourTilePath(MovementPath path) {
 	tiles->resetColourPath(path);
 }
 
-void GameMap::fireArcs(std::vector<ProjectileArc> arcs) {
-	projectileArcs.insert(projectileArcs.end(), arcs.begin(), arcs.end());
+void GameMap::fireProjectileArcs(std::vector<ProjectileArc> arcs) {
+	projectiles->fireArcs(arcs);
 }
 
 bool GameMap::areAllProjectileArcsComplete() {
-	return projectileArcs.size() == 0;
-}
-
-void GameMap::updateProjectiles() {
-	if (!areAllProjectileArcsComplete()) {
-		ProjectileArc &arc = projectileArcs[0];
-		sf::Vector2u position = arc.getCurrentProjectilePosition();
-
-		const ProjectileVisual &visual = arc.getProjectileVisualInfo();
-		const Animation::Frame &frame = visual.animation->getFrame(arc.getAnimationTime());
-		sf::Vector2f singleProjectileTextureSize = arc.getSingleProjectileTextureSize();
-
-		bool destroyArc = arc.update(this);
-
-		if (arc.reachedTarget() || destroyArc) {
-			Entity *arcUser = arc.getUser();
-			assert(arcUser != nullptr);
-
-			unsigned int tilesHit = arc.getTileHitCount();
-			unsigned int entitiesHit = arc.getEntityHitCount();
-
-			/*
-			console.display({
-				arcUser->getFullName() + " fired a projectile destroying a total of " + std::to_string(tilesHit) + (tilesHit == 1 ? " tile" : " tiles")
-				+ " and hitting " + std::to_string(entitiesHit) + (entitiesHit == 1 ? " entity." : " entities."),
-				isFactionPlayerFriendly(arcUser->getFaction()) ? Console::MessageType::INFO : Console::MessageType::WARNING
-			});
-			*/
-
-			projectileArcs.erase(projectileArcs.begin()); // Remove the projectile arc.
-		}
-		else {
-			projectileSprite.setPosition(sf::Vector2f(position.x * tileSize.x, position.y * tileSize.y));
-			projectileSprite.setScale(sf::Vector2f(2, 2)); // TODO: Properly calculate size of the projectile sprite.
-			projectileSprite.setTexture(*projectilesTexture.get());
-			projectileSprite.setTextureRect(sf::IntRect(frame.textureX * singleProjectileTextureSize.x, frame.textureY * singleProjectileTextureSize.y, singleProjectileTextureSize.x, singleProjectileTextureSize.y));
-			projectileSprite.setColor(arc.getProjectileColour());
-		}
-	}
+	return projectiles->areAllArcsComplete();
 }
 
 void GameMap::construct() {

@@ -30,13 +30,14 @@ MapBuilder::MapBuilder(sf::Vector2f sizeTile, std::vector<Faction> friendlyFacti
 std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std::shared_ptr<Entity>> initialEntities, std::vector<std::shared_ptr<MapGenerator>> generators) {
 	auto tiles = makeTileLayer(size);
 	auto entities = makeEntityLayer(size);
+	auto projectiles = makeProjectileLayer(size);
 
 	for (auto &generator : generators)
 		generator->generateTiles(tiles);
 
 	DEBUG_LOG("Building " << size.x << "x" << size.y << " map with " << tileSize.x << "x" << tileSize.y << " tile size...");
 
-	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), projectilesTexture, playerFriendlyFactions, console);
+	auto map = std::make_unique<GameMap>(size, tileSize, std::move(tiles), std::move(entities), std::move(projectiles), playerFriendlyFactions, console);
 	map->addEntities(initialEntities);
 
 	for (auto &generator : generators)
@@ -45,9 +46,12 @@ std::unique_ptr<GameMap> MapBuilder::buildMap(sf::Vector2u size, std::vector<std
 	return map;
 }
 
-std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u size) {
-	return std::make_unique<TileLayer>(size, tileSize, tilesTexture, tileManager);
+std::unique_ptr<TileLayer> MapBuilder::makeTileLayer(sf::Vector2u layerSize) {
+	return std::make_unique<TileLayer>(layerSize, tileSize, tilesTexture, tileManager);
 }
-std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u size) {
-	return std::make_unique<EntityLayer>(size, tileSize, entityBuilder.getFrameSize(), entitiesTexture);
+std::unique_ptr<EntityLayer> MapBuilder::makeEntityLayer(sf::Vector2u layerSize) {
+	return std::make_unique<EntityLayer>(layerSize, tileSize, entityBuilder.getFrameSize(), entitiesTexture);
+}
+std::unique_ptr<ProjectileLayer> MapBuilder::makeProjectileLayer(sf::Vector2u layerSize) {
+	return std::make_unique<ProjectileLayer>(layerSize, tileSize, tileManager.getSingleTileTextureSize(), projectilesTexture);
 }
