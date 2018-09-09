@@ -1,5 +1,7 @@
 #include "PlayerController.h"
 
+#include "../../gui/GameGui.h"
+
 #define PATH_IN_RANGE_COLOUR sf::Color(0, 255, 0, 255)
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)
 #define ATTACK_PATH_COLOUR sf::Color::Magenta
@@ -12,11 +14,7 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 	sf::Vector2f mousePos = input.getMouseWorldPosition();
 	sf::Vector2u mouseTilePos = map->worldPosToTilePos(mousePos); // Get the map tile that the mouse is currently over.
 
-	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) { // TODO: Load key bindings.
-		moveMode = !moveMode;
-
-		reset(path, entity->getPosition(), map);
-	}
+	if (input.isKeyJustPressed(sf::Keyboard::Key::M)) toggleMoveUseMode(entity);
 
 	if (gui.isMouseOverChildren()) { // Remove any path colouring if the mouse moves over the GUI.
 		map->resetColourTilePath(path);
@@ -62,6 +60,15 @@ bool PlayerController::handle(Entity *entity, Input &input) {
 	}
 
 	return false;
+}
+
+bool PlayerController::isInMoveMode() {
+	return moveMode;
+}
+
+void PlayerController::toggleMoveUseMode(Entity *entity) {
+	moveMode = !moveMode;
+	reset(path, entity->getPosition(), entity->getMapPtr());
 }
 
 void PlayerController::drawMovementPath(MovementPath &drawPath, Entity *entity, GameMap *map) {

@@ -18,8 +18,8 @@ void MainMenuGui::load(sf::Font &font, unsigned int fontSize, sf::Color backgrou
 	};
 
 	addChild(std::make_unique<GuiTextButton>("New Game Button", *this, sf::Vector2f(0.5f, 0.4f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
-		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, playCallback, font, settings.fontSize, "New Game"));
+		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, font, settings.fontSize, "New Game", playCallback));
 
 	addChild(std::make_unique<GuiTextButton>("Exit Button", *this, sf::Vector2f(0.5f, 0.48f), sf::Vector2f(0.15f, 0.05f), sf::Vector2f(0.5f, 0.5f),
-		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, exitCallback, font, settings.fontSize, "Exit"));
+		backgroundColour, hoverBackgroundColour, sf::Color::Blue, borderColour, 3.0f, font, settings.fontSize, "Exit", exitCallback));
 }

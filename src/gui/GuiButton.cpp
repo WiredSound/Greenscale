@@ -11,5 +11,9 @@ void GuiButton::mouseHover(Input &input) {
 
 	GuiWindow::mouseHover(input);
 
-	if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) onClickFunc(input);
+	if (input.isMouseButtonJustPressed(sf::Mouse::Button::Left)) clicked(input);
+}
+
+void GuiButton::clicked(Input &input) {
+	onClickFunc(input);
 }

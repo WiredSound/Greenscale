@@ -2,7 +2,7 @@
 
 GuiTextButton::GuiTextButton(std::string guiName, Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color backgroundColourClick, sf::Color borderColour, float borderThickness,
-	CallbackType onClick, sf::Font &font, unsigned textSize, std::string string)
+	sf::Font &font, unsigned textSize, std::string string, CallbackType onClick)
 	: GuiButton(guiName, parent, position, size, origin, backgroundColour, hoverBackgroundColour, backgroundColourClick, borderColour, borderThickness, onClick)
 {
 	text.setFont(font);

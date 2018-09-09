@@ -23,7 +23,8 @@ public:
 	void draw() override;
 
 private:
-	World world;
+	std::shared_ptr<PlayerController> playerController{ std::make_shared<PlayerController>(gui, console, camera) };
+	World world{ World(camera, playerController, console, sf::Vector2f(32, 32)) };
 	Camera camera;
 	GameGui gui;
 	Console console;

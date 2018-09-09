@@ -1,12 +1,15 @@
 #pragma once
 
 #include "EntityController.h"
-#include "../../gui/GameGui.h"
+class GameGui;
 
 class PlayerController : public EntityController {
 public:
 	PlayerController(GameGui &gameGui, Console &consoleRef, Camera &cameraRef);
 	virtual bool handle(Entity *entity, Input &input) override;
+
+	bool isInMoveMode();
+	void toggleMoveUseMode(Entity *entity);
 
 private:
 	GameGui &gui; // Reference to the game gui so movement/attack paths are not drawn when the mouse is over the gui.
