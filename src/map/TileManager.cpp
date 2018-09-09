@@ -21,7 +21,8 @@ std::pair<IDs::Tiles, const Tile> TileManager::parseJsonManaged(nlohmann::json j
 			JsonHelp::parseColour(json["colour"]),
 			json["blocking"].get<bool>(),
 			json["cover"].get<float>(),
-			json["strength"].get<unsigned int>()
+			json["strength"].get<unsigned int>(),
+			json.value<IDs::Tiles>("replacement on destruction", id)
 		}
 	);
 

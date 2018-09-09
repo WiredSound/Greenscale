@@ -13,4 +13,5 @@ struct Tile {
 	bool blocking; // Whether the tile blocks movement.
 	float cover; // Chance the tile will block an incoming projectile.
 	unsigned int strength; // The amount of damage that needs to be inflicted by a projectile for the tile to break.
+	IDs::Tiles replacementOnDestruction; // The ID of the tile that will replace this one when it is destroyed.
 };

@@ -237,10 +237,12 @@ bool GameMap::enoughPenetrationToDestroyTileAt(sf::Vector2u pos, unsigned int pe
 }
 
 unsigned int GameMap::applyPenetrationToTileAt(sf::Vector2u pos, unsigned int penetration) {
-	auto strength = tiles->getTileAt(pos).strength;
+	auto &tileAt = tiles->getTileAt(pos);
+	auto strength = tileAt.strength;
 
 	if (enoughPenetrationToDestroyTileAt(pos, penetration)) {
-		tiles->setIdAt(pos, IDs::Tiles::NOTHING); // TODO: Replace the tile to something more appropriate.
+		tiles->setIdAt(pos, tileAt.replacementOnDestruction);
+
 		penetration -= strength;
 	}
 
