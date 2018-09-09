@@ -4,7 +4,6 @@
 #include "generators/MapGenerator.h"
 #include "TileManager.h"
 #include "GameMap.h"
-#include "SquareRoom.h"
 #include "../entities/EntityBuilder.h"
 #include "../components/ComponentBuilder.h"
 #include "../entities/controllers/PlayerController.h"

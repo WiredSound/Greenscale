@@ -52,16 +52,6 @@ bool GameMap::areAllProjectileArcsComplete() {
 	return projectiles->areAllArcsComplete();
 }
 
-void GameMap::construct() {
-	for (std::unique_ptr<MapRoom> &room : rooms) {
-		room->build(tiles);
-	}
-}
-
-void GameMap::addRoom(std::unique_ptr<MapRoom> room) {
-	rooms.push_back(std::move(room));
-}
-
 /**
  * Added a new entity to the map and sets said entity's map pointer. An entity's map pointer is not set correctly when added directly to an EntityLayer so always use this method over EntityLayer::addEntity.
  * \param entity The entity to add to the map.

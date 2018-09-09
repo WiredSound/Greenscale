@@ -5,7 +5,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Mouse.hpp>
 #include <SFML/Graphics/Sprite.hpp>
-#include "MapRoom.h"
 #include "pathfinding/AStarPathBuilder.h"
 #include "TileLayer.h"
 #include "EntityLayer.h"
@@ -35,8 +34,6 @@ public:
 	void fireProjectileArcs(std::vector<ProjectileArc> arcs);
 	bool areAllProjectileArcsComplete();
 
-	void construct(); // Goes through each room and rebuilds it.
-	void addRoom(std::unique_ptr<MapRoom> room);
 	bool addEntity(std::shared_ptr<Entity> entity);
 	bool addEntities(std::vector<std::shared_ptr<Entity>> entities);
 	std::vector<std::shared_ptr<Entity>> getEntitesPriorityOrdered();
@@ -78,10 +75,6 @@ private:
 	std::unique_ptr<TileLayer> tiles;
 	std::unique_ptr<EntityLayer> entities;
 	std::unique_ptr<ProjectileLayer> projectiles;
-
-	std::vector<std::unique_ptr<MapRoom>> rooms; // Obsolete...
-
-	sf::Sprite projectileSprite;
 
 	std::vector<Faction> playerFriendlyFactions;
 
