@@ -2,6 +2,9 @@
 
 #include "Gui.h"
 
+/**
+ * The parent GUI element meant to represent the entire window/GUI area.
+ */
 class RootGui : public Gui {
 public:
 	RootGui(std::string name, sf::Vector2f position, sf::Vector2f size);

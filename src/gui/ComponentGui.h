@@ -4,6 +4,9 @@
 #include "ComponentGridGui.h"
 #include "TextLinesGui.h"
 
+/**
+ * Displays the information, such as the description, integrity and heat level, of the component that the mouse last hovered over in ComponentGridGui.
+ */
 class ComponentGui : public GuiWindow {
 public:
 	ComponentGui(Gui &parent, ComponentGridGui &componentGridGui, sf::Font &textFont, unsigned int fontSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,

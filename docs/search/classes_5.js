@@ -6,5 +6,7 @@ var searchData=
   ['gamestate',['GameState',['../class_game_state.html',1,'']]],
   ['gradientterraingenerator',['GradientTerrainGenerator',['../class_gradient_terrain_generator.html',1,'']]],
   ['gui',['Gui',['../class_gui.html',1,'']]],
+  ['guibutton',['GuiButton',['../class_gui_button.html',1,'']]],
+  ['guitextbutton',['GuiTextButton',['../class_gui_text_button.html',1,'']]],
   ['guiwindow',['GuiWindow',['../class_gui_window.html',1,'']]]
 ];

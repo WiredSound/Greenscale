@@ -64,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_input-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Input Class Reference</div>  </div>
@@ -80,8 +81,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae51c109fb03d46a6ce6f4b5c3e4a7355"><td class="memItemLeft" align="right" valign="top"><a id="ae51c109fb03d46a6ce6f4b5c3e4a7355"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>Input</b> (sf::RenderWindow &amp;renderWindow)</td></tr>
 <tr class="separator:ae51c109fb03d46a6ce6f4b5c3e4a7355"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aabefebddb533cd1e64fe5d12730f5b29"><td class="memItemLeft" align="right" valign="top"><a id="aabefebddb533cd1e64fe5d12730f5b29"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
+<tr class="memitem:aabefebddb533cd1e64fe5d12730f5b29"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input.html#aabefebddb533cd1e64fe5d12730f5b29">update</a> ()</td></tr>
 <tr class="separator:aabefebddb533cd1e64fe5d12730f5b29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab88930114816743caf6872cacc60a57c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input.html#ab88930114816743caf6872cacc60a57c">isKeyJustPressed</a> (sf::Keyboard::Key key)</td></tr>
 <tr class="memdesc:ab88930114816743caf6872cacc60a57c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the specified key was pressed in the last frame.  <a href="#ab88930114816743caf6872cacc60a57c">More...</a><br /></td></tr>
@@ -92,6 +92,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></t
 <tr class="memitem:aaf34dcc71ef1f9b76bc525ca338dcb97"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input.html#aaf34dcc71ef1f9b76bc525ca338dcb97">isMouseButtonJustPressed</a> (sf::Mouse::Button button)</td></tr>
 <tr class="memdesc:aaf34dcc71ef1f9b76bc525ca338dcb97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the specified mouse button was pressed in the last frame.  <a href="#aaf34dcc71ef1f9b76bc525ca338dcb97">More...</a><br /></td></tr>
 <tr class="separator:aaf34dcc71ef1f9b76bc525ca338dcb97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab376c40e7f2747e08d0364074613655d"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input.html#ab376c40e7f2747e08d0364074613655d">isMouseButtonHeld</a> (sf::Mouse::Button button)</td></tr>
+<tr class="memdesc:ab376c40e7f2747e08d0364074613655d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check whether the specified mouse button is being held down.  <a href="#ab376c40e7f2747e08d0364074613655d">More...</a><br /></td></tr>
+<tr class="separator:ab376c40e7f2747e08d0364074613655d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af92d0013fd9e6e1a926e11b4c8542492"><td class="memItemLeft" align="right" valign="top"><a id="af92d0013fd9e6e1a926e11b4c8542492"></a>
 const std::vector&lt; sf::Mouse::Button &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>getMouseButtonsJustPressed</b> ()</td></tr>
 <tr class="separator:af92d0013fd9e6e1a926e11b4c8542492"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,6 +107,13 @@ const std::vector&lt; sf::Event &gt; &amp;&#160;</td><td class="memItemRight" va
 <tr class="memitem:a5c04a0cd944fa5f7ff0f06c5e4a53e8c"><td class="memItemLeft" align="right" valign="top">sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_input.html#a5c04a0cd944fa5f7ff0f06c5e4a53e8c">getMouseWorldPosition</a> ()</td></tr>
 <tr class="memdesc:a5c04a0cd944fa5f7ff0f06c5e4a53e8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the mouse position but as coordinates within world space rather than its position on the window.  <a href="#a5c04a0cd944fa5f7ff0f06c5e4a53e8c">More...</a><br /></td></tr>
 <tr class="separator:a5c04a0cd944fa5f7ff0f06c5e4a53e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:adfbd0acdca8ab1a74417faf463db02f4"><td class="memTemplParams" colspan="2"><a id="adfbd0acdca8ab1a74417faf463db02f4"></a>
+template&lt;typename T &gt; </td></tr>
+<tr class="memitem:adfbd0acdca8ab1a74417faf463db02f4"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><b>contains</b> (std::vector&lt; T &gt; vector, T value)</td></tr>
+<tr class="separator:adfbd0acdca8ab1a74417faf463db02f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>This class makes it simpler to know which keys and mouse buttons are held and which have been immediately just pressed in addition to event handling. </p>
@@ -203,6 +213,33 @@ const std::vector&lt; sf::Event &gt; &amp;&#160;</td><td class="memItemRight" va
 
 </div>
 </div>
+<a id="ab376c40e7f2747e08d0364074613655d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab376c40e7f2747e08d0364074613655d">&#9670;&nbsp;</a></span>isMouseButtonHeld()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Input::isMouseButtonHeld </td>
+          <td>(</td>
+          <td class="paramtype">sf::Mouse::Button&#160;</td>
+          <td class="paramname"><em>button</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check whether the specified mouse button is being held down. </p>
+<p>Will continuely output <code>true</code> until the mouse button is released. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">key</td><td>The mouse button to test for. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether the mouse button is being held. </dd></dl>
+
+</div>
+</div>
 <a id="aaf34dcc71ef1f9b76bc525ca338dcb97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aaf34dcc71ef1f9b76bc525ca338dcb97">&#9670;&nbsp;</a></span>isMouseButtonJustPressed()</h2>
 
@@ -227,6 +264,24 @@ const std::vector&lt; sf::Event &gt; &amp;&#160;</td><td class="memItemRight" va
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Whether the mouse button was indeed pressed or not. </dd></dl>
+
+</div>
+</div>
+<a id="aabefebddb533cd1e64fe5d12730f5b29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabefebddb533cd1e64fe5d12730f5b29">&#9670;&nbsp;</a></span>update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Input::update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="section return"><dt>Returns</dt><dd>Returns true if the close event is triggered. </dd></dl>
 
 </div>
 </div>

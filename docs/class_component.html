@@ -192,15 +192,15 @@ sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getIconTextur
 <tr class="memitem:a938e4663e7c65b9187b3483a6505bca6"><td class="memItemLeft" align="right" valign="top"><a id="a938e4663e7c65b9187b3483a6505bca6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>applyDamage</b> (<a class="el" href="struct_damage.html">Damage</a> damage)</td></tr>
 <tr class="separator:a938e4663e7c65b9187b3483a6505bca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4da17c32308e5681fcdf0863a760d73c"><td class="memItemLeft" align="right" valign="top"><a id="a4da17c32308e5681fcdf0863a760d73c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyKineticDamage</b> (int kinetic)</td></tr>
-<tr class="separator:a4da17c32308e5681fcdf0863a760d73c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac2e1c8dc537182494ad9a63c6ed5320c"><td class="memItemLeft" align="right" valign="top"><a id="ac2e1c8dc537182494ad9a63c6ed5320c"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>applyThermalDamage</b> (int heat)</td></tr>
-<tr class="separator:ac2e1c8dc537182494ad9a63c6ed5320c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7be8094bae07b0fac6de7e5d17d78007"><td class="memItemLeft" align="right" valign="top"><a id="a7be8094bae07b0fac6de7e5d17d78007"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>applyDisruption</b> (float disruption)</td></tr>
-<tr class="separator:a7be8094bae07b0fac6de7e5d17d78007"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c7bc4d371ec5a1fd9d3c50b78a129fc"><td class="memItemLeft" align="right" valign="top"><a id="a0c7bc4d371ec5a1fd9d3c50b78a129fc"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>applyKineticDamage</b> (int amount)</td></tr>
+<tr class="separator:a0c7bc4d371ec5a1fd9d3c50b78a129fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb0a7017fc3fa4bec453d8caada67841"><td class="memItemLeft" align="right" valign="top"><a id="adb0a7017fc3fa4bec453d8caada67841"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>applyThermalDamage</b> (int amount)</td></tr>
+<tr class="separator:adb0a7017fc3fa4bec453d8caada67841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f8f20fa91f16625447e190b5890aa72"><td class="memItemLeft" align="right" valign="top"><a id="a7f8f20fa91f16625447e190b5890aa72"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>applyDisruption</b> (float amount)</td></tr>
+<tr class="separator:a7f8f20fa91f16625447e190b5890aa72"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a09bec2917eaf426166644f1b530f118a"><td class="memItemLeft" align="right" valign="top"><a id="a09bec2917eaf426166644f1b530f118a"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>increaseHeat</b> (unsigned int amount)</td></tr>
 <tr class="separator:a09bec2917eaf426166644f1b530f118a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -213,6 +213,9 @@ bool&#160;</td><td class="memItemRight" valign="bottom"><b>isFunctional</b> ()</
 <tr class="memitem:a7b1358681145ddebfe3fa680a716cc80"><td class="memItemLeft" align="right" valign="top"><a id="a7b1358681145ddebfe3fa680a716cc80"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isDestroyed</b> ()</td></tr>
 <tr class="separator:a7b1358681145ddebfe3fa680a716cc80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afeb20ff6ce552853c80b7fc5b9e287a0"><td class="memItemLeft" align="right" valign="top"><a id="afeb20ff6ce552853c80b7fc5b9e287a0"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>isForcedDisabled</b> ()</td></tr>
+<tr class="separator:afeb20ff6ce552853c80b7fc5b9e287a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa22ebfe0829ab3f1609fd139ddd0ff54"><td class="memItemLeft" align="right" valign="top"><a id="aa22ebfe0829ab3f1609fd139ddd0ff54"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>isEnabled</b> ()</td></tr>
 <tr class="separator:aa22ebfe0829ab3f1609fd139ddd0ff54"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -313,7 +316,7 @@ static <a class="el" href="class_random.html">Random</a>&#160;</td><td class="me
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Components function in the game as the equippable items used to customise the functionality of entities. </p>
-<p>Components can perform actions or modify stats on a per-turn basis as well as when they are used. There are also various upgrades that can be added to modify the effects and stats of components (see <a class="el" href="struct_component_upgrade.html">ComponentUpgrade</a>). The base stats of each component are defined in a JSON file and stored in the component manager as <a class="el" href="struct_component_info.html">ComponentInfo</a> structs. One of the more vital elements of these structs is their <code>std::string value</code> member which determines which <a class="el" href="class_component.html" title="Components function in the game as the equippable items used to customise the functionality of entiti...">Component</a> subclass that component is designed to be initialised as. Components are meant to bearranged inside a <a class="el" href="class_component_grid.html">ComponentGrid</a> which, based on how they are positioned, dictates the spread of heat and disruption between components. </p>
+<p>Components can perform actions or modify stats on a per-turn basis as well as when they are used. There are also various upgrades that can be added to modify the effects and stats of components (see <a class="el" href="struct_component_upgrade.html">ComponentUpgrade</a>). The base stats of each component are defined in a JSON file and stored in the component manager as <a class="el" href="struct_component_info.html">ComponentInfo</a> structs. One of the more vital elements of these structs is their <code>std::string value</code> member which determines which <a class="el" href="class_component.html" title="Components function in the game as the equippable items used to customise the functionality of entiti...">Component</a> subclass that component is designed to be initialised as. Components are meant to bearranged inside a <a class="el" href="class_component_grid.html" title="All of an entity&#39;s components are arranged with a component grid. ">ComponentGrid</a> which, based on how they are positioned, dictates the spread of heat and disruption between components. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a70301445e9e9f58fbb6e6659c6a0bbba"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a70301445e9e9f58fbb6e6659c6a0bbba">&#9670;&nbsp;</a></span>buildProjectilePath()</h2>

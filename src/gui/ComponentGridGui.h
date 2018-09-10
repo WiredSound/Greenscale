@@ -3,6 +3,10 @@
 #include "ComponentGridGuiBox.h"
 #include "../TurnManager.h"
 
+/**
+ * Handles the GUI that represents the ComponentGrid of the entity who's turn it currently is.
+ * This GUI allows for components to enabled and disabled, equipped and reorganised.
+ */
 class ComponentGridGui : public GuiWindow {
 public:
 	ComponentGridGui(Gui &parent, TurnManager &manager, std::shared_ptr<sf::Texture> texture, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,

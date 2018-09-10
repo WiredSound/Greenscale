@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['positionfromparent',['positionFromParent',['../class_child_gui.html#a8d67a60a574b59c89f8f9d649b7a951f',1,'ChildGui']]]
+  ['origin',['origin',['../class_child_gui.html#a7eb4e042b3f7537f68b2d74b568ce41b',1,'ChildGui']]]
 ];

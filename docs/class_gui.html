@@ -85,17 +85,21 @@ $(function() {
  <div class="center">
   <img src="class_gui.png" usemap="#Gui_map" alt=""/>
   <map id="Gui_map" name="Gui_map">
-<area href="class_child_gui.html" alt="ChildGui" shape="rect" coords="447,112,586,136"/>
-<area href="class_root_gui.html" alt="RootGui" shape="rect" coords="670,112,809,136"/>
-<area href="class_gui_window.html" alt="GuiWindow" shape="rect" coords="372,168,511,192"/>
-<area href="class_text_lines_gui.html" alt="TextLinesGui" shape="rect" coords="521,168,660,192"/>
-<area href="class_game_gui.html" alt="GameGui" shape="rect" coords="670,168,809,192"/>
-<area href="class_component_grid_gui.html" alt="ComponentGridGui" shape="rect" coords="0,224,139,248"/>
+<area href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. " alt="ChildGui" shape="rect" coords="521,112,660,136"/>
+<area href="class_root_gui.html" title="The parent GUI element meant to represent the entire window/GUI area. " alt="RootGui" shape="rect" coords="819,112,958,136"/>
+<area href="class_gui_window.html" alt="GuiWindow" shape="rect" coords="447,168,586,192"/>
+<area href="class_text_lines_gui.html" alt="TextLinesGui" shape="rect" coords="596,168,735,192"/>
+<area href="class_game_gui.html" alt="GameGui" shape="rect" coords="745,168,884,192"/>
+<area href="class_main_menu_gui.html" alt="MainMenuGui" shape="rect" coords="894,168,1033,192"/>
+<area href="class_component_grid_gui.html" title="Handles the GUI that represents the ComponentGrid of the entity who&#39;s turn it currently is..." alt="ComponentGridGui" shape="rect" coords="0,224,139,248"/>
 <area href="class_component_grid_gui_box.html" alt="ComponentGridGuiBox" shape="rect" coords="149,224,288,248"/>
-<area href="class_component_gui.html" alt="ComponentGui" shape="rect" coords="298,224,437,248"/>
+<area href="class_component_gui.html" title="Displays the information, such as the description, integrity and heat level, of the component that th..." alt="ComponentGui" shape="rect" coords="298,224,437,248"/>
 <area href="class_console_gui.html" alt="ConsoleGui" shape="rect" coords="447,224,586,248"/>
 <area href="class_entity_gui.html" alt="EntityGui" shape="rect" coords="596,224,735,248"/>
 <area href="class_entity_list_gui.html" alt="EntityListGui" shape="rect" coords="745,224,884,248"/>
+<area href="class_gui_button.html" alt="GuiButton" shape="rect" coords="894,224,1033,248"/>
+<area href="class_gui_text_button.html" alt="GuiTextButton" shape="rect" coords="894,280,1033,304"/>
+<area href="class_move_use_mode_gui.html" alt="MoveUseModeGui" shape="rect" coords="894,336,1033,360"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -116,12 +120,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateChildren</b> (<
 <tr class="memitem:abec2acc14eaba7b634925e2a10b76e46"><td class="memItemLeft" align="right" valign="top"><a id="abec2acc14eaba7b634925e2a10b76e46"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>drawChildren</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
 <tr class="separator:abec2acc14eaba7b634925e2a10b76e46"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae77464bbe15b14b5e7b9dbcc6da60559"><td class="memItemLeft" align="right" valign="top"><a id="ae77464bbe15b14b5e7b9dbcc6da60559"></a>
-virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsolutePosition</b> ()=0</td></tr>
-<tr class="separator:ae77464bbe15b14b5e7b9dbcc6da60559"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2e8ce22f095165996918766dd9e5c09a"><td class="memItemLeft" align="right" valign="top"><a id="a2e8ce22f095165996918766dd9e5c09a"></a>
-virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteSize</b> ()=0</td></tr>
-<tr class="separator:a2e8ce22f095165996918766dd9e5c09a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af05202f127cdb06c06d205bfff9ba14e"><td class="memItemLeft" align="right" valign="top"><a id="af05202f127cdb06c06d205bfff9ba14e"></a>
+virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsolutePosition</b> () const =0</td></tr>
+<tr class="separator:af05202f127cdb06c06d205bfff9ba14e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a786cedb6d434dccdac6af153aa963eb1"><td class="memItemLeft" align="right" valign="top"><a id="a786cedb6d434dccdac6af153aa963eb1"></a>
+virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteSize</b> () const =0</td></tr>
+<tr class="separator:a786cedb6d434dccdac6af153aa963eb1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc15f6a0caab241c57a1fabc783340a"><td class="memItemLeft" align="right" valign="top"><a id="abfc15f6a0caab241c57a1fabc783340a"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteCentre</b> () const</td></tr>
+<tr class="separator:abfc15f6a0caab241c57a1fabc783340a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a221eeb0954f9740af5885600d89c22e1"><td class="memItemLeft" align="right" valign="top"><a id="a221eeb0954f9740af5885600d89c22e1"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseHover</b> (<a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
 <tr class="separator:a221eeb0954f9740af5885600d89c22e1"><td class="memSeparator" colspan="2">&#160;</td></tr>

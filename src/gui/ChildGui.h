@@ -4,7 +4,7 @@
 #include "Gui.h"
 
 /**
- *
+ * A GUI element that is a child of either a RootGui or another ChildGui instance.
  */
 class ChildGui : public Gui {
 public:

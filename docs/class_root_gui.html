@@ -70,6 +70,11 @@ $(function() {
 <div class="title">RootGui Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The parent GUI element meant to represent the entire window/GUI area.  
+ <a href="class_root_gui.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_root_gui_8h_source.html">RootGui.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for RootGui:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -79,7 +84,8 @@ $(function() {
   <img src="class_root_gui.png" usemap="#RootGui_map" alt=""/>
   <map id="RootGui_map" name="RootGui_map">
 <area href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw..." alt="Gui" shape="rect" coords="51,56,144,80"/>
-<area href="class_game_gui.html" alt="GameGui" shape="rect" coords="51,168,144,192"/>
+<area href="class_game_gui.html" alt="GameGui" shape="rect" coords="0,168,93,192"/>
+<area href="class_main_menu_gui.html" alt="MainMenuGui" shape="rect" coords="103,168,196,192"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -88,12 +94,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a25d48c9eb5a7b00cb5631888e7c489b5"><td class="memItemLeft" align="right" valign="top"><a id="a25d48c9eb5a7b00cb5631888e7c489b5"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>RootGui</b> (std::string name, sf::Vector2f position, sf::Vector2f size)</td></tr>
 <tr class="separator:a25d48c9eb5a7b00cb5631888e7c489b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9bbd770646b020a54a716f1bba1ee4e6"><td class="memItemLeft" align="right" valign="top"><a id="a9bbd770646b020a54a716f1bba1ee4e6"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsolutePosition</b> () override</td></tr>
-<tr class="separator:a9bbd770646b020a54a716f1bba1ee4e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8fa840ad79fa388e787868b3ce979b5"><td class="memItemLeft" align="right" valign="top"><a id="af8fa840ad79fa388e787868b3ce979b5"></a>
-sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteSize</b> () override</td></tr>
-<tr class="separator:af8fa840ad79fa388e787868b3ce979b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d1fd52b2526668e3f486a0a179045ea"><td class="memItemLeft" align="right" valign="top"><a id="a2d1fd52b2526668e3f486a0a179045ea"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsolutePosition</b> () const override</td></tr>
+<tr class="separator:a2d1fd52b2526668e3f486a0a179045ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aecd9b8198b82dfdc7d395bf5e14042b9"><td class="memItemLeft" align="right" valign="top"><a id="aecd9b8198b82dfdc7d395bf5e14042b9"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteSize</b> () const override</td></tr>
+<tr class="separator:aecd9b8198b82dfdc7d395bf5e14042b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0cc654c654956f16029e5ec98b51b0e2"><td class="memItemLeft" align="right" valign="top"><a id="a0cc654c654956f16029e5ec98b51b0e2"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>getAspectRatio</b> ()</td></tr>
 <tr class="separator:a0cc654c654956f16029e5ec98b51b0e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -116,6 +122,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateChildren</b> (<
 <tr class="memitem:abec2acc14eaba7b634925e2a10b76e46 inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="abec2acc14eaba7b634925e2a10b76e46"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>drawChildren</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
 <tr class="separator:abec2acc14eaba7b634925e2a10b76e46 inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc15f6a0caab241c57a1fabc783340a inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="abfc15f6a0caab241c57a1fabc783340a"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteCentre</b> () const</td></tr>
+<tr class="separator:abfc15f6a0caab241c57a1fabc783340a inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a221eeb0954f9740af5885600d89c22e1 inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="a221eeb0954f9740af5885600d89c22e1"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseHover</b> (<a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
 <tr class="separator:a221eeb0954f9740af5885600d89c22e1 inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -169,7 +178,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyAllChildren</b
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChild</b> (std::unique_ptr&lt; <a class="el" href="class_gui.html">Gui</a> &gt; &amp;child, <a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
 <tr class="separator:abfd56f4df995303924359e9bc3806343 inherit pro_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The parent GUI element meant to represent the entire window/GUI area. </p>
+</div><hr/>The documentation for this class was generated from the following files:<ul>
 <li>src/gui/<a class="el" href="_root_gui_8h_source.html">RootGui.h</a></li>
 <li>src/gui/RootGui.cpp</li>
 </ul>

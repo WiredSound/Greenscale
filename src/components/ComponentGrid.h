@@ -6,6 +6,11 @@
 #include "PowerPool.h"
 #include "../Optional.h"
 
+/**
+ * All of an entity's components are arranged with a component grid.
+ * The positioning of these components within the grid will affect the transfer of power, heat and disruption between components. A component grid also allows a component to be equipped and then used
+ * within the context of a given game map and entity.
+ */
 class ComponentGrid {
 public:
 	ComponentGrid(sf::Vector2u size);

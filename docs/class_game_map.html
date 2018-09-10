@@ -78,9 +78,9 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad8d946afbb5c7fad504c30f60e6e1880"><td class="memItemLeft" align="right" valign="top"><a id="ad8d946afbb5c7fad504c30f60e6e1880"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>GameMap</b> (sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr&lt; <a class="el" href="class_tile_layer.html">TileLayer</a> &gt; tileLayer, std::unique_ptr&lt; <a class="el" href="class_entity_layer.html">EntityLayer</a> &gt; entityLayer, std::shared_ptr&lt; sf::Texture &gt; textureProjectiles, std::vector&lt; <a class="el" href="class_faction.html">Faction</a> &gt; friendlyFactions, <a class="el" href="class_console.html">Console</a> &amp;consoleRef)</td></tr>
-<tr class="separator:ad8d946afbb5c7fad504c30f60e6e1880"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a905819ed322e6884783c9eb77a430fec"><td class="memItemLeft" align="right" valign="top"><a id="a905819ed322e6884783c9eb77a430fec"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>GameMap</b> (sf::Vector2u mapSize, sf::Vector2f sizeTile, std::unique_ptr&lt; <a class="el" href="class_tile_layer.html">TileLayer</a> &gt; tileLayer, std::unique_ptr&lt; <a class="el" href="class_entity_layer.html">EntityLayer</a> &gt; entityLayer, std::unique_ptr&lt; <a class="el" href="class_projectile_layer.html">ProjectileLayer</a> &gt; projectileLayer, std::vector&lt; <a class="el" href="class_faction.html">Faction</a> &gt; friendlyFactions, <a class="el" href="class_console.html">Console</a> &amp;consoleRef)</td></tr>
+<tr class="separator:a905819ed322e6884783c9eb77a430fec"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6497b5f848c5ac2945c0beabb896bead"><td class="memItemLeft" align="right" valign="top"><a id="a6497b5f848c5ac2945c0beabb896bead"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> ()</td></tr>
 <tr class="separator:a6497b5f848c5ac2945c0beabb896bead"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,18 +96,12 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>draw</b> (sf::RenderW
 <tr class="memitem:a336cb6e0f8f40f511c01d1b04135792e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a336cb6e0f8f40f511c01d1b04135792e">resetColourTilePath</a> (<a class="el" href="class_movement_path.html">MovementPath</a> path)</td></tr>
 <tr class="memdesc:a336cb6e0f8f40f511c01d1b04135792e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the colour of all the tiles in the given movement path to their default colours.  <a href="#a336cb6e0f8f40f511c01d1b04135792e">More...</a><br /></td></tr>
 <tr class="separator:a336cb6e0f8f40f511c01d1b04135792e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6f61b92319b52485ecfcb1a8cd668bbf"><td class="memItemLeft" align="right" valign="top"><a id="a6f61b92319b52485ecfcb1a8cd668bbf"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>fireArcs</b> (std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt; arcs)</td></tr>
-<tr class="separator:a6f61b92319b52485ecfcb1a8cd668bbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ba6cced8787086b1b418dd73d8f2229"><td class="memItemLeft" align="right" valign="top"><a id="a3ba6cced8787086b1b418dd73d8f2229"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>fireProjectileArcs</b> (std::vector&lt; <a class="el" href="class_projectile_arc.html">ProjectileArc</a> &gt; arcs)</td></tr>
+<tr class="separator:a3ba6cced8787086b1b418dd73d8f2229"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a926fd4b8a1ed6073364c7955afae81e5"><td class="memItemLeft" align="right" valign="top"><a id="a926fd4b8a1ed6073364c7955afae81e5"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>areAllProjectileArcsComplete</b> ()</td></tr>
 <tr class="separator:a926fd4b8a1ed6073364c7955afae81e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a13a752d019c2442382daf96d9e6d5965"><td class="memItemLeft" align="right" valign="top"><a id="a13a752d019c2442382daf96d9e6d5965"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>construct</b> ()</td></tr>
-<tr class="separator:a13a752d019c2442382daf96d9e6d5965"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af9779dff312445a1d4124b9c9255465e"><td class="memItemLeft" align="right" valign="top"><a id="af9779dff312445a1d4124b9c9255465e"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addRoom</b> (std::unique_ptr&lt; <a class="el" href="class_map_room.html">MapRoom</a> &gt; room)</td></tr>
-<tr class="separator:af9779dff312445a1d4124b9c9255465e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_map.html#a2a0f038c0b75b042882bee12f2ec5fc9">addEntity</a> (std::shared_ptr&lt; <a class="el" href="class_entity.html">Entity</a> &gt; entity)</td></tr>
 <tr class="memdesc:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Added a new entity to the map and sets said entity's map pointer.  <a href="#a2a0f038c0b75b042882bee12f2ec5fc9">More...</a><br /></td></tr>
 <tr class="separator:a2a0f038c0b75b042882bee12f2ec5fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>

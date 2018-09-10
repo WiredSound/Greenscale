@@ -1,6 +1,6 @@
 #include "ComponentGrid.h"
 
-// This is another cryptically named macro that is similar to the one found in the Component.cpp file.
+// TODO: Replace the below monstrosity...
 // It's purpose is to make the creation of methods like findWeaponPositions, findActiveCoolerPositions, etc. require less boilerplate code.
 #define GET_COMPONENT_POSITIONS_WHERE(methodName, fromComponentsPosition)					\
 	std::vector<sf::Vector2u> positions;													\
@@ -74,6 +74,9 @@ void ComponentGrid::resize(sf::Vector2u size) {
 	gridSize = size;
 }
 
+/**
+ * Fetch the sum of the integrity values of every component in this grid.
+ */
 unsigned int ComponentGrid::getCurrentIntegrity() {
 	unsigned int integrity = 0;
 
@@ -84,6 +87,9 @@ unsigned int ComponentGrid::getCurrentIntegrity() {
 	return integrity;
 }
 
+/**
+ * Fetch the sum of the maximum integrity values of every component in this grid.
+ */
 unsigned int ComponentGrid::getMaxIntegrity() {
 	unsigned int maxIntegrity = 0;
 
@@ -93,6 +99,9 @@ unsigned int ComponentGrid::getMaxIntegrity() {
 	return maxIntegrity;
 }
 
+/**
+ * Calls PowerPool::getPowerLevel of this grid's power pool.
+ */
 unsigned int ComponentGrid::getPowerStored() {
 	return power.getPowerLevel();
 }
@@ -143,10 +152,20 @@ void ComponentGrid::swapPositions(sf::Vector2u firstPos, sf::Vector2u secondPos)
 	std::iter_swap(components.begin() + getIndex(firstPos), components.begin() + getIndex(secondPos)); // TODO: Add checks to ensure that both positions are within bounds.
 }
 
+/**
+ * Uses the specified component. See ComponentGrid::use(sf::Vector2u, Entity&, MovementPath, Console&) for more details.
+ */
 std::vector<ProjectileArc> ComponentGrid::use(Optional<Component> &component, Entity &user, MovementPath path, Console &console) {
 	return component->use(user, path, power, console);
 }
 
+/**
+ * Uses the component at the given grid position.
+ * \param position The position within the grid of the component to use.
+ * \param user The user of the component (should be the entity that owns this component grid).
+ * \param path The path along which this component should be used.
+ * \return A std::vector of ProjectileArc instances representing any projectiles that the use of the given component may result in.
+ */
 std::vector<ProjectileArc> ComponentGrid::use(sf::Vector2u position, Entity &user, MovementPath path, Console &console) {
 	auto &component = getComponentAt(position);
 

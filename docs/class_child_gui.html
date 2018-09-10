@@ -70,6 +70,11 @@ $(function() {
 <div class="title">ChildGui Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A GUI element that is a child of either a <a class="el" href="class_root_gui.html" title="The parent GUI element meant to represent the entire window/GUI area. ">RootGui</a> or another <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> instance.  
+ <a href="class_child_gui.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_child_gui_8h_source.html">ChildGui.h</a>&gt;</code></p>
 <div id="dynsection-0" onclick="return toggleVisibility(this)" class="dynheader closed" style="cursor:pointer;">
   <img id="dynsection-0-trigger" src="closed.png" alt="+"/> Inheritance diagram for ChildGui:</div>
 <div id="dynsection-0-summary" class="dynsummary" style="display:block;">
@@ -78,15 +83,18 @@ $(function() {
  <div class="center">
   <img src="class_child_gui.png" usemap="#ChildGui_map" alt=""/>
   <map id="ChildGui_map" name="ChildGui_map">
-<area href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw..." alt="Gui" shape="rect" coords="447,56,586,80"/>
-<area href="class_gui_window.html" alt="GuiWindow" shape="rect" coords="372,168,511,192"/>
-<area href="class_text_lines_gui.html" alt="TextLinesGui" shape="rect" coords="521,168,660,192"/>
-<area href="class_component_grid_gui.html" alt="ComponentGridGui" shape="rect" coords="0,224,139,248"/>
+<area href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw..." alt="Gui" shape="rect" coords="521,56,660,80"/>
+<area href="class_gui_window.html" alt="GuiWindow" shape="rect" coords="447,168,586,192"/>
+<area href="class_text_lines_gui.html" alt="TextLinesGui" shape="rect" coords="596,168,735,192"/>
+<area href="class_component_grid_gui.html" title="Handles the GUI that represents the ComponentGrid of the entity who&#39;s turn it currently is..." alt="ComponentGridGui" shape="rect" coords="0,224,139,248"/>
 <area href="class_component_grid_gui_box.html" alt="ComponentGridGuiBox" shape="rect" coords="149,224,288,248"/>
-<area href="class_component_gui.html" alt="ComponentGui" shape="rect" coords="298,224,437,248"/>
+<area href="class_component_gui.html" title="Displays the information, such as the description, integrity and heat level, of the component that th..." alt="ComponentGui" shape="rect" coords="298,224,437,248"/>
 <area href="class_console_gui.html" alt="ConsoleGui" shape="rect" coords="447,224,586,248"/>
 <area href="class_entity_gui.html" alt="EntityGui" shape="rect" coords="596,224,735,248"/>
 <area href="class_entity_list_gui.html" alt="EntityListGui" shape="rect" coords="745,224,884,248"/>
+<area href="class_gui_button.html" alt="GuiButton" shape="rect" coords="894,224,1033,248"/>
+<area href="class_gui_text_button.html" alt="GuiTextButton" shape="rect" coords="894,280,1033,304"/>
+<area href="class_move_use_mode_gui.html" alt="MoveUseModeGui" shape="rect" coords="894,336,1033,360"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -95,12 +103,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab2459543e4ad9ee836df28ce8df80773"><td class="memItemLeft" align="right" valign="top"><a id="ab2459543e4ad9ee836df28ce8df80773"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>ChildGui</b> (std::string name, <a class="el" href="class_gui.html">Gui</a> &amp;guiParent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f guiOrigin)</td></tr>
 <tr class="separator:ab2459543e4ad9ee836df28ce8df80773"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af54992677536a3472d0a3cfaa6c8d4cc"><td class="memItemLeft" align="right" valign="top">virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_child_gui.html#af54992677536a3472d0a3cfaa6c8d4cc">getAbsolutePosition</a> () override</td></tr>
-<tr class="memdesc:af54992677536a3472d0a3cfaa6c8d4cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of a <a class="el" href="class_child_gui.html">ChildGui</a> element is calculated based on the absolute position of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element multiplied by the <code>positionFromParent</code> field.  <a href="#af54992677536a3472d0a3cfaa6c8d4cc">More...</a><br /></td></tr>
-<tr class="separator:af54992677536a3472d0a3cfaa6c8d4cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8475c692bd0bfeeaa05eea1408c49149"><td class="memItemLeft" align="right" valign="top">virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_child_gui.html#a8475c692bd0bfeeaa05eea1408c49149">getAbsoluteSize</a> () override</td></tr>
-<tr class="memdesc:a8475c692bd0bfeeaa05eea1408c49149"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of a <a class="el" href="class_child_gui.html">ChildGui</a> element is expressed as a fraction of the absolute size of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element.  <a href="#a8475c692bd0bfeeaa05eea1408c49149">More...</a><br /></td></tr>
-<tr class="separator:a8475c692bd0bfeeaa05eea1408c49149"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae0867f985d3e30bd568e093c6c042e2b"><td class="memItemLeft" align="right" valign="top">virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_child_gui.html#ae0867f985d3e30bd568e093c6c042e2b">getAbsolutePosition</a> () const override</td></tr>
+<tr class="memdesc:ae0867f985d3e30bd568e093c6c042e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The position of a <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> element is calculated based on the absolute position of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element multiplied by the <code>positionFromParent</code> field.  <a href="#ae0867f985d3e30bd568e093c6c042e2b">More...</a><br /></td></tr>
+<tr class="separator:ae0867f985d3e30bd568e093c6c042e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7982d5d3601b98b0fa42158895ee4a86"><td class="memItemLeft" align="right" valign="top">virtual sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_child_gui.html#a7982d5d3601b98b0fa42158895ee4a86">getAbsoluteSize</a> () const override</td></tr>
+<tr class="memdesc:a7982d5d3601b98b0fa42158895ee4a86"><td class="mdescLeft">&#160;</td><td class="mdescRight">The size of a <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> element is expressed as a fraction of the absolute size of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element.  <a href="#a7982d5d3601b98b0fa42158895ee4a86">More...</a><br /></td></tr>
+<tr class="separator:a7982d5d3601b98b0fa42158895ee4a86"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ff3868b998398723af1f9b197325b2c"><td class="memItemLeft" align="right" valign="top"><a id="a4ff3868b998398723af1f9b197325b2c"></a>
 sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>absoluteSizeToRelative</b> (sf::Vector2f absoluteSize)</td></tr>
 <tr class="separator:a4ff3868b998398723af1f9b197325b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +128,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>updateChildren</b> (<
 <tr class="memitem:abec2acc14eaba7b634925e2a10b76e46 inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="abec2acc14eaba7b634925e2a10b76e46"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>drawChildren</b> (sf::RenderTarget &amp;target, sf::RenderStates states) const</td></tr>
 <tr class="separator:abec2acc14eaba7b634925e2a10b76e46 inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfc15f6a0caab241c57a1fabc783340a inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="abfc15f6a0caab241c57a1fabc783340a"></a>
+sf::Vector2f&#160;</td><td class="memItemRight" valign="bottom"><b>getAbsoluteCentre</b> () const</td></tr>
+<tr class="separator:abfc15f6a0caab241c57a1fabc783340a inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a221eeb0954f9740af5885600d89c22e1 inherit pub_methods_class_gui"><td class="memItemLeft" align="right" valign="top"><a id="a221eeb0954f9740af5885600d89c22e1"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseHover</b> (<a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
 <tr class="separator:a221eeb0954f9740af5885600d89c22e1 inherit pub_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -180,9 +191,11 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>destroyAllChildren</b
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChild</b> (std::unique_ptr&lt; <a class="el" href="class_gui.html">Gui</a> &gt; &amp;child, <a class="el" href="class_input.html">Input</a> &amp;input)</td></tr>
 <tr class="separator:abfd56f4df995303924359e9bc3806343 inherit pro_methods_class_gui"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="af54992677536a3472d0a3cfaa6c8d4cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af54992677536a3472d0a3cfaa6c8d4cc">&#9670;&nbsp;</a></span>getAbsolutePosition()</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A GUI element that is a child of either a <a class="el" href="class_root_gui.html" title="The parent GUI element meant to represent the entire window/GUI area. ">RootGui</a> or another <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> instance. </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ae0867f985d3e30bd568e093c6c042e2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0867f985d3e30bd568e093c6c042e2b">&#9670;&nbsp;</a></span>getAbsolutePosition()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -194,7 +207,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChil
           <td class="memname">sf::Vector2f ChildGui::getAbsolutePosition </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -204,15 +217,15 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChil
 </table>
 </div><div class="memdoc">
 
-<p>The position of a <a class="el" href="class_child_gui.html">ChildGui</a> element is calculated based on the absolute position of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element multiplied by the <code>positionFromParent</code> field. </p>
+<p>The position of a <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> element is calculated based on the absolute position of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element multiplied by the <code>positionFromParent</code> field. </p>
 <dl class="section return"><dt>Returns</dt><dd>The absolute position of this element. </dd></dl>
 
 <p>Implements <a class="el" href="class_gui.html">Gui</a>.</p>
 
 </div>
 </div>
-<a id="a8475c692bd0bfeeaa05eea1408c49149"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8475c692bd0bfeeaa05eea1408c49149">&#9670;&nbsp;</a></span>getAbsoluteSize()</h2>
+<a id="a7982d5d3601b98b0fa42158895ee4a86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7982d5d3601b98b0fa42158895ee4a86">&#9670;&nbsp;</a></span>getAbsoluteSize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -224,7 +237,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChil
           <td class="memname">sf::Vector2f ChildGui::getAbsoluteSize </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td></td>
+          <td> const</td>
         </tr>
       </table>
   </td>
@@ -234,7 +247,7 @@ virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>mouseOverChil
 </table>
 </div><div class="memdoc">
 
-<p>The size of a <a class="el" href="class_child_gui.html">ChildGui</a> element is expressed as a fraction of the absolute size of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element. </p>
+<p>The size of a <a class="el" href="class_child_gui.html" title="A GUI element that is a child of either a RootGui or another ChildGui instance. ">ChildGui</a> element is expressed as a fraction of the absolute size of the parent <a class="el" href="class_gui.html" title="Pure abstract class that has a collection of children also of Gui type in addition to update and draw...">Gui</a> element. </p>
 <dl class="section return"><dt>Returns</dt><dd>The absolute size of this element. </dd></dl>
 
 <p>Implements <a class="el" href="class_gui.html">Gui</a>.</p>

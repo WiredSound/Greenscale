@@ -98,7 +98,10 @@ void ComponentGridGui::mousePutDownHeldPosition(sf::Vector2u newPosition) {
 	}
 }
 
-// Creates component boxes and resizes window.
+/**
+ * Handles the resizing of the sf::VertexArray as well as the creation and positioning of the child ComponentGridGuiBox instances.
+ * \param grid The component grid to setup the GUI for.
+ */
 void ComponentGridGui::setup(ComponentGrid &grid) {
 	const sf::Vector2u &gridSize = grid.getGridSize();
 
@@ -123,6 +126,10 @@ void ComponentGridGui::setup(ComponentGrid &grid) {
 	}
 }
 
+/**
+ * Sets up the icon for the component at the specified position within the given component grid.
+ * The Input reference is required so that, should there be a component held by the mouse, it can be drawn at the mouse's position.
+ */
 void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid, Input &input) {
 	auto &component = grid.getComponentAt(pos);
 
@@ -136,9 +143,10 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid,
 		auto &child = getChild(index);
 
 		sf::Vector2f quadSize = child->getAbsoluteSize();
-		// If the component is the one held by the mouse then draw it at the mouse coordinates instead of in the grid.
-		sf::Vector2f quadPosition =
-			(mouseHoldingComponent && pos == mouseHeldGridPosition) ? sf::Vector2f(input.getMousePosition().x - (quadSize.x / 2), input.getMousePosition().y - (quadSize.y / 2)) : child->getAbsolutePosition();
+
+		sf::Vector2f drawPosForHeldComponent(input.getMousePosition().x - (quadSize.x / 2), input.getMousePosition().y - (quadSize.y / 2));
+		// If the component is the one held by the mouse then draw it at the mouse coordinates instead of in the grid:
+		sf::Vector2f quadPosition = (mouseHoldingComponent && pos == mouseHeldGridPosition) ? drawPosForHeldComponent : child->getAbsolutePosition();
 
 		quad[0].position = quadPosition;
 		quad[1].position = sf::Vector2f(quadPosition.x + quadSize.x, quadPosition.y);
@@ -158,12 +166,21 @@ void ComponentGridGui::setupComponentQuad(sf::Vector2u pos, ComponentGrid &grid,
 	}
 }
 
+/**
+ * Fetches a reference to the ComponentGrid of the Entity who's turn it currently is (as determined by the TurnManager).
+ */
 ComponentGrid &ComponentGridGui::fetchCurrentGrid() {
 	return turnManager.getCurrentEntity()->getComponentGrid();
 }
 
+/**
+ * Rather horrible dynamic casting scary bad stuff from a Gui std::unique_ptr to ComponentGridGuiBox raw pointer.
+ */
 ComponentGridGuiBox *ComponentGridGui::getGridBox(sf::Vector2u pos, ComponentGrid &grid) {
-	auto *ptr = dynamic_cast<ComponentGridGuiBox*>(getChild(getGridIndex(pos, grid)).get()); // Ew...
+	Gui *rawPtr = getChild(getGridIndex(pos, grid)).get();
+	auto *ptr = dynamic_cast<ComponentGridGuiBox*>(rawPtr); // Ew...
+
 	assert(ptr != nullptr);
+
 	return ptr;
 }

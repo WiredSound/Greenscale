@@ -64,6 +64,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="class_state-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -83,26 +84,36 @@ $(function() {
  <div class="center">
   <img src="class_state.png" usemap="#State_map" alt=""/>
   <map id="State_map" name="State_map">
-<area href="class_game_state.html" title="This is where the bulk of the program takes place. " alt="GameState" shape="rect" coords="0,56,72,80"/>
+<area href="class_game_state.html" title="This is where the bulk of the program takes place. " alt="GameState" shape="rect" coords="0,56,100,80"/>
+<area href="class_main_menu_state.html" alt="MainMenuState" shape="rect" coords="110,56,210,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7f1f0664cd8e93ed7b14efd3fa0bb70c"><td class="memItemLeft" align="right" valign="top"><a id="a7f1f0664cd8e93ed7b14efd3fa0bb70c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> (sf::RenderWindow &amp;renderWindow)</td></tr>
-<tr class="separator:a7f1f0664cd8e93ed7b14efd3fa0bb70c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27c97a4f123742baff911b32e9a0a722"><td class="memItemLeft" align="right" valign="top"><a id="a27c97a4f123742baff911b32e9a0a722"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>State</b> (std::string stateName, <a class="el" href="class_state_manager.html">StateManager</a> &amp;stateManager, sf::RenderWindow &amp;renderWindow)</td></tr>
+<tr class="separator:a27c97a4f123742baff911b32e9a0a722"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a98ba0650a71672b02248962c448b5f51"><td class="memItemLeft" align="right" valign="top"><a id="a98ba0650a71672b02248962c448b5f51"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state.html#a98ba0650a71672b02248962c448b5f51">update</a> (<a class="el" href="class_input.html">Input</a> &amp;input)=0</td></tr>
-<tr class="memdesc:a98ba0650a71672b02248962c448b5f51"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where all game logic takes place. <br /></td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>update</b> (<a class="el" href="class_input.html">Input</a> &amp;input)=0</td></tr>
 <tr class="separator:a98ba0650a71672b02248962c448b5f51"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae261605bc40b7e3959ce5df5457e4942"><td class="memItemLeft" align="right" valign="top"><a id="ae261605bc40b7e3959ce5df5457e4942"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state.html#ae261605bc40b7e3959ce5df5457e4942">draw</a> ()=0</td></tr>
-<tr class="memdesc:ae261605bc40b7e3959ce5df5457e4942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where rendering takes place. <br /></td></tr>
+<tr class="memdesc:ae261605bc40b7e3959ce5df5457e4942"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where all game logic takes place. <br /></td></tr>
 <tr class="separator:ae261605bc40b7e3959ce5df5457e4942"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:ac28059710fde0f893afbd38e8e60d217"><td class="memItemLeft" align="right" valign="top"><a id="ac28059710fde0f893afbd38e8e60d217"></a>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_state.html#ac28059710fde0f893afbd38e8e60d217">name</a></td></tr>
+<tr class="memdesc:ac28059710fde0f893afbd38e8e60d217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Where rendering takes place. <br /></td></tr>
+<tr class="separator:ac28059710fde0f893afbd38e8e60d217"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:a6f6091b6918e546929fb636acffff3c5"><td class="memItemLeft" align="right" valign="top"><a id="a6f6091b6918e546929fb636acffff3c5"></a>
+<a class="el" href="class_state_manager.html">StateManager</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>manager</b></td></tr>
+<tr class="separator:a6f6091b6918e546929fb636acffff3c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a897c8f448ef6e27108c47447334a8860"><td class="memItemLeft" align="right" valign="top"><a id="a897c8f448ef6e27108c47447334a8860"></a>
 sf::RenderWindow &amp;&#160;</td><td class="memItemRight" valign="bottom"><b>window</b></td></tr>
 <tr class="separator:a897c8f448ef6e27108c47447334a8860"><td class="memSeparator" colspan="2">&#160;</td></tr>
