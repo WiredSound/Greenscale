@@ -173,14 +173,6 @@ ComponentGrid &ComponentGridGui::fetchCurrentGrid() {
 	return turnManager.getCurrentEntity()->getComponentGrid();
 }
 
-/**
- * Rather horrible dynamic casting scary bad stuff from a Gui std::unique_ptr to ComponentGridGuiBox raw pointer.
- */
 ComponentGridGuiBox *ComponentGridGui::getGridBox(sf::Vector2u pos, ComponentGrid &grid) {
-	Gui *rawPtr = getChild(getGridIndex(pos, grid)).get();
-	auto *ptr = dynamic_cast<ComponentGridGuiBox*>(rawPtr); // Ew...
-
-	assert(ptr != nullptr);
-
-	return ptr;
+	return getChild<ComponentGridGuiBox>(getGridIndex(pos, grid));
 }
