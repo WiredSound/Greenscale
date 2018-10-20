@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+#include <cmath>
+
 Animation::Animation(sf::Time frameTime, std::vector<Frame> animationFrames) : timeBetweenFrames(frameTime), frames(animationFrames) {}
 
 /**

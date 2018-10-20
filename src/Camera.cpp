@@ -1,5 +1,7 @@
 #include "Camera.h"
 
+#include <cmath>
+
 /**
  * Construct a new Camera.
  * \param win The render window for the camera to use.
