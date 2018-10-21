@@ -1,6 +1,6 @@
-#include "TileManager.h"
+#include "map/TileManager.h"
 
-#include "../JsonHelp.h"
+#include "JsonHelp.h"
 
 TileManager::TileManager() : Manager("tile", "tiles") {}
 

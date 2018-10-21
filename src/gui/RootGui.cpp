@@ -1,4 +1,4 @@
-#include "RootGui.h"
+#include "gui/RootGui.h"
 
 RootGui::RootGui(std::string name, sf::Vector2f position, sf::Vector2f size) : Gui(name), absolutePosition(position), absoluteSize(size) {}
 

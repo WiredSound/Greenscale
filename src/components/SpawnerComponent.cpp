@@ -1,6 +1,6 @@
-#include "SpawnerComponent.h"
+#include "components/SpawnerComponent.h"
 
-#include "../entities/Entity.h"
+#include "entities/Entity.h"
 
 IDs::Entities SpawnerComponent::getSpawnerEntityId() {
 	return fetchInfo().spawnerEntityId;

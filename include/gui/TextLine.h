@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <functional>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Text.hpp>
@@ -32,7 +33,7 @@ public:
 
 private:
 	std::vector<sf::Text> texts;
-	sf::Font &font;
+    std::reference_wrapper<sf::Font> font;
 	sf::Vector2f currentPosition;
 	unsigned int fontSize;
 

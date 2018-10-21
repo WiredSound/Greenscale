@@ -1,7 +1,7 @@
-#include "MapBuilder.h"
+#include "map/MapBuilder.h"
 
-#include "GradientTerrainGenerator.h"
-#include "../IDs.h"
+#include "map/GradientTerrainGenerator.h"
+#include "IDs.h"
 
 #define TILES_PATH "assets/tiles/tiles.json"
 #define COMPONENTS_PATH "assets/components/components.json"

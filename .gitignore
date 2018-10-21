@@ -336,3 +336,6 @@ ASALocalRun/
 
 # Ignore the game assets folder
 assets/
+
+# Ignore build folder
+build/

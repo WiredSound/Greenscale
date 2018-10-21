@@ -1,4 +1,4 @@
-#include "GameState.h"
+#include "states/GameState.h"
 
 GameState::GameState(StateManager &manager, sf::RenderWindow &renderWindow, sf::Font &textFont, GameSettings &gameSettings)
 	: State("Game", manager, renderWindow), gui((sf::Vector2f) renderWindow.getSize()), font(textFont), settings(gameSettings), camera(renderWindow, gui)

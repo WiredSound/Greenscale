@@ -1,6 +1,6 @@
-#include "EntityManager.h"
+#include "entities/EntityManager.h"
 
-#include "../JsonHelp.h"
+#include "JsonHelp.h"
 
 EntityManager::EntityManager() : Manager("entity", "entities") {}
 

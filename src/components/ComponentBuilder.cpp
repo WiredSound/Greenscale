@@ -1,7 +1,7 @@
-#include "ComponentBuilder.h"
+#include "components/ComponentBuilder.h"
 
-#include "RangedComponent.h"
-#include "SpawnerComponent.h"
+#include "components/RangedComponent.h"
+#include "components/SpawnerComponent.h"
 
 ComponentBuilder::ComponentBuilder() : componentManager(std::make_shared<ComponentManager>()), projectileManager(std::make_shared<ProjectileManager>()) {}
 

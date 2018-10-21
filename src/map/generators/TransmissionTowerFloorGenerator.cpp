@@ -1,6 +1,6 @@
-#include "TransmissionTowerFloorGenerator.h"
+#include "map/generators/TransmissionTowerFloorGenerator.h"
 
-#include "../../entities/controllers/SearchAndDestroyController.h"
+#include "entities/controllers/SearchAndDestroyController.h"
 
 TransmissionTowerFloorGenerator::TransmissionTowerFloorGenerator(unsigned int radius, unsigned int thickness,
 	IDs::Tiles towerMainWallTile, sf::Color towerMainWallColour, IDs::Tiles towerMainFloorTile, sf::Color towerMainFloorColour)

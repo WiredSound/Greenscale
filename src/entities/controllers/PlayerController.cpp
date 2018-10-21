@@ -1,6 +1,6 @@
-#include "PlayerController.h"
+#include "entities/controllers/PlayerController.h"
 
-#include "../../gui/GameGui.h"
+#include "gui/GameGui.h"
 
 #define PATH_IN_RANGE_COLOUR sf::Color(0, 255, 0, 255)
 #define PATH_NOT_IN_RANGE_COLOUR sf::Color(255, 50, 50, 255)

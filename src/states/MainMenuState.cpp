@@ -1,4 +1,4 @@
-#include "MainMenuState.h"
+#include "states/MainMenuState.h"
 
 MainMenuState::MainMenuState(StateManager &manager, sf::RenderWindow &renderWindow, sf::Font &textFont, GameSettings &gameSettings)
 	: State("Main Menu", manager, renderWindow), gui((sf::Vector2f) renderWindow.getSize()), font(textFont), settings(gameSettings)

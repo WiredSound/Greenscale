@@ -1,6 +1,6 @@
-#include "ProjectileManager.h"
+#include "projectiles/ProjectileManager.h"
 
-#include "../JsonHelp.h"
+#include "JsonHelp.h"
 
 ProjectileManager::ProjectileManager() : Manager("projectile", "projectiles") {}
 

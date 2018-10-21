@@ -1,10 +1,10 @@
-#include "World.h"
+#include "map/World.h"
 
-#include "generators/PlainsGenerator.h"
-#include "generators/TransmissionTowerFloorGenerator.h"
-#include "../Camera.h"
-#include "../entities/controllers/FollowEntityController.h"
-#include "../entities/controllers/SearchAndDestroyController.h"
+#include "map/generators/PlainsGenerator.h"
+#include "map/generators/TransmissionTowerFloorGenerator.h"
+#include "entities/controllers/FollowEntityController.h"
+#include "entities/controllers/SearchAndDestroyController.h"
+#include "Camera.h"
 
 World::World(Camera &camera, std::shared_ptr<PlayerController> controller, Console &consoleRef, sf::Vector2f tileSize)
 	: builder(tileSize, { Faction::PLAYER, Faction::ROGUE }, controller, consoleRef), turnManager(camera), console(consoleRef)

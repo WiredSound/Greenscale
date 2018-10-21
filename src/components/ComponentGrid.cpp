@@ -1,4 +1,4 @@
-#include "ComponentGrid.h"
+#include "components/ComponentGrid.h"
 
 // TODO: Replace the below monstrosity...
 // It's purpose is to make the creation of methods like findWeaponPositions, findActiveCoolerPositions, etc. require less boilerplate code.

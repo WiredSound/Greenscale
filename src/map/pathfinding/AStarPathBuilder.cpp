@@ -1,7 +1,7 @@
-#include "AStarPathBuilder.h"
+#include "map/pathfinding/AStarPathBuilder.h"
 
-#include "../GameMap.h"
-#include "MovementPath.h"
+#include "map/pathfinding/MovementPath.h"
+#include "map/GameMap.h"
 
 AStarPathBuilder::AStarPathBuilder(GameMap &gameMap) : map(gameMap) {}
 

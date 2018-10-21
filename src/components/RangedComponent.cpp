@@ -1,6 +1,6 @@
-#include "RangedComponent.h"
+#include "components/RangedComponent.h"
 
-#include "../entities/Entity.h"
+#include "entities/Entity.h"
 
 RangedComponent::RangedComponent(IDs::Components componentId, std::shared_ptr<ComponentManager> componentManager, std::shared_ptr<ProjectileManager> manager)
 	: Component(componentId, componentManager), projectileManager(manager) {

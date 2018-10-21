@@ -1,4 +1,4 @@
-#include "GradientTerrainGenerator.h"
+#include "map/GradientTerrainGenerator.h"
 
 GradientTerrainGenerator::GradientTerrainGenerator(FastNoise::NoiseType type, float frequency, IDs::Tiles tileId, sf::Color colourMin, sf::Color colourMax)
 	: tile(tileId), minColour(colourMin), maxColour(colourMax) {

@@ -1,7 +1,7 @@
-#include "StateManager.h"
+#include "states/StateManager.h"
 
-#include "State.h"
-#include "../debugging.h"
+#include "states/State.h"
+#include "debugging.h"
 
 bool StateManager::update(Input &in) {
 	if (nextState != nullptr) state = std::move(nextState); // Change the current state to the next state should one be set.

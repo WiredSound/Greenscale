@@ -1,6 +1,7 @@
-#include "GridHelp.h"
+#include "map/GridHelp.h"
 
 #include <algorithm>
+#include <cmath>
 
 float lerp(float start, float end, float t);
 sf::Vector2f lerpPoint(const sf::Vector2f &point0, const sf::Vector2f &point1, float t);

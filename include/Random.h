@@ -13,5 +13,5 @@ public:
 private:
 	std::default_random_engine rand;
 
-	static const std::uniform_real_distribution<float> percentDistribution;
+	static std::uniform_real_distribution<float> percentDistribution;
 };

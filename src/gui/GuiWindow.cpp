@@ -1,4 +1,4 @@
-#include "GuiWindow.h"
+#include "gui/GuiWindow.h"
 
 GuiWindow::GuiWindow(std::string guiName, Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness) : ChildGui(guiName, parent, position, size, origin) {

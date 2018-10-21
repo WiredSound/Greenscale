@@ -1,4 +1,4 @@
-#include "FollowEntityController.h"
+#include "entities/controllers/FollowEntityController.h"
 
 FollowEntityController::FollowEntityController(std::shared_ptr<Entity> target, unsigned int idealDistance, Console &consoleRef)
 	: targetEntity(target), idealDistanceFromTarget(idealDistance), console(consoleRef) {}

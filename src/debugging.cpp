@@ -1,15 +1,14 @@
 #include "debugging.h"
 
 #include <iomanip>
-#include <time.h>
+#include <ctime>
 
 std::string Debug::getTimestamp() {
-	struct tm newtime;
-	time_t now = time(nullptr);
-	localtime_s(&newtime, &now);
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
 
 	std::ostringstream oss;
-	oss << std::put_time(&newtime, "%H:%M:%S");
+	oss << std::put_time(&tm, "%H:%M:%S");
 
 	return oss.str();
 }

@@ -1,6 +1,6 @@
-#include "PowerPool.h"
+#include "components/PowerPool.h"
 
-#include "ComponentGrid.h"
+#include "components/ComponentGrid.h"
 
 PowerPool::PowerPool(ComponentGrid &componentGrid) : grid(componentGrid) {}
 

@@ -1,6 +1,6 @@
-#include "ComponentGridGuiBox.h"
+#include "gui/ComponentGridGuiBox.h"
 
-#include "ComponentGridGui.h"
+#include "gui/ComponentGridGui.h"
 
 ComponentGridGuiBox::ComponentGridGuiBox(ComponentGridGui &parent, sf::Vector2u positionInGrid, sf::Vector2f position, sf::Vector2f size,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color equippedColour, sf::Color unequippedColour, float thickness)

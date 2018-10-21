@@ -1,7 +1,7 @@
-#include "PlainsGenerator.h"
+#include "map/generators/PlainsGenerator.h"
 
-#include "../../Random.h"
-#include "../GradientTerrainGenerator.h"
+#include "Random.h"
+#include "map/GradientTerrainGenerator.h"
 
 PlainsGenerator::PlainsGenerator(IDs::Tiles ground, sf::Color colourMin, sf::Color colourMax)
 	: MapGenerator(), groundTile(ground), minColour(colourMin), maxColour(colourMax), shrubFrequency(0) {}

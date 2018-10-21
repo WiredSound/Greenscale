@@ -1,4 +1,6 @@
-#include "GuiTextButton.h"
+#include "gui/GuiTextButton.h"
+
+#include <cmath>
 
 GuiTextButton::GuiTextButton(std::string guiName, Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color backgroundColourClick, sf::Color borderColour, float borderThickness,

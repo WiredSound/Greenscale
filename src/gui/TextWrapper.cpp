@@ -1,4 +1,4 @@
-#include "TextWrapper.h"
+#include "gui/TextWrapper.h"
 
 #include <sstream>
 

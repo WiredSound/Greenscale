@@ -1,4 +1,4 @@
-#include "SearchAndDestroyController.h"
+#include "entities/controllers/SearchAndDestroyController.h"
 
 SearchAndDestroyController::SearchAndDestroyController(std::shared_ptr<Entity> target) : targetEntity(target), targetFaction(Faction::UNALIGNED), targetingIndividual(true) {}
 SearchAndDestroyController::SearchAndDestroyController(Faction target) : targetFaction(target), targetingIndividual(false) {}

@@ -1,9 +1,8 @@
-#include "GameMap.h"
+#include "map/GameMap.h"
 
 #include <cmath>
-#include <experimental/filesystem>
-#include "../entities/Robot.h"
-#include "../Console.h"
+#include "entities/Robot.h"
+#include "Console.h"
 
 bool entitySortMethod(const std::shared_ptr<Entity> &left, const std::shared_ptr<Entity> &right);
 
@@ -169,7 +168,8 @@ bool GameMap::withinBounds(sf::Vector2u pos) {
 bool GameMap::save(std::string path) {
 	if (path[path.size() - 1] != '/') path.push_back('/');
 
-	std::experimental::filesystem::create_directories(path);
+    // TODO: Find a cross-platform way of creating directories.
+    //std::experimental::filesystem::create_directories(path);
 
 	return tiles->save(path + "tiles.sav");// && entities->save(path + "entities.sav");
 }

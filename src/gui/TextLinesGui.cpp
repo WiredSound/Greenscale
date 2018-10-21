@@ -1,4 +1,4 @@
-#include "TextLinesGui.h"
+#include "gui/TextLinesGui.h"
 
 TextLinesGui::TextLinesGui(Gui &parent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin)
 	: ChildGui("Text Lines", parent, position, size, origin) {}

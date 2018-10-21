@@ -1,6 +1,6 @@
-#include "ComponentManager.h"
+#include "components/ComponentManager.h"
 
-#include "../JsonHelp.h"
+#include "JsonHelp.h"
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 

@@ -1,4 +1,4 @@
-#include "Robot.h"
+#include "entities/Robot.h"
 
 Animation::Frame Robot::fetchFrame() {
 	if (isDestroyed()) return getDestroyedAnimation()->getFrame(animationClock.getElapsedTime());

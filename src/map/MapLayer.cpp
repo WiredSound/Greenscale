@@ -1,4 +1,6 @@
-#include "MapLayer.h"
+#include "map/MapLayer.h"
+
+#include <cmath>
 
 MapLayer::MapLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr<sf::Texture> layerTexture)
 	: size(layerSize), tileSize(sizeTile), tileTextureSize(textureSizeTile), texture(layerTexture) {}

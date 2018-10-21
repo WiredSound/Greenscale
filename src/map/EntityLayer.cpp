@@ -1,8 +1,8 @@
-#include "EntityLayer.h"
+#include "map/EntityLayer.h"
 
 #include <iostream>
-#include "../entities/Entity.h"
-#include "../entities/Robot.h"
+#include "entities/Entity.h"
+#include "entities/Robot.h"
 
 EntityLayer::EntityLayer(sf::Vector2u layerSize, sf::Vector2f sizeTile, sf::Vector2f textureSizeTile, std::shared_ptr<sf::Texture> layerTexture)
 	: MapLayer(layerSize, sizeTile, textureSizeTile, layerTexture) {
@@ -14,7 +14,7 @@ void EntityLayer::update() {
 }
 
 void EntityLayer::colourEntitiesInPath(MovementPath path, sf::Color colour) {
-	throw std::exception("EntityLayer::colourEntitiesInPath is unimplemented!");
+	throw "EntityLayer::colourEntitiesInPath is unimplemented!";
 
 	for (sf::Vector2u pos : path.getPathTiles()) {
 		auto entitiesAt = getEntitiesAt(pos);

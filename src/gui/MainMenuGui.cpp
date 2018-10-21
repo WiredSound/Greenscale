@@ -1,7 +1,7 @@
-#include "MainMenuGui.h"
+#include "gui/MainMenuGui.h"
 
-#include "GuiTextButton.h"
-#include "../states/GameState.h"
+#include "gui/GuiTextButton.h"
+#include "states/GameState.h"
 
 MainMenuGui::MainMenuGui(sf::Vector2f size) : RootGui("Main Menu", sf::Vector2f(0, 0), size) {}
 

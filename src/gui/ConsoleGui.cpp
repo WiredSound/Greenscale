@@ -1,4 +1,6 @@
-#include "ConsoleGui.h"
+#include "gui/ConsoleGui.h"
+
+#include <cmath>
 
 ConsoleGui::ConsoleGui(Gui &parent, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin, unsigned int countLines,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)

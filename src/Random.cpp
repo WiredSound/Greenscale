@@ -1,6 +1,6 @@
 #include "Random.h"
 
-const std::uniform_real_distribution<float> Random::percentDistribution(0.0f, 100.0f);
+std::uniform_real_distribution<float> Random::percentDistribution(0.0f, 100.0f);
 
 Random::Random() : rand() {}
 Random::Random(unsigned int seed) : rand(seed) {}

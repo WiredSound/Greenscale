@@ -1,7 +1,7 @@
-#include "MovementPath.h"
+#include "map/pathfinding/MovementPath.h"
 
-#include "../GameMap.h"
-#include "../GridHelp.h"
+#include "map/GameMap.h"
+#include "map/GridHelp.h"
 
 MovementPath::MovementPath(sf::Vector2u pos) : pathIndex(1), complete(false) {
 	path.push_back(pos);

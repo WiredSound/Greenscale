@@ -1,4 +1,4 @@
-#include "Faction.h"
+#include "entities/Faction.h"
 
 #define FACTIONS_OPACITY 230
 

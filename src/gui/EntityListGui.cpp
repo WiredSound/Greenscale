@@ -1,4 +1,4 @@
-#include "EntityListGui.h"
+#include "gui/EntityListGui.h"
 
 EntityListGui::EntityListGui(Gui &parent, TurnManager &managerTurns, sf::Font &textFont, unsigned int textSize, sf::Vector2f position, sf::Vector2f size, sf::Vector2f origin,
 	sf::Color backgroundColour, sf::Color hoverBackgroundColour, sf::Color borderColour, float borderThickness)

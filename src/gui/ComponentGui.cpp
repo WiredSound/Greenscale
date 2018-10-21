@@ -1,4 +1,4 @@
-#include "ComponentGui.h"
+#include "gui/ComponentGui.h"
 
 #include <cmath>
 

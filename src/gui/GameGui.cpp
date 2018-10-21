@@ -1,11 +1,11 @@
-#include "GameGui.h"
+#include "gui/GameGui.h"
 
-#include "ComponentGridGui.h"
-#include "ComponentGui.h"
-#include "EntityListGui.h"
-#include "EntityGui.h"
-#include "MoveUseModeGui.h"
-#include "../TurnManager.h"
+#include "gui/ComponentGridGui.h"
+#include "gui/ComponentGui.h"
+#include "gui/EntityListGui.h"
+#include "gui/EntityGui.h"
+#include "gui/MoveUseModeGui.h"
+#include "TurnManager.h"
 
 #define COMPONENTS_TEXTURE_PATH "assets/components/components.png"
 

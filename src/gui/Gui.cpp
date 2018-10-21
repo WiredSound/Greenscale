@@ -1,4 +1,4 @@
-#include "Gui.h"
+#include "gui/Gui.h"
 
 Gui::Gui(std::string guiName) : name(guiName) {}
 

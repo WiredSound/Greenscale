@@ -1,9 +1,9 @@
-#include "Component.h"
+#include "components/Component.h"
 
-#include "PowerPool.h"
-#include "../Random.h"
-#include "../entities/Entity.h"
-#include "../map/GameMap.h"
+#include "components/PowerPool.h"
+#include "Random.h"
+#include "entities/Entity.h"
+#include "map/GameMap.h"
 
 Random Component::random = Random();
 

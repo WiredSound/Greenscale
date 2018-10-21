@@ -1,4 +1,4 @@
-#include "SpawnerController.h"
+#include "entities/controllers/SpawnerController.h"
 
 bool SpawnerController::handle(Entity *entity, Input &input) {
 	ComponentGrid &grid = entity->getComponentGrid();

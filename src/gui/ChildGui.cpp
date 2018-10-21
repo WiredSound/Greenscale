@@ -1,4 +1,4 @@
-#include "ChildGui.h"
+#include "gui/ChildGui.h"
 
 ChildGui::ChildGui(std::string name, Gui &guiParent, sf::Vector2f position, sf::Vector2f size, sf::Vector2f guiOrigin) : Gui(name),
 positionFromParent(position), sizeFromParent(size), origin(guiOrigin), parent(guiParent) {}

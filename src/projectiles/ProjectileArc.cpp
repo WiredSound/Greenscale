@@ -1,7 +1,7 @@
-#include "ProjectileArc.h"
+#include "projectiles/ProjectileArc.h"
 
-#include "../map/GameMap.h"
-#include "../entities/Entity.h"
+#include "map/GameMap.h"
+#include "entities/Entity.h"
 
 ProjectileArc::ProjectileArc(std::shared_ptr<ProjectileManager> projectileManager, Entity *arcUser, MovementPath projectilePath, IDs::Projectiles projectileId,
 	Damage projectileDamage, unsigned int projectilePenetration, sf::Color projectileColour)
