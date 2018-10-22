@@ -24,15 +24,15 @@ bool GameSettings::loadSettings(std::string filename) {
 		try {
 			file >> json;
 
-			windowWidth = json.value<unsigned int>(WINDOW_WIDTH, 1728);
-			windowHeight = json.value<unsigned int>(WINDOW_HEIGHT, 972);
-			fontSize = json.value<unsigned int>(FONT_SIZE, 14);
-			vsyncEnabled = json.value<bool>(VSYNC_ENABLED, false);
-			fullscreenEnabled = json.value<bool>(FULLSCREEN_ENABLED, false);
-			displayFps = json.value<bool>(DISPLAY_FPS, true);
-			guiBackgroundColour = JsonHelp::containsKey(json, GUI_BACKGROUND_COLOUR) ? JsonHelp::parseColour(json[GUI_BACKGROUND_COLOUR]) : sf::Color(5, 5, 5, 200);
-			guiHoverBackgroundColour = JsonHelp::containsKey(json, GUI_HOVER_BACKGROUND_COLOUR) ? JsonHelp::parseColour(json[GUI_HOVER_BACKGROUND_COLOUR]) : sf::Color(5, 5, 5, 230);
-			guiBorderColour = JsonHelp::containsKey(json, GUI_BORDER_COLOUR) ? JsonHelp::parseColour(json[GUI_BORDER_COLOUR]) : sf::Color(35, 140, 35, 255);
+            windowWidth = json[WINDOW_WIDTH].get<unsigned int>();
+			windowHeight = json[WINDOW_HEIGHT].get<unsigned int>();
+			fontSize = json[FONT_SIZE].get<unsigned int>();
+			vsyncEnabled = json[VSYNC_ENABLED].get<bool>();
+            fullscreenEnabled = json[FULLSCREEN_ENABLED].get<bool>();
+			displayFps = json[DISPLAY_FPS].get<bool>();
+			guiBackgroundColour = JsonHelp::parseColour(json[GUI_BACKGROUND_COLOUR]);
+            guiHoverBackgroundColour = JsonHelp::parseColour(json[GUI_HOVER_BACKGROUND_COLOUR]);
+            guiBorderColour = JsonHelp::parseColour(json[GUI_BORDER_COLOUR]);
 
 			file.close();
 
