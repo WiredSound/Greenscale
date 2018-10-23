@@ -5,6 +5,7 @@ Console::MessageType::MessageType(std::string typeName, sf::Color typeColour) : 
 const Console::MessageType Console::MessageType::INFO("INFO", sf::Color(0, 255, 0, 255));
 const Console::MessageType Console::MessageType::INFO_NONESSENTIAL("NONESSENTIAL INFO", sf::Color(0, 255, 0, 160));
 const Console::MessageType Console::MessageType::WARNING("WARNING", sf::Color(255, 255, 0, 255));
+const Console::MessageType Console::MessageType::WARNING_NONESSENTIAL("NONESSENTIAL WARNING", sf::Color(255, 255, 0, 160));
 const Console::MessageType Console::MessageType::FATAL("FATAL", sf::Color(255, 0, 0, 255));
 const Console::MessageType Console::MessageType::SPEECH("SPEECH", sf::Color(0, 0, 255, 255));
 

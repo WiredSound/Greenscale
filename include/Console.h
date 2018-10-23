@@ -19,7 +19,8 @@ public:
 		static const MessageType INFO;
 		static const MessageType INFO_NONESSENTIAL;
 		static const MessageType WARNING;
-		static const MessageType FATAL;
+		static const MessageType WARNING_NONESSENTIAL;
+        static const MessageType FATAL;
 		static const MessageType SPEECH;
 
 	private:

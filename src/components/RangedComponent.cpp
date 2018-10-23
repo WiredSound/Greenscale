@@ -19,7 +19,7 @@ std::vector<ProjectileArc> RangedComponent::useEnabled(Entity &user, MovementPat
 
 	console.display({ user.getFullName() + " fired " + std::to_string(count) + (count == 1 ? " projectile with " : " projectiles each with ") + std::to_string(penetration) + " penetration and damage: "
 		+ std::to_string(damage.kinetic) + " kinetic, " + std::to_string(damage.thermal) + " thermal, " + std::to_string(static_cast<int>(damage.disruption * 100)) + "% disruption.",
-		(user.isMemberOfPlayerFaction() ? Console::MessageType::INFO : Console::MessageType::WARNING) });
+		(user.isMemberOfPlayerFaction() ? Console::MessageType::INFO_NONESSENTIAL : Console::MessageType::WARNING_NONESSENTIAL) });
 
 	return arcs;
 }
